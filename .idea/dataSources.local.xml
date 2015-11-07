@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - sport_car_db@localhost" uuid="ea69f5cd-598e-40d2-aa0e-0eef6e16c355">
+      <secret-storage>master_key</secret-storage>
+      <user-name>test_user</user-name>
+      <schema-pattern>sport_car_db.pg_catalog sport_car_db.public</schema-pattern>
+      <default-schemas>sport_car_db.pg_catalog sport_car_db.public</default-schemas>
+    </data-source>
+    <data-source name="Django default" uuid="5a39951a-dd1c-477d-ad52-295b0fc398f5">
+      <user-name>test_user</user-name>
+      <user-password>dfd9dfc2dfcbdfc4dfcddfc2dfcbdfc3</user-password>
+      <schema-pattern>sport_car_db.pg_catalog sport_car_db.public</schema-pattern>
+      <default-schemas>sport_car_db.pg_catalog sport_car_db.public</default-schemas>
+    </data-source>
+  </component>
+</project>

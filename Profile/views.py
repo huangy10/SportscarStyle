@@ -1,0 +1,275 @@
+# coding=utf-8
+from django.contrib import auth
+from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+from django.views.decorators import http as http_decorators
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
+
+from .utils import send_sms, create_random_code
+from .forms import RegistrationForm, PasswordResetForm, ProfileCreationForm
+from .models import AuthenticationCode, UserFollow
+from Club.models import Club, ClubJoining
+from Sportscar.models import Sportscar, SportCarOwnership
+from Status.models import Status, StatusLikeThrough
+from custom.utils import login_first, post_data_loader, page_separator_loader
+#######################################################################################################################
+#
+# 以下是登陆注册部分使用的API
+#
+#######################################################################################################################
+
+
+@http_decorators.require_POST
+@post_data_loader()
+def account_login(request, data):
+    """ Login through this method
+     This method only accept post request
+
+     POST params:
+        - username: username
+        - password: password
+    """
+    username = data.get('username', '')
+    password = data.get('password', '')
+    user = auth.authenticate(username=username,
+                             password=password)
+    if user is None:
+        if not get_user_model().objects.filter(username=username).exists():
+            error_reason = 'invalid username'
+            error_code = '1000'
+        else:
+            error_reason = 'password incorrect'
+            error_code = '1001'
+        return JsonResponse(dict(success=False, message=error_reason, code=error_code))
+    else:
+        auth.login(request, user)
+        return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_POST
+@post_data_loader()
+def account_send_code(request, data):
+    """ Request for authentication code
+     POST params:
+        - phone_num: phone number
+    """
+    phone_num = data.get('phone_num', None)
+    if AuthenticationCode.objects.already_sent(phone=phone_num):
+        return JsonResponse(dict(success=False, message='request too frequent',
+                                 code='1400'))
+    else:
+        code = create_random_code()
+        if send_sms(code, phone_num):
+            AuthenticationCode.objects.create(phone_num=phone_num, code=code)
+            return JsonResponse(dict(success=True))
+        else:
+            return JsonResponse(dict(success=False, message='error occurs in the SMS backend',
+                                     code='1401'))
+
+
+@http_decorators.require_POST
+@post_data_loader()
+def account_register(request, data):
+    """ Create New user through this interface
+     This method only accept post request
+     POST params:
+        - username: username, only accept phoneNum
+        - password1: password
+        - password2: confirm
+        - auth_code: authentication code
+    """
+    form = RegistrationForm(data)
+    if form.is_valid():
+        form.save()
+        # form验证通过保证了下面这个查询一定是存在的
+        AuthenticationCode.objects.deactivate(code=data['auth_code'], phone=data['username'])
+        return JsonResponse(dict(success=True))
+    else:
+        response_dict = dict(success=False, code='1002')
+        response_dict.update(form.errors)
+        return JsonResponse(response_dict)
+
+
+@http_decorators.require_POST
+@post_data_loader()
+def account_reset_password(request, data):
+    """ Reset password
+     The view only accept post request
+
+     POST params:
+        - username: username, only accept phoneNum
+        - password1: password
+        - password2: confirm
+        - auth_code: authentication code
+    """
+    form = PasswordResetForm(data)
+    if form.is_valid():
+        form.save()
+        AuthenticationCode.objects.deactivate(code=data['auth_code'], phone=data['username'])
+        return JsonResponse(dict(success=True))
+    else:
+        response_dict = dict(success=False)
+        response_dict.update(form.errors)
+        return JsonResponse(response_dict)
+
+
+@http_decorators.require_POST
+@login_first
+@post_data_loader()
+def account_profile(request, data):
+    """ Set profile
+     This view only accept POST request
+
+     POST params:
+        - nick_name:
+        - gender:m or f
+        - birth_date: birth date
+    """
+    form = ProfileCreationForm(profile=request.user.profile, data=data)
+    if form.is_valid():
+        form.save()
+        return JsonResponse(dict(success=True))
+    else:
+        response_dict = dict(success=False)
+        response_dict.update(form.errors)
+        return JsonResponse(response_dict)
+
+
+#######################################################################################################################
+#
+# 以下是个人中心部分使用的API
+#
+#######################################################################################################################
+
+
+@http_decorators.require_GET
+@login_first
+def profile_info(request, user_id):
+    """ 获取个人中心首页的信息
+     :param user_id  需要索取的用户信息对应用户的id，当这个id是当前登陆用户的id时，返回“我的”界面
+                     需要的数据，否则返回“他人”界面需要的数据
+     :return 需要返回的数据较为复杂：如下列出：
+         -- success
+         -- user_profile
+          | nick-name:
+          | age:
+          | avatar:
+          | gender:
+          | star_sign:
+          | district:
+          | job:
+          | interest:
+          | signature:
+          | -- avatar_car
+             | car_id:
+             | name:
+             | logo:
+          | status_num:
+          | fans_num:
+          | follow_num:
+          | -- avatar_club
+             | id:
+             | club_logo:
+        如果是返回他人的数据，还会增加一个字段：followed来表明当前登陆用户是否已经关注的了指定用户
+
+        注意：
+            在个人界面中用户实时位置的更新一集下方的对于动态列表的，汽车介绍等需要从别的接口单独获取
+    """
+    try:
+        user = get_user_model().objects.select_related('profile__avatar_club', 'profile__avatar_car')\
+            .get(id=user_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=True, code='2000', message='User not found.'))
+    profile = user.profile
+    user_info = dict(
+        nick_name=profile.nick_name,
+        age=profile.age,
+        avatar=profile.avatar.url,
+        gender=profile.get_gender_display(),
+        star_sign=profile.get_star_sign_display(),
+        district=profile.district,
+        job=profile.job,
+        signature=profile.signature,
+    )
+    user_info['status_num'] = Status.objects.filter(user=user).count()
+    user_info['fans_num'] = UserFollow.objects.filter(target_user=user).count()
+    user_info['follow_num'] = UserFollow.objects.filter(source_user=user).count()
+    car = profile.avatar_car
+    if car is not None:
+        user_info['avatar_car'] = dict(
+            car_id=car.id,
+            name=car.name,
+            logo=car.logo.url
+        )
+    club = profile.avatar_club
+    if club is not None:
+        user_info['avatar_club'] = dict(
+            id=club.id,
+            club_logo=club.logo.url
+        )
+    if user.id != request.user.id:
+        user_info['followed'] = UserFollow.objects.filter(source_user=request.user, target_user=user).exists()
+    return JsonResponse(dict(success=True, user_profile=user_info))
+
+
+@http_decorators.require_GET
+@login_first
+@page_separator_loader
+def profile_status_list(request, date_threshold, op_type, limit, user_id):
+    """ 这个函数和状态列表的首页十分类似，但是在返回数据上，只需要返回状态的封面和id即可
+     :param user_id 目标用户的id
+    """
+    if op_type == 'latest':
+        date_filter = Q(created_at__gt=date_threshold)
+    else:
+        date_filter = Q(created_at__lt=date_threshold)
+
+    data = Status.objects.filter(date_filter, user__id=user_id)[0:limit]
+
+    def format_fix(status):
+        return {'id': status.id, 'image': status.image.url}
+
+    data = map(format_fix, data)
+    return JsonResponse(dict(success=True, data=data))
+
+
+@http_decorators.require_POST
+@post_data_loader()
+def profile_modify(request, data):
+    """ data为修改的属性字典
+    """
+    modifiable_properties = ['nick_name', 'avatar', 'avatar_club', 'avatar_car', 'signature',
+                             'job', 'district']
+    # First, check if the posted data are valid
+    for key in data:
+        if key not in modifiable_properties:
+            return JsonResponse(dict(success=False, code='2001', message='Invalid property name.'))
+
+    profile = request.user.profile
+
+    if 'avatar' in request.FILES:
+        profile.avatar = request.FILES.get('avatar')
+
+    profile.nick_name = data.get('nick_name', profile.nick_name)
+    profile.signature = data.get('signature', profile.signature)
+    profile.job = data.get('job', profile.job)
+    profile.district = data.get('district', profile.district)
+
+    try:
+        if 'avatar_club' in data:
+            join = ClubJoining.objects.get(user=request.user, club__id=data['avatar_club'])
+            profile.avatar_club_id = join.club_id
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code='2002',
+                                 message='Club not found or you have not joined the club yet.'))
+
+    try:
+        if 'avatar_car' in data:
+            ownership = SportCarOwnership.objects.get(user=request.user, car__id=data['avatar_car'], identified=True)
+            profile.avatar_car_id = ownership.car_id
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code='2003', message='Car not found or you do not own this car'))
+
+    profile.save()
+    return JsonResponse(dict(success=True))
