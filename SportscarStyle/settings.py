@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'Status',
     'Location',
     'Club',
+    'SettingCenter'
 )
 
 MIDDLEWARE_CLASSES = (
