@@ -49,3 +49,25 @@ class SettingsTest(TestCase):
         self.assertEqual(response_data['settings'],
                          dict(notification_accept=True, notification_sound=True, notification_shake=True,
                               location_visible_to='all', blacklist=None))
+
+    def test_remove_black_list(self):
+        self.user.setting_center.blacklist.add(self.another_user)
+        self.authenticate()
+        response = self.client.post(reverse('settings:settings'), data=dict(
+            notification_accept='YES',
+            notification_sound='YES',
+            notification_shake='YES',
+            location_visible_to='all',
+            blacklist=json.dumps({'remove': [self.another_user.id]})
+        ))
+        response_data = json.loads(response.content)
+        self.assertTrue(response_data['success'])
+        setting_center = self.user.setting_center
+        self.assertEqual(setting_center.blacklist.all().count(), 0)
+
+    def test_give_suggestions(self):
+        self.authenticate()
+        self.client.post(reverse('settings:suggestions'), data=dict(
+            content='test_content'
+        ))
+        self.assertEqual(len(Suggestion.objects.all()), 1)

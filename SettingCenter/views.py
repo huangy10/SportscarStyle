@@ -24,6 +24,8 @@ def settings(request, data):
                              注意这个需要json解析,使用data的字段的json_data来提取
        |- add []
        |- remove []          注意,先处理添加,再处理删除.因此如果add和remove数组中有重复的id的话, 其作用将会抵消
+
+     注意: 你需要一次提交所有的设置内容,因为这个接口的本质,是对本地设置的云端备份
     """
     user = request.user
     settings = user.setting_center

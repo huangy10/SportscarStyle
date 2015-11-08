@@ -231,6 +231,7 @@ def profile_status_list(request, date_threshold, op_type, limit, user_id):
         return {'id': status.id, 'image': status.image.url}
 
     data = map(format_fix, data)
+    # TODO: 这里还要返回status创建的时间
     return JsonResponse(dict(success=True, data=data))
 
 
@@ -273,3 +274,95 @@ def profile_modify(request, data):
 
     profile.save()
     return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_GET
+@page_separator_loader
+def profile_fans_list(request, date_threshold, op_type, limit):
+    """ 这个接口返回粉丝列表,GET参数中的user_id指定了用户,如果没有发现这个参数,则认为是获取当前用户粉丝列表
+     返回为一个列表,其中每个用户返回头像,昵称,关注该用户的时间,id
+    """
+    if 'user_id' in request.GET:
+        try:
+            user = get_user_model().objects.get(id=request.GET['user_id'])
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=True, message='User not found', code='2000'))
+    else:
+        user = request.user
+
+    if op_type == 'latest':
+        date_filter = Q(created_at__gt=date_threshold)
+    else:
+        date_filter = Q(created_at__lt=date_threshold)
+
+    fans = UserFollow.objects.select_related('source_user__profile').filter(date_filter, source_user=user)[0:limit]
+
+    def data_organize(x):
+        source_user = x.source_user
+        return dict(
+            user_id=source_user.id,
+            avatar=source_user.profile.avatar.url,
+            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            nick_name=source_user.profile.nickname
+        )
+
+    return JsonResponse(dict(success=True, fans=map(data_organize, fans)))
+
+
+@http_decorators.require_GET
+@page_separator_loader
+def profile_follow_list(request, date_threshold, op_type, limit):
+    """ 这个接口返回粉关注列表,GET参数中的user_id指定了用户,如果没有发现这个参数,则认为是获取当前用户粉丝列表
+     返回为一个列表,其中每个用户返回头像,昵称,关注该用户的时间,id
+    """
+    if 'user_id' in request.GET:
+        try:
+            user = get_user_model().objects.get(id=request.GET['user_id'])
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=True, message='User not found', code='2000'))
+    else:
+        user = request.user
+
+    if op_type == 'latest':
+        date_filter = Q(created_at__gt=date_threshold)
+    else:
+        date_filter = Q(created_at__lt=date_threshold)
+
+    follows = UserFollow.objects.select_related('source_user__profile').filter(date_filter, target_user=user)[0:limit]
+
+    def data_organize(x):
+        source_user = x.source_user
+        return dict(
+            user_id=source_user.id,
+            avatar=source_user.profile.avatar.url,
+            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            nick_name=source_user.profile.nickname
+        )
+
+    return JsonResponse(dict(success=True, fans=map(data_organize, follows)))
+
+
+
+@http_decorators.require_POST
+@post_data_loader()
+def profile_operation(request, data, user_id):
+    """ 用户操作,目前只限于关注
+    """
+    if 'op_type' not in data or data['op_type'] not in ['follow']:
+        return JsonResponse(dict(success=False, code='2300', message='No valid operation type param found.'))
+    if int(user_id) == request.user.id:
+        return JsonResponse(dict(success=False, message='Invalid operation', code='2301'))
+    try:
+        target_user = get_user_model().objects.get(id=user_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=True, message='User not found', code='2000'))
+
+    if data['op_type'] == 'follow':
+        obj, created = UserFollow.objects.get_or_create(source_user=request.user, target_user=target_user)
+        if created:
+            obj.delete()
+        return JsonResponse(dict(success=True))
+
+
+
+

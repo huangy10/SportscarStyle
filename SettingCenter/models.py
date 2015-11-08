@@ -37,7 +37,7 @@ def auto_create_setting_center(sender, instance, created, **kwargs):
 class Suggestion(models.Model):
 
     content = models.CharField(max_length=255, verbose_name='内容')
-    setting_center = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
 

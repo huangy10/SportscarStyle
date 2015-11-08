@@ -120,6 +120,7 @@ class UserFollow(models.Model):
     class Meta:
         verbose_name = u'用户关系'
         verbose_name_plural = u'用户关系'
+        ordering = ['-created_at', ]
 
 
 class AuthenticationManager(models.Manager):
