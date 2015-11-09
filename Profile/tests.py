@@ -605,3 +605,123 @@ class PersonalViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data,
                          dict(success=False, code='2003', message='Car not found or you do not own this car'))
+
+    def test_profile_fan_list_latest(self):
+        fan = get_user_model().objects.create(username='another_user')
+        follow = UserFollow.objects.create(source_user=fan, target_user=self.default_user)
+        self.authenticate()
+        request_time = timezone.now() - datetime.timedelta(seconds=60)
+        response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            op_type='latest',
+            limit='10',
+        ))
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['fans'], [dict(
+            user_id=fan.id,
+            avatar=fan.profile.avatar.url,
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            nick_name=fan.profile.nick_name
+        )])
+
+    def test_profile_fan_list_more(self):
+        fan = get_user_model().objects.create(username='another_user')
+        follow = UserFollow.objects.create(source_user=fan, target_user=self.default_user)
+        self.authenticate()
+        request_time = timezone.now() + datetime.timedelta(seconds=60)
+        response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            op_type='more',
+            limit='10',
+        ))
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['fans'], [dict(
+            user_id=fan.id,
+            avatar=fan.profile.avatar.url,
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            nick_name=fan.profile.nick_name
+        )])
+
+    def test_profile_fan_list_multi(self):
+        fan_num = random.randint(0, 20)
+        for i in range(fan_num):
+            fan = get_user_model().objects.create(username='another_user_%s' % i)
+            UserFollow.objects.create(source_user=fan, target_user=self.default_user)
+        self.authenticate()
+        request_time = timezone.now() - datetime.timedelta(seconds=60)
+        response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            op_type='latest',
+            limit='10',
+        ))
+        response_data = json.loads(response.content)
+        self.assertEqual(len(response_data['fans']), min(fan_num, 10))
+
+    def test_profile_follow_list_more(self):
+        follower = get_user_model().objects.create(username='another_user')
+        follow = UserFollow.objects.create(source_user=self.default_user, target_user=follower)
+        self.authenticate()
+        request_time = timezone.now() + datetime.timedelta(seconds=60)
+        response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            op_type='more',
+            limit='10',
+        ))
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['fans'], [dict(
+            user_id=follower.id,
+            avatar=follower.profile.avatar.url,
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            nick_name=follower.profile.nick_name
+        )])
+
+    def test_profile_follow_list_latest(self):
+        follower = get_user_model().objects.create(username='another_user')
+        follow = UserFollow.objects.create(source_user=self.default_user, target_user=follower)
+        self.authenticate()
+        request_time = timezone.now() - datetime.timedelta(seconds=60)
+        response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            op_type='latest',
+            limit='10',
+        ))
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['fans'], [dict(
+            user_id=follower.id,
+            avatar=follower.profile.avatar.url,
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            nick_name=follower.profile.nick_name
+        )])
+
+    def test_profile_follow_list_multi(self):
+        follow_num = random.randint(0, 20)
+        for i in range(follow_num):
+            follower = get_user_model().objects.create(username='another_user_%s' % i)
+            UserFollow.objects.create(source_user=self.default_user, target_user=follower)
+        self.authenticate()
+        request_time = timezone.now() - datetime.timedelta(seconds=60)
+        response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            op_type='latest',
+            limit='10',
+        ))
+        response_data = json.loads(response.content)
+        self.assertEqual(len(response_data['fans']), min(follow_num, 10))
+
+    def test_profile_operation_follow(self):
+        user = get_user_model().objects.create(username='another_user')
+        self.authenticate()
+        response = self.client.post(reverse('profile:operation', args=(user.id, )), data=dict(
+            op_type='follow'
+        ))
+        response_data = json.loads(response.content)
+        self.assertTrue(response_data['success'])
+        self.assertTrue(UserFollow.objects.filter(source_user=self.default_user, target_user=user).exists())
+
+    def test_profile_operation_follow_self(self):
+        self.authenticate()
+        response = self.client.post(reverse('profile:operation', args=(self.default_user.id, )), data=dict(
+            op_type='follow'
+        ))
+        response_data = json.loads(response.content)
+        self.assertFalse(response_data['success'])
