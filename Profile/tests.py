@@ -384,7 +384,7 @@ class PersonalViewTest(TestCase):
             zeroTo60='3s',
             manufacturer=default_manufacturer
         )
-        location = Location.objects.create(location=Point(120, 30), description='test', user=self.default_user)
+        location = Location.objects.create(location=Point(120, 30), description='test')
         status_num = random.randint(1, 10)
         for _ in range(status_num):
             Status.objects.create(user=self.default_user, image='media/tests/test.png', content='status content',
@@ -444,7 +444,7 @@ class PersonalViewTest(TestCase):
             zeroTo60='3s',
             manufacturer=default_manufacturer
         )
-        location = Location.objects.create(location=Point(120, 30), description='test', user=self.default_user)
+        location = Location.objects.create(location=Point(120, 30), description='test')
         if user is None:
             user = self.default_user
         status = []

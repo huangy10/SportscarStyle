@@ -38,7 +38,7 @@ class SettingsTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertTrue(response_data['success'])
-        setting_center = self.user.setting_center
+        setting_center = SettingCenter.objects.get(user=self.user)
         self.assertEqual(setting_center.blacklist.all().count(), 1)
 
     def test_get_settings(self):

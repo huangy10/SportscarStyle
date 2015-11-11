@@ -37,12 +37,13 @@ def settings(request, data):
             settings.location_visible_to = data['location_visible_to']
         blacklist = json.loads(data['blacklist'])
         if 'add' in blacklist:
-            add = get_user_model().objects.filter(id__in=blacklist['add'])
+            add = list(get_user_model().objects.filter(id__in=blacklist['add']))
             settings.blacklist.add(*add)
         if 'remove' in blacklist:
-            remove = get_user_model().objects.filter(id__in=blacklist['remove'])
+            remove = list(get_user_model().objects.filter(id__in=blacklist['remove']))
             settings.blacklist.remove(*remove)
         settings.save()
+
         return JsonResponse(dict(success=True))
 
     # 返回当前的设置

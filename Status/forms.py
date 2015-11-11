@@ -40,7 +40,6 @@ class StatusCreationForm(forms.ModelForm):
         loc = Location.objects.create(
             location=Point(x=self.cleaned_data['lon'], y=self.cleaned_data['lat']),
             description=self.cleaned_data['location_description'],
-            user=self.cleaned_data['user_id']
         )
         status = Status.objects.create(
             user=self.cleaned_data['user_id'],

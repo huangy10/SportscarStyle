@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^cars/', include('Sportscar.urls', namespace='cars')),
     url(r'^news/', include('News.urls', namespace='news')),
     url(r'^status/', include('Status.urls', namespace='status')),
-    url(r'^settings/', include('SettingCenter.urls', namespace='settings'))
+    url(r'^settings/', include('SettingCenter.urls', namespace='settings')),
+    url(r'^activity/', include('Activity.urls', namespace='activity'))
 ]

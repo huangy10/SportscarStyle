@@ -51,7 +51,6 @@ class StatusViewTest(TestCase):
         self.default_location = Location.objects.create(
             location=Point(120, 30),
             description='test location',
-            user=self.default_user,
         )
         self.default_status = Status.objects.\
             create(user=self.default_user,

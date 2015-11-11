@@ -16,7 +16,7 @@ class SettingCenter(models.Model):
     notification_sound = models.BooleanField(default=True, verbose_name=u'声音')
     notification_shake = models.BooleanField(default=True, verbose_name=u'震动')
 
-    blacklist = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='+')
+    blacklist = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     location_visible_to = models.CharField(max_length=10, choices=(
         ('all', '所有人'),
