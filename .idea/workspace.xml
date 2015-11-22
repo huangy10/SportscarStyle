@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab0b551-2c12-4d23-b0b0-305e7ba2be2e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Activity/urls.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Status/migrations/0002_status_created_at.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Status/migrations/0003_auto_20151028_0729.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Status/migrations/0004_auto_20151029_1538.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/models.py" afterPath="$PROJECT_DIR$/Activity/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/tests.py" afterPath="$PROJECT_DIR$/Activity/tests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/urls.py" afterPath="$PROJECT_DIR$/Activity/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/views.py" afterPath="$PROJECT_DIR$/Activity/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Location/models.py" afterPath="$PROJECT_DIR$/Location/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Location/views.py" afterPath="$PROJECT_DIR$/Location/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Profile/tests.py" afterPath="$PROJECT_DIR$/Profile/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SettingCenter/models.py" afterPath="$PROJECT_DIR$/SettingCenter/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SettingCenter/tests.py" afterPath="$PROJECT_DIR$/SettingCenter/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SettingCenter/views.py" afterPath="$PROJECT_DIR$/SettingCenter/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SportscarStyle/settings.py" afterPath="$PROJECT_DIR$/SportscarStyle/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SportscarStyle/urls.py" afterPath="$PROJECT_DIR$/SportscarStyle/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/forms.py" afterPath="$PROJECT_DIR$/Status/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Status/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/tests.py" afterPath="$PROJECT_DIR$/Status/tests.py" />
     </list>
     <ignored path="SportscarStyle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +29,7 @@
     <SUITE FILE_PATH="coverage/SportscarStyle$Test__SettingCenter.coverage" NAME="Test: SettingCenter Coverage Results" MODIFIED="1446976589614" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/SportscarStyle$Test__Spr.coverage" NAME="Test: Spr Coverage Results" MODIFIED="1446903279642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/SportscarStyle$Test__Sportscar.coverage" NAME="Test: Sportscar Coverage Results" MODIFIED="1446903427900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/SportscarStyle$Test__Activity.coverage" NAME="Test: Activity Coverage Results" MODIFIED="1447245967554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SportscarStyle$Test__Activity.coverage" NAME="Test: Activity Coverage Results" MODIFIED="1448180526125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/SportscarStyle$Test__Status.coverage" NAME="Test: Status Coverage Results" MODIFIED="1445502194999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/SportscarStyle$Test__.coverage" NAME="Test:  Coverage Results" MODIFIED="1447166188293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/SportscarStyle$Test__Club.coverage" NAME="Test: Club Coverage Results" MODIFIED="1445409880859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -104,39 +90,47 @@
             <entry file="file://$PROJECT_DIR$/Location/models.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Profile/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.20782396">
-                  <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+                  <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
           <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Activity/tests.py">
+            <entry file="file://$PROJECT_DIR$/News/tests.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
-                  <folding>
-                    <element signature="e#0#15#0" expanded="true" />
-                  </folding>
+                  <caret line="241" column="64" selection-start-line="241" selection-start-column="64" selection-end-line="241" selection-end-column="64" />
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
           <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Activity/models.py">
+            <entry file="file://$PROJECT_DIR$/Profile/models.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="60" column="68" selection-start-line="60" selection-start-column="68" selection-end-line="60" selection-end-column="68" />
+                  <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/News/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="114" column="109" selection-start-line="114" selection-start-column="71" selection-end-line="114" selection-end-column="109" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Activity/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-0.091816366">
+                  <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
                   <folding>
                     <element signature="e#15#26#0" expanded="true" />
                   </folding>
@@ -148,13 +142,37 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Activity/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.95110023">
-                  <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
                   <folding>
                     <element signature="e#15#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Activity/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tests.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Activity/tests.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.34131736">
+                  <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
+                  <folding>
+                    <element signature="e#0#15#0" expanded="true" />
+                    <element signature="e#1141#1278#0" expanded="false" />
+                    <element signature="e#1324#2030#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -210,7 +228,6 @@
         <option value="$PROJECT_DIR$/Profile/profile_urls.py" />
         <option value="$PROJECT_DIR$/Profile/views.py" />
         <option value="$PROJECT_DIR$/SportscarStyle/urls.py" />
-        <option value="$PROJECT_DIR$/Activity/urls.py" />
         <option value="$PROJECT_DIR$/SportscarStyle/settings.py" />
         <option value="$PROJECT_DIR$/Profile/tests.py" />
         <option value="$PROJECT_DIR$/Status/forms.py" />
@@ -220,9 +237,10 @@
         <option value="$PROJECT_DIR$/SettingCenter/models.py" />
         <option value="$PROJECT_DIR$/SettingCenter/views.py" />
         <option value="$PROJECT_DIR$/Location/views.py" />
-        <option value="$PROJECT_DIR$/Activity/tests.py" />
         <option value="$PROJECT_DIR$/Activity/models.py" />
         <option value="$PROJECT_DIR$/Activity/views.py" />
+        <option value="$PROJECT_DIR$/Activity/urls.py" />
+        <option value="$PROJECT_DIR$/Activity/tests.py" />
       </list>
     </option>
   </component>
@@ -232,10 +250,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2560" />
     <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1373" />
+    <option name="width" value="1440" />
+    <option name="height" value="833" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -281,7 +298,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -475,6 +491,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -870,34 +887,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test__ - 2015.11.10 at 22h 26m 56s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 27m 33s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 27m 56s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 28m 20s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 31m 25s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 32m 01s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 33m 35s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__ - 2015.11.10 at 22h 36m 37s.xml">
-      <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__Activity - 2015.11.11 at 20h 39m 55s.xml">
+    <history-entry file="Test__Activity - 2015.11.11 at 20h 46m 17s.xml">
       <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__Activity - 2015.11.11 at 20h 46m 17s.xml">
+    <history-entry file="Test__Activity - 2015.11.21 at 22h 40m 18s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.21 at 22h 43m 05s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.21 at 22h 48m 45s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.21 at 22h 49m 29s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.21 at 22h 54m 45s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.21 at 22h 55m 52s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.22 at 16h 16m 31s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.22 at 16h 21m 51s.xml">
+      <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__Activity - 2015.11.22 at 16h 22m 17s.xml">
       <configuration name="Test: Activity" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
   </component>
@@ -911,17 +928,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2560" y="23" width="2560" height="1373" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="833" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2804781" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07227959" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27894002" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12374821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29228857" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23962805" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38277513" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25976095" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26013985" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -973,7 +990,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1069,13 +1086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/News/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5538462">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chat/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4450262">
@@ -1101,13 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15306123">
           <caret line="7" column="103" selection-start-line="7" selection-start-column="103" selection-end-line="7" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/News/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8469388">
-          <caret line="146" column="21" selection-start-line="146" selection-start-column="21" selection-end-line="146" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1182,13 +1185,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/News/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.393586">
-          <caret line="187" column="8" selection-start-line="187" selection-start-column="8" selection-end-line="192" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Profile/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7157434">
@@ -1203,32 +1199,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/custom/models_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24469821">
-          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/custom/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5945946">
           <caret line="96" column="42" selection-start-line="96" selection-start-column="42" selection-end-line="96" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SportscarStyle/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41666666">
-          <caret line="26" column="67" selection-start-line="26" selection-start-column="67" selection-end-line="26" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Activity/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06666667">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1303,8 +1278,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2196908">
           <caret line="18" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SportscarStyle/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74850297">
+          <caret line="26" column="67" selection-start-line="26" selection-start-column="67" selection-end-line="26" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/News/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.32656023">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/models_template.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43541363">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/News/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="109" selection-start-line="114" selection-start-column="71" selection-end-line="114" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Activity/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
           <folding>
-            <element signature="e#15#50#0" expanded="true" />
+            <element signature="e#15#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1312,46 +1334,46 @@
     <entry file="file://$PROJECT_DIR$/Location/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Activity/tests.py">
+    <entry file="file://$PROJECT_DIR$/Activity/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+          <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Activity/views.py">
+    <entry file="file://$PROJECT_DIR$/News/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95110023">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#26#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="241" column="64" selection-start-line="241" selection-start-column="64" selection-end-line="241" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Activity/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="68" selection-start-line="60" selection-start-column="68" selection-end-line="60" selection-end-column="68" />
+        <state vertical-scroll-proportion="-0.091816366">
+          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
           <folding>
             <element signature="e#15#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/models.py">
+    <entry file="file://$PROJECT_DIR$/Activity/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20782396">
-          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
-          <folding />
+        <state vertical-scroll-proportion="0.34131736">
+          <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#1141#1278#0" expanded="false" />
+            <element signature="e#1324#2030#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

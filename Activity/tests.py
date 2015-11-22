@@ -8,9 +8,11 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.conf import settings
+from django.contrib.gis.geos import Point
 
-from .models import Activity, ActivityComment
+from .models import Activity, ActivityComment, ActivityJoin
 from Club.models import Club
+from Location.models import Location
 # Create your tests here.
 
 
@@ -21,6 +23,16 @@ class ActivityViewTest(TestCase):
         user.set_password('test_password')
         user.save()
         self.user = user
+        self.activity = Activity.objects.create(
+            name="test_activity",
+            description="test",
+            max_attend=10,
+            start_at=timezone.now() + datetime.timedelta(days=1),
+            end_at=timezone.now() + datetime.timedelta(days=2),
+            allowed_club=None,
+            poster="/media/tests/test.png",
+            location=Location.objects.create(location=Point(30, 120), description='test')
+        )
 
     def authenticate(self):
         self.client.post(reverse('account:login'), data=dict(
@@ -59,7 +71,7 @@ class ActivityViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertTrue(response_data['success'])
-        act = Activity.objects.first()
+        act = Activity.objects.order_by('-created_at').first()
         self.assertEqual(act.allowed_club.id, club.id)
 
     def test_activity_create_with_inform_of(self):
@@ -81,6 +93,78 @@ class ActivityViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertTrue(response_data['success'])
-        act = Activity.objects.first()
+        act = Activity.objects.order_by('-created_at').first()
         self.assertEqual(len(act.inform_of.all()), user_num)
+
+    def test_activity_check_detail(self):
+        self.authenticate()
+        response = self.client.get(reverse('activity:detail', args=(self.activity.id, )))
+        response_data = json.loads(response.content)
+        self.maxDiff = None
+        self.assertEqual(response_data['data'], dict(
+            name=self.activity.name,
+            description=self.activity.description,
+            max_attend=self.activity.max_attend,
+            start_at=self.activity.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            end_at=self.activity.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            poster=self.activity.poster.url,
+            location=dict(lat=self.activity.location.location.x,
+                          lon=self.activity.location.location.y,
+                          description=self.activity.location.description),
+            apply_list=[],
+        ))
+
+    def test_activity_check_detail_with_appliers(self):
+        another_user = get_user_model().objects.create(username='new_user')
+        ActivityJoin.objects.create(user=another_user, activity=self.activity)
+        self.authenticate()
+        response = self.client.get(reverse('activity:detail', args=(self.activity.id, )))
+        response_data = json.loads(response.content)
+        self.maxDiff = None
+        self.assertEqual(response_data['data'], dict(
+            name=self.activity.name,
+            description=self.activity.description,
+            max_attend=self.activity.max_attend,
+            start_at=self.activity.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            end_at=self.activity.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            poster=self.activity.poster.url,
+            location=dict(lat=self.activity.location.location.x,
+                          lon=self.activity.location.location.y,
+                          description=self.activity.location.description),
+            apply_list=[dict(
+                approved=False,
+                user=dict(
+                    id=another_user.id,
+                    avatar=another_user.profile.avatar.url,
+                    avatar_car=None)
+            ), ],
+        ))
+
+    def test_activity_post_comment(self):
+        self.authenticate()
+        response = self.client.post(reverse('activity:comment', args=(self.activity.id, )), data=dict(
+            content='test content',
+        ))
+        response_data = json.loads(response.content)
+        self.assertTrue(response_data['success'])
+        self.assertEqual(ActivityComment.objects.all().count(), 1)
+
+    def test_activity_post_commnet_with_response_to_previous_commnet(self):
+        self.authenticate()
+        pre_comment = ActivityComment.objects.create(
+            user=get_user_model().objects.create(username='another_new_user'),
+            activity=self.activity, image=None,
+            content='test',
+        )
+        response = self.client.post(reverse('activity:comment', args=(self.activity.id, )), data=dict(
+            content='test content',
+            response_to=pre_comment.id
+        ))
+        response_data = json.loads(response.content)
+        self.assertTrue(response_data['success'])
+        self.assertEqual(ActivityComment.objects.all().count(), 2)
+        comment = ActivityComment.objects.order_by('-created_at').first()
+        self.assertEqual(comment.response_to.id, pre_comment.id)
+
+
 
