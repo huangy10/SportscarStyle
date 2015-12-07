@@ -93,6 +93,7 @@ def news_comments_list(request, date_threshold, op_type, limit, news_id):
 @post_data_loader(json_fields=('inform_of', ))
 def news_post_comment(request, data, news_id):
     """ 发布评论
+     需要返回分配给评论的id
     """
     try:
         news = News.objects.get(id=news_id)
@@ -121,7 +122,7 @@ def news_post_comment(request, data, news_id):
                 comment.inform_of.add(inform_user)
             except ObjectDoesNotExist:
                 return JsonResponse(dict(success=False, code='3002', message='User with id %s not found' % at))
-    return JsonResponse(dict(success=True))
+    return JsonResponse(dict(success=True, id=comment.id))
 
 
 @http_decorators.require_POST

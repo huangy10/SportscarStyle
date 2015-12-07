@@ -1,3 +1,4 @@
+# coding=utf-8
 import datetime
 import json
 import random
@@ -165,6 +166,22 @@ class ActivityViewTest(TestCase):
         self.assertEqual(ActivityComment.objects.all().count(), 2)
         comment = ActivityComment.objects.order_by('-created_at').first()
         self.assertEqual(comment.response_to.id, pre_comment.id)
+
+    def test_activity_post_comment_with_inform_of(self):
+        """ 在这个测试中加入@别人的效果
+        """
+        self.authenticate()
+        users = []
+        for i in range(3):
+            users.append(get_user_model().objects.create(username='new_user_%s' % i))
+        response = self.client.post(reverse('activity:comment', args=(self.activity.id, )), data=dict(
+            content='test content',
+            inform_of=json.dumps([user.id for user in users])
+        ))
+        response_data = json.loads(response.content)
+        self.assertTrue(response_data['success'])
+        comment = ActivityComment.objects.get(id=response_data['id'])
+        self.assertEqual(comment.inform_of.all().count(), 3)
 
 
 

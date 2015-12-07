@@ -38,6 +38,7 @@ class Activity(models.Model):
     location = models.ForeignKey('Location.Location', verbose_name=u'活动地点')
 
     created_at = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         verbose_name = u'活动'
         verbose_name_plural = u'活动'

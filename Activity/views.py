@@ -170,6 +170,7 @@ def activity_detail_comment(request, date_threshold, op_type, limit, act_id):
 @post_data_loader(json_fields=('inform_of', ))
 def post_activity_comment(request, data, act_id):
     """ 对活动发布评论
+     返回分配给这个活动的id
     """
     try:
         activity = Activity.objects.get(id=act_id)
@@ -192,8 +193,8 @@ def post_activity_comment(request, data, act_id):
     except ValidationError:
         return JsonResponse(dict(success=False, code='7002', message='No valid content found for the comment'))
 
-    if 'inform' in data:
-        inform_users = get_user_model().objects.filter(id__in=data['json_field'])
+    if 'inform_of' in data:
+        inform_users = get_user_model().objects.filter(id__in=data['json_data'])
         comment.inform_of.add(*inform_users)
 
-    return JsonResponse(dict(success=True))
+    return JsonResponse(dict(success=True, id=comment.id))
