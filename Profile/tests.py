@@ -82,7 +82,7 @@ class ProfileViewTest(TestCase):
         """
         response = self.client.post('/account/login', data=dict(username='15201525181', password='test_password'))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
+        self.assertEqual(response_data, dict(success=True, userID=self.default_user.id))
 
     def test_login_with_invalid_username(self):
         response = self.client.post('/account/login', data=dict(username='invalid_username', password='test_password'))

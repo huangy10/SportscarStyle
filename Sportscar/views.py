@@ -1,8 +1,9 @@
 # coding=utf-8
 from django.views.decorators.cache import cache_page
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.views.decorators import http as http_decorators
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from .models import Manufacturer, Sportscar, SportCarOwnership, SportCarIdentificationRequestRecord
@@ -133,6 +134,19 @@ def car_auth(request, data):
             return JsonResponse(dict(success=False, message=u'没有权限', code='2401'))
 
 
+@http_decorators.require_GET
+@login_first
+def car_query_by_name(request):
+    manufacturer = request.GET['manufacturer']
+    car_name = request.GET['car_name']
+    print request
+    print manufacturer, car_name
+    try:
+        car = Sportscar.objects.get(name=car_name, manufacturer__name=manufacturer)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False))
+
+    return HttpResponseRedirect(reverse("cars:car_detail", args=(car.id, )))
 
 
 

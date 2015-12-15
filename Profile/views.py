@@ -44,7 +44,7 @@ def account_login(request, data):
         return JsonResponse(dict(success=False, message=error_reason, code=error_code))
     else:
         auth.login(request, user)
-        return JsonResponse(dict(success=True))
+        return JsonResponse(dict(success=True, userID=user.id))
 
 
 @http_decorators.require_POST

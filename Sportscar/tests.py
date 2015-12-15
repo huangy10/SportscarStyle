@@ -126,5 +126,12 @@ class CarViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertFalse(response_data['success'])
 
+    def test_car_query(self):
+        self.default_authenticate()
+        response = self.client.get(reverse('cars:query'), data=dict(
+            manufacturer=self.default_manufacturer.name,
+            car_name=self.car1.name
+        ))
+        self.assertEqual(response.status_code, 302)
     # TODO: 后续在这里要加上允许的通过的申请的功能的测试
 
