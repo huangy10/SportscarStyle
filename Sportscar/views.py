@@ -45,7 +45,8 @@ def cars_detail(request, car_id):
         - zeroTo60:
         - logo_url:
         - image_url
-
+        - car_id:
+        - price
     """
     # you can specify the response data type by the `type` GET param
     query_type = request.GET.get('type', 'default')
@@ -61,7 +62,10 @@ def cars_detail(request, car_id):
                 max_speed=car.max_speed,
                 zeroTo60=car.zeroTo60,
                 logo_url=car.logo.url,
-                image_url=car.image.url
+                image_url=car.image.url,
+                body=car.body,
+                price=car.price,
+                car_id=car.id
             )
         except ObjectDoesNotExist:
             result['success'] = False
@@ -132,6 +136,17 @@ def car_auth(request, data):
             return JsonResponse(dict(success=True))
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message=u'没有权限', code='2401'))
+
+@http_decorators.require_GET
+@login_first
+def car_authed_list(request, user_id):
+    """ 获取制定user_id的用户所拥有的车辆
+     :param user_id
+
+     返回的数据为车辆组成的数组,其中每个元素包含的信息是
+    """
+    ownership =SportCarOwnership.objects.filter(user_id=user_id)
+    return JsonResponse(success=True, data=map(lambda x: x.dict_description(), ownership))
 
 
 @http_decorators.require_GET

@@ -461,7 +461,7 @@ class PersonalViewTest(TestCase):
         status = self.create_status()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:status_list', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='more',
             limit='10'
         ))
@@ -473,7 +473,7 @@ class PersonalViewTest(TestCase):
         status = self.create_status()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:status_list', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10'
         ))
@@ -486,7 +486,7 @@ class PersonalViewTest(TestCase):
         self.create_status(num=status_num)
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:status_list', args=(self.default_user.id, )), data=dict(
-            date_threshold = request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold = request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='more',
             limit='10'
         ))
@@ -612,7 +612,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10',
         ))
@@ -620,7 +620,7 @@ class PersonalViewTest(TestCase):
         self.assertEqual(response_data['fans'], [dict(
             user_id=fan.id,
             avatar=fan.profile.avatar.url,
-            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=fan.profile.nick_name
         )])
 
@@ -630,7 +630,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='more',
             limit='10',
         ))
@@ -638,7 +638,7 @@ class PersonalViewTest(TestCase):
         self.assertEqual(response_data['fans'], [dict(
             user_id=fan.id,
             avatar=fan.profile.avatar.url,
-            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=fan.profile.nick_name
         )])
 
@@ -650,7 +650,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10',
         ))
@@ -663,7 +663,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='more',
             limit='10',
         ))
@@ -671,7 +671,7 @@ class PersonalViewTest(TestCase):
         self.assertEqual(response_data['fans'], [dict(
             user_id=follower.id,
             avatar=follower.profile.avatar.url,
-            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=follower.profile.nick_name
         )])
 
@@ -681,7 +681,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10',
         ))
@@ -689,7 +689,7 @@ class PersonalViewTest(TestCase):
         self.assertEqual(response_data['fans'], [dict(
             user_id=follower.id,
             avatar=follower.profile.avatar.url,
-            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            time=follow.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=follower.profile.nick_name
         )])
 
@@ -701,7 +701,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10',
         ))

@@ -83,8 +83,8 @@ def activity_create(request, data):
         name=data['name'],
         description=data['description'],
         max_attend=data['max_attend'],
-        start_at=timezone.make_aware(datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S %Z')),
-        end_at=timezone.make_aware(datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S %Z')),
+        start_at=timezone.make_aware(datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S')),
+        end_at=timezone.make_aware(datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S')),
         location=loc,
         allowed_club=club_limit,
         poster=request.FILES['poster'],
@@ -116,8 +116,8 @@ def activity_detail(request, act_id):
 
     data = dict(
         name=act.name, description=act.description, max_attend=act.max_attend,
-        start_at=act.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-        end_at=act.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+        start_at=act.start_at.strftime('%Y-%m-%d %H:%M:%S'),
+        end_at=act.end_at.strftime('%Y-%m-%d %H:%M:%S'),
         poster=act.poster.url,
     )
 
@@ -154,7 +154,7 @@ def activity_detail_comment(request, date_threshold, op_type, limit, act_id):
     def format_fix(comment):
         comment['user_id'] = comment['user__id']
         comment['user_nickname'] = comment['user__profile__nick_name']
-        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S %Z')
+        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S')
         del comment['user__id']
         del comment['user__profile__nick_name']
         return comment

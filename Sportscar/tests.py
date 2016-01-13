@@ -32,10 +32,11 @@ class CarViewTest(TestCase):
             logo=File(image),
             image=File(image),
             engine=u'4.5L 605马力V8',
-            transmission=u'2门2座硬顶跑车',
+            transmission=u'7缸双离合',
             max_speed=u'325 km/h',
             zeroTo60='3s',
-            manufacturer=self.default_manufacturer
+            manufacturer=self.default_manufacturer,
+            body=u"2门2坐硬顶跑车"
         )
         image.close()
         self.user = get_user_model().objects.create(username='15201525181')
@@ -68,11 +69,14 @@ class CarViewTest(TestCase):
                 logo_url=self.car1.logo.url,
                 image_url=self.car1.image.url,
                 engine=u'4.5L 605马力V8',
-                transmission=u'2门2座硬顶跑车',
+                transmission=u'7缸双离合',
                 max_speed=u'325 km/h',
                 zeroTo60=u'3s',
                 manufacturer_name=u'宝马',
-                car_name=u'Mini Cooper'
+                car_name=u'Mini Cooper',
+                body=u'2门2坐硬顶跑车',
+                price=u'300,000',
+                car_id=self.car1.id
             )
         ))
 

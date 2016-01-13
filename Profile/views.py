@@ -60,6 +60,7 @@ def account_send_code(request, data):
                                  code='1400'))
     else:
         code = create_random_code()
+        print code
         if send_sms(code, phone_num):
             AuthenticationCode.objects.create(phone_num=phone_num, code=code)
             return JsonResponse(dict(success=True))
@@ -84,7 +85,9 @@ def account_register(request, data):
         form.save()
         # form验证通过保证了下面这个查询一定是存在的
         AuthenticationCode.objects.deactivate(code=data['auth_code'], phone=data['username'])
-        return JsonResponse(dict(success=True))
+        new_user = auth.authenticate(username=data["username"], password=data["password1"])
+        auth.login(request, new_user)
+        return JsonResponse(dict(success=True, userID=new_user.id))
     else:
         response_dict = dict(success=False, code='1002')
         response_dict.update(form.errors)
@@ -106,8 +109,10 @@ def account_reset_password(request, data):
     form = PasswordResetForm(data)
     if form.is_valid():
         form.save()
+        new_user = auth.authenticate(username=data["username"], password=data["password1"])
+        auth.login(request, new_user)
         AuthenticationCode.objects.deactivate(code=data['auth_code'], phone=data['username'])
-        return JsonResponse(dict(success=True))
+        return JsonResponse(dict(success=True, userID=new_user.id))
     else:
         response_dict = dict(success=False)
         response_dict.update(form.errors)
@@ -125,8 +130,10 @@ def account_profile(request, data):
         - nick_name:
         - gender:m or f
         - birth_date: birth date
+        - avatar:
     """
-    form = ProfileCreationForm(profile=request.user.profile, data=data)
+    print request
+    form = ProfileCreationForm(profile=request.user.profile, data=data, files=request.FILES)
     if form.is_valid():
         form.save()
         return JsonResponse(dict(success=True))
@@ -152,7 +159,7 @@ def profile_info(request, user_id):
      :return 需要返回的数据较为复杂：如下列出：
          -- success
          -- user_profile
-          | nick-name:
+          | nick_name:
           | age:
           | avatar:
           | gender:
@@ -165,12 +172,14 @@ def profile_info(request, user_id):
              | car_id:
              | name:
              | logo:
+             | image:
           | status_num:
           | fans_num:
           | follow_num:
           | -- avatar_club
              | id:
              | club_logo:
+             | club_name
         如果是返回他人的数据，还会增加一个字段：followed来表明当前登陆用户是否已经关注的了指定用户
 
         注意：
@@ -183,6 +192,7 @@ def profile_info(request, user_id):
         return JsonResponse(dict(success=True, code='2000', message='User not found.'))
     profile = user.profile
     user_info = dict(
+        userID=user.id,
         nick_name=profile.nick_name,
         age=profile.age,
         avatar=profile.avatar.url,
@@ -200,13 +210,15 @@ def profile_info(request, user_id):
         user_info['avatar_car'] = dict(
             car_id=car.id,
             name=car.name,
-            logo=car.logo.url
+            logo=car.logo.url,
+            image=car.image.url
         )
     club = profile.avatar_club
     if club is not None:
         user_info['avatar_club'] = dict(
             id=club.id,
-            club_logo=club.logo.url
+            club_logo=club.logo.url,
+            club_name=club.name
         )
     if user.id != request.user.id:
         user_info['followed'] = UserFollow.objects.filter(source_user=request.user, target_user=user).exists()
@@ -299,7 +311,7 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
         return dict(
             user_id=source_user.id,
             avatar=source_user.profile.avatar.url,
-            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=source_user.profile.nick_name
         )
 
@@ -329,7 +341,7 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
         return dict(
             user_id=target_user.id,
             avatar=target_user.profile.avatar.url,
-            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=target_user.profile.nick_name
         )
 
@@ -342,6 +354,7 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
 def profile_operation(request, data, user_id):
     """ 用户操作,目前只限于关注
     """
+    # TODO: 还需要取消关注
     if 'op_type' not in data or data['op_type'] not in ['follow']:
         return JsonResponse(dict(success=False, code='2300', message='No valid operation type param found.'))
     if int(user_id) == request.user.id:

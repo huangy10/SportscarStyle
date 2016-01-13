@@ -86,7 +86,7 @@ def status_comments(request, date_threshold, op_type, limit, status_id):
         # comment['image'] = settings.MEDIA_URL + comment['image']
         comment['user_id'] = comment['user__id']
         comment['user_nickname'] = comment['user__profile__nick_name']
-        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S %Z')
+        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S')
         del comment['user__id']
         del comment['user__profile__nick_name']
         return comment

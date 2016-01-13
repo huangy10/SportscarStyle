@@ -4,6 +4,7 @@ import uuid
 import json
 import pytz
 from datetime import datetime
+from dateutil.parser import parse
 
 from django.http import JsonResponse
 from django.utils import timezone
@@ -94,7 +95,8 @@ def page_separator_loader(method):
         )
         if 'date_threshold' in request.GET and 'op_type' in request.GET and 'limit' in request.GET:
             try:
-                date_threshold = datetime.strptime(request.GET['date_threshold'], '%Y-%m-%d %H:%M:%S %Z')
+                date_threshold = parse(request.GET["date_threshold"])
+                # date_threshold = datetime.strptime(request.GET['date_threshold'], '%Y-%m-%d %H:%M:%S %Z')
                 date_threshold = timezone.make_aware(date_threshold)
                 limit = int(request.GET['limit'])
                 limit = min(limit, 1000)

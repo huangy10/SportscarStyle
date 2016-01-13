@@ -7,7 +7,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.encoding import smart_str
 from django.utils.functional import cached_property
@@ -54,6 +54,7 @@ def auto_create_profile(sender, instance, created, **kwargs):
                                                        avatar=os.path.join('defaults', DEFAULT_AVATAR_NAME),
                                                        gender='m',
                                                        )
+        FriendShip.objects.get_or_create(user=instance)
 
 
 class UserProfile(models.Model):
@@ -102,9 +103,31 @@ class UserProfile(models.Model):
     def __str__(self):
         return smart_str(self.nick_name)
 
+    def simple_dict_description(self):
+        return dict(
+            userID=self.user_id,
+            nick_name=self.nick_name,
+            avatar=self.avatar.url
+        )
+
     class Meta:
         verbose_name = u'用户详情'
         verbose_name_plural = u'用户详情'
+
+
+class UserFollowManager(models.Manager):
+
+    def get_or_create(self, defaults=None, **kwargs):
+        """ 这里我们呀
+        """
+        obj, created = super(UserFollowManager, self).get_or_create(defaults, **kwargs)
+        if created:
+            # 非create的情形不需要理会
+            source_user = obj.source_user
+            target_user = obj.target_user
+            if UserFollow.objects.filter(source_user=target_user, target_user=source_user).exists():
+                source_user.friendship.friend.add(target_user)
+                target_user.friendship.friend.add(source_user)
 
 
 class UserFollow(models.Model):
@@ -121,6 +144,21 @@ class UserFollow(models.Model):
         verbose_name = u'用户关系'
         verbose_name_plural = u'用户关系'
         ordering = ['-created_at', ]
+
+
+@receiver(post_save, sender=UserFollow)
+def auto_delete_friendship(sender, instance, **kwargs):
+    source_user = instance.source_user
+    target_user = instance.target_user
+    target_user.friendship.friend.remove(source_user)
+    source_user.friendship.friend.remove(target_user)
+
+
+class FriendShip(models.Model):
+    """ 为了快速检索用户朋友关系而建立的索引表.是对上面的UserFollow表的补充, 需要由上面的UserFollow来自动维护
+    """
+    creator = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="friendship", verbose_name="朋友圈创建者")
+    friend = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="+", verbose_name="朋友")
 
 
 class AuthenticationManager(models.Manager):

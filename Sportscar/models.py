@@ -61,11 +61,20 @@ class Sportscar(models.Model):
     max_speed = models.CharField(max_length=20, verbose_name=u'最高车速')
     zeroTo60 = models.CharField(max_length=7, verbose_name=u'百公里加速')
     release_date = models.DateField(verbose_name=u'发布日期')
+    body = models.CharField(max_length=255, verbose_name=u"车身结构")
     logo = models.ImageField(verbose_name=u'车标', upload_to=car_logo)
     image = models.ImageField(verbose_name=u'跑车照片', upload_to=car_image)
 
     manufacturer = models.ForeignKey(Manufacturer, verbose_name=u'制造商')
     owners = models.ManyToManyField(settings.AUTH_USER_MODEL, through='SportCarOwnership')
+
+    def dict_description(self):
+        return dict(
+            name=self.name,
+            car_id=self.id,
+            logo=self.logo.url,
+            image=self.image.url
+        )
 
     class Meta:
         verbose_name = u'跑车'
@@ -80,6 +89,13 @@ class SportCarOwnership(models.Model):
     identified_at = models.DateTimeField(blank=True, verbose_name=u'认证日期', null=True)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'拥有日期')
+
+    def dict_description(self):
+        return dict(
+            car=self.car.dict_description(),
+            signature=self.signature,
+            identified_date=timezone.make_aware(self.created_at.strftime('%Y-%m-%d %H:%M:%S'))
+        )
 
     class Meta:
         verbose_name = u'拥车/关注'

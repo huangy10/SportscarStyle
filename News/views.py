@@ -1,4 +1,6 @@
 # coding=utf-8
+import os
+
 from django.http import JsonResponse
 from django.views.decorators import http as http_decorators
 from django.db.models import Q, Count, Case, When, BooleanField, Value, CharField
@@ -8,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 from .models import News, NewsComment, NewsLikeThrough
 from custom.utils import login_first, post_data_loader, page_separator_loader
+from Profile.models import UserFollow
 
 
 # Create your views here.
@@ -18,7 +21,19 @@ from custom.utils import login_first, post_data_loader, page_separator_loader
 @page_separator_loader
 def news_list(request, date_threshold, op_type, limit):
     """ Get the host page of news module
+     ---
+      |- success:
+      |- news:
+         |- id
+         |- cover
+         |- created_at
+         |- content
+         |- title
+         |- like_num
+         |- comment_num
+         |- recent_like_user_id            # 最近的改用户的好友中赞了这个资讯的人的id
     """
+    # TODO: 这里更改了返回的结构,新的结构参加上面的注释
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
     else:
@@ -26,13 +41,23 @@ def news_list(request, date_threshold, op_type, limit):
 
     data = News.objects.filter(date_filter) \
                .annotate(comment_num=Count('comments')) \
-               .annotate(like_num=Count('liked_by')) \
-               .values()[0: limit]
+               .annotate(like_num=Count('liked_by'))[0: limit]
 
-    def format_fix(image_field):
-        # image_field['cover'] = settings.MEDIA_URL + image_field['cover']
-        image_field['created_at'] = image_field['created_at'].strftime('%Y-%m-%d %H-%M-%S %Z')
-        return image_field
+    def format_fix(news):
+        result = dict(
+            id=news.id,
+            cover=news.cover.url,
+            created_at=news.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            content=news.content,
+            title=news.title,
+            like_num=news.like_num,
+            comment_num=news.like_num,
+        )
+        most_recent_like_record = NewsLikeThrough.objects.filter(user__friendship__friend=request.user, news=news)\
+            .order_by("-like_at").first()
+        if most_recent_like_record is not None:
+            result["recent_like_user_id"] = most_recent_like_record.user_id
+        return result
 
     data = map(format_fix, list(data))
 
@@ -64,22 +89,40 @@ def news_detail(requset, news_id):
 @page_separator_loader
 def news_comments_list(request, date_threshold, op_type, limit, news_id):
     """ Fetch comments from this interface
+       The architecture of the response JSON object is:
+        ---
+         |- success:
+         |- comments: list:
+            |- commentID:
+            |- created_at
+            |- image:
+            |- content:
+            |- user:                    # profile的simple_dict_description生成的结构
+               |- userID
+               |- nick_namne
+               |- avatar
+            |- response_to:
     """
+    # TODO: 变更了评论列表返回的形式,变更之后的格式见上面的注释
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
     else:
         date_filter = Q(created_at__lt=date_threshold)
-    comments = NewsComment.objects.filter(date_filter, news__id=news_id). \
-        values('user__profile__nick_name', 'user__id', 'created_at', 'image', 'response_to__id', 'id')[0: limit]
+    comments = NewsComment.objects.filter(date_filter, news__id=news_id).select_related("user__profile")[0: limit]
 
     def format_fix(comment):
-        # comment['image'] = settings.MEDIA_URL + comment['image']
-        comment['user_id'] = comment['user__id']
-        comment['user_nickname'] = comment['user__profile__nick_name']
-        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S %Z')
-        del comment['user__id']
-        del comment['user__profile__nick_name']
-        return comment
+        user = comment.user
+        result = dict(
+            commentID=comment.id,
+            content=comment.content,
+            user=user.profile.simple_dict_description(),
+            created_at=comment.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+        )
+        if comment.image:
+            result["image"] = comment.image.url
+        if comment.response_to is not None:
+            result["response_to"] = comment.response_to_id
+        return result
 
     comments = map(format_fix, comments)
     return JsonResponse(dict(
@@ -95,6 +138,7 @@ def news_post_comment(request, data, news_id):
     """ 发布评论
      需要返回分配给评论的id
     """
+    print data
     try:
         news = News.objects.get(id=news_id)
     except ObjectDoesNotExist:

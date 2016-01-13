@@ -35,7 +35,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='more',
             limit='10'
         ))
@@ -56,7 +56,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10'
         ))
@@ -77,7 +77,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='invalid',
             limit='10'
         ))
@@ -94,7 +94,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10'
         ))
@@ -144,7 +144,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='more',
             limit='10'
         ))
@@ -152,7 +152,7 @@ class NewsViewsTest(TestCase):
         self.maxDiff = None
         self.assertEqual(response_data, dict(
             success=True,
-            comments=[{u'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            comments=[{u'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                        u'image': u'media/tests/test.png',
                        u'response_to__id': None,
                        u'user_id': self.default_user.id,
@@ -165,7 +165,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10'
         ))
@@ -173,7 +173,7 @@ class NewsViewsTest(TestCase):
         self.maxDiff = None
         self.assertEqual(response_data, dict(
             success=True,
-            comments=[{u'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            comments=[{u'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                        u'image': u'media/tests/test.png',
                        u'response_to__id': None,
                        u'user_id': self.default_user.id,
@@ -187,7 +187,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10'
         ))
@@ -199,7 +199,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
             op_type='latest',
             limit='10'
         ))
