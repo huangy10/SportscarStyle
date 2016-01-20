@@ -20,10 +20,20 @@ def status_image_path(instance, filename, *args, **kwargs):
 
 class Status(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    image = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图')
+    # 由于Django的ArrayField只能应用到的PostgreSQL使用,由于将来可能会更换数据库,这里不适用ArrayField而是将其拆分成为9个ImageField
+    image1 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image2 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image3 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image4 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image5 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image6 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image7 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image8 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+    image9 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
+
     content = models.CharField(max_length=255, verbose_name=u'正文')
-    location = models.ForeignKey('Location.Location', verbose_name=u'发布地点')
-    car = models.ForeignKey('Sportscar.Sportscar', verbose_name=u'签名跑车')
+    location = models.ForeignKey('Location.Location', verbose_name=u'发布地点', null=True, blank=True)
+    car = models.ForeignKey('Sportscar.Sportscar', verbose_name=u'签名跑车', null=True, blank=True)
 
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u'点赞', related_name='liked_status',
                                       through='StatusLikeThrough')
@@ -34,6 +44,37 @@ class Status(models.Model):
     class Meta:
         verbose_name = u'状态'
         verbose_name_plural = u'状态'
+
+    @property
+    def images(self):
+        """ 将所有非空的image的url整理成一个字符串,以分号分隔
+        """
+        images_url = []
+        for i in range(1, 10):
+            image = getattr(self, "image%s" % i)
+            if image:
+                images_url.append(image.url)
+        return ";".join(images_url)
+
+    def dict_description(self):
+        """ 获取字典形式的数据描述,字典形式的注释参见view.py中的status_list的注释
+         但是这里没有生成comment_num和like_num这两个字段
+        """
+        result = dict(
+            statusID=self.id,
+            images=self.images,
+            content=self.content,
+            user=self.user.profile.complete_dict_description()
+        )
+        if self.car is not None:
+            result["car"] = self.car.dict_description()
+        if self.location is not None:
+            result["location"] = self.location.dict_description()
+        if hasattr(self, "comment_num"):
+            result["comment_num"] = self.comment_num
+        if hasattr(self, "like_num"):
+            result["like_num"] = self.like_num
+        return result
 
 
 class StatusComment(models.Model):

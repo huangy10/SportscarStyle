@@ -34,7 +34,7 @@ class StatusCreationForm(forms.ModelForm):
 
     class Meta:
         model = Status
-        fields = ('image', 'content')
+        fields = ('image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'content')
 
     def save(self, commit=True):
         loc = Location.objects.create(
@@ -44,7 +44,15 @@ class StatusCreationForm(forms.ModelForm):
         status = Status.objects.create(
             user=self.cleaned_data['user_id'],
             car=self.cleaned_data['car_id'],
-            image=self.cleaned_data['image'],
+            image1=self.cleaned_data.get("image1", None),
+            image2=self.cleaned_data.get("image2", None),
+            image3=self.cleaned_data.get("image3", None),
+            image4=self.cleaned_data.get("image4", None),
+            image5=self.cleaned_data.get("image5", None),
+            image6=self.cleaned_data.get("image6", None),
+            image7=self.cleaned_data.get("image7", None),
+            image8=self.cleaned_data.get("image8", None),
+            image9=self.cleaned_data.get("image9", None),
             content=self.cleaned_data['content'],
             location=loc,
         )

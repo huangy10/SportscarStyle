@@ -70,3 +70,7 @@ class Club(models.Model):
         verbose_name = u"俱乐部"
         verbose_name_plural = u'俱乐部'
 
+    def dict_description(self):
+        return dict(
+            id=self.id, club_logo=self.logo.url, club_name=self.name
+        )

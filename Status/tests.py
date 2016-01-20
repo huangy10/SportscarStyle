@@ -54,7 +54,7 @@ class StatusViewTest(TestCase):
         )
         self.default_status = Status.objects.\
             create(user=self.default_user,
-                   image=os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'),
+                   image1=os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'),
                    content='status content',
                    location=self.default_location,
                    car=self.car1)
@@ -82,23 +82,13 @@ class StatusViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.maxDiff = None
+        self.assertTrue(response_data["success"])
+        self.assertEqual(len(response_data["data"]), 1)
         status = self.default_status
-        self.assertEqual(response_data, dict(
-            success=True,
-            data=[dict(
-                id=status.id,
-                created_at=status.created_at.strftime('%Y-%m-%d %H-%M-%S %Z'),
-                image=status.image.url,
-                content=status.content,
-                car=dict(name=self.car1.name, logo=self.car1.logo.url, id=self.car1.id),
-                comment_num=0,
-                like_num=0,
-                location=dict(description=self.default_location.description,
-                              lat=self.default_location.latitude,
-                              lon=self.default_location.longitude),
-                user=dict(id=status.user.id, avatar=status.user.profile.avatar.url)
-            ), ]
-        ))
+        status_dict = status.dict_description()
+        status_dict["comment_num"] = 0
+        status_dict["like_num"] = 0
+        self.assertEqual(response_data["data"][0], status_dict)
 
     def test_stauts_list_access_latest(self):
         """ 测试状态列表首页获取是否正常
@@ -112,23 +102,8 @@ class StatusViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.maxDiff = None
-        status = self.default_status
-        self.assertEqual(response_data, dict(
-            success=True,
-            data=[dict(
-                id=status.id,
-                created_at=status.created_at.strftime('%Y-%m-%d %H-%M-%S %Z'),
-                image=status.image.url,
-                content=status.content,
-                car=dict(name=self.car1.name, logo=self.car1.logo.url, id=self.car1.id),
-                comment_num=0,
-                like_num=0,
-                location=dict(description=self.default_location.description,
-                              lat=self.default_location.latitude,
-                              lon=self.default_location.longitude),
-                user=dict(id=status.user.id, avatar=status.user.profile.avatar.url)
-            ), ]
-        ))
+        self.assertTrue(response_data["success"])
+        self.assertEqual(len(response_data["data"]), 1)
 
     def test_status_list_access_with_avatar_club(self):
         """ 在setUp创建的数据集里面，没有引入签名俱乐部，这个测试给默认用户加入签名俱乐部
@@ -150,24 +125,12 @@ class StatusViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.maxDiff = None
+        self.assertEqual(len(response_data["data"]), 1)
         status = self.default_status
-        self.assertEqual(response_data, dict(
-            success=True,
-            data=[dict(
-                id=status.id,
-                created_at=status.created_at.strftime('%Y-%m-%d %H-%M-%S %Z'),
-                image=status.image.url,
-                content=status.content,
-                car=dict(name=self.car1.name, logo=self.car1.logo.url, id=self.car1.id),
-                comment_num=0,
-                like_num=0,
-                location=dict(description=self.default_location.description,
-                              lat=self.default_location.latitude,
-                              lon=self.default_location.longitude),
-                user=dict(id=status.user.id, avatar=status.user.profile.avatar.url,
-                          club=dict(id=club.id, image=club.logo.url))
-            ), ]
-        ))
+        status_dict = status.dict_description()
+        status_dict["comment_num"] = 0
+        status_dict["like_num"] = 0
+        self.assertEqual(response_data["data"][0], status_dict)
 
     def test_status_list_comment_num(self):
         """ 测试返回的评论数量是否正确
@@ -186,24 +149,12 @@ class StatusViewTest(TestCase):
             limit='10'
         ))
         response_data = json.loads(response.content)
-        self.maxDiff = None
+        self.assertEqual(len(response_data["data"]), 1)
         status = self.default_status
-        self.assertEqual(response_data, dict(
-            success=True,
-            data=[dict(
-                id=status.id,
-                created_at=status.created_at.strftime('%Y-%m-%d %H-%M-%S %Z'),
-                image=status.image.url,
-                content=status.content,
-                car=dict(name=self.car1.name, logo=self.car1.logo.url, id=self.car1.id),
-                comment_num=random_comment_num,
-                like_num=0,
-                location=dict(description=self.default_location.description,
-                              lat=self.default_location.latitude,
-                              lon=self.default_location.longitude),
-                user=dict(id=status.user.id, avatar=status.user.profile.avatar.url)
-            ), ]
-        ))
+        status_dict = status.dict_description()
+        status_dict["comment_num"] = random_comment_num
+        status_dict["like_num"] = 0
+        self.assertEqual(response_data["data"][0], status_dict)
 
     def test_status_list_like_num(self):
         """ 测试点赞人数是否正确
@@ -221,23 +172,12 @@ class StatusViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.maxDiff = None
+        self.assertEqual(len(response_data["data"]), 1)
         status = self.default_status
-        self.assertEqual(response_data, dict(
-            success=True,
-            data=[dict(
-                id=status.id,
-                created_at=status.created_at.strftime('%Y-%m-%d %H-%M-%S %Z'),
-                image=status.image.url,
-                content=status.content,
-                car=dict(name=self.car1.name, logo=self.car1.logo.url, id=self.car1.id),
-                comment_num=0,
-                like_num=random_like_num,
-                location=dict(description=self.default_location.description,
-                              lat=self.default_location.latitude,
-                              lon=self.default_location.longitude),
-                user=dict(id=status.user.id, avatar=status.user.profile.avatar.url)
-            ), ]
-        ))
+        status_dict = status.dict_description()
+        status_dict["comment_num"] = 0
+        status_dict["like_num"] = random_like_num
+        self.assertEqual(response_data["data"][0], status_dict)
 
     def test_status_post(self):
         """ 测试发布状态的接口是否工作正常
@@ -245,7 +185,7 @@ class StatusViewTest(TestCase):
         self.authenticate()
         image = open(os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'))
         response = self.client.post(reverse('status:post_status'), data=dict(
-            image=image,
+            image1=image,
             user_id=self.default_user.id,
             car_id=self.car1.id,
             lat=30,

@@ -22,6 +22,11 @@ class Location(models.Model):
         verbose_name = u'位置'
         verbose_name_plural = u'位置'
 
+    def dict_description(self):
+        return dict(
+            lon=self.longitude, lat=self.latitude, description=self.description
+        )
+
 
 class UserTracking(models.Model):
     """ 这个表是存储的是用户的事实位置.

@@ -110,6 +110,11 @@ class UserProfile(models.Model):
             avatar=self.avatar.url
         )
 
+    def complete_dict_description(self):
+        result = self.simple_dict_description()
+        if self.avatar_club is not None:
+            result["avatar_club"] = self.avatar_club
+
     class Meta:
         verbose_name = u'用户详情'
         verbose_name_plural = u'用户详情'

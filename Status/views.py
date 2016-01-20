@@ -15,7 +15,36 @@ from custom.utils import post_data_loader, page_separator_loader, login_first
 @login_first
 @page_separator_loader
 def status_list(request, date_threshold, op_type, limit):
-    """ Get the list of status
+    """ Get the list of status,结构如下:
+     -- success
+     -- data: array
+       | statusID:
+       | images:
+       | content:
+       | -- car
+           | carID
+           | name
+           | logo
+           | image
+       | comment_num
+       | like_num
+       | -- location
+           | lat:
+           | lon:
+           | description
+       | -- user
+           | user_id:
+           | avatar:
+           | nick_name:
+           | -- avatar_club:
+               | id:
+               | club_logo:
+               | club_name
+           | -- avatar_car:
+               | carID:
+               | name:
+               | logo:
+               | image:
     """
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
@@ -30,27 +59,7 @@ def status_list(request, date_threshold, op_type, limit):
         .annotate(comment_num=Count('comments'))\
         .annotate(like_num=Count('liked_by'))[0:limit]
 
-    def format_fix(status):
-        result = dict()
-        result['id'] = status.id
-        result['created_at'] = status.created_at.strftime('%Y-%m-%d %H-%M-%S %Z')
-        result['image'] = status.image.url
-        result['content'] = status.content
-        if status.car is not None:
-            result['car'] = dict(name=status.car.name, logo=status.car.logo.url, id=status.car.id)
-        result['comment_num'] = status.comment_num
-        result['like_num'] = status.like_num
-        if status.location is not None:
-            location = status.location
-            result['location'] = dict(description=location.description, lat=location.latitude, lon=location.longitude)
-        user_dict = dict(id=status.user.id, avatar=status.user.profile.avatar.url)
-        if status.user.profile.avatar_club is not None:
-            user_dict['club'] = dict(id=status.user.profile.avatar_club.id,
-                                     image=status.user.profile.avatar_club.logo.url)
-        result['user'] = user_dict
-        return result
-
-    data = map(format_fix, data)
+    data = map(lambda x: x.dict_description(), data)
     return JsonResponse(dict(
         success=True,
         data=data
@@ -83,7 +92,6 @@ def status_comments(request, date_threshold, op_type, limit, status_id):
         values('id', 'user__profile__nick_name', 'user__id', 'created_at', 'image', 'response_to__id', 'id')[0:limit]
 
     def format_fix(comment):
-        # comment['image'] = settings.MEDIA_URL + comment['image']
         comment['user_id'] = comment['user__id']
         comment['user_nickname'] = comment['user__profile__nick_name']
         comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S')
