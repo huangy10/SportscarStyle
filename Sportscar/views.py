@@ -137,25 +137,13 @@ def car_auth(request, data):
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message=u'没有权限', code='2401'))
 
-@http_decorators.require_GET
-@login_first
-def car_authed_list(request, user_id):
-    """ 获取制定user_id的用户所拥有的车辆
-     :param user_id
-
-     返回的数据为车辆组成的数组,其中每个元素包含的信息是
-    """
-    ownership =SportCarOwnership.objects.filter(user_id=user_id)
-    return JsonResponse(success=True, data=map(lambda x: x.dict_description(), ownership))
-
 
 @http_decorators.require_GET
 @login_first
 def car_query_by_name(request):
     manufacturer = request.GET['manufacturer']
     car_name = request.GET['car_name']
-    print request
-    print manufacturer, car_name
+
     try:
         car = Sportscar.objects.get(name=car_name, manufacturer__name=manufacturer)
     except ObjectDoesNotExist:

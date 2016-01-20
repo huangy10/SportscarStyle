@@ -54,7 +54,7 @@ def auto_create_profile(sender, instance, created, **kwargs):
                                                        avatar=os.path.join('defaults', DEFAULT_AVATAR_NAME),
                                                        gender='m',
                                                        )
-        FriendShip.objects.get_or_create(user=instance)
+        FriendShip.objects.get_or_create(creator=instance)
 
 
 class UserProfile(models.Model):
@@ -144,7 +144,6 @@ class UserFollow(models.Model):
         verbose_name = u'用户关系'
         verbose_name_plural = u'用户关系'
         ordering = ['-created_at', ]
-
 
 @receiver(post_save, sender=UserFollow)
 def auto_delete_friendship(sender, instance, **kwargs):

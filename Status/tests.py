@@ -243,7 +243,7 @@ class StatusViewTest(TestCase):
         """ 测试发布状态的接口是否工作正常
         """
         self.authenticate()
-        image = open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT.replace('/', ''), 'tests', 'test.png'))
+        image = open(os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'))
         response = self.client.post(reverse('status:post_status'), data=dict(
             image=image,
             user_id=self.default_user.id,
@@ -259,7 +259,7 @@ class StatusViewTest(TestCase):
 
     def test_status_post_with_invalid_user_id(self):
         self.authenticate()
-        image = open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT.replace('/', ''), 'tests', 'test.png'))
+        image = open(os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'))
         response = self.client.post(reverse('status:post_status'), data=dict(
             image=image,
             user_id=1000,
@@ -275,7 +275,7 @@ class StatusViewTest(TestCase):
 
     def test_status_post_with_invalid_car_id(self):
         self.authenticate()
-        image = open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT.replace('/', ''), 'tests', 'test.png'))
+        image = open(os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'))
         response = self.client.post(reverse('status:post_status'), data=dict(
             image=image,
             user_id=self.default_user.id,

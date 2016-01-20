@@ -71,7 +71,7 @@ class Sportscar(models.Model):
     def dict_description(self):
         return dict(
             name=self.name,
-            car_id=self.id,
+            carID=self.id,
             logo=self.logo.url,
             image=self.image.url
         )
@@ -94,7 +94,7 @@ class SportCarOwnership(models.Model):
         return dict(
             car=self.car.dict_description(),
             signature=self.signature,
-            identified_date=timezone.make_aware(self.created_at.strftime('%Y-%m-%d %H:%M:%S'))
+            identified_date=self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         )
 
     class Meta:

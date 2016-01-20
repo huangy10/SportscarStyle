@@ -138,7 +138,6 @@ def news_post_comment(request, data, news_id):
     """ 发布评论
      需要返回分配给评论的id
     """
-    print data
     try:
         news = News.objects.get(id=news_id)
     except ObjectDoesNotExist:

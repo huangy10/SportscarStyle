@@ -60,7 +60,6 @@ def account_send_code(request, data):
                                  code='1400'))
     else:
         code = create_random_code()
-        print code
         if send_sms(code, phone_num):
             AuthenticationCode.objects.create(phone_num=phone_num, code=code)
             return JsonResponse(dict(success=True))
@@ -225,6 +224,27 @@ def profile_info(request, user_id):
     return JsonResponse(dict(success=True, user_profile=user_info))
 
 
+
+@http_decorators.require_GET
+@login_first
+def profile_authed_cars(request, user_id):
+    """ 获取制定用户所有已经认证的跑车的信息, 返回的数据格式如下:
+     -- success
+     -- cars: array
+       |-- car_info
+          | car_id
+          | name
+          | logo
+          | image
+       |-- identified_date: 认证的时间
+       |-- signature: 跑车签名
+    """
+    carsOwnerShip = SportCarOwnership.objects.select_related("car")\
+        .filter(user_id=user_id, identified=True).order_by("-created_at")
+    cars_dict_data = map(lambda x: x.dict_description(), carsOwnerShip)
+    return JsonResponse(dict(success=True, cars=cars_dict_data))
+
+
 @http_decorators.require_GET
 @login_first
 @page_separator_loader
@@ -304,15 +324,29 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
     else:
         date_filter = Q(created_at__lt=date_threshold)
 
-    fans = UserFollow.objects.select_related('source_user__profile').filter(date_filter, target_user=user)[0:limit]
+    filter_str = request.GET.get("filter", "")
+    if filter_str != "":
+        filter_elements = filter_str.split(" ")
+        filter_q = Q()
+        for filter_element in filter_elements:
+            filter_q = filter_q | Q(source_user__profile__nick_name__icontains=filter_element)
+    else:
+        filter_q = Q()
+
+    fans = UserFollow.objects.select_related('source_user__profile').filter(date_filter & filter_q, target_user=user)[0:limit]
 
     def data_organize(x):
         source_user = x.source_user
+        recent_status = Status.objects.filter(user=source_user).order_by("-created_at").first()
+        recent_status_des = ""
+        if recent_status is not None and recent_status.content is not None:
+            recent_status_des = recent_status.content
         return dict(
-            user_id=source_user.id,
+            userID=source_user.id,
             avatar=source_user.profile.avatar.url,
-            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-            nick_name=source_user.profile.nick_name
+            created_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            nick_name=source_user.profile.nick_name,
+            recent_status_des=recent_status_des
         )
 
     return JsonResponse(dict(success=True, fans=map(data_organize, fans)))
@@ -334,18 +368,32 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
     else:
         date_filter = Q(created_at__lt=date_threshold)
 
-    follows = UserFollow.objects.select_related('source_user__profile').filter(date_filter, source_user=user)[0:limit]
+    filter_str = request.GET.get("filter", "")
+    if filter_str != "":
+        filter_elements = filter_str.split(" ")
+        filter_q = Q()
+        for filter_element in filter_elements:
+            filter_q = filter_q | Q(target_user__profile__nick_name__icontains=filter_element)
+    else:
+        filter_q = Q()
+
+    follows = UserFollow.objects.select_related('source_user__profile').filter(date_filter & filter_q, source_user=user)[0:limit]
 
     def data_organize(x):
         target_user = x.target_user
+        recent_status = Status.objects.filter(user=target_user).order_by("-created_at").first()
+        recent_status_des = ""
+        if recent_status is not None and recent_status.content is not None:
+            recent_status_des = recent_status.content
         return dict(
             user_id=target_user.id,
             avatar=target_user.profile.avatar.url,
             time=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-            nick_name=target_user.profile.nick_name
+            nick_name=target_user.profile.nick_name,
+            recent_status_des=recent_status_des
         )
 
-    return JsonResponse(dict(success=True, fans=map(data_organize, follows)))
+    return JsonResponse(dict(success=True, follow=map(data_organize, follows)))
 
 
 
