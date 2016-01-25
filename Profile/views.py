@@ -260,7 +260,7 @@ def profile_status_list(request, date_threshold, op_type, limit, user_id):
     data = Status.objects.filter(date_filter, user__id=user_id)[0:limit]
 
     def format_fix(status):
-        return {'id': status.id, 'image': status.image.url}
+        return {'id': status.id, 'image': status.images}
 
     data = map(format_fix, data)
     # TODO: 这里还要返回status创建的时间

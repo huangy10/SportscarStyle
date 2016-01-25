@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'Club',
     'SettingCenter',
     'Activity',
+    'Chat',
 )
 
 MIDDLEWARE_CLASSES = (

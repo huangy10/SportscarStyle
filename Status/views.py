@@ -4,6 +4,8 @@ from django.db.models import Q, Count
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth import get_user_model
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
 
 from .models import Status, StatusLikeThrough, StatusComment
 from .forms import StatusCreationForm
@@ -21,6 +23,7 @@ def status_list(request, date_threshold, op_type, limit):
        | statusID:
        | images:
        | content:
+       | created_at:
        | -- car
            | carID
            | name
@@ -50,12 +53,28 @@ def status_list(request, date_threshold, op_type, limit):
         date_filter = Q(created_at__gt=date_threshold)
     else:
         date_filter = Q(created_at__lt=date_threshold)
+    print date_threshold
+    print Status.objects.all()[0].created_at
+
+    query_type = request.GET.get("query_type", "follow")
+
+    if query_type == 'follow':
+        # 获取关注的特点
+        content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
+    elif query_type == 'nearby':
+        lat = request.GET["lat"]
+        lon = request.GET["lon"]
+        distance = request.GET["distance"]
+        content_filter = Q(location__distance_lte=(Point(lon, lat), D(m=distance)))
+    else:
+        # TODO: 剩下一个"热门"需要"实现
+        content_filter = Q()
 
     data = Status.objects\
         .select_related('user__profile__avatar_club')\
         .select_related('car')\
         .select_related('location')\
-        .filter(date_filter)\
+        .filter(date_filter & content_filter)\
         .annotate(comment_num=Count('comments'))\
         .annotate(like_num=Count('liked_by'))[0:limit]
 
@@ -72,8 +91,8 @@ def status_list(request, date_threshold, op_type, limit):
 def post_new_status(request, data):
     form = StatusCreationForm(data, request.FILES)
     if form.is_valid():
-        form.save()
-        return JsonResponse(dict(success=True))
+        status = form.save()
+        return JsonResponse(dict(success=True, statusID=status.id))
     else:
         response_dict = dict(success=False)
         response_dict.update(form.errors)
@@ -84,25 +103,29 @@ def post_new_status(request, data):
 @login_first
 @page_separator_loader
 def status_comments(request, date_threshold, op_type, limit, status_id):
+    """ 状态评论列表,返回的数据结构为
+     ---
+      |- success:
+      |- comments: list
+          |- commentID
+          |- created_at
+          |- image
+          |- content
+          |- user
+              |- userID
+              |- nick_name
+              |- avatar
+          |- response_to
+    """
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
     else:
         date_filter = Q(created_at__lt=date_threshold)
-    comments = StatusComment.objects.filter(date_filter, status__id=status_id). \
-        values('id', 'user__profile__nick_name', 'user__id', 'created_at', 'image', 'response_to__id', 'id')[0:limit]
+    comments = StatusComment.objects.select_related("user__profile").filter(date_filter, status__id=status_id)[0:limit]
 
-    def format_fix(comment):
-        comment['user_id'] = comment['user__id']
-        comment['user_nickname'] = comment['user__profile__nick_name']
-        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S')
-        del comment['user__id']
-        del comment['user__profile__nick_name']
-        return comment
-
-    comments = map(format_fix, comments)
     return JsonResponse(dict(
         success=True,
-        comments=list(comments)
+        comments=map(lambda x: x.dict_description(), comments)
     ))
 
 

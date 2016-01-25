@@ -113,26 +113,12 @@ class UserProfile(models.Model):
     def complete_dict_description(self):
         result = self.simple_dict_description()
         if self.avatar_club is not None:
-            result["avatar_club"] = self.avatar_club
+            result["avatar_club"] = self.avatar_club.dict_description()
+        return result
 
     class Meta:
         verbose_name = u'用户详情'
         verbose_name_plural = u'用户详情'
-
-
-class UserFollowManager(models.Manager):
-
-    def get_or_create(self, defaults=None, **kwargs):
-        """ 这里我们呀
-        """
-        obj, created = super(UserFollowManager, self).get_or_create(defaults, **kwargs)
-        if created:
-            # 非create的情形不需要理会
-            source_user = obj.source_user
-            target_user = obj.target_user
-            if UserFollow.objects.filter(source_user=target_user, target_user=source_user).exists():
-                source_user.friendship.friend.add(target_user)
-                target_user.friendship.friend.add(source_user)
 
 
 class UserFollow(models.Model):
@@ -149,20 +135,42 @@ class UserFollow(models.Model):
         verbose_name = u'用户关系'
         verbose_name_plural = u'用户关系'
         ordering = ['-created_at', ]
+        unique_together = ("source_user", "target_user")
+
 
 @receiver(post_save, sender=UserFollow)
+def auto_maintain_friendship(sender, instance, created, **kwargs):
+    """ 当创建UserFollow对象时维护相应的friendship对象
+    """
+    if created:
+        source_user = instance.source_user
+        target_user = instance.target_user
+        source_user.friendship.follow.add(target_user)
+        target_user.friendship.fans.add(source_user)
+        if UserFollow.objects.filter(source_user=target_user, target_user=source_user).exists():
+            source_user.friendship.friend.add(target_user)
+            target_user.friendship.friend.add(source_user)
+
+
+@receiver(post_delete, sender=UserFollow)
 def auto_delete_friendship(sender, instance, **kwargs):
+    """ 在删除UserFollow时自动维护这个FriendShip索引
+    """
     source_user = instance.source_user
     target_user = instance.target_user
     target_user.friendship.friend.remove(source_user)
+    target_user.friendship.fans.remove(source_user)
     source_user.friendship.friend.remove(target_user)
+    source_user.friendship.follow.remove(target_user)
 
 
 class FriendShip(models.Model):
     """ 为了快速检索用户朋友关系而建立的索引表.是对上面的UserFollow表的补充, 需要由上面的UserFollow来自动维护
     """
     creator = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="friendship", verbose_name="朋友圈创建者")
-    friend = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="+", verbose_name="朋友")
+    friend = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="does_not_important_1", verbose_name="朋友")
+    fans = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="does_not_important_2", verbose_name="粉丝")
+    follow = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="does_not_important_3", verbose_name="关注")
 
 
 class AuthenticationManager(models.Manager):

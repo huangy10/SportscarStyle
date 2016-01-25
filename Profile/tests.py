@@ -11,8 +11,9 @@ from django.core.files import File
 from django.conf import settings
 from django.contrib.gis.geos import Point
 from django.utils import timezone
+from django.db import IntegrityError
 
-from .models import AuthenticationCode, UserProfile, UserFollow
+from .models import AuthenticationCode, UserProfile, UserFollow, FriendShip
 from .utils import create_random_code, star_sign_from_date
 from Club.models import Club
 from Sportscar.models import Sportscar, Manufacturer, SportCarOwnership
@@ -374,7 +375,7 @@ class PersonalViewTest(TestCase):
         location = Location.objects.create(location=Point(120, 30), description='test')
         status_num = random.randint(1, 10)
         for _ in range(status_num):
-            Status.objects.create(user=self.default_user, image='media/tests/test.png', content='status content',
+            Status.objects.create(user=self.default_user, image1='media/tests/test.png', content='status content',
                                   location=location, car=car)
         self.authenticate()
         response = self.client.get(reverse('profile:profile_info', args=(self.default_user.id, )))
@@ -436,7 +437,7 @@ class PersonalViewTest(TestCase):
             user = self.default_user
         status = []
         for _ in range(num):
-            status.append(Status.objects.create(user=user, image='media/tests/test.png', content='status content',
+            status.append(Status.objects.create(user=user, image1='media/tests/test.png', content='status content',
                                                 location=location, car=car))
         if num == 1:
             return status[0]
@@ -453,7 +454,7 @@ class PersonalViewTest(TestCase):
             limit='10'
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data['data'], [{'id': status.id, 'image': status.image.url}])
+        self.assertEqual(response_data['data'], [{'id': status.id, 'image': status.images}])
 
     def test_get_status_list_latest(self):
         self.authenticate()
@@ -465,7 +466,7 @@ class PersonalViewTest(TestCase):
             limit='10'
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data['data'], [{'id': status.id, 'image': status.image.url}])
+        self.assertEqual(response_data['data'], [{'id': status.id, 'image': status.images}])
 
     def test_get_status_list_multiple_status(self):
         self.authenticate()
@@ -696,3 +697,43 @@ class PersonalViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertFalse(response_data['success'])
+
+
+class UserFriendShipText(TestCase):
+
+    def setUp(self):
+        self.user1 = get_user_model().objects.create(username="username1")
+        self.user2 = get_user_model().objects.create(username="username2")
+
+    def test_friend_ship_object_auto_created(self):
+        self.assertTrue(FriendShip.objects.filter(creator=self.user1).exists())
+        self.assertTrue(FriendShip.objects.filter(creator=self.user2).exists())
+
+    def test_add_fans(self):
+        """ 当创建UserFollow记录时FriendShip索引应当也自动创建了
+        """
+        UserFollow.objects.create(source_user=self.user1, target_user=self.user2)
+        fans = self.user1.friendship.follow.all()[0]
+        self.assertEqual(fans.id, self.user2.id)
+        follow = self.user2.friendship.fans.all()[0]
+        self.assertEqual(follow.id, self.user1.id)
+
+    def test_relation_auto_delete(self):
+        """ 删除原有的relation后friendship索引中的数据应当同步
+        """
+        relation = UserFollow.objects.create(source_user=self.user1, target_user=self.user2)
+        relation.delete()
+        # 重新从数据库里面获取用户对象
+        self.assertEqual(len(self.user1.friendship.follow.all()), 0)
+        self.assertEqual(len(self.user2.friendship.follow.all()), 0)
+
+    def test_friend_ship_auto_create(self):
+        UserFollow.objects.create(source_user=self.user1, target_user=self.user2)
+        UserFollow.objects.create(source_user=self.user2, target_user=self.user1)
+        self.assertEqual(self.user1.friendship.friend.all()[0].id, self.user2.id)
+        self.assertEqual(self.user2.friendship.friend.all()[0].id, self.user1.id)
+
+    def test_duplicated_relation_forbidden(self):
+        UserFollow.objects.create(source_user=self.user1, target_user=self.user2)
+        with self.assertRaises(IntegrityError):
+            UserFollow.objects.create(source_user=self.user1, target_user=self.user2)

@@ -195,7 +195,30 @@ class StatusViewTest(TestCase):
         ))
         image.close()
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
+        self.assertTrue(response_data["success"])
+        self.assertIsNotNone(response_data.get("statusID", None))
+
+    def test_status_post_using_mulit_images(self):
+        """ 上传多张图片
+        """
+        self.authenticate()
+        image = open(os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'))
+        image2 = open(os.path.join(settings.MEDIA_ROOT, 'tests', 'test.png'))
+        response = self.client.post(reverse('status:post_status'), data=dict(
+            image1=image,
+            image2=image2,
+            user_id=self.default_user.id,
+            car_id=self.car1.id,
+            lat=30,
+            lon=120,
+            location_description='test location',
+            content='test_content',
+        ))
+        image.close()
+        image2.close()
+        response_data = json.loads(response.content)
+        print response_data
+        self.assertTrue(response_data["success"])
 
     def test_status_post_with_invalid_user_id(self):
         self.authenticate()
@@ -268,14 +291,7 @@ class StatusViewTest(TestCase):
             response_data,
             dict(
                 success=True,
-                comments=[dict(
-                    user_id=another_user.id,
-                    user_nickname='DEFAULT NAME',
-                    created_at=comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-                    response_to__id=None,
-                    image='media/tests/test.png',
-                    id=comment.id
-                )]
+                comments=[comment.dict_description()]
             )
         )
 
@@ -295,14 +311,7 @@ class StatusViewTest(TestCase):
             response_data,
             dict(
                 success=True,
-                comments=[dict(
-                    user_id=another_user.id,
-                    user_nickname='DEFAULT NAME',
-                    created_at=comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-                    response_to__id=None,
-                    image='media/tests/test.png',
-                    id=comment.id
-                )]
+                comments=[comment.dict_description()]
             )
         )
 

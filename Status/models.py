@@ -64,7 +64,8 @@ class Status(models.Model):
             statusID=self.id,
             images=self.images,
             content=self.content,
-            user=self.user.profile.complete_dict_description()
+            user=self.user.profile.complete_dict_description(),
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
         )
         if self.car is not None:
             result["car"] = self.car.dict_description()
@@ -93,6 +94,16 @@ class StatusComment(models.Model):
         abstract = False
         verbose_name = u'状态评论'
         verbose_name_plural = u'状态评论'
+
+    def dict_description(self):
+        return dict(
+            commentID=self.id,
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            image=self.image.url if self.image else "",
+            content=self.content,
+            user=self.user.profile.simple_dict_description(),
+            response_to=self.response_to_id
+        )
 
 
 class StatusLikeThrough(models.Model):
