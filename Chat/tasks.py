@@ -9,6 +9,8 @@ def inform_of_related_waiters(message, global_message_dispatch):
      :param message
     """
     # 复制一份当前的等待列表以免冲突
+    if message is None:
+        return
     waiters = global_message_dispatch.waiters.copy()
     if message.chat_type == "private":
         # private: 私信,目标是单一用户

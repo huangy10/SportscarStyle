@@ -48,7 +48,7 @@ class ChatRecordBasic(models.Model):
     message_type = models.CharField(max_length=10, choices=(
         ("text", "text"),
         ("image", "image"),
-        ("voice", "voice"),
+        ("audio", "audio"),
         ("activity", "activity"),
         ("share", "share"),
         ("contact", "contact")
@@ -62,12 +62,14 @@ class ChatRecordBasic(models.Model):
 
     def dict_description(self):
         return dict(
+            chatID=self.id,
             sender=self.sender.profile.simple_dict_description(),
             chat_type=self.chat_type,
             target_id=self.target_id,
-            message_type = self.message_type,
+            message_type=self.message_type,
             image=self.image.url if self.image else None,
             text_content=self.text_content,
             audio=self.audio.url if self.audio else None,
-            related_id=self.related_id
+            related_id=self.related_id,
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
         )

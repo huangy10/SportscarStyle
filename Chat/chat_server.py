@@ -116,6 +116,7 @@ class ChatUpdateHandler(JSONResponseHandler):
         self.JSONResponse(dict(success=True, messages=map(lambda x: x.dict_description(), messages)))
 
     def on_connection_close(self):
+        print "close"
         if self.future is None:
             return
         global_message_dispatch.cancel_wait(self.future)
@@ -148,19 +149,19 @@ class ChatNewHandler(JSONResponseHandler):
         chat_type = self.get_argument("chat_type")
         target_id = int(self.get_argument("target_id"))
         message_type = self.get_argument("message_type")
-        print self.current_user, chat_type, target_id, message_type
         message = ChatRecordBasic.objects.create(
                 sender=self.current_user, chat_type=chat_type, target_id=target_id, message_type=message_type)
         if message_type == "text":
             message.text_content = self.get_argument("text_content")
         elif message_type == "image":
+            print(self.request.files.keys())
             file_info = self.request.files['image'][0]
             file_io = StringIO.StringIO(file_info["body"])
             message.image = InMemoryUploadedFile(
                 file=file_io, field_name=None, name=file_info["filename"], content_type=file_info["content_type"],
                 size=file_io.len, charset=None
             )
-        elif message_type == "voice":
+        elif message_type == "audio":
             file_info = self.request.files['audio'][0]
             file_io = StringIO.StringIO(file_info["body"])
             message.audio = InMemoryUploadedFile(
@@ -172,7 +173,7 @@ class ChatNewHandler(JSONResponseHandler):
 
         message.save()
         global_message_dispatch.new_message(message)
-        return self.JSONResponse(dict(success=True, chat_id=message.id))
+        return self.JSONResponse(dict(success=True, message=message.dict_description()))
 
 
 def start_tornado_service():
@@ -180,7 +181,7 @@ def start_tornado_service():
     app = Application(
         [
             (r"/chat/update", ChatUpdateHandler),
-            (r"/chat/speek", ChatNewHandler)
+            (r"/chat/speak", ChatNewHandler)
         ],
         cookie_secret="463a2380-39c9-450a-a884-3f7b8857d720",
         xsrf_cookies=False,

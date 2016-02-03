@@ -72,5 +72,5 @@ class Club(models.Model):
 
     def dict_description(self):
         return dict(
-            id=self.id, club_logo=self.logo.url, club_name=self.name
+            id=self.id, club_logo=self.logo.url, club_name=self.name, description=self.description
         )
