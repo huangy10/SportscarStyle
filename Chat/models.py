@@ -5,7 +5,6 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
-from custom.utils import path_creator
 # Create your models here.
 
 
@@ -35,7 +34,7 @@ class ChatMessage(models.Model):
 
 class ChatRecordBasic(models.Model):
 
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL)
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="chats")
     created_at = models.DateTimeField(auto_now_add=True)
 
     chat_type = models.CharField(max_length=10, choices=(
@@ -43,7 +42,15 @@ class ChatRecordBasic(models.Model):
         ("group", "group"),
     ))
     # 若chat_type是private,则这是目标用户的id,否则是Club的id
-    target_id = models.IntegerField(default=0, verbose_name="目标id")
+    target_user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="目标用户", null=True, blank=True)
+    target_club = models.ForeignKey("Club.Club", verbose_name="目标群聊", null=True, blank=True)
+
+    @property
+    def target_id(self):
+        if self.chat_type == "private":
+            return self.target_user_id
+        else:
+            return self.target_club_id
 
     message_type = models.CharField(max_length=10, choices=(
         ("text", "text"),
@@ -61,7 +68,7 @@ class ChatRecordBasic(models.Model):
     deleted = models.BooleanField(default=False, verbose_name="是否已经被删除")
 
     def dict_description(self):
-        return dict(
+        result =  dict(
             chatID=self.id,
             sender=self.sender.profile.simple_dict_description(),
             chat_type=self.chat_type,
@@ -73,3 +80,8 @@ class ChatRecordBasic(models.Model):
             related_id=self.related_id,
             created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
         )
+        if self.chat_type == "private":
+            result["target_user"] = self.target_user.profile.simple_dict_description()
+        else:
+            result["target_club"] = self.target_club.dict_description()
+        return result

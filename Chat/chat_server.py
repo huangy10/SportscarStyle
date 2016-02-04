@@ -149,8 +149,17 @@ class ChatNewHandler(JSONResponseHandler):
         chat_type = self.get_argument("chat_type")
         target_id = int(self.get_argument("target_id"))
         message_type = self.get_argument("message_type")
-        message = ChatRecordBasic.objects.create(
-                sender=self.current_user, chat_type=chat_type, target_id=target_id, message_type=message_type)
+        creation_param = {
+            "sender": self.current_user,
+            "chat_type": chat_type,
+            "message_type": message_type
+        }
+        if chat_type == "private":
+            creation_param["target_user"] = get_user_model().objects.get(id=target_id)
+        else:
+            creation_param["target_club"] = Club.objects.get(id=target_id)
+        message = ChatRecordBasic.objects.create(**creation_param)
+
         if message_type == "text":
             message.text_content = self.get_argument("text_content")
         elif message_type == "image":
