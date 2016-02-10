@@ -8,5 +8,6 @@ urlpatterns = patterns('Profile.views',
                        url(r'^(?P<user_id>\d+)/fans', 'profile_fans_list', name='fans'),
                        url(r'^(?P<user_id>\d+)/follows', 'profile_follow_list', name='follows'),
                        url(r'^(?P<user_id>\d+)/operation', 'profile_operation', name='operation'),
-                       url(r'^(?P<user_id>\d+)/authed_cars', 'profile_authed_cars', name='authed_cars')
+                       url(r'^(?P<user_id>\d+)/authed_cars', 'profile_authed_cars', name='authed_cars'),
+                       url(r'^(?P<target_id>\d+)/settings', 'profile_chat_settings', name='chat_settings'),
                        )

@@ -8,7 +8,7 @@ from django.db.models import Q
 
 from .utils import send_sms, create_random_code
 from .forms import RegistrationForm, PasswordResetForm, ProfileCreationForm
-from .models import AuthenticationCode, UserFollow
+from .models import AuthenticationCode, UserFollow, UserRelationSetting
 from Club.models import Club, ClubJoining
 from Sportscar.models import Sportscar, SportCarOwnership
 from Status.models import Status, StatusLikeThrough
@@ -419,5 +419,40 @@ def profile_operation(request, data, user_id):
         return JsonResponse(dict(success=True))
 
 
-
+##
+#  获取ChatSettings
+##
+@login_first
+def profile_chat_settings(request, target_id):
+    """ 查看聊天设置
+    """
+    if request.method == "POST":
+        relation, _ = UserRelationSetting.objects.get_or_create(user=request.user, target_id=target_id)
+        if "remark_name" in request.POST:
+            relation.remark_name = request.POST.get("remark_name")
+        if "allow_see_status" in request.POST:
+            relation.allow_see_status = request.POST.get("allow_see_status")
+        if "see_his_status" in request.POST:
+            relation.see_his_stats = request.POST.get("allow_see_status")
+        relation.save()
+        return JsonResponse(dict(success=True))
+    else:
+        try:
+            result = UserRelationSetting.objects.select_related("target__profile", "user__profile").get(
+                user=request.user, target__id=target_id
+            )
+        except ObjectDoesNotExist:
+            # 没有查到记录的话就返回默认的设置值
+            target_user = get_user_model().objects.select_related("profile").get(id=target_id)
+            default_settings = dict(
+                target=target_user.profile.simple_dict_description(),
+                user=request.user.profile.simple_dict_description(),
+                allow_see_status=True,
+                see_his_status=True,
+                remark_name=target_user.profile.nick_name
+            )
+            return JsonResponse(dict(success=True, settings=default_settings))
+        return JsonResponse(dict(
+            success=True, settings=result.dict_description()
+        ))
 

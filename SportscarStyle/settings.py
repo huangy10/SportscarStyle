@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'SettingCenter',
     'Activity',
     'Chat',
+    'Notification'
 )
 
 MIDDLEWARE_CLASSES = (

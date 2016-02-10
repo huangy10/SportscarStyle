@@ -88,6 +88,7 @@ def activity_create(request, data):
         location=loc,
         allowed_club=club_limit,
         poster=request.FILES['poster'],
+        user=request.user
     )
     if users is not None:
         act.inform_of.add(*users)

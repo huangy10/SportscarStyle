@@ -25,6 +25,7 @@ class ActivityViewTest(TestCase):
         user.save()
         self.user = user
         self.activity = Activity.objects.create(
+            user=user,
             name="test_activity",
             description="test",
             max_attend=10,

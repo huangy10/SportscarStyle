@@ -85,3 +85,4 @@ class ChatRecordBasic(models.Model):
         else:
             result["target_club"] = self.target_club.dict_description()
         return result
+

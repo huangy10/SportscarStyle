@@ -173,6 +173,30 @@ class FriendShip(models.Model):
     follow = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="does_not_important_3", verbose_name="关注")
 
 
+class UserRelationSetting(models.Model):
+    """ 用户关系设置,主要是的昵称,是否允许查看状态等
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="relation_settings")
+    target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+")
+
+    allow_see_status = models.BooleanField(default=True, verbose_name="允许查看我的动态")
+    see_his_status = models.BooleanField(default=True, verbose_name="是否查看他的动态")
+    remark_name = models.CharField(max_length=255, verbose_name="备注名称")
+
+    @property
+    def see_status(self):
+        return self.allow_see_status and self.see_his_status
+
+    def dict_description(self):
+        return dict(
+            user=self.user.profile.simple_dict_description(),
+            target=self.target.profile.simple_dict_description(),
+            remark_name=self.remark_name,
+            see_his_status=self.see_his_status,
+            allow_see_status=self.allow_see_status
+        )
+
+
 class AuthenticationManager(models.Manager):
 
     def already_sent(self, phone, seconds=60):

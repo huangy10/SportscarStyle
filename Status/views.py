@@ -8,6 +8,7 @@ from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 
 from .models import Status, StatusLikeThrough, StatusComment
+from Profile.models import UserRelationSetting
 from .forms import StatusCreationForm
 from custom.utils import post_data_loader, page_separator_loader, login_first
 # Create your views here.
@@ -70,11 +71,20 @@ def status_list(request, date_threshold, op_type, limit):
         # TODO: 剩下一个"热门"需要"实现
         content_filter = Q()
 
+    # 这里我们认为黑名单的长度是有限的,故将黑名单全部载入内存然后筛选
+    blacklist1 = UserRelationSetting.objects.filter(
+        user=request.user, see_his_status=False
+    ).values_list("target__id")
+    blacklist2 = UserRelationSetting.objects.filter(
+        target=request.user, allow_see_status=False
+    ).values_list("target__id")
+    blacklist_filter = ~Q(user__id__in=list(blacklist1) + list(blacklist2))
+
     data = Status.objects\
         .select_related('user__profile__avatar_club')\
         .select_related('car')\
         .select_related('location')\
-        .filter(date_filter & content_filter)\
+        .filter(date_filter & content_filter & blacklist_filter)\
         .annotate(comment_num=Count('comments'))\
         .annotate(like_num=Count('liked_by'))[0:limit]
 

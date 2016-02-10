@@ -109,6 +109,9 @@ class ChatUpdateHandler(JSONResponseHandler):
         """ 更新聊天信息
         """
         waiting_date = timezone.now()
+        if self.current_user is None:
+            self.JSONResponse(dict(success=False, message='You need to login first', code='1402'))
+            return
         self.future = global_message_dispatch.wait_for_message(self.current_user.id, waiting_date=waiting_date)
         messages = yield self.future
         if self.request.connection.stream.closed():

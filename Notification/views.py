@@ -32,7 +32,7 @@ def notification_list(request, date_threshold, op_type, limit):
         "related_status_comment",
         "related_news",
         "related_news_comment"
-    ).filter(date_threshold, target=request.user)
+    ).filter(date_threshold, target=request.user).order_by("-created_at")[0:limit]
 
     return JsonResponse(
             dict(success=True,

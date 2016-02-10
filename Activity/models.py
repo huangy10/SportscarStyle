@@ -27,6 +27,7 @@ def activity_poster(instance, filename, *args, **kwargs):
 class Activity(models.Model):
     name = models.CharField(max_length=100, verbose_name=u'活动名称')
     description = models.TextField(verbose_name=u'活动描述')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u"活动发起者")
 
     inform_of = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u'通知谁看',
                                        related_name='activities_need_to_see')
@@ -42,6 +43,22 @@ class Activity(models.Model):
     class Meta:
         verbose_name = u'活动'
         verbose_name_plural = u'活动'
+        ordering = ("-created_at", )
+
+    def dict_description(self):
+        result = dict(
+            name=self.name,
+            description=self.description,
+            max_attend=self.max_attend,
+            start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            poster=self.poster.url,
+            location=self.location.dict_description(),
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+        )
+        if self.allowed_club is not None:
+            result.update(allowed_club=self.allowed_club.dict_description())
+        return result
 
 
 class ActivityJoin(models.Model):
@@ -49,6 +66,17 @@ class ActivityJoin(models.Model):
     activity = models.ForeignKey(Activity, related_name='+')
     approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at", )
+
+    def dict_description(self):
+        return dict(
+            user=self.user.profile.simple_dict_description(),
+            activity=self.activity.dict_description(),
+            approved=self.approved,
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+        )
 
 
 class ActivityComment(models.Model):
@@ -67,3 +95,41 @@ class ActivityComment(models.Model):
     class Meta:
         verbose_name = '活动评论'
         verbose_name_plural = '活动评论内容'
+
+    def dict_description(self):
+        result = dict(
+            activity=self.activity.dict_description(),
+            user=self.user.profile.simple_dict_description(),
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            image=self.image.url,
+            content=self.content,
+        )
+        if self.response_to is not None:
+            result.update(response_to=self.response_to_id)
+        return result
+
+
+class ActivityInvitation(models.Model):
+    """ 活动邀请
+    """
+    inviter = models.ForeignKey(settings.AUTH_USER_MODEL)
+    target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="invites")
+    activity = models.ForeignKey(Activity)
+    created_at = models.DateTimeField(auto_now_add=True)
+    responsed = models.BooleanField(default=False)      # 被邀请者是否已经回应了这个邀请
+    agree = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "活动邀请"
+        verbose_name = "活动邀请"
+        ordering = ("-created_at", )
+
+    def dict_description(self):
+        return dict(
+            inviter=self.inviter.profile.simple_dict_description(),
+            target=self.target.profile.simple_dict_description(),
+            activity=self.target.dict_description(),
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            responsed=self.responsed,
+            agree=self.agree
+        )
