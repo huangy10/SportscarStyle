@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from .models import Manufacturer, Sportscar, SportCarOwnership, SportCarIdentificationRequestRecord
+from Status.models import Status
 from custom.utils import post_data_loader, login_first
 # Create your views here.
 
@@ -32,29 +33,49 @@ def cars_type_list(request):
 
 
 @http_decorators.require_GET
+@login_first
 def cars_detail(request, car_id):
-    """ Query for the information about a specific sport car with the car id
+    """ 根据给定的跑车的id,获取其详细信息,伴随返回的还有和此跑车相关的(最多)三条状态
      :param car_id id of the car
 
      the default response data includes:
-        - manufacturer_name:
-        - car_name:
-        - engine:
-        - transmission:
-        - max_speed:
-        - zeroTo60:
-        - logo_url:
-        - image_url
-        - car_id:
-        - price
+        | manufacturer_name:
+        | car_name:
+        | engine:
+        | transmission:
+        | max_speed:
+        | zeroTo60:
+        | logo_url:
+        | image_url
+        | car_id:
+        | price
+        |-- related_status
+            | id
+            | image
+        | identified: 是否是当前用户认证了的车辆
+        | signature: 跑车签名
+        | owned: 是否由当前用户所拥有,若为false,则上面的identified和signature属性将不会存在
     """
     # you can specify the response data type by the `type` GET param
     query_type = request.GET.get('type', 'default')
     result = dict(success=True)
     if query_type == 'default':
         try:
-            car = Sportscar.objects.get(id=car_id)
-            result['data'] = dict(
+            data = dict()
+            try:
+                ownership = SportCarOwnership.objects.select_related("car").get(user=request.user, car_id=car_id)
+                car = ownership.car
+                data["identified"] = ownership.identified
+                data["signature"] = ownership.signature
+                data["owned"] = True
+                related_status = Status.objects.filter(user=request.user, car_id=car_id).order_by("-created_at")[0:4]
+                data["related_status"] = map(lambda x: {"id": x.id, "image": x.image1.url}, related_status)
+
+            except ObjectDoesNotExist:
+                car = Sportscar.objects.get(id=car_id)
+                data["owned"] = False
+
+            data.update(dict(
                 manufacturer_name=car.manufacturer.name,
                 car_name=car.name,
                 engine=car.engine,
@@ -65,8 +86,10 @@ def cars_detail(request, car_id):
                 image_url=car.image.url,
                 body=car.body,
                 price=car.price,
-                car_id=car.id
-            )
+                car_id=car.id,
+            ))
+            result["data"] = data
+
         except ObjectDoesNotExist:
             result['success'] = False
             result['code'] = 1004

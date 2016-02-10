@@ -60,6 +60,7 @@ class CarViewTest(TestCase):
         ))
 
     def test_get_car_information(self):
+        self.default_authenticate()
         response = self.client.get(reverse('cars:car_detail', kwargs={'car_id': self.car1.id}))
         response_data = json.loads(response.content)
         self.maxDiff = None
@@ -76,7 +77,8 @@ class CarViewTest(TestCase):
                 car_name=u'Mini Cooper',
                 body=u'2门2坐硬顶跑车',
                 price=u'300,000',
-                car_id=self.car1.id
+                car_id=self.car1.id,
+                owned=False,
             )
         ))
 
