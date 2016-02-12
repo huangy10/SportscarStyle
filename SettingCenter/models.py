@@ -24,8 +24,18 @@ class SettingCenter(models.Model):
         ('male_only', '仅男性'),
         ('none', '不可见'),
         ('only_idol', '仅我关注的人'),
-        ('only_fried', '互相关注')
+        ('only_fried', '互相关注'),
     ), default='all')
+
+    accept_invitation = models.CharField(max_length=20, choices=(
+        ('all', '所有人'),
+        ('friend', '互相关注'),
+        ('follow', '我关注的'),
+        ('fans', '我关注的'),
+        ('auth_first', '需通过验证'),
+        ('never', '不允许'),
+    ), default='all')
+    show_on_map = models.BooleanField(default=True, verbose_name="是否展现在地图上")
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -40,4 +50,3 @@ class Suggestion(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
-

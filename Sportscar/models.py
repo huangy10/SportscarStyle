@@ -73,7 +73,13 @@ class Sportscar(models.Model):
             name=self.name,
             carID=self.id,
             logo=self.logo.url,
-            image=self.image.url
+            image=self.image.url,
+            price=str(self.price),
+            engine=self.engine,
+            trans=self.transmission,
+            body=self.body,
+            speed=self.max_speed,
+            acce=self.zeroTo60
         )
 
     class Meta:
@@ -94,6 +100,7 @@ class SportCarOwnership(models.Model):
         return dict(
             car=self.car.dict_description(),
             signature=self.signature,
+            identified=self.identified,
             identified_date=self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         )
 

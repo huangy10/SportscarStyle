@@ -30,18 +30,22 @@ def settings(request, data):
     user = request.user
     settings = user.setting_center
     if request.method == 'POST':
+
         settings.notification_accept = data['notification_accept'] in ['YES', 'yes', 'y', 'Y']
         settings.notification_sound = data['notification_sound'] in ['YES', 'yes', 'y', 'Y']
         settings.notification_shake = data['notification_shake'] in ['YES', 'yes', 'y', 'Y']
         if data['location_visible_to'] in ['all', 'female_only', 'male_only', 'none', 'only_idol', 'only_friend']:
             settings.location_visible_to = data['location_visible_to']
-        blacklist = json.loads(data['blacklist'])
-        if 'add' in blacklist:
-            add = list(get_user_model().objects.filter(id__in=blacklist['add']))
-            settings.blacklist.add(*add)
-        if 'remove' in blacklist:
-            remove = list(get_user_model().objects.filter(id__in=blacklist['remove']))
-            settings.blacklist.remove(*remove)
+        if data['accept_invitation'] in ['all', 'friend', 'follow', 'fans', 'auth_first', 'never']:
+            settings.accept_invitation = data['accept_invitation']
+        settings.show_on_map = data["show_on_map"] in ['YES', 'yes', 'y', 'Y']
+        # blacklist = json.loads(data['blacklist'])
+        # if 'add' in blacklist:
+        #     add = list(get_user_model().objects.filter(id__in=blacklist['add']))
+        #     settings.blacklist.add(*add)
+        # if 'remove' in blacklist:
+        #     remove = list(get_user_model().objects.filter(id__in=blacklist['remove']))
+        #     settings.blacklist.remove(*remove)
         settings.save()
 
         return JsonResponse(dict(success=True))
@@ -53,6 +57,8 @@ def settings(request, data):
         notification_shake=settings.notification_shake,
         notification_sound=settings.notification_sound,
         location_visible_to=settings.location_visible_to,
+        accept_invitation=settings.accept_invitation,
+        show_on_map=settings.show_on_map,
         blacklist=blacklist if len(blacklist) != 0 else None
     )
     return JsonResponse(dict(success=True, settings=result))

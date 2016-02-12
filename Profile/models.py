@@ -183,6 +183,8 @@ class UserRelationSetting(models.Model):
     see_his_status = models.BooleanField(default=True, verbose_name="是否查看他的动态")
     remark_name = models.CharField(max_length=255, verbose_name="备注名称")
 
+    blacklist_at = models.DateTimeField(verbose_name="拉黑时间", auto_now_add=True)
+
     @property
     def see_status(self):
         return self.allow_see_status and self.see_his_status
@@ -193,7 +195,8 @@ class UserRelationSetting(models.Model):
             target=self.target.profile.simple_dict_description(),
             remark_name=self.remark_name,
             see_his_status=self.see_his_status,
-            allow_see_status=self.allow_see_status
+            allow_see_status=self.allow_see_status,
+            blacklist_at=self.blacklist_at.strftime('%Y-%m-%d %H:%M:%S %Z')
         )
 
 

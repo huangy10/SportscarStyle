@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.views.decorators import http as http_decorators
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q
+from django.db.models import Q,F
+from django.utils import timezone
 
 from .utils import send_sms, create_random_code
 from .forms import RegistrationForm, PasswordResetForm, ProfileCreationForm
@@ -178,7 +179,8 @@ def profile_info(request, user_id):
           | -- avatar_club
              | id:
              | club_logo:
-             | club_name
+             | club_name:
+          | followed: 是否被当前登陆的用户关注了
         如果是返回他人的数据，还会增加一个字段：followed来表明当前登陆用户是否已经关注的了指定用户
 
         注意：
@@ -206,12 +208,7 @@ def profile_info(request, user_id):
     user_info['follow_num'] = UserFollow.objects.filter(source_user=user).count()
     car = profile.avatar_car
     if car is not None:
-        user_info['avatar_car'] = dict(
-            car_id=car.id,
-            name=car.name,
-            logo=car.logo.url,
-            image=car.image.url
-        )
+        user_info['avatar_car'] = car.dict_description()
     club = profile.avatar_club
     if club is not None:
         user_info['avatar_club'] = dict(
@@ -249,7 +246,7 @@ def profile_authed_cars(request, user_id):
 @login_first
 @page_separator_loader
 def profile_status_list(request, date_threshold, op_type, limit, user_id):
-    """ 这个函数和状态列表的首页十分类似，但是在返回数据上，只需要返回状态的封面和id即可
+    """ 这个函数和状态列表的首页十分类似
      :param user_id 目标用户的id
     """
     if op_type == 'latest':
@@ -257,10 +254,16 @@ def profile_status_list(request, date_threshold, op_type, limit, user_id):
     else:
         date_filter = Q(created_at__lt=date_threshold)
 
-    data = Status.objects.filter(date_filter, user__id=user_id)[0:limit]
+    car_query_id = request.GET.get("filter_car", None)
+    if car_query_id is not None:
+        car_query = Q(car_id=car_query_id)
+    else:
+        car_query = Q()
+
+    data = Status.objects.filter(date_filter & car_query, user__id=user_id).order_by("-created_at")[0:limit]
 
     def format_fix(status):
-        return {'id': status.id, 'image': status.images}
+        return status.dict_description()
 
     data = map(format_fix, data)
     # TODO: 这里还要返回status创建的时间
@@ -416,6 +419,73 @@ def profile_operation(request, data, user_id):
         obj, created = UserFollow.objects.get_or_create(source_user=request.user, target_user=target_user)
         if not created:
             obj.delete()
+        return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_GET
+@login_first
+@page_separator_loader
+def profile_black_list(request, date_threshold, op_type, limit):
+    """ 获取当前登陆用户的黑名单,这个方法还没有进行测试
+    """
+    if op_type == 'latest':
+        date_filter = Q(blacklist_at__gt=date_threshold)
+    else:
+        date_filter = Q(blacklist_at__lt=date_threshold)
+
+    search_filter = Q()
+    filter_str = request.GET.get("filter", None)
+    if filter_str is not None:
+        filter_elements = filter_str.split(" ")  # 搜索关键词以空格分割
+        for filter_element in filter_elements:
+            search_filter = search_filter | Q(target__profile__nick_name__icontains=filter_element)
+
+    users = UserRelationSetting.objects.select_related("user__profile", "target__profile")\
+        .order_by("-blacklist_at").filter(date_filter & search_filter, user=request.user)[0:limit]
+
+    def data_organize(x):
+        result = x.dict_description()
+        recent_status = Status.objects.filter(user=x.target).order_by("-created_at").first()
+        recent_status_des = ""
+        if recent_status is not None and recent_status.content is not None:
+            recent_status_des = recent_status.content
+        result["recent_status_des"] = recent_status_des
+        return result
+
+    return JsonResponse(dict(
+        success=True,
+        users=map(data_organize, users)
+    ))
+
+
+@http_decorators.require_POST
+@login_first
+@post_data_loader()
+def profile_black_list_update(request, data):
+    """ 更新的黑名单,上传参数形式为:
+     | op_type: add/remove
+     |-- users:
+        |-- id: 只需要id
+     只需要返回是否是成功
+
+    """
+    op_type = data["op_type"]
+    if op_type == "add":
+        id_list = data["users"]
+        for user_id in id_list:
+            try:
+                target = get_user_model().objects.get(id=user_id)
+            except ObjectDoesNotExist:
+                return JsonResponse(dict(success=False, message="user with id:%s no found" % user_id, code="4001"))
+            relation_setting = UserRelationSetting.objects.get_or_create(
+                    user=request.user, target=target)[0]
+            relation_setting.allow_see_status = False
+            relation_setting.blacklist_at = timezone.now()
+            relation_setting.save()
+        return JsonResponse(dict(success=True))
+    else:
+        id_list = data["users"]
+        UserRelationSetting.objects.filter(user=request.user, target_id__in=id_list).update(allow_see_status=True)
         return JsonResponse(dict(success=True))
 
 

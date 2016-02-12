@@ -13,7 +13,7 @@ from django.contrib.gis.geos import Point
 from django.utils import timezone
 from django.db import IntegrityError
 
-from .models import AuthenticationCode, UserProfile, UserFollow, FriendShip
+from .models import AuthenticationCode, UserProfile, UserFollow, FriendShip, UserRelationSetting
 from .utils import create_random_code, star_sign_from_date
 from Club.models import Club
 from Sportscar.models import Sportscar, Manufacturer, SportCarOwnership
@@ -341,13 +341,7 @@ class PersonalViewTest(TestCase):
         response_data = json.loads(response.content)
         self.maxDiff = None
         self.assertEqual(
-            response_data['user_profile']['avatar_car'],
-            {
-                'car_id': car.id,
-                'name': car.name,
-                'logo': car.logo.url,
-                'image': car.image.url
-            }
+            response_data['user_profile']['avatar_car'], car.dict_description()
         )
 
     def test_get_profile_with_posted_status(self):
@@ -454,7 +448,7 @@ class PersonalViewTest(TestCase):
             limit='10'
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data['data'], [{'id': status.id, 'image': status.images}])
+        self.assertEqual(response_data['data'], [status.dict_description()])
 
     def test_get_status_list_latest(self):
         self.authenticate()
@@ -466,7 +460,7 @@ class PersonalViewTest(TestCase):
             limit='10'
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data['data'], [{'id': status.id, 'image': status.images}])
+        self.assertEqual(response_data['data'], [status.dict_description()])
 
     def test_get_status_list_multiple_status(self):
         self.authenticate()
@@ -699,7 +693,7 @@ class PersonalViewTest(TestCase):
         self.assertFalse(response_data['success'])
 
 
-class UserFriendShipText(TestCase):
+class UserFriendShipTest(TestCase):
 
     def setUp(self):
         self.user1 = get_user_model().objects.create(username="username1")
@@ -737,3 +731,41 @@ class UserFriendShipText(TestCase):
         UserFollow.objects.create(source_user=self.user1, target_user=self.user2)
         with self.assertRaises(IntegrityError):
             UserFollow.objects.create(source_user=self.user1, target_user=self.user2)
+
+
+class UserBlackListTest(TestCase):
+
+    def setUp(self):
+        user = get_user_model().objects.create(username='15201525181')
+        user.set_password('test_password')
+        user.save()
+        self.user = user
+
+        user2 = get_user_model().objects.create(username='12312412412')
+        self.user2 = user2
+
+    def authenticate(self):
+        self.client.post(reverse('account:login'), data=dict(
+            username='15201525181',
+            password='test_password'
+        ))
+
+    def test_add_blacklist(self):
+        self.authenticate()
+        response = self.client.post(reverse('profile:blacklist_update'), data=dict(
+            op_type="add",
+            users=[self.user2.id]
+        ))
+        self.assertTrue(UserRelationSetting.objects.filter(
+                user=self.user, target=self.user2, allow_see_status=False).exists())
+
+    def test_remove_blacklist(self):
+        self.authenticate()
+        UserRelationSetting.objects.create(user=self.user, target=self.user2, allow_see_status=False)
+        self.client.post(reverse('profile:blacklist_update'), data=dict(
+            op_type="remove",
+            users=[self.user2.id]
+        ))
+        self.assertTrue(UserRelationSetting.objects.filter(
+            user=self.user, target=self.user2, allow_see_status=True
+        ).exists())
