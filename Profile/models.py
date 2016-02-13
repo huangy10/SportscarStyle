@@ -45,6 +45,21 @@ def profile_avatar(instance, filename, *args, **kwargs):
     return new_file_name
 
 
+def auth_image(instance, filename, *args, **kwargs):
+    current = timezone.now()
+    ext = filename.split('.')[-1]
+    random_file_name = str(uuid.uuid4()).replace('-', '')
+    new_file_name = "{0}/{1}/{2}/{3}/{4}.{5}".format(
+        'auth_image',
+        current.year,
+        current.month,
+        current.day,
+        random_file_name,
+        ext
+    )
+    return new_file_name
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def auto_create_profile(sender, instance, created, **kwargs):
     if created:
@@ -89,6 +104,8 @@ class UserProfile(models.Model):
     district = models.CharField(max_length=255, verbose_name=u'地区', default='')
     signature = models.CharField(max_length=255, verbose_name=u'签名', default='')
     job = models.CharField(max_length=64, verbose_name='行业', default='')
+
+    corporation_user = models.BooleanField(default=False, verbose_name="是否是经过认证的企业用户")
 
     @property
     def age(self):
@@ -262,3 +279,21 @@ class AuthenticationCode(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class CorporationUserApplication(models.Model):
+    """ 企业用户认证申请记录
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="申请人")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="申请日期")
+
+    license_image = models.ImageField(upload_to=auth_image, verbose_name="营业执照图片")
+    id_card_image = models.ImageField(upload_to=auth_image, verbose_name="身份证图片")
+    other_info_image = models.ImageField(upload_to=auth_image, verbose_name="补充材料")
+
+    approved = models.BooleanField(default=False, verbose_name="是否已经批准")
+
+    class Meta:
+        verbose_name = "企业认证申请"
+        verbose_name_plural = "企业认证申请"
+        ordering = ("-created_at", )

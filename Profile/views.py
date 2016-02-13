@@ -8,7 +8,7 @@ from django.db.models import Q,F
 from django.utils import timezone
 
 from .utils import send_sms, create_random_code
-from .forms import RegistrationForm, PasswordResetForm, ProfileCreationForm
+from .forms import RegistrationForm, PasswordResetForm, ProfileCreationForm, CorporationUserApplicationCreateForm
 from .models import AuthenticationCode, UserFollow, UserRelationSetting
 from Club.models import Club, ClubJoining
 from Sportscar.models import Sportscar, SportCarOwnership
@@ -221,6 +221,19 @@ def profile_info(request, user_id):
     return JsonResponse(dict(success=True, user_profile=user_info))
 
 
+@http_decorators.require_POST
+@login_first
+def profile_corporation_user_authenticate(request):
+    """ 企业用户申请提交
+    """
+
+    form = CorporationUserApplicationCreateForm({"user": request.user.id}, request.FILES)
+    if form.is_valid():
+        form.save()
+        return JsonResponse(dict(success=True))
+    else:
+        print(form.errors)
+        return JsonResponse(dict(success=False))
 
 @http_decorators.require_GET
 @login_first

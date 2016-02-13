@@ -12,4 +12,5 @@ urlpatterns = patterns('Profile.views',
                        url(r'^(?P<target_id>\d+)/settings', 'profile_chat_settings', name='chat_settings'),
                        url(r'^blacklist/update', 'profile_black_list_update', name='blacklist_update'),
                        url(r'^blacklist', 'profile_black_list', name='blacklist'),
+                       url(r'^auth/corporation', 'profile_corporation_user_authenticate', name="user_auth")
                        )

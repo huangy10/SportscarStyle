@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import AuthenticationCode, UserProfile
+from .models import AuthenticationCode, UserProfile, CorporationUserApplication
 from .utils import star_sign_from_date
 
 
@@ -102,4 +102,11 @@ class ProfileCreationForm(forms.ModelForm):
             profile.star_sign = star_sign_from_date(profile.birth_date)
         if commit:
             profile.save()
+
+
+class CorporationUserApplicationCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = CorporationUserApplication
+        fields = ("license_image", "id_card_image", "other_info_image", 'user')
 
