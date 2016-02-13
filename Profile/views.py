@@ -321,7 +321,10 @@ def profile_modify(request, data):
         return JsonResponse(dict(success=False, code='2003', message='Car not found or you do not own this car'))
 
     profile.save()
-    return JsonResponse(dict(success=True))
+    response_dict = dict(success=True)
+    if 'avatar' in request.FILES:
+        response_dict["avatar"] = profile.avatar.url
+    return JsonResponse(response_dict)
 
 
 @http_decorators.require_GET

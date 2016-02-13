@@ -175,4 +175,3 @@ def car_query_by_name(request):
     return HttpResponseRedirect(reverse("cars:car_detail", args=(car.id, )))
 
 
-

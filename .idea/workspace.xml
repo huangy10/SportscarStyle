@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab0b551-2c12-4d23-b0b0-305e7ba2be2e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Profile/forms.py" afterPath="$PROJECT_DIR$/Profile/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Profile/models.py" afterPath="$PROJECT_DIR$/Profile/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Profile/profile_urls.py" afterPath="$PROJECT_DIR$/Profile/profile_urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Profile/views.py" afterPath="$PROJECT_DIR$/Profile/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sportscar/views.py" afterPath="$PROJECT_DIR$/Sportscar/views.py" />
     </list>
     <ignored path="SportscarStyle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -130,11 +127,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Profile/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="200" column="46" selection-start-line="200" selection-start-column="46" selection-end-line="200" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.17087063">
+              <caret line="289" column="6" selection-start-line="289" selection-start-column="6" selection-end-line="289" selection-end-column="6" />
               <folding>
                 <element signature="e#15#46#0" expanded="true" />
                 <element signature="e#1129#1926#0" expanded="false" />
@@ -152,26 +149,35 @@
                 <element signature="e#8820#9489#0" expanded="false" />
                 <element signature="e#8820#8876#1" expanded="false" />
                 <element signature="e#9338#9370#0" expanded="false" />
-                <element signature="e#9581#11123#0" expanded="false" />
-                <element signature="e#11255#12822#0" expanded="false" />
-                <element signature="e#11255#11362#1" expanded="false" />
-                <element signature="e#12177#12746#0" expanded="false" />
-                <element signature="e#12956#14526#0" expanded="false" />
-                <element signature="e#12956#13063#1" expanded="false" />
-                <element signature="e#13881#14445#0" expanded="false" />
-                <element signature="e#14631#15415#0" expanded="false" />
-                <element signature="e#15552#16743#0" expanded="false" />
-                <element signature="e#17949#19397#0" expanded="false" />
+                <element signature="e#11376#12943#0" expanded="false" />
+                <element signature="e#11376#11483#1" expanded="false" />
+                <element signature="e#12298#12867#0" expanded="false" />
+                <element signature="e#13077#14647#0" expanded="false" />
+                <element signature="e#13077#13184#1" expanded="false" />
+                <element signature="e#14002#14566#0" expanded="false" />
+                <element signature="e#14752#15536#0" expanded="false" />
+                <element signature="e#15673#16864#0" expanded="false" />
+                <element signature="e#18070#19518#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Sportscar/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="143" column="14" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Profile/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0526316">
-              <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="286" column="64" selection-start-line="286" selection-start-column="64" selection-end-line="286" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -185,6 +191,16 @@
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile_urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Profile/profile_urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -248,7 +264,6 @@
         <option value="$PROJECT_DIR$/Activity/views.py" />
         <option value="$PROJECT_DIR$/Activity/tests.py" />
         <option value="$PROJECT_DIR$/Sportscar/tests.py" />
-        <option value="$PROJECT_DIR$/Sportscar/views.py" />
         <option value="$PROJECT_DIR$/Sportscar/models.py" />
         <option value="$PROJECT_DIR$/Profile/tests.py" />
         <option value="$PROJECT_DIR$/SettingCenter/models.py" />
@@ -257,6 +272,7 @@
         <option value="$PROJECT_DIR$/Profile/models.py" />
         <option value="$PROJECT_DIR$/Profile/profile_urls.py" />
         <option value="$PROJECT_DIR$/Profile/forms.py" />
+        <option value="$PROJECT_DIR$/Sportscar/views.py" />
         <option value="$PROJECT_DIR$/Profile/views.py" />
       </list>
     </option>
@@ -267,8 +283,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="606" />
-    <option name="y" value="116" />
+    <option name="x" value="1228" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="1375" />
   </component>
@@ -962,10 +978,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="606" y="116" width="1280" height="1375" extended-state="0" />
+    <frame x="1228" y="23" width="1280" height="1375" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2975338" sideWeight="0.49713877" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2975338" sideWeight="0.49713877" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29228857" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12867355" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1298,24 +1314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sportscar/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#67#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sportscar/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Club/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1397,14 +1395,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/profile_urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12280702">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Profile/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1415,10 +1405,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/views.py">
+    <entry file="file://$PROJECT_DIR$/Profile/profile_urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="200" column="46" selection-start-line="200" selection-start-column="46" selection-end-line="200" selection-end-column="46" />
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="286" column="64" selection-start-line="286" selection-start-column="64" selection-end-line="286" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sportscar/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09682669">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sportscar/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="143" column="14" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17087063">
+          <caret line="289" column="6" selection-start-line="289" selection-start-column="6" selection-end-line="289" selection-end-column="6" />
           <folding>
             <element signature="e#15#46#0" expanded="true" />
             <element signature="e#1129#1926#0" expanded="false" />
@@ -1436,25 +1458,16 @@
             <element signature="e#8820#9489#0" expanded="false" />
             <element signature="e#8820#8876#1" expanded="false" />
             <element signature="e#9338#9370#0" expanded="false" />
-            <element signature="e#9581#11123#0" expanded="false" />
-            <element signature="e#11255#12822#0" expanded="false" />
-            <element signature="e#11255#11362#1" expanded="false" />
-            <element signature="e#12177#12746#0" expanded="false" />
-            <element signature="e#12956#14526#0" expanded="false" />
-            <element signature="e#12956#13063#1" expanded="false" />
-            <element signature="e#13881#14445#0" expanded="false" />
-            <element signature="e#14631#15415#0" expanded="false" />
-            <element signature="e#15552#16743#0" expanded="false" />
-            <element signature="e#17949#19397#0" expanded="false" />
+            <element signature="e#11376#12943#0" expanded="false" />
+            <element signature="e#11376#11483#1" expanded="false" />
+            <element signature="e#12298#12867#0" expanded="false" />
+            <element signature="e#13077#14647#0" expanded="false" />
+            <element signature="e#13077#13184#1" expanded="false" />
+            <element signature="e#14002#14566#0" expanded="false" />
+            <element signature="e#14752#15536#0" expanded="false" />
+            <element signature="e#15673#16864#0" expanded="false" />
+            <element signature="e#18070#19518#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0526316">
-          <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
