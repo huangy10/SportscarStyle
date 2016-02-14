@@ -45,8 +45,9 @@ class Activity(models.Model):
         verbose_name_plural = u'活动'
         ordering = ("-created_at", )
 
-    def dict_description(self):
+    def dict_description_without_user(self):
         result = dict(
+            actID=self.id,
             name=self.name,
             description=self.description,
             max_attend=self.max_attend,
@@ -54,7 +55,24 @@ class Activity(models.Model):
             end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
             poster=self.poster.url,
             location=self.location.dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+        )
+        if self.allowed_club is not None:
+            result.update(allowed_club=self.allowed_club.dict_description())
+        return result
+
+    def dict_description(self):
+        result = dict(
+            actID=self.id,
+            name=self.name,
+            description=self.description,
+            max_attend=self.max_attend,
+            start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            poster=self.poster.url,
+            location=self.location.dict_description(),
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            user=self.user.profile.simple_dict_description()
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())

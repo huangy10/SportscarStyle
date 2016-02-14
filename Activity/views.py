@@ -4,6 +4,7 @@ import datetime
 
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.gis.geos import Point
+from django.contrib.gis.measure import D
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth import get_user_model
@@ -20,14 +21,38 @@ from Club.models import Club
 
 @require_GET
 def activity_discover(request):
-    """ 活动发现
+    """ 活动发现,需要提交的参数是query的范围,包括:用户所在位置经纬度,query的distance
     """
+    # 获取用户的坐标
+    lat = float(request.GET.get("lat"))
+    lon = float(request.GET.get("lon"))
+    user_position = Point(lon, lat)
+    # 检索的距离,单位为km
+    query_distance = float(request.GET.get("query_distance", 10.0))
+    #
+    limit = int(request.GET.get("limit"))
+    skip = int(request.GET.get("skip"))
+    #
+    acts = Activity.objects.filter(
+            location__location__distance_lte=(user_position, D(km=query_distance)))[skip: skip + limit]
+
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description(), acts)))
 
 
 @require_GET
-def activity_mine(request):
+@page_separator_loader
+def activity_mine(request, date_threshold, op_type, limit):
     """ 自己发布的活动
     """
+    if op_type == 'latest':
+        date_filter = Q(created_at__gt=date_threshold)
+    else:
+        date_filter = Q(created_at__lt=date_threshold)
+
+    acts = Activity.objects.select_related("allowed_club")\
+        .filter(date_filter, user=request.user).order_by("-created_at")[0: limit]
+
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description(), acts)))
 
 
 @require_GET

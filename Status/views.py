@@ -78,7 +78,8 @@ def status_list(request, date_threshold, op_type, limit):
     blacklist2 = UserRelationSetting.objects.filter(
         target=request.user, allow_see_status=False
     ).values_list("target__id")
-    blacklist_filter = ~Q(user__id__in=list(blacklist1) + list(blacklist2))
+    blacklist = list(blacklist1) + list(blacklist1)
+    blacklist_filter = ~Q(user__id__in=blacklist)
 
     data = Status.objects\
         .select_related('user__profile__avatar_club')\
