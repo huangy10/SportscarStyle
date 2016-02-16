@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from .models import Activity, ActivityJoin, ActivityComment
 from custom.utils import post_data_loader, login_first, page_separator_loader
@@ -33,10 +33,11 @@ def activity_discover(request):
     limit = int(request.GET.get("limit"))
     skip = int(request.GET.get("skip"))
     #
-    acts = Activity.objects.filter(
-            location__location__distance_lte=(user_position, D(km=query_distance)))[skip: skip + limit]
+    acts = Activity.objects\
+        .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
+        .filter(location__location__distance_lte=(user_position, D(km=query_distance)))[skip: skip + limit]
 
-    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description(), acts)))
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(), acts)))
 
 
 @require_GET
@@ -50,9 +51,10 @@ def activity_mine(request, date_threshold, op_type, limit):
         date_filter = Q(created_at__lt=date_threshold)
 
     acts = Activity.objects.select_related("allowed_club")\
+        .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .filter(date_filter, user=request.user).order_by("-created_at")[0: limit]
 
-    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description(), acts)))
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(), acts)))
 
 
 @require_GET

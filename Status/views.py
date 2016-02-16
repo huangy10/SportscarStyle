@@ -54,8 +54,6 @@ def status_list(request, date_threshold, op_type, limit):
         date_filter = Q(created_at__gt=date_threshold)
     else:
         date_filter = Q(created_at__lt=date_threshold)
-    print date_threshold
-    print Status.objects.all()[0].created_at
 
     query_type = request.GET.get("query_type", "follow")
 
