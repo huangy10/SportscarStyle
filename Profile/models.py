@@ -131,6 +131,8 @@ class UserProfile(models.Model):
         result = self.simple_dict_description()
         if self.avatar_club is not None:
             result["avatar_club"] = self.avatar_club.dict_description()
+        if self.avatar_car is not None:
+            result["avatar_car"] = self.avatar_car.dict_description()
         return result
 
     class Meta:

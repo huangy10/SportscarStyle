@@ -40,6 +40,9 @@ class Activity(models.Model):
     poster = models.ImageField(upload_to=activity_poster, verbose_name=u'活动海报')
     location = models.ForeignKey('Location.Location', verbose_name=u'活动地点')
 
+    appliers = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                      through="ActivityJoin", verbose_name="申请者", related_name="applied_acts")
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -63,8 +66,14 @@ class Activity(models.Model):
             result.update(allowed_club=self.allowed_club.dict_description())
         return result
 
-    def dict_description_with_aggregation(self):
-        result = self.dict_description()
+    def dict_description_with_aggregation(self, with_user_info=False):
+        """ 获取对象的字典表示形式方便json化
+         :param with_user_info 是否携带活动发布者的信息
+        """
+        if with_user_info:
+            result = self.dict_description()
+        else:
+            result = self.dict_description_without_user()
         result["like_num"] = self.like_num
         result["comment_num"] = self.comment_num
         return result
@@ -88,8 +97,8 @@ class Activity(models.Model):
 
 
 class ActivityJoin(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
-    activity = models.ForeignKey(Activity, related_name='+')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications")
+    activity = models.ForeignKey(Activity, related_name="applications")
     approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -133,8 +142,23 @@ class ActivityComment(models.Model):
             activity=self.activity.dict_description(),
             user=self.user.profile.simple_dict_description(),
             created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            image=self.image.url,
+            image=self.image.url if self.image else None,
             content=self.content,
+            commentID=self.id
+        )
+        if self.response_to is not None:
+            result.update(response_to=self.response_to_id)
+        return result
+
+    def dict_description_simple(self):
+        """ 相比之下,这个函数返回的字典不包含activity的信息
+        """
+        result = dict(
+            user=self.user.profile.simple_dict_description(),
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            image=self.image.url if self.image else None,
+            content=self.content,
+            commentID=self.id
         )
         if self.response_to is not None:
             result.update(response_to=self.response_to_id)

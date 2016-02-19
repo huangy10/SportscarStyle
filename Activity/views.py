@@ -58,9 +58,22 @@ def activity_mine(request, date_threshold, op_type, limit):
 
 
 @require_GET
-def activity_applied(request):
+@login_first
+@page_separator_loader
+def activity_applied(request, date_threshold, op_type, limit):
     """ 自己报名的活动
     """
+
+    if op_type == 'latest':
+        date_filter = Q(applications__created_at__gt=date_threshold)
+    else:
+        date_filter = Q(applications__created_at__lt=date_threshold)
+    #  统计评论数量和点赞数量
+    result = Activity.objects.select_related("user__profile")\
+        .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
+        .order_by("applications__created_at").filter(date_filter, applications__user=request.user)[0:limit]
+    print(result)
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(), result)))
 
 
 @require_POST
@@ -121,7 +134,7 @@ def activity_create(request, data):
         act.inform_of.add(*users)
     # TODO: 需要给这些用户发送相应的通知
 
-    return JsonResponse(dict(success=True, act_id=act.id))
+    return JsonResponse(dict(success=True, id=act.id))
 
 
 @require_POST
@@ -138,29 +151,17 @@ def activity_detail(request, act_id):
      另外要返回报名参加者的列表
     """
     try:
-        act = Activity.objects.get(id=act_id)
+        act = Activity.objects.annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
+            .get(id=act_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
 
-    data = dict(
-        name=act.name, description=act.description, max_attend=act.max_attend,
-        start_at=act.start_at.strftime('%Y-%m-%d %H:%M:%S'),
-        end_at=act.end_at.strftime('%Y-%m-%d %H:%M:%S'),
-        poster=act.poster.url,
-    )
-
-    loc = act.location
-    data['location'] = dict(
-        lat=loc.location.x, lon=loc.location.y,
-        description=loc.description
-    )
-
+    data = act.dict_description_with_aggregation(with_user_info=True)
     apply_list = ActivityJoin.objects.select_related('user__profile__avatar_club').filter(activity=act)
-    data['apply_list'] = map(lambda x: dict(approved=x.approved, user=dict(
-        id=x.user.id,
-        avatar=x.user.profile.avatar.url,
-        avatar_car=x.user.profile.avatar_car.logo if x.user.profile.avatar_car is not None else None
-    )), apply_list)
+    data['apply_list'] = map(lambda x: dict(approved=x.approved,
+                                            like_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                                            user=x.user.profile.complete_dict_description()),
+                             apply_list)
 
     return JsonResponse(dict(success=True, data=data))
 
@@ -176,20 +177,14 @@ def activity_detail_comment(request, date_threshold, op_type, limit, act_id):
     else:
         date_filter = Q(created_at__lt=date_threshold)
 
-    comments = ActivityComment.objects.filter(date_filter, activity_id=act_id).\
-        values('user__profile__nick_name', 'user__id', 'created_at', 'image', 'response_to__id', 'id')[0: limit]
+    comments = ActivityComment.objects\
+        .select_related("user__profile")\
+        .filter(date_filter, activity_id=act_id)[0:limit]
 
-    def format_fix(comment):
-        comment['user_id'] = comment['user__id']
-        comment['user_nickname'] = comment['user__profile__nick_name']
-        comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M:%S')
-        del comment['user__id']
-        del comment['user__profile__nick_name']
-        return comment
-    comments = map(format_fix, comments)
+    comments = map(lambda x: x.dict_description_simple(), comments)
     return JsonResponse(dict(
         success=True,
-        comments=list(comments)
+        comments=comments
     ))
 
 
