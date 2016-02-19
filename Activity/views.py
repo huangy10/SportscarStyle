@@ -54,7 +54,7 @@ def activity_mine(request, date_threshold, op_type, limit):
         .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .filter(date_filter, user=request.user).order_by("-created_at")[0: limit]
 
-    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(), acts)))
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), acts)))
 
 
 @require_GET
@@ -72,14 +72,26 @@ def activity_applied(request, date_threshold, op_type, limit):
     result = Activity.objects.select_related("user__profile")\
         .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .order_by("applications__created_at").filter(date_filter, applications__user=request.user)[0:limit]
-    print(result)
-    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(), result)))
+    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), result)))
 
 
 @require_POST
-def activity_apply(request):
+@login_first
+def activity_apply(request, act_id):
     """ 报名活动
     """
+    try:
+        act = Activity.objects.get(id=act_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code="7001", message="Activity with id %s not found" % act_id))
+
+    join, created = ActivityJoin.objects.get_or_create(user=request.user, activity=act)
+    if not created:
+        join.approved = False
+        join.save()
+        # join字段表明最终操作是报名还是取消报名
+        return JsonResponse(dict(success=True, join=False))
+    return JsonResponse(dict(success=True, join=True))
 
 
 @require_POST
@@ -141,6 +153,19 @@ def activity_create(request, data):
 def activity_edit(request):
     """ 活动编辑
     """
+
+
+def activity_close(request, act_id):
+    """ 关闭活动报名
+    """
+    try:
+        act = Activity.objects.get(id=act_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code="7001", message="Activity with id %s not found" % act_id))
+    act.closed = True
+    act.closed_at = timezone.now()
+    return JsonResponse(dict(success=True))
+
 
 
 @require_GET

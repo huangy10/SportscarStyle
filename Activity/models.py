@@ -6,6 +6,8 @@ from django.conf import settings
 from django.utils import timezone
 
 from custom.models_template import comment_image_path, BaseCommentManager
+
+
 # Create your models here.
 
 
@@ -14,12 +16,12 @@ def activity_poster(instance, filename, *args, **kwargs):
     ext = filename.split('.')[-1]
     random_file_name = str(uuid.uuid4()).replace('-', '')
     new_file_name = "{0}/{1}/{2}/{3}/{4}.{5}".format(
-        'activity_poster',
-        current.year,
-        current.month,
-        current.day,
-        random_file_name,
-        ext
+            'activity_poster',
+            current.year,
+            current.month,
+            current.day,
+            random_file_name,
+            ext
     )
     return new_file_name
 
@@ -40,6 +42,9 @@ class Activity(models.Model):
     poster = models.ImageField(upload_to=activity_poster, verbose_name=u'活动海报')
     location = models.ForeignKey('Location.Location', verbose_name=u'活动地点')
 
+    closed = models.BooleanField(default=False, verbose_name="活动报名是否关闭")
+    closed_at = models.DateTimeField(default=timezone.now, verbose_name="关闭报名的时间")
+
     appliers = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                       through="ActivityJoin", verbose_name="申请者", related_name="applied_acts")
 
@@ -48,19 +53,20 @@ class Activity(models.Model):
     class Meta:
         verbose_name = u'活动'
         verbose_name_plural = u'活动'
-        ordering = ("-created_at", )
+        ordering = ("-created_at",)
 
     def dict_description_without_user(self):
         result = dict(
-            actID=self.id,
-            name=self.name,
-            description=self.description,
-            max_attend=self.max_attend,
-            start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            poster=self.poster.url,
-            location=self.location.dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                actID=self.id,
+                name=self.name,
+                description=self.description,
+                max_attend=self.max_attend,
+                start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z') if not self.closed \
+                    else self.closed_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                poster=self.poster.url,
+                location=self.location.dict_description(),
+                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
@@ -80,16 +86,16 @@ class Activity(models.Model):
 
     def dict_description(self):
         result = dict(
-            actID=self.id,
-            name=self.name,
-            description=self.description,
-            max_attend=self.max_attend,
-            start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            poster=self.poster.url,
-            location=self.location.dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            user=self.user.profile.simple_dict_description()
+                actID=self.id,
+                name=self.name,
+                description=self.description,
+                max_attend=self.max_attend,
+                start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                poster=self.poster.url,
+                location=self.location.dict_description(),
+                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                user=self.user.profile.simple_dict_description()
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
@@ -99,18 +105,18 @@ class Activity(models.Model):
 class ActivityJoin(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications")
     activity = models.ForeignKey(Activity, related_name="applications")
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)  # 不需要审核,这里总为true
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ("-created_at", )
+        ordering = ("-created_at",)
 
     def dict_description(self):
         return dict(
-            user=self.user.profile.simple_dict_description(),
-            activity=self.activity.dict_description(),
-            approved=self.approved,
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+                user=self.user.profile.simple_dict_description(),
+                activity=self.activity.dict_description(),
+                approved=self.approved,
+                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
         )
 
 
@@ -121,7 +127,6 @@ class ActivityLikeThrough(models.Model):
 
 
 class ActivityComment(models.Model):
-
     activity = models.ForeignKey(Activity, verbose_name='相关活动', related_name='comments')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -139,12 +144,12 @@ class ActivityComment(models.Model):
 
     def dict_description(self):
         result = dict(
-            activity=self.activity.dict_description(),
-            user=self.user.profile.simple_dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            image=self.image.url if self.image else None,
-            content=self.content,
-            commentID=self.id
+                activity=self.activity.dict_description(),
+                user=self.user.profile.simple_dict_description(),
+                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                image=self.image.url if self.image else None,
+                content=self.content,
+                commentID=self.id
         )
         if self.response_to is not None:
             result.update(response_to=self.response_to_id)
@@ -154,11 +159,11 @@ class ActivityComment(models.Model):
         """ 相比之下,这个函数返回的字典不包含activity的信息
         """
         result = dict(
-            user=self.user.profile.simple_dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            image=self.image.url if self.image else None,
-            content=self.content,
-            commentID=self.id
+                user=self.user.profile.simple_dict_description(),
+                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                image=self.image.url if self.image else None,
+                content=self.content,
+                commentID=self.id
         )
         if self.response_to is not None:
             result.update(response_to=self.response_to_id)
@@ -172,20 +177,20 @@ class ActivityInvitation(models.Model):
     target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="invites")
     activity = models.ForeignKey(Activity)
     created_at = models.DateTimeField(auto_now_add=True)
-    responsed = models.BooleanField(default=False)      # 被邀请者是否已经回应了这个邀请
+    responsed = models.BooleanField(default=False)  # 被邀请者是否已经回应了这个邀请
     agree = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "活动邀请"
         verbose_name = "活动邀请"
-        ordering = ("-created_at", )
+        ordering = ("-created_at",)
 
     def dict_description(self):
         return dict(
-            inviter=self.inviter.profile.simple_dict_description(),
-            target=self.target.profile.simple_dict_description(),
-            activity=self.target.dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-            responsed=self.responsed,
-            agree=self.agree
+                inviter=self.inviter.profile.simple_dict_description(),
+                target=self.target.profile.simple_dict_description(),
+                activity=self.target.dict_description(),
+                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                responsed=self.responsed,
+                agree=self.agree
         )
