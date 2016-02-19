@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for SportscarStyle project.
 
@@ -115,6 +116,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Session寿命设置的充分长,等效于永远不会expire
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 365 * 10
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
