@@ -11,7 +11,7 @@ from Location.models import Location
 class StatusCreationForm(forms.ModelForm):
 
     user_id = forms.IntegerField()
-    car_id = forms.IntegerField()
+    car_id = forms.IntegerField(required=False)
     lat = forms.FloatField()
     lon = forms.FloatField()
     location_description = forms.CharField(max_length=255)
@@ -26,6 +26,8 @@ class StatusCreationForm(forms.ModelForm):
 
     def clean_car_id(self):
         car_id = self.cleaned_data['car_id']
+        if car_id is None:
+            return None
         try:
             car = Sportscar.objects.get(id=car_id)
         except ObjectDoesNotExist:

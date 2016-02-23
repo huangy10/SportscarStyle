@@ -13,7 +13,7 @@ class RegistrationForm(UserCreationForm):
 
     def clean_password2(self):
         password = super(RegistrationForm, self).clean_password2()
-        if len(password) < 8:
+        if len(password) < 4:
             raise forms.ValidationError('password too short', code='1003')
         return password
 
@@ -85,7 +85,7 @@ class ProfileCreationForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('nick_name', 'gender', 'birth_date')
+        fields = ('nick_name', 'gender', 'birth_date', 'avatar')
 
     def __init__(self, profile, data=None, *args, **kwargs):
         super(ProfileCreationForm, self).__init__(data=data, *args, **kwargs)
@@ -100,6 +100,8 @@ class ProfileCreationForm(forms.ModelForm):
         if 'birth_date' in self.cleaned_data:
             profile.birth_date = self.cleaned_data['birth_date']
             profile.star_sign = star_sign_from_date(profile.birth_date)
+        if 'avatar' in self.cleaned_data:
+            profile.avatar = self.cleaned_data["avatar"]
         if commit:
             profile.save()
 

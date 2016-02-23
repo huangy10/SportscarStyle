@@ -91,7 +91,8 @@ class Activity(models.Model):
                 description=self.description,
                 max_attend=self.max_attend,
                 start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-                end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z') if not self.closed \
+                    else self.closed_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
                 poster=self.poster.url,
                 location=self.location.dict_description(),
                 created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),

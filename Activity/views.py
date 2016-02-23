@@ -37,7 +37,8 @@ def activity_discover(request):
         .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .filter(location__location__distance_lte=(user_position, D(km=query_distance)))[skip: skip + limit]
 
-    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(), acts)))
+    return JsonResponse(dict(success=True,
+                             acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), acts)))
 
 
 @require_GET
@@ -113,6 +114,9 @@ def activity_create(request, data):
        |- lon
        |- description
     """
+    print(data)
+    print(request.POST)
+    print(request.FILES)
     if 'inform_of' in data:
         inform_of = json.loads(data['inform_of'])
         users = get_user_model().objects.filter(id__in=inform_of)
@@ -127,7 +131,7 @@ def activity_create(request, data):
     else:
         club_limit = None
     loc = Location.objects.create(
-        location=Point(location['lat'], location['lon']),
+        location=Point(location['lon'], location['lat']),
         description=location['description'],
     )
 
@@ -164,6 +168,7 @@ def activity_close(request, act_id):
         return JsonResponse(dict(success=False, code="7001", message="Activity with id %s not found" % act_id))
     act.closed = True
     act.closed_at = timezone.now()
+    act.save()
     return JsonResponse(dict(success=True))
 
 
@@ -182,6 +187,7 @@ def activity_detail(request, act_id):
         return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
 
     data = act.dict_description_with_aggregation(with_user_info=True)
+    print(data)
     apply_list = ActivityJoin.objects.select_related('user__profile__avatar_club').filter(activity=act)
     data['apply_list'] = map(lambda x: dict(approved=x.approved,
                                             like_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),

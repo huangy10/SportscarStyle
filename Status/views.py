@@ -59,7 +59,8 @@ def status_list(request, date_threshold, op_type, limit):
 
     if query_type == 'follow':
         # 获取关注的特点
-        content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
+        # content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
+        content_filter = Q()
     elif query_type == 'nearby':
         lat = request.GET["lat"]
         lon = request.GET["lon"]
@@ -83,7 +84,7 @@ def status_list(request, date_threshold, op_type, limit):
         .select_related('user__profile__avatar_club')\
         .select_related('car')\
         .select_related('location')\
-        .filter(date_filter & content_filter & blacklist_filter)\
+        .order_by("-created_at").filter(date_filter & content_filter & blacklist_filter)\
         .annotate(comment_num=Count('comments'))\
         .annotate(like_num=Count('liked_by'))[0:limit]
 
@@ -105,6 +106,7 @@ def post_new_status(request, data):
     else:
         response_dict = dict(success=False)
         response_dict.update(form.errors)
+        print(response_dict)
         return JsonResponse(response_dict)
 
 

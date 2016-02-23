@@ -132,7 +132,7 @@ def account_profile(request, data):
         - birth_date: birth date
         - avatar:
     """
-    print request
+    print request.FILES
     form = ProfileCreationForm(profile=request.user.profile, data=data, files=request.FILES)
     if form.is_valid():
         form.save()
@@ -250,7 +250,7 @@ def profile_authed_cars(request, user_id):
        |-- signature: 跑车签名
     """
     carsOwnerShip = SportCarOwnership.objects.select_related("car")\
-        .filter(user_id=user_id, identified=True).order_by("-created_at")
+        .filter(user_id=user_id).order_by("-created_at")
     cars_dict_data = map(lambda x: x.dict_description(), carsOwnerShip)
     return JsonResponse(dict(success=True, cars=cars_dict_data))
 
@@ -435,7 +435,7 @@ def profile_operation(request, data, user_id):
         obj, created = UserFollow.objects.get_or_create(source_user=request.user, target_user=target_user)
         if not created:
             obj.delete()
-        return JsonResponse(dict(success=True))
+        return JsonResponse(dict(success=True, follow=created))
 
 
 @http_decorators.require_GET

@@ -119,7 +119,6 @@ class ChatUpdateHandler(JSONResponseHandler):
         self.JSONResponse(dict(success=True, messages=map(lambda x: x.dict_description(), messages)))
 
     def on_connection_close(self):
-        print "close"
         if self.future is None:
             return
         global_message_dispatch.cancel_wait(self.future)
@@ -166,7 +165,6 @@ class ChatNewHandler(JSONResponseHandler):
         if message_type == "text":
             message.text_content = self.get_argument("text_content")
         elif message_type == "image":
-            print(self.request.files.keys())
             file_info = self.request.files['image'][0]
             file_io = StringIO.StringIO(file_info["body"])
             message.image = InMemoryUploadedFile(

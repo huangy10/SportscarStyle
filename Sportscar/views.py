@@ -86,7 +86,7 @@ def cars_detail(request, car_id):
                 image_url=car.image.url,
                 body=car.body,
                 price=car.price,
-                car_id=car.id,
+                carID=car.id,
             ))
             result["data"] = data
 
