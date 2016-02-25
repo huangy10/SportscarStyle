@@ -43,6 +43,11 @@ class UserTracking(models.Model):
 
     location_available = models.BooleanField(default=False, verbose_name="地址数据是否可用")
 
+    def update(self):
+        """ 测试用的函数,
+        """
+        self.save()
+
     class Meta:
         ordering = ('-created_at', )
 

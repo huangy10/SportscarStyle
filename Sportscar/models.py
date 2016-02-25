@@ -5,6 +5,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
+from django.utils.encoding import smart_str
 
 # Create your models here.
 
@@ -67,6 +68,9 @@ class Sportscar(models.Model):
 
     manufacturer = models.ForeignKey(Manufacturer, verbose_name=u'制造商')
     owners = models.ManyToManyField(settings.AUTH_USER_MODEL, through='SportCarOwnership')
+
+    def __str__(self):
+        return smart_str(self.name)
 
     def dict_description(self):
         return dict(

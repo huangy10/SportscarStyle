@@ -8,7 +8,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from django.db.models import Count, Case, When, Sum
+from django.db.models import Count, Case, When, Sum, Q
 from django.db import models
 from django.utils import timezone
 
@@ -38,12 +38,15 @@ def radar_cars(request, data):
       |- lon
     """
     # 首先更新用户的位置
-    lat = data["loc"]["lat"]
-    lon = data["loc"]["lon"]
+    lat = float(data["loc"]["lat"])
+    lon = float(data["loc"]["lon"])
     tracking = request.user.location
     loc = tracking.location
     loc.location = Point(lon, lat)
-    loc.save()  # 自动更新了时间
+    loc.save()
+    # 自动更新了时间
+    tracking.save()
+
     if not tracking.location_available:
         tracking.location_available = True
         tracking.save()
@@ -54,18 +57,17 @@ def radar_cars(request, data):
 
         # TODO: 添加其他的筛选条件
 
-        results = User.objects.select_related("profile")\
-            .annotate(authed_cars_num=Sum(
-                Case(
+        results = get_user_model().objects.select_related("profile", "location")\
+            .annotate(authed_cars_num=Case(
                         When(
                                 ownership__identified=True,
                                 then=1),
-                        default=0),
-                output_field=models.IntegerField))\
-            .filter(authed_cars_num__gt=0,
+                        default=0, output_field=models.IntegerField()))\
+            .filter(~Q(id=request.user.id), authed_cars_num__gt=0,
                     location__location__location__distance_lte=(loc.location, D(km=distance)),
                     location__location_available=True,
-                    location__updated_at__gt=timezone.now() - datetime.timedelta(seconds=300))
+                    location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300)))\
+            .distinct()
 
         def result_generator(user):
             result = user.profile.complete_dict_description()
@@ -73,6 +75,7 @@ def radar_cars(request, data):
             return result
 
         return JsonResponse(dict(success=True, result=map(result_generator, results)))
+
 
 @require_POST
 @login_first
