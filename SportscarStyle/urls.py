@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^settings/', include('SettingCenter.urls', namespace='settings')),
     url(r'^activity/', include('Activity.urls', namespace='activity')),
     url(r'^notification/', include('Notification.urls', namespace="notification")),
-    url(r'^radar/', include('Location.urls', namespace="radar"))
+    url(r'^radar/', include('Location.urls', namespace="radar")),
+    url(r'^club/', include('Club.urls', namespace='club'))
 ]
 
 if settings.DEBUG:

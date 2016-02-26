@@ -27,6 +27,9 @@ class ClubJoining(models.Model):
     def __str__(self):
         return smart_str("{0} in {1}".format(self.user.profile.nick_name, self.club.name))
 
+    class Meta:
+        unique_together = ("user", "club")
+
 
 def club_logo(instance, filename, *args, **kwargs):
     current = timezone.now()
