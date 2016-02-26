@@ -4,6 +4,8 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -45,6 +47,9 @@ class ChatRecordBasic(models.Model):
     target_user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="目标用户", null=True, blank=True)
     target_club = models.ForeignKey("Club.Club", verbose_name="目标群聊", null=True, blank=True)
 
+    # 用来唯一确定一个聊天对象的identifier,其组成方式是(target_id)_(chat_type)
+    distinct_identifier = models.CharField(max_length=20)
+
     @property
     def target_id(self):
         if self.chat_type == "private":
@@ -66,6 +71,7 @@ class ChatRecordBasic(models.Model):
     related_id = models.IntegerField(default=0, verbose_name="相关绑定id")      # 对于活动消息而言这里存储的是对应活动的id
 
     deleted = models.BooleanField(default=False, verbose_name="是否已经被删除")
+    read = models.BooleanField(default=False, verbose_name="是否已读")
 
     def dict_description(self):
         result =  dict(
@@ -86,3 +92,12 @@ class ChatRecordBasic(models.Model):
             result["target_club"] = self.target_club.dict_description()
         return result
 
+
+@receiver(pre_save, sender=ChatRecordBasic)
+def auto_create_distince_identifier(sender, instance, **kwargs):
+
+    if instance.chat_type == "private":
+        target_id = instance.target_user.id
+    else:
+        target_id = instance.target_club.id
+    instance.distinct_identifier = "{0}_{1}".format(target_id, instance.chat_type)

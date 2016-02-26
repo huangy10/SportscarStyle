@@ -29,7 +29,8 @@ urlpatterns = [
     url(r'^activity/', include('Activity.urls', namespace='activity')),
     url(r'^notification/', include('Notification.urls', namespace="notification")),
     url(r'^radar/', include('Location.urls', namespace="radar")),
-    url(r'^club/', include('Club.urls', namespace='club'))
+    url(r'^club/', include('Club.urls', namespace='club')),
+    url(r'^chat/', include('Chat.urls', namespace='chat'))
 ]
 
 if settings.DEBUG:

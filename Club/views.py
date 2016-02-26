@@ -18,8 +18,10 @@ def club_create(request):
     """ 创建俱乐部,需要提供初始成员和logo,简介等信息
     """
     users_id = json.loads(request.POST["members"])
+    # Manually add host id to POST
+    request.POST.update({"host": request.user.id})
     form = ClubCreateForm(request.POST, request.FILES)
-    if form.valid():
+    if form.is_valid():
         club = form.save()
         users = []
         try:
@@ -31,8 +33,8 @@ def club_create(request):
             ClubJoining.objects.create(club=club, user=user, nick_name=user.profile.nick_name)
         # Also add the host as a member of the club
         ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.profile.nick_name)
-
+        return JsonResponse(dict(success=True, club=club.dict_description()))
     else:
+        print form.errors
+        print request.POST
         return JsonResponse(dict(success=False))
-
-    return JsonResponse(dict(success=True, clubID=club.id))

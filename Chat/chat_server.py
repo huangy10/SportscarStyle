@@ -121,6 +121,7 @@ class ChatUpdateHandler(JSONResponseHandler):
     def on_connection_close(self):
         if self.future is None:
             return
+        print(self.future)
         global_message_dispatch.cancel_wait(self.future)
 
 
