@@ -84,7 +84,8 @@ class ChatRecordBasic(models.Model):
             text_content=self.text_content,
             audio=self.audio.url if self.audio else None,
             related_id=self.related_id,
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            read=self.read
         )
         if self.chat_type == "private":
             result["target_user"] = self.target_user.profile.simple_dict_description()
