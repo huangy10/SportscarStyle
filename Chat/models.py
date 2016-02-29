@@ -92,6 +92,9 @@ class ChatRecordBasic(models.Model):
             result["target_club"] = self.target_club.dict_description()
         return result
 
+    class Meta:
+        ordering = ("distinct_identifier", "-created_at")
+
 
 @receiver(pre_save, sender=ChatRecordBasic)
 def auto_create_distince_identifier(sender, instance, **kwargs):

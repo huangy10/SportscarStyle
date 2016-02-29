@@ -11,7 +11,8 @@ from tornado import ioloop, gen
 from tornado.concurrent import Future
 
 from django.core.wsgi import get_wsgi_application
-sys.path.extend([os.path.abspath(os.path.join(os.getcwd(), os.pardir))])
+sys.path.extend([os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))])
+print(os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SportscarStyle.settings')
 application = get_wsgi_application()
 
@@ -115,13 +116,13 @@ class ChatUpdateHandler(JSONResponseHandler):
         self.future = global_message_dispatch.wait_for_message(self.current_user.id, waiting_date=waiting_date)
         messages = yield self.future
         if self.request.connection.stream.closed():
+            self.JSONResponse(dict(success=False))
             return
         self.JSONResponse(dict(success=True, messages=map(lambda x: x.dict_description(), messages)))
 
     def on_connection_close(self):
         if self.future is None:
             return
-        print(self.future)
         global_message_dispatch.cancel_wait(self.future)
 
 

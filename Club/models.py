@@ -30,6 +30,15 @@ class ClubJoining(models.Model):
     class Meta:
         unique_together = ("user", "club")
 
+    def dict_description(self):
+        return dict(
+            nick_name=self.nick_name,
+            club=self.club.dict_description(),
+            show_nick_name=self.show_nick_name,
+            no_disturbing=self.show_nick_name,
+            always_on_top=self.always_on_top,
+        )
+
 
 def club_logo(instance, filename, *args, **kwargs):
     current = timezone.now()
@@ -61,6 +70,8 @@ class Club(models.Model):
     logo = models.ImageField(upload_to=club_logo, verbose_name=u"俱乐部标识")
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"成员", through='ClubJoining')
     description = models.TextField(verbose_name=u"俱乐部简介")
+    identified = models.BooleanField(default=False, verbose_name="是否认证")
+    identified_at = models.DateTimeField(default=timezone.now)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u"创建日期")
 

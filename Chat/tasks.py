@@ -26,8 +26,8 @@ def inform_of_related_waiters(message, global_message_dispatch):
         target_users = target_club.members.all()
         for user in target_users:
             waiter = waiters.get(user.id, None)
-            print waiter
             if waiter is not None:
+                print message
                 waiter.set_result([message])
             else:
                 # TODO: 当目标用户不是waiter时,需要发送notification

@@ -52,6 +52,7 @@ def news_list(request, date_threshold, op_type, limit):
             title=news.title,
             like_num=news.like_num,
             comment_num=news.like_num,
+            liked=NewsLikeThrough.objects.filter(user=request.user, news=news).exists()
         )
         most_recent_like_record = NewsLikeThrough.objects.filter(user__friendship__friend=request.user, news=news)\
             .order_by("-like_at").first()
@@ -186,6 +187,10 @@ def news_operation(request, data, news_id):
                                                              news=news)
         if not created:
             obj.delete()
-        return JsonResponse(dict(success=True, like_state=created))
+        result =dict(
+            like_state=created,
+            like_num=NewsLikeThrough.objects.filter(news=news).count()
+        )
+        return JsonResponse(dict(success=True, like_info=result))
     else:
         return JsonResponse(dict(success=False, code='3004', message='Operation not defined'))

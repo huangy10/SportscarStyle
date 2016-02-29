@@ -6,6 +6,7 @@ import os
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.utils.functional import cached_property
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
@@ -121,6 +122,7 @@ class UserProfile(models.Model):
         return smart_str(self.nick_name)
 
     def simple_dict_description(self):
+        # 添加user_relation_setting部分
         return dict(
             userID=self.user_id,
             nick_name=self.nick_name,

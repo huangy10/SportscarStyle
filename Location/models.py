@@ -58,5 +58,5 @@ def auto_create_tracking(sender, instance, created, **kwargs):
     """
     if created:
         loc = Location.objects.create(location=Point(0, 0), description="")
-        UserTracking.objects.get_or_create(user=sender, location=loc)
+        UserTracking.objects.get_or_create(user=instance, location=loc)
 

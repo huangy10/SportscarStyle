@@ -16,8 +16,9 @@ def chat_list(request):
      返回的信息包括每个单元的类型(private/group),目标信息(target_user/target_club),以及最近的一条聊天的内容
     """
     result = ChatRecordBasic.objects.select_related("sender__profile", "target_club")\
-        .order_by("-created_at")\
+        .order_by("distinct_identifier", "-created_at")\
         .filter(Q(target_user=request.user) | Q(target_club__members=request.user), deleted=False)\
         .distinct("distinct_identifier")
-
+    print(result)
     return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(), result)))
+

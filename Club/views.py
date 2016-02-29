@@ -38,3 +38,12 @@ def club_create(request):
         print form.errors
         print request.POST
         return JsonResponse(dict(success=False))
+
+
+@require_GET
+@login_first
+def club_list(request):
+    """ 获取当前用户的所有经过认证的群组
+    """
+    result = ClubJoining.objects.filter(user=request.user)
+    return JsonResponse(dict(success=True, clubs=map(lambda x: x.dict_description(), result)))
