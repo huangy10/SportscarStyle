@@ -11,8 +11,7 @@ from tornado import ioloop, gen
 from tornado.concurrent import Future
 
 from django.core.wsgi import get_wsgi_application
-sys.path.extend([os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))])
-print(os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)))
+sys.path.extend([os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir, os.pardir))])
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SportscarStyle.settings')
 application = get_wsgi_application()
 

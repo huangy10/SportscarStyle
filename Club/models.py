@@ -24,6 +24,8 @@ class ClubJoining(models.Model):
     always_on_top = models.BooleanField(default=False, verbose_name=u"置顶聊天")
     always_on_to_date = models.DateTimeField(null=True, blank=True, verbose_name=u"置顶的日期")  # 影响排序
 
+    unread_chats = models.IntegerField(default=0, verbose_name=u"未读消息数量")
+
     def __str__(self):
         return smart_str("{0} in {1}".format(self.user.profile.nick_name, self.club.name))
 
