@@ -405,7 +405,7 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
         if recent_status is not None and recent_status.content is not None:
             recent_status_des = recent_status.content
         return dict(
-            user_id=target_user.id,
+            userID=target_user.id,
             avatar=target_user.profile.avatar.url,
             time=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             nick_name=target_user.profile.nick_name,
