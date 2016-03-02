@@ -12,6 +12,7 @@ from django.utils import timezone
 from custom.utils import login_first, page_separator_loader
 from .models import ChatRecordBasic
 from Club.models import Club, ClubJoining
+from Profile.models import UserRelationSetting
 # Create your views here.
 
 
@@ -29,14 +30,18 @@ def chat_list(request):
             Q(sender=request.user),
             deleted=False)\
         .distinct("distinct_identifier")
-    # 获取相关的app
+    # 获取相关的clubs
     clubs = [x.target_club for x in result if x.chat_type == "group"]
     club_joins = ClubJoining.objects.filter(user=request.user, club__in=clubs)
+    users = [x.target_user for x in result if x.chat_type == "private"]
+    relation_settings = UserRelationSetting.objects.filter(user=request.user, target__in=users)
+    #
     data = dict(
         chats=map(lambda x: x.dict_description(), result),
-        settings=map(lambda x: x.dict_description(), club_joins)
+        club_settings=map(lambda x: x.dict_description(), club_joins),
+        private_settings=map(lambda x: x.dict_description_simple(), relation_settings)
     )
-    return JsonResponse(dict(success=True, data=data)
+    return JsonResponse(dict(success=True, data=data))
 
 
 @require_GET

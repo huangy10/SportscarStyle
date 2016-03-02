@@ -47,3 +47,25 @@ def club_list(request):
     """
     result = ClubJoining.objects.filter(user=request.user)
     return JsonResponse(dict(success=True, clubs=map(lambda x: x.dict_description(), result)))
+
+
+@require_GET
+@login_first
+def club_infos(request, club_id):
+    """
+    """
+    try:
+        club = Club.objects.get(id=club_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=True, code="2002", message="club not found"))
+    try:
+        club_join = ClubJoining.objects.get(user=request.user, club=club)
+        if request.user == club.host:
+            return JsonResponse(
+                dict(success=True, data=club_join.dict_description(show_members=True, for_host=True)))
+        else:
+            return JsonResponse(
+                dict(success=True, data=club_join.dict_description(show_members=True, for_host=False)))
+    except ObjectDoesNotExist:
+        return JsonResponse(success=True, data=club.dict_description(show_members=club.show_members_to_public,
+                                                                     show_setting=False))

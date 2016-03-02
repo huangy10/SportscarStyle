@@ -35,7 +35,7 @@ def activity_discover(request):
     #
     acts = Activity.objects\
         .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
-        .filter(location__location__distance_lte=(user_position, D(km=query_distance)))[skip: skip + limit]
+        .filter(location__location__distance_lte=(user_position, D(km=query_distance))).distinct()[skip: skip + limit]
 
     return JsonResponse(dict(success=True,
                              acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), acts)))

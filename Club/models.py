@@ -32,14 +32,20 @@ class ClubJoining(models.Model):
     class Meta:
         unique_together = ("user", "club")
 
-    def dict_description(self):
-        return dict(
+    def dict_description(self, show_members=False, for_host=False):
+        """
+         :param show_members 是否打包成员信息
+         :param for_host     以host权限获取数据
+        """
+        result = dict(
             nick_name=self.nick_name,
-            club=self.club.dict_description(),
+            club=self.club.dict_description(show_members=show_members,
+                                            show_setting=for_host),
             show_nick_name=self.show_nick_name,
             no_disturbing=self.show_nick_name,
             always_on_top=self.always_on_top,
         )
+        return result
 
 
 def club_logo(instance, filename, *args, **kwargs):
@@ -79,6 +85,10 @@ class Club(models.Model):
 
     objects = ClubManager()
 
+    # some settings about club
+    only_host_can_invite = models.BooleanField(default=False, verbose_name=u"只有群主能够邀请")
+    show_members_to_public = models.BooleanField(default=False, verbose_name=u"对外公布成员信息")
+
     def __str__(self):
         return smart_str(self.name)
 
@@ -86,7 +96,19 @@ class Club(models.Model):
         verbose_name = u"俱乐部"
         verbose_name_plural = u'俱乐部'
 
-    def dict_description(self):
-        return dict(
-            id=self.id, club_logo=self.logo.url, club_name=self.name, description=self.description
+    def dict_description(self, show_members=False, show_setting=False):
+        result = dict(
+            id=self.id, club_logo=self.logo.url,
+            club_name=self.name, description=self.description,
+            identified=self.identified
         )
+        if show_members:
+            result.update(
+                members=map(lambda x: x.profile.simple_dict_description(), self.members.all())
+            )
+        if show_setting:
+            result.update(dict(
+                only_host_can_invite=self.only_host_can_invite,
+                show_members_to_public=self.show_members_to_public
+            ))
+        return result

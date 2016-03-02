@@ -220,6 +220,14 @@ class UserRelationSetting(models.Model):
             blacklist_at=self.blacklist_at.strftime('%Y-%m-%d %H:%M:%S %Z')
         )
 
+    def dict_description_simple(self):
+        return dict(
+            target_id=self.target_id,
+            remark_name=self.remark_name,
+            see_his_status=self.see_his_status,
+            allow_see_status=self.allow_see_status,
+            blacklist_at=self.blacklist_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+        )
 
 class AuthenticationManager(models.Manager):
 
