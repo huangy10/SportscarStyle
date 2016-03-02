@@ -29,7 +29,14 @@ def chat_list(request):
             Q(sender=request.user),
             deleted=False)\
         .distinct("distinct_identifier")
-    return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(), result)))
+    # 获取相关的app
+    clubs = [x.target_club for x in result if x.chat_type == "group"]
+    club_joins = ClubJoining.objects.filter(user=request.user, club__in=clubs)
+    data = dict(
+        chats=map(lambda x: x.dict_description(), result),
+        settings=map(lambda x: x.dict_description(), club_joins)
+    )
+    return JsonResponse(dict(success=True, data=data)
 
 
 @require_GET
