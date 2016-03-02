@@ -352,7 +352,8 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
     else:
         filter_q = Q()
 
-    fans = UserFollow.objects.select_related('source_user__profile').filter(date_filter & filter_q, target_user=user)[0:limit]
+    fans = UserFollow.objects.select_related('source_user__profile')\
+        .filter(date_filter & filter_q, target_user=user)[0:limit]
 
     def data_organize(x):
         source_user = x.source_user
@@ -363,7 +364,7 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
         return dict(
             userID=source_user.id,
             avatar=source_user.profile.avatar.url,
-            created_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            created_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
             nick_name=source_user.profile.nick_name,
             recent_status_des=recent_status_des
         )

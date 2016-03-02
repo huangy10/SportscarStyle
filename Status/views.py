@@ -84,7 +84,8 @@ def status_list(request, date_threshold, op_type, limit):
         .select_related('user__profile__avatar_club')\
         .select_related('car')\
         .select_related('location')\
-        .order_by("-created_at").filter(date_filter & content_filter & blacklist_filter)\
+        .order_by("-created_at")\
+        .filter(date_filter & content_filter & blacklist_filter, deleted=False)\
         .annotate(comment_num=Count('comments'))\
         .annotate(like_num=Count('liked_by'))[0:limit]
 
@@ -132,7 +133,11 @@ def status_comments(request, date_threshold, op_type, limit, status_id):
         date_filter = Q(created_at__gt=date_threshold)
     else:
         date_filter = Q(created_at__lt=date_threshold)
-    comments = StatusComment.objects.select_related("user__profile").filter(date_filter, status__id=status_id)[0:limit]
+    try:
+        status = Status.objects.get(id=status_id, deleted=False)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code="4002", message="status not found"))
+    comments = StatusComment.objects.select_related("user__profile").filter(date_filter, status=status)[0:limit]
 
     return JsonResponse(dict(
         success=True,
@@ -185,14 +190,24 @@ def status_operation(request, data, status_id):
         return JsonResponse(dict(success=False, code='4300', message='No valid operation type param found.'))
     op_type = data['op_type']
     try:
-        status = Status.objects.get(id=status_id)
+        status = Status.objects.get(id=status_id, deleted=False)
     except ObjectDoesNotExist:
-        return JsonResponse(dict(success=False, code='4002', message='News not found.'))
+        return JsonResponse(dict(success=False, code='4002', message='Status not found.'))
+
     if op_type == 'like':
+        # 点赞
         obj, created = StatusLikeThrough.objects.get_or_create(user=request.user,
                                                                status=status)
         if not created:
             obj.delete()
         return JsonResponse(dict(success=True, like_state=created))
+    elif op_type == "delete":
+        # 删除
+        if status.user != request.user:
+            # no permission
+            return JsonResponse(dict(success=False, code="code", message="no permission"))
+        status.deleted = True
+        status.save()
+        return JsonResponse(dict(success=True))
     else:
         return JsonResponse(dict(success=False, code='4004', message='Operation not defined'))

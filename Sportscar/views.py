@@ -127,9 +127,8 @@ def car_auth(request, data):
      上传的参数包括:
         -------
          |- car_id
-         |- image1:
-         |- image2:
-         |- image3:
+         |- drive_license:
+         |- photo:
          |- id_card:
          |- license:
     """
@@ -140,7 +139,8 @@ def car_auth(request, data):
         if record.approved:
             return JsonResponse(dict(success=False, message=u'该车主的该车辆已经被认证了', code='2400'))
         elif SportCarOwnership.objects.filter(car_id=data['car_id'], user=request.user).exists():
-            record.image = [request.FILES['image1'], request.FILES['image2'], request.FILES['image3']]
+            record.drive_license = request.FILES["drive_license"]
+            record.photo = request.FILES["photo"]
             record.id_card = request.FILES['id_card']
             record.license_num = data['license']
             record.save()
@@ -152,7 +152,8 @@ def car_auth(request, data):
             owner_ship = SportCarOwnership.objects.get(car_id=data['car_id'], user=request.user)
             SportCarIdentificationRequestRecord.objects.create(
                 ownership=owner_ship,
-                images=[request.FILES['image1'], request.FILES['image2'], request.FILES['image3']],
+                drive_license=request.FILES["drive_license"],
+                photo=request.FILES["photo"],
                 id_card=request.FILES['id_card'],
                 license_num=data['license']
             )

@@ -121,6 +121,7 @@ class SportCarIdentificationRequestRecord(models.Model):
     ownership = models.ForeignKey(SportCarOwnership, verbose_name=u'待认证跑车')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'申请时间')
     approved = models.BooleanField(default=False, verbose_name=u'是否批准')
-    images = ArrayField(models.ImageField(upload_to=car_auth_image), size=3, verbose_name=u'认证图片')
+    drive_license = models.ImageField(upload_to=car_auth_image, verbose_name=u"驾照")
     id_card = models.ImageField(upload_to=car_auth_image, verbose_name=u'身份证')
+    photo = models.ImageField(upload_to=car_auth_image, verbose_name=u"合影")
     license_num = models.CharField(max_length=30, verbose_name=u'车牌号')

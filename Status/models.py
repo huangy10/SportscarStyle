@@ -40,6 +40,8 @@ class Status(models.Model):
     inform_of = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u'提醒谁看',
                                        related_name='status_need_to_see')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布日期')
+    #
+    deleted = models.BooleanField(default=False, verbose_name=u"是否已经被删除")
 
     class Meta:
         verbose_name = u'状态'

@@ -6,6 +6,9 @@ from django.conf import settings
 from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.utils.functional import cached_property
+
+from Club.models import ClubJoining
 
 # Create your models here.
 
@@ -32,6 +35,13 @@ class ChatRecordBasic(models.Model):
     target_user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="目标用户", null=True, blank=True,
                                     related_name="chats_to_me")
     target_club = models.ForeignKey("Club.Club", verbose_name="目标群聊", null=True, blank=True, related_name="chats")
+
+    @cached_property
+    def target_club_joing(self):
+        if self.chat_type == "private":
+            return None
+        else:
+            return ClubJoining.objects.get(club=self.target_club, user=self.sender)
 
     # 用来唯一确定一个聊天对象的identifier,其组成方式是:
     # 当聊天类型是group时,这个标识符为目标club的id
