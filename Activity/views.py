@@ -114,9 +114,6 @@ def activity_create(request, data):
        |- lon
        |- description
     """
-    print(data)
-    print(request.POST)
-    print(request.FILES)
     if 'inform_of' in data:
         inform_of = json.loads(data['inform_of'])
         users = get_user_model().objects.filter(id__in=inform_of)
@@ -187,7 +184,6 @@ def activity_detail(request, act_id):
         return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
 
     data = act.dict_description_with_aggregation(with_user_info=True)
-    print(data)
     apply_list = ActivityJoin.objects.select_related('user__profile__avatar_club').filter(activity=act)
     data['apply_list'] = map(lambda x: dict(approved=x.approved,
                                             like_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),

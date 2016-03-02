@@ -458,4 +458,4 @@ class StatusViewTest(TestCase):
             op_type='like'
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=False, code='4002', message='News not found.'))
+        self.assertEqual(response_data, dict(success=False, code='4002', message='Status not found.'))

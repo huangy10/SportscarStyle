@@ -270,7 +270,7 @@ class NewsViewsTest(TestCase):
         response_data = json.loads(response.content)
         # 注意：在setup函数里面我们已经加入了default_user到news1的like，所以这里返回的like_state应是False
         self.assertEqual(response_data, dict(
-            success=True, like_state=False
+            success=True, like_info=dict(like_state=False, like_num=0)
         ))
         self.assertFalse(NewsLikeThrough.objects.filter(user=self.default_user, news=self.news1).exists())
 
@@ -284,7 +284,7 @@ class NewsViewsTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertEqual(response_data, dict(
-            success=True, like_state=True
+            success=True, like_info=dict(like_state=True, like_num=1)
         ))
         self.assertTrue(NewsLikeThrough.objects.filter(user=self.default_user, news=self.news1).exists())
 

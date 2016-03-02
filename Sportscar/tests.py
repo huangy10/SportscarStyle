@@ -77,7 +77,7 @@ class CarViewTest(TestCase):
                 car_name=u'Mini Cooper',
                 body=u'2门2坐硬顶跑车',
                 price=u'300,000',
-                car_id=self.car1.id,
+                carID=self.car1.id,
                 owned=False,
             )
         ))
@@ -115,7 +115,7 @@ class CarViewTest(TestCase):
         image = open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, 'tests', 'test.png'))
         response = self.client.post(reverse('cars:auth'), data=dict(
             car_id=self.car1.id,
-            image1=image, image2=image, image3=image, id_card=image,
+            photo=image, drive_license=image, id_card=image,
             license='test'
         ))
         response_data = json.loads(response.content)

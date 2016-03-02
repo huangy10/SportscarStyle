@@ -40,7 +40,7 @@ class ProfileModelTest(TestCase):
         self.assertEqual(self.default_user.profile.age, 16)
         # test with leap year
         self.default_user.profile.birth_date = datetime.date(year=2000, month=2, day=29)
-        self.assertEqual(self.default_user.profile.age, 15)
+        self.assertEqual(self.default_user.profile.age, 16)
         # test with birthday
         today = datetime.datetime.today()
         self.default_user.profile.birth_date = datetime.date(year=2000, month=today.month, day=today.day)
@@ -142,8 +142,8 @@ class ProfileViewTest(TestCase):
         phone = '18570353219'
         AuthenticationCode.objects.create(phone_num=phone, code=code)
         post_data = dict(username=phone,
-                         password1='short',
-                         password2='short',
+                         password1='s',
+                         password2='s',
                          auth_code=code)
         response = self.client.post('/account/register', data=post_data)
         response_data = json.loads(response.content)
@@ -241,7 +241,8 @@ class ProfileViewTest(TestCase):
         gender = random.choice(['m', 'f'])
         post_data = dict(nick_name='test_nick_name',
                          gender=gender,
-                         birth_date='1992-01-30')
+                         birth_date='1992-01-30',
+                         avatar=File(open(os.path.join(settings.MEDIA_ROOT, "tests", 'test.png'))))
         response = self.client.post('/account/profile', data=post_data)
         response_data = json.loads(response.content)
         self.assertEqual(response_data, dict(success=True))
@@ -506,7 +507,7 @@ class PersonalViewTest(TestCase):
         ))
         new_avatar.close()
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
+        self.assertTrue(response_data["success"])
         profile = UserProfile.objects.get(user=self.default_user)
         self.assertEqual(profile.avatar_club.id, club.id)
         self.assertEqual(profile.nick_name, 'new_name')
@@ -752,7 +753,7 @@ class UserBlackListTest(TestCase):
 
     def test_add_blacklist(self):
         self.authenticate()
-        response = self.client.post(reverse('profile:blacklist_update'), data=dict(
+        self.client.post(reverse('profile:blacklist_update'), data=dict(
             op_type="add",
             users=[self.user2.id]
         ))

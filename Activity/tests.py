@@ -102,45 +102,28 @@ class ActivityViewTest(TestCase):
         self.authenticate()
         response = self.client.get(reverse('activity:detail', args=(self.activity.id, )))
         response_data = json.loads(response.content)
-        self.maxDiff = None
-        self.assertEqual(response_data['data'], dict(
-            name=self.activity.name,
-            description=self.activity.description,
-            max_attend=self.activity.max_attend,
-            start_at=self.activity.start_at.strftime('%Y-%m-%d %H:%M:%S'),
-            end_at=self.activity.end_at.strftime('%Y-%m-%d %H:%M:%S'),
-            poster=self.activity.poster.url,
-            location=dict(lat=self.activity.location.location.x,
-                          lon=self.activity.location.location.y,
-                          description=self.activity.location.description),
-            apply_list=[],
-        ))
+        setattr(self.activity, "like_num", 0)
+        setattr(self.activity, "comment_num", 0)
+        act_dict = self.activity.dict_description_with_aggregation(with_user_info=True)
+        act_dict.update(dict(apply_list=[]))
+        self.assertEqual(response_data['data'], act_dict)
 
     def test_activity_check_detail_with_appliers(self):
         another_user = get_user_model().objects.create(username='new_user')
-        ActivityJoin.objects.create(user=another_user, activity=self.activity)
+        join = ActivityJoin.objects.create(user=another_user, activity=self.activity)
         self.authenticate()
         response = self.client.get(reverse('activity:detail', args=(self.activity.id, )))
         response_data = json.loads(response.content)
+        setattr(self.activity, "like_num", 0)
+        setattr(self.activity, "comment_num", 0)
+        act_dict = self.activity.dict_description_with_aggregation(with_user_info=True)
+        act_dict.update(dict(apply_list=[dict(
+            approved=join.approved,
+            like_at=join.created_at.strftime("%Y-%m-%d %H:%M:%S %Z"),
+            user=join.user.profile.complete_dict_description()
+        )]))
         self.maxDiff = None
-        self.assertEqual(response_data['data'], dict(
-            name=self.activity.name,
-            description=self.activity.description,
-            max_attend=self.activity.max_attend,
-            start_at=self.activity.start_at.strftime('%Y-%m-%d %H:%M:%S'),
-            end_at=self.activity.end_at.strftime('%Y-%m-%d %H:%M:%S'),
-            poster=self.activity.poster.url,
-            location=dict(lat=self.activity.location.location.x,
-                          lon=self.activity.location.location.y,
-                          description=self.activity.location.description),
-            apply_list=[dict(
-                approved=False,
-                user=dict(
-                    id=another_user.id,
-                    avatar=another_user.profile.avatar.url,
-                    avatar_car=None)
-            ), ],
-        ))
+        self.assertEqual(response_data['data'], act_dict)
 
     def test_activity_post_comment(self):
         self.authenticate()
@@ -151,7 +134,7 @@ class ActivityViewTest(TestCase):
         self.assertTrue(response_data['success'])
         self.assertEqual(ActivityComment.objects.all().count(), 1)
 
-    def test_activity_post_commnet_with_response_to_previous_commnet(self):
+    def test_activity_post_comment_with_response_to_previous_commnet(self):
         self.authenticate()
         pre_comment = ActivityComment.objects.create(
             user=get_user_model().objects.create(username='another_new_user'),
