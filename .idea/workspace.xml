@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9ab0b551-2c12-4d23-b0b0-305e7ba2be2e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/views.py" afterPath="$PROJECT_DIR$/Chat/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/models.py" afterPath="$PROJECT_DIR$/Activity/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/views.py" afterPath="$PROJECT_DIR$/Activity/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Club/models.py" afterPath="$PROJECT_DIR$/Club/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Club/urls.py" afterPath="$PROJECT_DIR$/Club/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Club/views.py" afterPath="$PROJECT_DIR$/Club/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Profile/views.py" afterPath="$PROJECT_DIR$/Profile/views.py" />
     </list>
     <ignored path="SportscarStyle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,58 +99,128 @@
     <favorites_list name="SportscarStyle" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="chat_server.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Chat/chat_server.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Chat/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Club/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Club/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="74" selection-start-line="91" selection-start-column="74" selection-end-line="91" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Profile/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.846659">
-              <caret line="309" column="30" selection-start-line="309" selection-start-column="30" selection-end-line="309" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="chat_server.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Chat/chat_server.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Chat/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Location/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.41530946">
+                  <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Club/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="126" column="50" selection-start-line="126" selection-start-column="50" selection-end-line="126" selection-end-column="50" />
+                  <folding>
+                    <element signature="e#15#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/News/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="93" column="11" selection-start-line="93" selection-start-column="11" selection-end-line="93" selection-end-column="11" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Club/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="122" column="55" selection-start-line="122" selection-start-column="55" selection-end-line="122" selection-end-column="55" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Activity/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-5.5925927">
+                  <caret line="187" column="103" selection-start-line="187" selection-start-column="103" selection-end-line="187" selection-end-column="103" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Activity/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="189" column="35" selection-start-line="189" selection-start-column="35" selection-end-line="189" selection-end-column="35" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Club/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.52361566">
+                  <caret line="114" column="15" selection-start-line="114" selection-start-column="15" selection-end-line="114" selection-end-column="15" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Club/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Profile/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="188" column="48" selection-start-line="188" selection-start-column="48" selection-end-line="188" selection-end-column="48" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -188,12 +258,10 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/SportscarStyle/settings.py" />
         <option value="$PROJECT_DIR$/Activity/urls.py" />
-        <option value="$PROJECT_DIR$/Activity/models.py" />
         <option value="$PROJECT_DIR$/Status/forms.py" />
         <option value="$PROJECT_DIR$/Profile/forms.py" />
         <option value="$PROJECT_DIR$/News/urls.py" />
         <option value="$PROJECT_DIR$/Location/urls.py" />
-        <option value="$PROJECT_DIR$/Location/views.py" />
         <option value="$PROJECT_DIR$/Club/forms.py" />
         <option value="$PROJECT_DIR$/SportscarStyle/urls.py" />
         <option value="$PROJECT_DIR$/News/views.py" />
@@ -214,12 +282,14 @@
         <option value="$PROJECT_DIR$/Sportscar/tests.py" />
         <option value="$PROJECT_DIR$/SettingCenter/tests.py" />
         <option value="$PROJECT_DIR$/Profile/models.py" />
-        <option value="$PROJECT_DIR$/Activity/views.py" />
         <option value="$PROJECT_DIR$/Chat/views.py" />
-        <option value="$PROJECT_DIR$/Club/urls.py" />
-        <option value="$PROJECT_DIR$/Club/models.py" />
         <option value="$PROJECT_DIR$/Profile/views.py" />
+        <option value="$PROJECT_DIR$/Activity/models.py" />
+        <option value="$PROJECT_DIR$/Activity/views.py" />
+        <option value="$PROJECT_DIR$/Club/models.py" />
+        <option value="$PROJECT_DIR$/Club/urls.py" />
         <option value="$PROJECT_DIR$/Club/views.py" />
+        <option value="$PROJECT_DIR$/Location/views.py" />
       </list>
     </option>
   </component>
@@ -229,10 +299,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1920" />
     <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1057" />
+    <option name="width" value="2560" />
+    <option name="height" value="1374" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -928,10 +997,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="0" y="23" width="2560" height="1374" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.104898825" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0782367" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29228857" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16640191" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1086,13 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Location/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Club/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10993485">
@@ -1197,13 +1259,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/News/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62">
-          <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Sportscar/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47846153">
@@ -1260,13 +1315,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.016465422">
-          <caret line="188" column="48" selection-start-line="188" selection-start-column="48" selection-end-line="188" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Activity/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07793634">
@@ -1303,31 +1351,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Club/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12214984">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chat/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.72068405">
           <caret line="68" column="30" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Activity/models.py">
+    <entry file="file://$PROJECT_DIR$/Profile/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5985342">
-          <caret line="55" column="35" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.67360353">
+          <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Activity/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.24592833">
-          <caret line="154" column="12" selection-start-line="154" selection-start-column="12" selection-end-line="154" selection-end-column="12" />
+        <state vertical-scroll-proportion="-5.5925927">
+          <caret line="187" column="103" selection-start-line="187" selection-start-column="103" selection-end-line="187" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Activity/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="189" column="35" selection-start-line="189" selection-start-column="35" selection-end-line="189" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="188" column="48" selection-start-line="188" selection-start-column="48" selection-end-line="188" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Club/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Club/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="55" selection-start-line="122" selection-start-column="55" selection-end-line="122" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/News/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="11" selection-start-line="93" selection-start-column="11" selection-end-line="93" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Club/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="126" column="50" selection-start-line="126" selection-start-column="50" selection-end-line="126" selection-end-column="50" />
+          <folding>
+            <element signature="e#15#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1339,26 +1433,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Club/models.py">
+    <entry file="file://$PROJECT_DIR$/Location/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="74" selection-start-line="91" selection-start-column="74" selection-end-line="91" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Club/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.846659">
-          <caret line="309" column="30" selection-start-line="309" selection-start-column="30" selection-end-line="309" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.41530946">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>

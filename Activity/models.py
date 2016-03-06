@@ -72,9 +72,10 @@ class Activity(models.Model):
             result.update(allowed_club=self.allowed_club.dict_description())
         return result
 
-    def dict_description_with_aggregation(self, with_user_info=False):
+    def dict_description_with_aggregation(self, with_user_info=False, show_members=False):
         """ 获取对象的字典表示形式方便json化
-         :param with_user_info 是否携带活动发布者的信息
+         :param with_user_info  是否携带活动发布者的信息
+         :param show_members    显示参与者信息
         """
         if with_user_info:
             result = self.dict_description()
@@ -82,6 +83,8 @@ class Activity(models.Model):
             result = self.dict_description_without_user()
         result["like_num"] = self.like_num
         result["comment_num"] = self.comment_num
+        if show_members:
+            result["members"] = map(lambda x: x.profile.simple_dict_description(), self.applications.all())
         return result
 
     def dict_description(self):

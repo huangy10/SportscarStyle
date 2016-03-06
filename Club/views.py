@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST, require_GET
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Count, Case, When, Sum, IntegerField
 
 from .forms import ClubCreateForm
 from .models import Club, ClubJoining
@@ -109,3 +110,46 @@ def update_club_settings(request, data, club_id):
         new_logo_url = club.logo.url
         return JsonResponse(dict(success=True, logo=new_logo_url))
     return JsonResponse(dict(success=True))
+
+
+@require_GET
+@login_first
+def club_discover(request):
+    """ 发现俱乐部
+     query_type: nearby/value/members/average/beauty/recent
+    """
+    query_type = request.GET.get("query_type", "nearby")
+    skip = int(request.GET.get("skip", 0))
+    limit = int(request.GET.get("limit", 10))
+    user = request.user
+
+    if query_type == "nearby":
+        city = user.profile.district.split(" ")[0]
+        result = Club.objects.filter(city=city, deleted=False)\
+            .annotate(members_num=Count("members"))[skip: skip + limit]
+    elif query_type == "value":
+        result = Club.objects.filter(deleted=False).order_by("-value_total")\
+            .annotate(members_num=Count("members"))[skip: skip + limit]
+    elif query_type == "members":
+        result = Club.objects.filter(deleted=False)\
+            .annotate(members_num=Count("members"))\
+            .order_by("-members_num")[skip: skip + limit]
+    elif query_type == "avarage":
+        result = Club.objects.filter(deleted=False)\
+            .annotate(members_num=Count("members"))\
+        .order_by("-value_average")[skip: skip + limit]
+    elif query_type == "beauty":
+        result = Club.objects.filter(deleted=False)\
+            .annotate(members_num=Count("members"))\
+            .annotate(beauty_num=Sum(
+                Case(When(members__profile__gender="f", then=1),
+                     default=0, output_field=IntegerField())))\
+            .order_by("-beauty_num")[skip: skip + limit]
+    elif query_type == "recent":
+        result = Club.objects.filter(deleted=False)\
+            .annotate(members_num=Count("members"))\
+            .order_by("-created_at")[skip: skip + limit]
+    else:
+        return JsonResponse(dict(success=False))
+    return JsonResponse(dict(success=True,
+                             data=map(lambda x: x.dict_description(show_value=True, show_members_num=True), result)))

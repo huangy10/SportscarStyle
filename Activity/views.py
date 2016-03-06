@@ -73,7 +73,8 @@ def activity_applied(request, date_threshold, op_type, limit):
     result = Activity.objects.select_related("user__profile")\
         .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .order_by("applications__created_at").filter(date_filter, applications__user=request.user)[0:limit]
-    return JsonResponse(dict(success=True, acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), result)))
+    return JsonResponse(dict(success=True,
+        acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), result)))
 
 
 @require_POST

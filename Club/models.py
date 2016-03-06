@@ -93,14 +93,21 @@ class Club(models.Model):
     description = models.TextField(verbose_name=u"俱乐部简介")
     identified = models.BooleanField(default=False, verbose_name="是否认证")
     identified_at = models.DateTimeField(default=timezone.now)
+    city = models.CharField(max_length=30, verbose_name=u"俱乐部所在的城市")
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u"创建日期")
+
+    value_total = models.IntegerField(default=0, verbose_name=u"俱乐部中所有成员的所有认证车辆的官方参考价格总和")
+    value_average = models.IntegerField(default=0, verbose_name=u"均价")
 
     objects = ClubManager()
 
     # some settings about club
     only_host_can_invite = models.BooleanField(default=False, verbose_name=u"只有群主能够邀请")
     show_members_to_public = models.BooleanField(default=False, verbose_name=u"对外公布成员信息")
+
+    # status
+    deleted = models.BooleanField(default=False, verbose_name=u"俱乐部是否被删除")
 
     def __str__(self):
         return smart_str(self.name)
@@ -109,11 +116,11 @@ class Club(models.Model):
         verbose_name = u"俱乐部"
         verbose_name_plural = u'俱乐部'
 
-    def dict_description(self, show_members=False, show_setting=False):
+    def dict_description(self, show_members=False, show_setting=False, show_value=False, show_members_num=False):
         result = dict(
             id=self.id, club_logo=self.logo.url,
             club_name=self.name, description=self.description,
-            identified=self.identified,
+            identified=self.identified, city=self.city,
             host=self.host.profile.simple_dict_description()
         )
         if show_members:
@@ -125,6 +132,12 @@ class Club(models.Model):
                 only_host_can_invite=self.only_host_can_invite,
                 show_members_to_public=self.show_members_to_public
             ))
+        if show_value:
+            result.update(dict(
+                value=self.value_total
+            ))
+        if show_members_num:
+            result.update(members_num=self.members_num)
         return result
 
     def update_settings(self, settings):
