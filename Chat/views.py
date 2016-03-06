@@ -38,7 +38,7 @@ def chat_list(request):
     #
     data = dict(
         chats=map(lambda x: x.dict_description(), result),
-        club_settings=map(lambda x: x.dict_description(), club_joins),
+        club_settings=map(lambda x: x.dict_description(for_host=True), club_joins),
         private_settings=map(lambda x: x.dict_description_simple(), relation_settings)
     )
     return JsonResponse(dict(success=True, data=data))

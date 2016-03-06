@@ -42,10 +42,23 @@ class ClubJoining(models.Model):
             club=self.club.dict_description(show_members=show_members,
                                             show_setting=for_host),
             show_nick_name=self.show_nick_name,
-            no_disturbing=self.show_nick_name,
+            no_disturbing=self.no_disturbing,
             always_on_top=self.always_on_top,
         )
         return result
+
+    def update_settings(self, settings, update_club=False):
+        """ 更新设置
+         :param settings        dict like object
+         :param update_club     Boolean, whether to update the club object
+        """
+        if update_club:
+            self.club.update_settings(settings)
+        self.show_nick_name = settings.get("show_nick_name", self.show_nick_name)
+        self.no_disturbing = settings.get("no_disturbing", self.no_disturbing)
+        self.always_on_top = settings.get("always_on_top", self.always_on_top)
+        self.nick_name = settings.get("nick_name", self.nick_name)
+        self.save()
 
 
 def club_logo(instance, filename, *args, **kwargs):
@@ -100,7 +113,8 @@ class Club(models.Model):
         result = dict(
             id=self.id, club_logo=self.logo.url,
             club_name=self.name, description=self.description,
-            identified=self.identified
+            identified=self.identified,
+            host=self.host.profile.simple_dict_description()
         )
         if show_members:
             result.update(
@@ -112,3 +126,11 @@ class Club(models.Model):
                 show_members_to_public=self.show_members_to_public
             ))
         return result
+
+    def update_settings(self, settings):
+        self.name = settings.get("name", self.name)
+        self.only_host_can_invite = settings.get("only_host_can_invite", self.only_host_can_invite)
+        self.show_members_to_public = settings.get("show_members_to_public", self.show_members_to_public)
+        self.description = settings.get("description", self.description)
+        self.save()
+

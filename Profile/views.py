@@ -173,6 +173,8 @@ def profile_info(request, user_id):
              | name:
              | logo:
              | image:
+          | -- avatar_club
+             | ..
           | status_num:
           | fans_num:
           | follow_num:
@@ -211,11 +213,7 @@ def profile_info(request, user_id):
         user_info['avatar_car'] = car.dict_description()
     club = profile.avatar_club
     if club is not None:
-        user_info['avatar_club'] = dict(
-            id=club.id,
-            club_logo=club.logo.url,
-            club_name=club.name
-        )
+        user_info['avatar_club'] = club.dict_description()
     if user.id != request.user.id:
         user_info['followed'] = UserFollow.objects.filter(source_user=request.user, target_user=user).exists()
     return JsonResponse(dict(success=True, user_profile=user_info))
@@ -514,6 +512,7 @@ def profile_chat_settings(request, target_id):
     """ 查看聊天设置
     """
     if request.method == "POST":
+        print request.POST
         relation, _ = UserRelationSetting.objects.get_or_create(user=request.user, target_id=target_id)
         if "remark_name" in request.POST:
             relation.remark_name = request.POST.get("remark_name")
