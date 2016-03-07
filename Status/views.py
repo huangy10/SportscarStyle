@@ -11,6 +11,7 @@ from .models import Status, StatusLikeThrough, StatusComment
 from Profile.models import UserRelationSetting
 from .forms import StatusCreationForm
 from custom.utils import post_data_loader, page_separator_loader, login_first
+from Notification.signal import send_notification
 # Create your views here.
 
 
@@ -200,7 +201,18 @@ def status_operation(request, data, status_id):
                                                                status=status)
         if not created:
             obj.delete()
-        return JsonResponse(dict(success=True, like_state=created))
+        else:
+            send_notification.send(sender=Status,
+                                   message_type="status_like",
+                                   related_user=request.user,
+                                   related_status=status,
+                                   target=status.user,
+                                   message_body="")
+        result = dict(
+            like_state=created,
+            like_num=StatusLikeThrough.objects.filter(status=status).count()
+        )
+        return JsonResponse(dict(success=True, like_info=result))
     elif op_type == "delete":
         # 删除
         if status.user != request.user:

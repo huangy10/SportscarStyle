@@ -33,6 +33,7 @@ class Notification(models.Model):
         ("auth_act_approved", ""),
         ("auth_act_denied", ""),
         ("relation_follow", ""),
+        ("chat", ""),
     ))
     related_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+", null=True)
     related_act = models.ForeignKey("Activity.Activity", related_name="+", null=True)
@@ -72,7 +73,7 @@ class Notification(models.Model):
                 if attribute_name == "related_user":
                     result[attribute_name] = attribute.profile.simple_dict_description()
                 else:
-                    result[attribute_name] = attribute.dict_description
+                    result[attribute_name] = attribute.dict_description()
         set_related("related_user")
         set_related("related_act")
         set_related("related_act_invite")

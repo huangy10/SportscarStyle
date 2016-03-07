@@ -19,6 +19,13 @@ def notification_list(request, date_threshold, op_type, limit):
      :param op_type         操作类型,more/latest
      :param limit           最大获取的条目数量
     """
+    date_fix = request.GET.get("date_fix", None)
+    if date_fix is not None and date_fix != "":
+        try:
+            date_fix = Notification.objects.get(id=date_fix).created_at
+            date_threshold = date_fix
+        except ObjectDoesNotExist:
+            pass
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
     else:
@@ -32,8 +39,8 @@ def notification_list(request, date_threshold, op_type, limit):
         "related_status_comment",
         "related_news",
         "related_news_comment"
-    ).filter(date_threshold, target=request.user).order_by("-created_at")[0:limit]
-
+    ).order_by("-created_at").filter(date_filter, target=request.user)[0:limit]
+    print date_threshold, Notification.objects.first().created_at
     return JsonResponse(
             dict(success=True,
                  notifications=map(lambda x: x.dict_description(), notif)))

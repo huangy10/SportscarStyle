@@ -63,7 +63,7 @@ def radar_cars(request, data):
                                 ownership__identified=True,
                                 then=1),
                         default=0, output_field=models.IntegerField()))\
-            .filter(~Q(id=request.user.id), authed_cars_num__gt=0,
+            .filter(~Q(id=request.user.id), authed_cars_num__gte=0,
                     location__location__location__distance_lte=(loc.location, D(km=distance)),
                     location__location_available=True,
                     location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300)))\

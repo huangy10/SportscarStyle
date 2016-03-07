@@ -271,7 +271,7 @@ def profile_status_list(request, date_threshold, op_type, limit, user_id):
     else:
         car_query = Q()
 
-    data = Status.objects.filter(date_filter & car_query, user__id=user_id).order_by("-created_at")[0:limit]
+    data = Status.objects.filter(date_filter & car_query, user__id=user_id, deleted=False).order_by("-created_at")[0:limit]
 
     def format_fix(status):
         return status.dict_description()

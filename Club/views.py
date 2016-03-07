@@ -134,7 +134,7 @@ def club_discover(request):
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
             .order_by("-members_num")[skip: skip + limit]
-    elif query_type == "avarage":
+    elif query_type == "average":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
         .order_by("-value_average")[skip: skip + limit]
