@@ -14,6 +14,7 @@ class Notification(models.Model):
         ("status_like", "status_like"),
         ("status_comment", "your_status_are_commmented_by_others"),
         ("status_comment_replied", "your_comment_on_a_status_is_responsed_by_others"),
+        ("status_inform", ""),
         ("news_comment_replied", "your commemnt_on_a_news_is_responsed_by_others"),
         ("act_applied", "some_one_applys_your_activity"),
         ("act_approved", "your_application_on_an_activity_is_approved"),

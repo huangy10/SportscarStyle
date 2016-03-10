@@ -14,6 +14,7 @@ from Club.models import Club, ClubJoining
 from Sportscar.models import Sportscar, SportCarOwnership
 from Status.models import Status, StatusLikeThrough
 from custom.utils import login_first, post_data_loader, page_separator_loader
+from Notification.signal import send_notification
 #######################################################################################################################
 #
 # 以下是登陆注册部分使用的API
@@ -434,6 +435,13 @@ def profile_operation(request, data, user_id):
         obj, created = UserFollow.objects.get_or_create(source_user=request.user, target_user=target_user)
         if not created:
             obj.delete()
+        else:
+            # send a notification to the guy who is followed
+            send_notification.send(sender=get_user_model(),
+                                   target=target_user,
+                                   message_type="relation_follow",
+                                   related_user=request.user,
+                                   message_body="")
         return JsonResponse(dict(success=True, follow=created))
 
 

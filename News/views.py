@@ -40,8 +40,8 @@ def news_list(request, date_threshold, op_type, limit):
         date_filter = Q(created_at__lt=date_threshold)
 
     data = News.objects.filter(date_filter) \
-               .annotate(comment_num=Count('comments')) \
-               .annotate(like_num=Count('liked_by'))[0: limit]
+               .annotate(like_num=Count('newslikethrough', distinct=True))\
+               .annotate(comment_num=Count('comments', distinct=True))[0: limit]
 
     def format_fix(news):
         result = dict(
@@ -51,7 +51,7 @@ def news_list(request, date_threshold, op_type, limit):
             content=news.content,
             title=news.title,
             like_num=news.like_num,
-            comment_num=news.like_num,
+            comment_num=news.comment_num,
             liked=NewsLikeThrough.objects.filter(user=request.user, news=news).exists()
         )
         most_recent_like_record = NewsLikeThrough.objects.filter(user__friendship__friend=request.user, news=news)\

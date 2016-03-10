@@ -58,7 +58,7 @@ class Status(models.Model):
                 images_url.append(image.url)
         return ";".join(images_url)
 
-    def dict_description(self):
+    def dict_description(self, show_liked=False, user=None):
         """ 获取字典形式的数据描述,字典形式的注释参见view.py中的status_list的注释
          但是这里没有生成comment_num和like_num这两个字段
         """
@@ -77,6 +77,8 @@ class Status(models.Model):
             result["comment_num"] = self.comment_num
         if hasattr(self, "like_num"):
             result["like_num"] = self.like_num
+        if show_liked:
+            result["liked"] = StatusLikeThrough.objects.filter(status=self, user=user).exists()
         return result
 
 

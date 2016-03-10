@@ -172,6 +172,7 @@ class ChatNewHandler(JSONResponseHandler):
                 file=file_io, field_name=None, name=file_info["filename"], content_type=file_info["content_type"],
                 size=file_io.len, charset=None
             )
+
         elif message_type == "audio":
             file_info = self.request.files['audio'][0]
             file_io = StringIO.StringIO(file_info["body"])

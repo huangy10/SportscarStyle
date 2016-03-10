@@ -90,7 +90,7 @@ def status_list(request, date_threshold, op_type, limit):
         .annotate(comment_num=Count('comments'))\
         .annotate(like_num=Count('liked_by'))[0:limit]
 
-    data = map(lambda x: x.dict_description(), data)
+    data = map(lambda x: x.dict_description(show_liked=True, user=request.user), data)
     return JsonResponse(dict(
         success=True,
         data=data
@@ -99,11 +99,20 @@ def status_list(request, date_threshold, op_type, limit):
 
 @http_decorator.require_POST
 @login_first
-@post_data_loader()
+@post_data_loader(json_fields=("inform_of", ))
 def post_new_status(request, data):
+    print data
     form = StatusCreationForm(data, request.FILES)
     if form.is_valid():
         status = form.save()
+        if 'inform_of' in data:
+            ats = get_user_model().objects.filter(id__in=data['json_data'])
+            for at in ats:
+                send_notification.send(sender=get_user_model(),
+                                       message_type="status_inform",
+                                       target=at,
+                                       message_body="",
+                                       related_status=status)
         return JsonResponse(dict(success=True, statusID=status.id))
     else:
         response_dict = dict(success=False)
@@ -157,6 +166,7 @@ def status_post_comment(request, data, status_id):
      :keyword content       评论的文字内容
      :keyword image         评论的图片，从request.FILES中取得
     """
+    print data
     try:
         status = Status.objects.get(id=status_id)
     except ObjectDoesNotExist:
@@ -180,7 +190,32 @@ def status_post_comment(request, data, status_id):
     if 'inform_of' in data:
         ats = get_user_model().objects.filter(id__in=data['json_data'])
         comment.inform_of.add(*ats)
-    return JsonResponse(dict(success=True))
+        for at in ats:
+            send_notification.send(sender=get_user_model(),
+                                   message_type="status_inform",
+                                   target=at,
+                                   message_body="",
+                                   related_status=status)
+
+    # if the comment replies to another comment, send a notification to the sender of that comment as well.
+    if 'response_to' in data:
+        send_notification.send(sender=StatusComment,
+                               message_type="status_comment_replied",
+                               target=response_to.user,
+                               message_body=comment.content,
+                               related_status_comment=comment,
+                               related_status=status)
+        if response_to.user == status.user:
+            # avoid duplicated notifications about the same comment
+            return JsonResponse(dict(success=True, id=comment.id))
+    # send a notification message to the sender of the status
+    send_notification.send(sender=Status,
+                           message_type="status_comment",
+                           target=status.user,
+                           message_body=comment.content,
+                           related_status_comment=comment,
+                           related_status=status)
+    return JsonResponse(dict(success=True, id=comment.id))
 
 
 @http_decorator.require_POST

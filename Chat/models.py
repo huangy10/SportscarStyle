@@ -83,6 +83,8 @@ class ChatRecordBasic(models.Model):
             target_id=self.target_id,
             message_type=self.message_type,
             image=self.image.url if self.image else None,
+            image_width=self.image.width if self.image else 0,
+            image_height=self.image.height if self.image else 0,
             text_content=self.text_content,
             audio=self.audio.url if self.audio else None,
             related_id=self.related_id,
