@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 from django.utils.encoding import smart_str
 
+from Notification.signal import send_notification
+
 # Create your models here.
 
 
@@ -125,3 +127,14 @@ class SportCarIdentificationRequestRecord(models.Model):
     id_card = models.ImageField(upload_to=car_auth_image, verbose_name=u'身份证')
     photo = models.ImageField(upload_to=car_auth_image, verbose_name=u"合影")
     license_num = models.CharField(max_length=30, verbose_name=u'车牌号')
+    
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        send_notification.send(
+            sender=SportCarIdentificationRequestRecord,
+            target=self.ownership.user,
+            message_type="auth_car_approved" if self.approved else "auth_car_denied",
+            related_own=self.ownership,
+            message_body=""
+        )
+        super(SportCarIdentificationRequestRecord, self).save()

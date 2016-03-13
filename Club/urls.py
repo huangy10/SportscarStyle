@@ -7,5 +7,6 @@ urlpatterns = patterns('Club.views',
                        url(r'^discover$', 'club_discover', name='discover'),
                        url(r'^(?P<club_id>\d+)/info$', 'club_infos', name="info"),
                        url(r'^(?P<club_id>\d+)/update$', 'update_club_settings', name="update"),
+                       url(r'^(?P<club_id>\d+)/members$', 'club_member_change', name="members_update"),
                        )
 

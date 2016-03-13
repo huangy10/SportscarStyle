@@ -32,7 +32,7 @@ class ClubJoining(models.Model):
     class Meta:
         unique_together = ("user", "club")
 
-    def dict_description(self, show_members=False, for_host=False):
+    def dict_description(self, show_members=False, for_host=False, show_members_num=False):
         """
          :param show_members 是否打包成员信息
          :param for_host     以host权限获取数据
@@ -40,7 +40,8 @@ class ClubJoining(models.Model):
         result = dict(
             nick_name=self.nick_name,
             club=self.club.dict_description(show_members=show_members,
-                                            show_setting=for_host),
+                                            show_setting=for_host,
+                                            show_members_num=show_members_num),
             show_nick_name=self.show_nick_name,
             no_disturbing=self.no_disturbing,
             always_on_top=self.always_on_top,
@@ -137,7 +138,10 @@ class Club(models.Model):
                 value=self.value_total
             ))
         if show_members_num:
-            result.update(members_num=self.members_num)
+            if hasattr(self, "members_num"):
+                result.update(members_num=self.members_num)
+            else:
+                result.update(members_num=ClubJoining.objects.filter(club=self).count())
         return result
 
     def update_settings(self, settings):
@@ -146,4 +150,11 @@ class Club(models.Model):
         self.show_members_to_public = settings.get("show_members_to_public", self.show_members_to_public)
         self.description = settings.get("description", self.description)
         self.save()
+
+
+class ClubAuthRequest(models.Model):
+    """ 俱乐部认证
+    """
+    approve = models.BooleanField(default=False)
+    club = models.ForeignKey("Club.Club", verbose_name="待认证的俱乐部")
 

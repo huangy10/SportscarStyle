@@ -46,6 +46,7 @@ class Notification(models.Model):
     related_status_comment = models.ForeignKey("Status.StatusComment", related_name="+", null=True)
     related_news = models.ForeignKey("News.News", related_name="+", null=True)
     related_news_comment = models.ForeignKey("News.NewsComment", related_name="+", null=True)
+    related_own = models.ForeignKey("Sportscar.SportCarOwnership", related_name="+", null=True)
 
     message_body = models.CharField(max_length=255, verbose_name="消息内容(Optional)")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
@@ -65,7 +66,8 @@ class Notification(models.Model):
             target=self.target.profile.simple_dict_description(),
             message_type=self.message_type,
             read=self.read,
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            flag=self.flag
         )
 
         def set_related(attribute_name):
@@ -85,6 +87,7 @@ class Notification(models.Model):
         set_related("related_status_comment")
         set_related("related_news")
         set_related("related_news_comment")
+        set_related("related_own")
 
         return result
 
@@ -107,7 +110,8 @@ def send_notification_handler(sender, **kwargs):
         related_status=kwargs.get("related_status", None),
         related_status_comment=kwargs.get("related_status_comment", None),
         related_news=kwargs.get("related_news", None),
-        related_news_comment=kwargs.get("related_news_commnet", None)
+        related_news_comment=kwargs.get("related_news_commnet", None),
+        related_own=kwargs.get("related_own", None)
     )
 
     Notification.objects.create(**create_params)

@@ -57,7 +57,7 @@ def status_list(request, date_threshold, op_type, limit):
         date_filter = Q(created_at__lt=date_threshold)
 
     query_type = request.GET.get("query_type", "follow")
-
+    order_by_properties = ["-created_at"]
     if query_type == 'follow':
         # 获取关注的特点
         # content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
@@ -67,9 +67,11 @@ def status_list(request, date_threshold, op_type, limit):
         lon = request.GET["lon"]
         distance = request.GET["distance"]
         content_filter = Q(location__distance_lte=(Point(lon, lat), D(m=distance)))
-    else:
+    elif query_type == "hot":
         # TODO: 剩下一个"热门"需要"实现
         content_filter = Q()
+    else:
+        return JsonResponse(dict(success=False, message="Undefined query type"))
 
     # 这里我们认为黑名单的长度是有限的,故将黑名单全部载入内存然后筛选
     blacklist1 = UserRelationSetting.objects.filter(
@@ -85,10 +87,10 @@ def status_list(request, date_threshold, op_type, limit):
         .select_related('user__profile__avatar_club')\
         .select_related('car')\
         .select_related('location')\
-        .order_by("-created_at")\
+        .order_by(*order_by_properties)\
         .filter(date_filter & content_filter & blacklist_filter, deleted=False)\
-        .annotate(comment_num=Count('comments'))\
-        .annotate(like_num=Count('liked_by'))[0:limit]
+        .annotate(comment_num=Count('comments', distinct=True))\
+        .annotate(like_num=Count('liked_by', distinct=True))[0:limit]
 
     data = map(lambda x: x.dict_description(show_liked=True, user=request.user), data)
     return JsonResponse(dict(
@@ -236,7 +238,7 @@ def status_operation(request, data, status_id):
                                                                status=status)
         if not created:
             obj.delete()
-        else:
+        elif status.user == request.user:
             send_notification.send(sender=Status,
                                    message_type="status_like",
                                    related_user=request.user,

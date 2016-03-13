@@ -153,3 +153,36 @@ def club_discover(request):
         return JsonResponse(dict(success=False))
     return JsonResponse(dict(success=True,
                              data=map(lambda x: x.dict_description(show_value=True, show_members_num=True), result)))
+
+
+@require_POST
+@login_first
+@post_data_loader(force_json=True)
+def club_member_change(request, data, club_id):
+    """ 俱乐部成员变更
+    """
+    op_type = data.get("op_type")
+    target_list = list(json.loads(data.get("target_list")))
+    try:
+        club = Club.objects.get(id=club_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="club not exists"))
+    # Check the permisson
+    if club.only_host_can_invite and club.host != request.user:
+        return JsonResponse(dict(success=False, message="no permisson"))
+    if op_type == "delete":
+        joins = ClubJoining.objects.filter(user__in=target_list, club_id=club_id)
+        if joins.count() != len(target_list):
+            return JsonResponse(dict(success=False, message="Invalid user data"))
+        joins.delete()
+        return JsonResponse(dict(success=True))
+    elif op_type == "add":
+        users = User.objects.filter(id__in=target_list)
+        if users.count() != len(target_list):
+            return JsonResponse(dict(success=False, message="Invalid user data"))
+        ClubJoining.objects.bulk_create(
+            [ClubJoining(user=user, club=club) for user in users]
+        )
+        return JsonResponse(dict(success=True))
+    else:
+        return JsonResponse(dict(success=False, message="Undefined operation type"))
