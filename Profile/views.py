@@ -133,7 +133,6 @@ def account_profile(request, data):
         - birth_date: birth date
         - avatar:
     """
-    print request.FILES
     form = ProfileCreationForm(profile=request.user.profile, data=data, files=request.FILES)
     if form.is_valid():
         form.save()
@@ -483,7 +482,7 @@ def profile_black_list(request, date_threshold, op_type, limit):
 
 @http_decorators.require_POST
 @login_first
-@post_data_loader()
+@post_data_loader(json_fields="users")
 def profile_black_list_update(request, data):
     """ 更新的黑名单,上传参数形式为:
      | op_type: add/remove
@@ -520,7 +519,6 @@ def profile_chat_settings(request, target_id):
     """ 查看聊天设置
     """
     if request.method == "POST":
-        print request.POST
         relation, _ = UserRelationSetting.objects.get_or_create(user=request.user, target_id=target_id)
         if "remark_name" in request.POST:
             relation.remark_name = request.POST.get("remark_name")

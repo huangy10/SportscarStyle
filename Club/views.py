@@ -36,8 +36,6 @@ def club_create(request):
         ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.profile.nick_name)
         return JsonResponse(dict(success=True, club=club.dict_description()))
     else:
-        print form.errors
-        print request.POST
         return JsonResponse(dict(success=False))
 
 

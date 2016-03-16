@@ -40,7 +40,6 @@ def notification_list(request, date_threshold, op_type, limit):
         "related_news",
         "related_news_comment"
     ).order_by("-created_at").filter(date_filter, target=request.user)[0:limit]
-    print date_threshold, Notification.objects.first().created_at
     return JsonResponse(
             dict(success=True,
                  notifications=map(lambda x: x.dict_description(), notif)))

@@ -61,7 +61,8 @@ class ChatRecordBasic(models.Model):
         ("audio", "audio"),
         ("activity", "activity"),
         ("share", "share"),
-        ("contact", "contact")
+        ("contact", "contact"),
+        ("placeholder", "placeholder"),
     ))
     image = models.ImageField(upload_to=chat_image_path, verbose_name="相关图片", null=True, blank=True)
     text_content = models.CharField(max_length=255, verbose_name="文字内容", null=True, blank=True)

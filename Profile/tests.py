@@ -302,12 +302,7 @@ class PersonalViewTest(TestCase):
         response_data = json.loads(response.content)
         self.maxDiff = None
         self.assertEqual(
-            response_data['user_profile']['avatar_club'],
-            {
-                'id': club.id,
-                'club_logo': club.logo.url,
-                'club_name': club.name
-            }
+            response_data['user_profile']['avatar_club'], club.dict_description()
         )
 
     def test_get_profile_with_avatar_car(self):
@@ -741,7 +736,6 @@ class UserBlackListTest(TestCase):
         user.set_password('test_password')
         user.save()
         self.user = user
-
         user2 = get_user_model().objects.create(username='12312412412')
         self.user2 = user2
 
@@ -753,20 +747,18 @@ class UserBlackListTest(TestCase):
 
     def test_add_blacklist(self):
         self.authenticate()
-        self.client.post(reverse('profile:blacklist_update'), data=dict(
-            op_type="add",
-            users=[self.user2.id]
-        ))
+        params = dict(op_type="add", users=[self.user2.id])
+        self.client.post(reverse('profile:blacklist_update'), data=json.dumps(params),
+                         content_type="application/json")
         self.assertTrue(UserRelationSetting.objects.filter(
                 user=self.user, target=self.user2, allow_see_status=False).exists())
 
     def test_remove_blacklist(self):
         self.authenticate()
         UserRelationSetting.objects.create(user=self.user, target=self.user2, allow_see_status=False)
-        self.client.post(reverse('profile:blacklist_update'), data=dict(
-            op_type="remove",
-            users=[self.user2.id]
-        ))
+        params = dict(op_type="remove", users=[self.user2.id])
+        self.client.post(reverse('profile:blacklist_update'), data=json.dumps(params),
+                         content_type="application/json")
         self.assertTrue(UserRelationSetting.objects.filter(
             user=self.user, target=self.user2, allow_see_status=True
         ).exists())

@@ -105,7 +105,7 @@ class ActivityViewTest(TestCase):
         setattr(self.activity, "like_num", 0)
         setattr(self.activity, "comment_num", 0)
         act_dict = self.activity.dict_description_with_aggregation(with_user_info=True)
-        act_dict.update(dict(apply_list=[]))
+        act_dict.update(dict(apply_list=[], liked=False))
         self.assertEqual(response_data['data'], act_dict)
 
     def test_activity_check_detail_with_appliers(self):
@@ -121,7 +121,7 @@ class ActivityViewTest(TestCase):
             approved=join.approved,
             like_at=join.created_at.strftime("%Y-%m-%d %H:%M:%S %Z"),
             user=join.user.profile.complete_dict_description()
-        )]))
+        )], liked=False))
         self.maxDiff = None
         self.assertEqual(response_data['data'], act_dict)
 
@@ -164,7 +164,7 @@ class ActivityViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertTrue(response_data['success'])
-        comment = ActivityComment.objects.get(id=response_data['id'])
+        comment = ActivityComment.objects.get(id=response_data['data']["id"])
         self.assertEqual(comment.inform_of.all().count(), 3)
 
 

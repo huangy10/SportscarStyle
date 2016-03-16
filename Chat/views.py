@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 
-from custom.utils import login_first, page_separator_loader
+from custom.utils import login_first, page_separator_loader, post_data_loader
 from .models import ChatRecordBasic
 from Club.models import Club, ClubJoining
 from Profile.models import UserRelationSetting
@@ -59,7 +59,6 @@ def unread_chat_message_num(request):
     def g(club):
         return dict(club=club.club.dict_description(), unread=club.unread_chats, chat_type="group")
 
-    print(club_result)
     user_list = map(f, user_result)
     club_list = map(g, club_result)
 
@@ -141,3 +140,9 @@ def read_sync(request):
             return JsonResponse(dict(success=False, code="2002", message="club not found"))
     else:
         return JsonResponse(dict(success=False, code="6002", message="invalid chat type"))
+
+
+@require_POST
+@login_first
+def start_chat():
+    pass

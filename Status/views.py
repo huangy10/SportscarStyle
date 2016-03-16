@@ -103,7 +103,6 @@ def status_list(request, date_threshold, op_type, limit):
 @login_first
 @post_data_loader(json_fields=("inform_of", ))
 def post_new_status(request, data):
-    print data
     form = StatusCreationForm(data, request.FILES)
     if form.is_valid():
         status = form.save()
@@ -168,7 +167,6 @@ def status_post_comment(request, data, status_id):
      :keyword content       评论的文字内容
      :keyword image         评论的图片，从request.FILES中取得
     """
-    print data
     try:
         status = Status.objects.get(id=status_id)
     except ObjectDoesNotExist:

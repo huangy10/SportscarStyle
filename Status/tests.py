@@ -88,6 +88,7 @@ class StatusViewTest(TestCase):
         status_dict = status.dict_description()
         status_dict["comment_num"] = 0
         status_dict["like_num"] = 0
+        status_dict["liked"] = False
         self.assertEqual(response_data["data"][0], status_dict)
 
     def test_stauts_list_access_latest(self):
@@ -130,6 +131,7 @@ class StatusViewTest(TestCase):
         status_dict = status.dict_description()
         status_dict["comment_num"] = 0
         status_dict["like_num"] = 0
+        status_dict["liked"] = False
         self.assertEqual(response_data["data"][0], status_dict)
 
     def test_status_list_comment_num(self):
@@ -154,6 +156,7 @@ class StatusViewTest(TestCase):
         status_dict = status.dict_description()
         status_dict["comment_num"] = random_comment_num
         status_dict["like_num"] = 0
+        status_dict["liked"] = False
         self.assertEqual(response_data["data"][0], status_dict)
 
     def test_status_list_like_num(self):
@@ -177,6 +180,7 @@ class StatusViewTest(TestCase):
         status_dict = status.dict_description()
         status_dict["comment_num"] = 0
         status_dict["like_num"] = random_like_num
+        status_dict["liked"] = False
         self.assertEqual(response_data["data"][0], status_dict)
 
     def test_status_post(self):
@@ -217,7 +221,6 @@ class StatusViewTest(TestCase):
         image.close()
         image2.close()
         response_data = json.loads(response.content)
-        print response_data
         self.assertTrue(response_data["success"])
 
     def test_status_post_with_invalid_user_id(self):
@@ -335,7 +338,7 @@ class StatusViewTest(TestCase):
             image=open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, 'tests', 'test.png'))
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
+        self.assertTrue(response_data["success"])
 
     def test_status_post_comment_text_only(self):
         self.authenticate()
@@ -343,17 +346,19 @@ class StatusViewTest(TestCase):
             content='test content',
         ))
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
+        self.assertTrue(response_data["success"])
+        self.assertIsNotNone(response_data.get("id", None))
         comment = StatusComment.objects.all()[0]
         self.assertEqual(comment.status.id, self.default_status.id)
 
-    def test_status_post_comment_image_only(self):
-        self.authenticate()
-        response = self.client.post(reverse('status:post_comments', args=(self.default_status.id, )), data=dict(
-            image=open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, 'tests', 'test.png'))
-        ))
-        response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
+    # def test_status_post_comment_image_only(self):
+    #     # image in comments has been deprecated
+    #     self.authenticate()
+    #     response = self.client.post(reverse('status:post_comments', args=(self.default_status.id, )), data=dict(
+    #         image=open(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, 'tests', 'test.png'))
+    #     ))
+    #     response_data = json.loads(response.content)
+    #     self.assertEqual(response_data, dict(success=True))
 
     def test_status_post_comment_without_login(self):
         response = self.client.post(reverse('status:post_comments', args=(self.default_status.id, )), data=dict(
@@ -377,8 +382,6 @@ class StatusViewTest(TestCase):
             content='test content',
             response_to=comment.id
         ))
-        response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
         new_comment = StatusComment.objects.all().order_by('-created_at').first()
         self.assertEqual(new_comment.response_to.id, comment.id)
 
@@ -389,8 +392,6 @@ class StatusViewTest(TestCase):
             content='test content',
             inform_of=json.dumps([another_user.id, ])
         ))
-        response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
         new_comment = StatusComment.objects.all().order_by('-created_at').first()
         self.assertEqual(new_comment.inform_of.all()[0].id, another_user.id)
 
@@ -404,8 +405,6 @@ class StatusViewTest(TestCase):
             content='test content',
             inform_of=json.dumps(users_id)
         ))
-        response_data = json.loads(response.content)
-        self.assertEqual(response_data, dict(success=True))
         new_comment = StatusComment.objects.all().order_by('-created_at').first()
         self.assertEqual(len(new_comment.inform_of.all()), 10)
 
@@ -416,7 +415,7 @@ class StatusViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertEqual(response_data, dict(
-            success=True, like_state=True
+            success=True, like_info=dict(like_state=True, like_num=1)
         ))
         self.assertTrue(StatusLikeThrough.objects.filter(user=self.default_user, status=self.default_status).exists())
 
@@ -430,7 +429,7 @@ class StatusViewTest(TestCase):
         ))
         response_data = json.loads(response.content)
         self.assertEqual(response_data, dict(
-            success=True, like_state=False
+            success=True, like_info=dict(like_state=False, like_num=0)
         ))
         self.assertFalse(StatusLikeThrough.objects.filter(user=self.default_user, status=self.default_status).exists())
 
