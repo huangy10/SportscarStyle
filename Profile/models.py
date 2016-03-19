@@ -98,7 +98,7 @@ class UserProfile(models.Model):
         ('Scorpio', u'天蝎座'),
         ('Sagittarius', u'射手座'),
         ('Capricorn', u'摩羯座'),
-        ('Aquarius', u's水瓶座'),
+        ('Aquarius', u'水瓶座'),
         ('Pisces', u'双鱼座'),
     ), verbose_name=u'星座', default='Aries')
 

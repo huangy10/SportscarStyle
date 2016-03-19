@@ -55,7 +55,7 @@ class ChatRecordBasic(models.Model):
         else:
             return self.target_club_id
 
-    message_type = models.CharField(max_length=10, choices=(
+    message_type = models.CharField(max_length=15, choices=(
         ("text", "text"),
         ("image", "image"),
         ("audio", "audio"),

@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count, Case, When, Sum, Q
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Location, UserTracking
 from custom.utils import login_first, post_data_loader
@@ -94,3 +95,19 @@ def radar_user_location_udpate(request, data):
         tracking.save()
 
     return JsonResponse(dict(success=True))
+
+
+@require_GET
+@login_first
+def track_user(request, user_id):
+    """ Fetch the latest location of the given user
+    """
+    try:
+        target_user = get_user_model().objects.select_related("profile", "location").get(id=user_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="user not found"))
+    time_delta = timezone.now() - target_user.location.updated_at
+    # if time_delta.seconds > 300:
+    #     return JsonResponse(dict(success=True, location=None))
+    # # TODO: Check the permission of the current user
+    return JsonResponse(dict(success=True, location=target_user.location.location.dict_description()))

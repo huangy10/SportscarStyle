@@ -140,9 +140,33 @@ def read_sync(request):
             return JsonResponse(dict(success=False, code="2002", message="club not found"))
     else:
         return JsonResponse(dict(success=False, code="6002", message="invalid chat type"))
-
-
-@require_POST
-@login_first
-def start_chat():
-    pass
+#
+#
+# @require_POST
+# @login_first
+# @post_data_loader()
+# def start_chat(request, data):
+#     """ Start chat with a target(user or club)
+#     """
+#     chat_type = data["chat_type"]
+#     target_id = data["target_id"]
+#     if chat_type == "private":
+#         try:
+#             user = get_user_model().objects.get(id=target_id)
+#         except ObjectDoesNotExist:
+#             return JsonResponse(dict(success=False, message="User not found"))
+#         ChatRecordBasic.objects.get_or_create(
+#             target_user=user, message_type="placeholder",
+#             sender=request.user, chat_type="private"
+#         )
+#         return JsonResponse(dict(success=True))
+#     elif chat_type == "group":
+#         try:
+#             club = Club.objects.get(id=target_id)
+#         except ObjectDoesNotExist:
+#             return JsonResponse(dict(success=False, message="Club not found"))
+#         ChatRecordBasic.objects.get_or_create(
+#             target_club=club, message_type="placeholder",
+#             sender=request.user, chat_type="group"
+#         )
+#         return JsonResponse(dict(success=True))

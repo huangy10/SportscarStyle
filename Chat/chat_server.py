@@ -161,7 +161,11 @@ class ChatNewHandler(JSONResponseHandler):
             creation_param["target_user"] = get_user_model().objects.get(id=target_id)
         else:
             creation_param["target_club"] = Club.objects.get(id=target_id)
-        message = ChatRecordBasic.objects.create(**creation_param)
+
+        if message_type == "placeholder":
+            message, _ = ChatRecordBasic.objects.get_or_create(**creation_param)
+        else:
+            message = ChatRecordBasic.objects.create(**creation_param)
 
         if message_type == "text":
             message.text_content = self.get_argument("text_content")
