@@ -8,6 +8,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.utils.encoding import smart_str
 
 from Notification.signal import send_notification
+from custom.utils import time_to_string
 
 # Create your models here.
 
@@ -107,7 +108,7 @@ class SportCarOwnership(models.Model):
             car=self.car.dict_description(),
             signature=self.signature,
             identified=self.identified,
-            identified_date=self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            identified_date=time_to_string(self.created_at)
         )
 
     class Meta:

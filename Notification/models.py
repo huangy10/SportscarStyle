@@ -4,6 +4,7 @@ from django.conf import settings
 from django.dispatch import receiver
 
 from .signal import send_notification
+from custom.utils import time_to_string
 # Create your models here.
 
 
@@ -66,7 +67,7 @@ class Notification(models.Model):
             target=self.target.profile.simple_dict_description(),
             message_type=self.message_type,
             read=self.read,
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            created_at=time_to_string(self.created_at),
             flag=self.flag
         )
 

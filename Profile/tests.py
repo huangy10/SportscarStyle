@@ -19,6 +19,7 @@ from Club.models import Club
 from Sportscar.models import Sportscar, Manufacturer, SportCarOwnership
 from Status.models import Status
 from Location.models import Location
+from custom.utils import time_to_string
 
 # Create your tests here.
 
@@ -439,7 +440,7 @@ class PersonalViewTest(TestCase):
         status = self.create_status()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:status_list', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -451,7 +452,7 @@ class PersonalViewTest(TestCase):
         status = self.create_status()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:status_list', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
@@ -464,7 +465,7 @@ class PersonalViewTest(TestCase):
         self.create_status(num=status_num)
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:status_list', args=(self.default_user.id, )), data=dict(
-            date_threshold = request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -590,7 +591,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10',
         ))
@@ -604,7 +605,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10',
         ))
@@ -620,7 +621,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:fans', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10',
         ))
@@ -633,7 +634,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10',
         ))
@@ -647,7 +648,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10',
         ))
@@ -663,7 +664,7 @@ class PersonalViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('profile:follows', args=(self.default_user.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10',
         ))

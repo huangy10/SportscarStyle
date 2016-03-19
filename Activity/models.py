@@ -6,7 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from custom.models_template import comment_image_path, BaseCommentManager
-
+from custom.utils import time_to_string
 
 # Create your models here.
 
@@ -61,12 +61,12 @@ class Activity(models.Model):
                 name=self.name,
                 description=self.description,
                 max_attend=self.max_attend,
-                start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-                end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z') if not self.closed \
-                    else self.closed_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                start_at=time_to_string(self.start_at),
+                end_at=time_to_string(self.end_at) if not self.closed \
+                    else time_to_string(self.closed_at),
                 poster=self.poster.url,
                 location=self.location.dict_description(),
-                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                created_at=time_to_string(self.created_at),
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
@@ -93,12 +93,12 @@ class Activity(models.Model):
                 name=self.name,
                 description=self.description,
                 max_attend=self.max_attend,
-                start_at=self.start_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
-                end_at=self.end_at.strftime('%Y-%m-%d %H:%M:%S %Z') if not self.closed \
-                    else self.closed_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                start_at=time_to_string(self.start_at),
+                end_at=time_to_string(self.end_at) if not self.closed \
+                    else time_to_string(self.closed_at),
                 poster=self.poster.url,
                 location=self.location.dict_description(),
-                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                created_at=time_to_string(self.created_at),
                 user=self.user.profile.simple_dict_description()
         )
         if self.allowed_club is not None:
@@ -150,7 +150,7 @@ class ActivityComment(models.Model):
         result = dict(
                 activity=self.activity.dict_description(),
                 user=self.user.profile.simple_dict_description(),
-                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                created_at=time_to_string(self.created_at),
                 image=self.image.url if self.image else None,
                 content=self.content,
                 commentID=self.id
@@ -164,7 +164,7 @@ class ActivityComment(models.Model):
         """
         result = dict(
                 user=self.user.profile.simple_dict_description(),
-                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                created_at=time_to_string(self.created_at),
                 image=self.image.url if self.image else None,
                 content=self.content,
                 commentID=self.id
@@ -194,7 +194,7 @@ class ActivityInvitation(models.Model):
                 inviter=self.inviter.profile.simple_dict_description(),
                 target=self.target.profile.simple_dict_description(),
                 activity=self.target.dict_description(),
-                created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                created_at=time_to_string(self.created_at),
                 responsed=self.responsed,
                 agree=self.agree
         )

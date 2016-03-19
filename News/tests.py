@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 from .models import News, NewsComment, NewsLikeThrough
+from custom.utils import time_to_string
 # Create your tests here.
 
 
@@ -35,7 +36,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -47,7 +48,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
@@ -59,7 +60,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='invalid',
             limit='10'
         ))
@@ -76,7 +77,7 @@ class NewsViewsTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:news_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
@@ -126,7 +127,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -139,12 +140,12 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
         response_data = json.loads(response.content)
-        self.maxDiff = None
+        print response_data
         self.assertTrue(response_data["success"])
 
 
@@ -154,7 +155,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
@@ -166,7 +167,7 @@ class NewsViewsTest(TestCase):
         comment = self.create_comments(num=1)[0]
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('news:comments_list', args=(self.news1.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))

@@ -12,7 +12,7 @@ from django.http import JsonResponse
 from django.db.models import Q, Count
 
 from .models import Activity, ActivityJoin, ActivityComment
-from custom.utils import post_data_loader, login_first, page_separator_loader
+from custom.utils import post_data_loader, login_first, page_separator_loader, time_to_string
 from Location.models import Location
 from Club.models import Club
 from Notification.signal import send_notification
@@ -144,13 +144,12 @@ def activity_create(request, data):
         location=Point(location['lon'], location['lat']),
         description=location['description'],
     )
-
     act = Activity.objects.create(
         name=data['name'],
         description=data['description'],
         max_attend=data['max_attend'],
-        start_at=timezone.make_aware(datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S')),
-        end_at=timezone.make_aware(datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S')),
+        start_at=timezone.make_aware(datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z')),
+        end_at=timezone.make_aware(datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z')),
         location=loc,
         allowed_club=club_limit,
         poster=request.FILES['poster'],
@@ -296,7 +295,7 @@ def activity_detail(request, act_id):
     data = act.dict_description_with_aggregation(with_user_info=True)
     apply_list = ActivityJoin.objects.select_related('user__profile__avatar_club').filter(activity=act, approved=True)
     data['apply_list'] = map(lambda x: dict(approved=x.approved,
-                                            like_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                                            like_at=time_to_string(x.created_at),
                                             user=x.user.profile.complete_dict_description()),
                              apply_list)
     data["liked"] = act.liked_by.filter(id=request.user.id).exists()

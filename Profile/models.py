@@ -12,6 +12,8 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.encoding import smart_str
 from django.utils.functional import cached_property
+
+from custom.utils import time_to_string
 # Create your models here.
 
 DEFAULT_AVATAR_NAME = 'default_avatar.png'
@@ -217,7 +219,7 @@ class UserRelationSetting(models.Model):
             remark_name=self.remark_name,
             see_his_status=self.see_his_status,
             allow_see_status=self.allow_see_status,
-            blacklist_at=self.blacklist_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            blacklist_at=time_to_string(self.blacklist_at)
         )
 
     def dict_description_simple(self):
@@ -226,7 +228,7 @@ class UserRelationSetting(models.Model):
             remark_name=self.remark_name,
             see_his_status=self.see_his_status,
             allow_see_status=self.allow_see_status,
-            blacklist_at=self.blacklist_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            blacklist_at=time_to_string(self.blacklist_at)
         )
 
 class AuthenticationManager(models.Manager):

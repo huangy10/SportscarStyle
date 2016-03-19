@@ -15,7 +15,7 @@ from .models import Status, StatusComment, StatusLikeThrough
 from Location.models import Location
 from Sportscar.models import Sportscar, Manufacturer
 from Club.models import Club, ClubJoining
-
+from custom.utils import time_to_string
 # Create your tests here.
 
 
@@ -76,7 +76,7 @@ class StatusViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -97,7 +97,7 @@ class StatusViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
@@ -120,7 +120,7 @@ class StatusViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -146,7 +146,7 @@ class StatusViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -169,7 +169,7 @@ class StatusViewTest(TestCase):
         self.authenticate()
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_list'), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -284,7 +284,7 @@ class StatusViewTest(TestCase):
         comment = self.create_comments(num=1, user=another_user)
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_comments', args=(self.default_status.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))
@@ -304,7 +304,7 @@ class StatusViewTest(TestCase):
         comment = self.create_comments(num=1, user=another_user)
         request_time = timezone.now() - datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_comments', args=(self.default_status.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='latest',
             limit='10'
         ))
@@ -324,7 +324,7 @@ class StatusViewTest(TestCase):
         self.create_comments(num=20, user=another_user)
         request_time = timezone.now() + datetime.timedelta(seconds=60)
         response = self.client.get(reverse('status:status_comments', args=(self.default_status.id, )), data=dict(
-            date_threshold=request_time.strftime('%Y-%m-%d %H:%M:%S'),
+            date_threshold=time_to_string(request_time),
             op_type='more',
             limit='10'
         ))

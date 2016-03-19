@@ -14,6 +14,7 @@ from django.contrib.gis.geos import Point
 from .models import Activity, ActivityComment, ActivityJoin
 from Club.models import Club
 from Location.models import Location
+from custom.utils import time_to_string
 # Create your tests here.
 
 
@@ -49,8 +50,8 @@ class ActivityViewTest(TestCase):
             name='test activity',
             description='description',
             max_attend=10,
-            start_at=(timezone.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d %H:%M:%S'),
-            end_at=(timezone.now() + datetime.timedelta(days=12)).strftime('%Y-%m-%d %H:%M:%S'),
+            start_at=time_to_string(timezone.now() + datetime.timedelta(days=10)),
+            end_at=time_to_string(timezone.now() + datetime.timedelta(days=12)),
             location=json.dumps(dict(lat=30, lon=120, description='test location')),
             poster=poster
         ))
@@ -65,8 +66,8 @@ class ActivityViewTest(TestCase):
             name='test activity',
             description='description',
             max_attend=10,
-            start_at=(timezone.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d %H:%M:%S'),
-            end_at=(timezone.now() + datetime.timedelta(days=12)).strftime('%Y-%m-%d %H:%M:%S'),
+            start_at=time_to_string(timezone.now() + datetime.timedelta(days=10)),
+            end_at=time_to_string(timezone.now() + datetime.timedelta(days=12)),
             location=json.dumps(dict(lat=30, lon=120, description='test location')),
             club_limit=club.id,
             poster=poster
@@ -87,8 +88,8 @@ class ActivityViewTest(TestCase):
             name='test activity',
             description='description',
             max_attend=10,
-            start_at=(timezone.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d %H:%M:%S'),
-            end_at=(timezone.now() + datetime.timedelta(days=12)).strftime('%Y-%m-%d %H:%M:%S'),
+            start_at=time_to_string(timezone.now() + datetime.timedelta(days=10)),
+            end_at=time_to_string(timezone.now() + datetime.timedelta(days=12)),
             location=json.dumps(dict(lat=30, lon=120, description='test location')),
             inform_of=json.dumps(map(lambda x: x.id, users)),
             poster=poster
@@ -119,7 +120,7 @@ class ActivityViewTest(TestCase):
         act_dict = self.activity.dict_description_with_aggregation(with_user_info=True)
         act_dict.update(dict(apply_list=[dict(
             approved=join.approved,
-            like_at=join.created_at.strftime("%Y-%m-%d %H:%M:%S %Z"),
+            like_at=time_to_string(join.created_at),
             user=join.user.profile.complete_dict_description()
         )], liked=False))
         self.maxDiff = None

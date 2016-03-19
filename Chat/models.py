@@ -9,6 +9,7 @@ from django.dispatch import receiver
 from django.utils.functional import cached_property
 
 from Club.models import ClubJoining
+from custom.utils import time_to_string
 
 # Create your models here.
 
@@ -89,7 +90,7 @@ class ChatRecordBasic(models.Model):
             text_content=self.text_content,
             audio=self.audio.url if self.audio else None,
             related_id=self.related_id,
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            created_at=time_to_string(self.created_at),
             read=self.read,
             distinct_identifier=self.distinct_identifier
         )

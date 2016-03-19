@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from custom.models_template import BaseCommentManager, comment_image_path
+from custom.utils import time_to_string
 # Create your models here.
 
 
@@ -67,7 +68,7 @@ class Status(models.Model):
             images=self.images,
             content=self.content,
             user=self.user.profile.complete_dict_description(),
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            created_at=time_to_string(self.created_at)
         )
         if self.car is not None:
             result["car"] = self.car.dict_description()
@@ -102,7 +103,7 @@ class StatusComment(models.Model):
     def dict_description(self):
         return dict(
             commentID=self.id,
-            created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            created_at=time_to_string(self.created_at),
             image=self.image.url if self.image else "",
             content=self.content,
             user=self.user.profile.simple_dict_description(),

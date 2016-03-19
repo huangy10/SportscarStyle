@@ -9,9 +9,8 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 from .models import News, NewsComment, NewsLikeThrough
-from custom.utils import login_first, post_data_loader, page_separator_loader
+from custom.utils import *
 from Profile.models import UserFollow
-
 
 # Create your views here.
 
@@ -47,7 +46,7 @@ def news_list(request, date_threshold, op_type, limit):
         result = dict(
             id=news.id,
             cover=news.cover.url,
-            created_at=news.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            created_at=time_to_string(news.created_at),
             content=news.content,
             title=news.title,
             like_num=news.like_num,
@@ -117,7 +116,7 @@ def news_comments_list(request, date_threshold, op_type, limit, news_id):
             commentID=comment.id,
             content=comment.content,
             user=user.profile.simple_dict_description(),
-            created_at=comment.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
+            created_at=time_to_string(comment.created_at)
         )
         if comment.image:
             result["image"] = comment.image.url

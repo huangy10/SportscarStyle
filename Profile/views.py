@@ -13,7 +13,7 @@ from .models import AuthenticationCode, UserFollow, UserRelationSetting
 from Club.models import Club, ClubJoining
 from Sportscar.models import Sportscar, SportCarOwnership
 from Status.models import Status, StatusLikeThrough
-from custom.utils import login_first, post_data_loader, page_separator_loader
+from custom.utils import *
 from Notification.signal import send_notification
 #######################################################################################################################
 #
@@ -362,7 +362,7 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
         return dict(
             userID=source_user.id,
             avatar=source_user.profile.avatar.url,
-            created_at=x.created_at.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            created_at=time_to_string(x.created_at),
             nick_name=source_user.profile.nick_name,
             recent_status_des=recent_status_des
         )
@@ -406,7 +406,7 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
         return dict(
             userID=target_user.id,
             avatar=target_user.profile.avatar.url,
-            time=x.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            time=time_to_string(x.created_at),
             nick_name=target_user.profile.nick_name,
             recent_status_des=recent_status_des
         )

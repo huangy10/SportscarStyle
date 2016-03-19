@@ -83,7 +83,7 @@ def login_first(method):
 def page_separator_loader(method):
     """ 这个装饰器从GET中载入分页参数，如果发现参数缺失，会返回错误
      - GET data:
-        - date_threshold:
+        - thres_id:
         - op_type:
         - limit:
     """
@@ -96,8 +96,9 @@ def page_separator_loader(method):
         if 'date_threshold' in request.GET and 'op_type' in request.GET and 'limit' in request.GET:
             try:
                 date_threshold = parse(request.GET["date_threshold"])
+                if not timezone.is_aware(date_threshold):
+                    date_threshold = timezone.make_aware(date_threshold)
                 # date_threshold = datetime.strptime(request.GET['date_threshold'], '%Y-%m-%d %H:%M:%S %Z')
-                date_threshold = timezone.make_aware(date_threshold)
                 limit = int(request.GET['limit'])
                 limit = min(limit, 1000)
                 op_type = request.GET.get('op_type')
@@ -112,3 +113,7 @@ def page_separator_loader(method):
         else:
             return JsonResponse(error_dict)
     return wrapper
+
+
+def time_to_string(t):
+    return t.strftime("%Y-%m-%d %H:%M:%S.%f %Z")
