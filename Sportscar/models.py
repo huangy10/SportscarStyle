@@ -31,6 +31,15 @@ def car_image(instance, filename, *args, **kwargs):
     return new_file_name
 
 
+def car_thumbnail(instance, filename, *args, **kwargs):
+    current = timezone.now()
+    ext = filename.split('.')[-1]
+    random_file_name = str(uuid.uuid4()).replace('-', '')
+    new_file_name = "{0}/{1}/{2}/{3}/{4}.{5}".\
+        format('car_thumbnail', current.year, current.month, current.day, random_file_name, ext)
+    return new_file_name
+
+
 def car_auth_image(instance, filename, *args, **kwargs):
     current = timezone.now()
     ext = filename.split('.')[-1]
@@ -44,7 +53,9 @@ class Manufacturer(models.Model):
     """这个类为对汽车生产商的抽象
     """
     name = models.CharField(max_length=128, verbose_name=u'名称(中文)', unique=True)
-    name_english = models.CharField(max_length=128, verbose_name=u'名称(英文)', unique=True)
+    remote_id = models.IntegerField(default=0, unique=True)
+    detail_url = models.CharField(max_length=255, verbose_name=u"详情链接")
+    logo_remote = models.CharField(max_length=255, verbose_name=u"厂商的logo的url")
 
     class Meta:
         verbose_name = u'汽车生产商'
@@ -55,22 +66,27 @@ class Sportscar(models.Model):
     """这个类为对跑车的抽象
     """
     name = models.CharField(max_length=128, verbose_name=u'名称(中文)', unique=True)
-    name_english = models.CharField(max_length=128, verbose_name=u'名称(英文)', unique=True)
-    price = models.CharField(max_length=18, verbose_name=u'价格')
-    seats = models.PositiveIntegerField(default=0, verbose_name=u'座位数')
-    fuel_consumption = models.FloatField(default=0, verbose_name=u'油耗', help_text=u'升每百公里')
-    displacement = models.FloatField(default=0, verbose_name=u'排量', help_text=u'升')
-    engine = models.CharField(max_length=100, verbose_name=u'发动机')
-    transmission = models.CharField(max_length=100, verbose_name=u'变速器')
-    max_speed = models.CharField(max_length=20, verbose_name=u'最高车速')
-    zeroTo60 = models.CharField(max_length=7, verbose_name=u'百公里加速')
-    release_date = models.DateField(verbose_name=u'发布日期')
-    body = models.CharField(max_length=255, verbose_name=u"车身结构")
+    remote_id = models.IntegerField(default=0, verbose_name=u"汽车之家定义的id")
+
+    price = models.CharField(max_length=18, verbose_name=u'价格', default="-")
+    fuel_consumption = models.CharField(max_length=100, default="-", verbose_name=u'油耗', help_text=u'升每百公里')
+    engine = models.CharField(max_length=100, verbose_name=u'发动机', default="-")
+    transmission = models.CharField(max_length=100, verbose_name=u'变速器', default="-")
+    max_speed = models.CharField(max_length=20, verbose_name=u'最高车速', default="-")
+    zeroTo60 = models.CharField(max_length=7, verbose_name=u'百公里加速', default="-")
+    body = models.CharField(max_length=255, verbose_name=u"车身结构", default="-")
+    torque = models.CharField(max_length=255, default=u"-")
+
     logo = models.ImageField(verbose_name=u'车标', upload_to=car_logo)
     image = models.ImageField(verbose_name=u'跑车照片', upload_to=car_image)
+    thumbnail = models.ImageField(verbose_name=u'缩略图', upload_to=car_thumbnail)
+    remote_image = models.CharField(max_length=255, verbose_name=u"远程资源链接", default="")
+    remote_thumbnail = models.CharField(max_length=255, verbose_name=u"远程缩略图", default="")
 
     manufacturer = models.ForeignKey(Manufacturer, verbose_name=u'制造商')
     owners = models.ManyToManyField(settings.AUTH_USER_MODEL, through='SportCarOwnership')
+    # For the spider to check if the data of this car is fetched
+    data_fetched = models.BooleanField(default=False, verbose_name=u"")
 
     def __str__(self):
         return smart_str(self.name)

@@ -36,7 +36,6 @@ def activity_discover(request):
     skip = int(request.GET.get("skip"))
     #
     acts = Activity.objects\
-        .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .filter(location__location__distance_lte=(user_position, D(km=query_distance)),
                 closed=False, end_at__gt=timezone.now())\
         .distinct()[skip: skip + limit]
@@ -56,7 +55,6 @@ def activity_mine(request, date_threshold, op_type, limit):
         date_filter = Q(created_at__lt=date_threshold)
 
     acts = Activity.objects.select_related("allowed_club")\
-        .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
         .filter(date_filter, user=request.user).order_by("-created_at")[0: limit]
 
     return JsonResponse(dict(success=True, \
@@ -69,18 +67,16 @@ def activity_mine(request, date_threshold, op_type, limit):
 def activity_applied(request, date_threshold, op_type, limit):
     """ 自己报名的活动
     """
-
     if op_type == 'latest':
-        date_filter = Q(applications__created_at__gt=date_threshold)
+        date_filter = Q(created_at__gt=date_threshold)
     else:
-        date_filter = Q(applications__created_at__lt=date_threshold)
+        date_filter = Q(created_at__lt=date_threshold)
     #  统计评论数量和点赞数量
-    result = Activity.objects.select_related("user__profile")\
-        .annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
-        .order_by("applications__created_at")\
-        .filter(date_filter, applications__user=request.user, applications__approved=True)[0:limit]
+    result = ActivityJoin.objects\
+        .select_related("activity")\
+        .filter(date_filter, user=request.user, approved=True)[0: limit]
     return JsonResponse(dict(success=True,
-        acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), result)))
+        acts=map(lambda x: x.dict_description(), result)))
 
 
 @require_POST
@@ -155,6 +151,7 @@ def activity_create(request, data):
         poster=request.FILES['poster'],
         user=request.user
     )
+    # ActivityJoin.objects.create(user=request.user, activity=act)
     if users is not None:
         act.inform_of.add(*users)
     # TODO: 需要给这些用户发送相应的通知
@@ -213,11 +210,10 @@ def activity_operation(request, data, act_id):
             act = Activity.objects.get(id=act_id)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=True, message="Activity Not found"))
-        for applier in appliers:
-            try:
-                user = get_user_model().objects.get(id=applier)
-            except ObjectDoesNotExist:
-                return JsonResponse(dict(success=False, message="User with id {0} not found".format(applier)))
+        users = get_user_model().objects.filter(~Q(id=request.user.id), id__in=appliers)
+        if len(users) != len(appliers):
+            return JsonResponse(dict(success=False, message="user id list is not valid"))
+        for user in users:
             send_notification.send(sender=ActivityJoin,
                                    target=user,
                                    related_user=request.user,
@@ -287,8 +283,7 @@ def activity_detail(request, act_id):
      另外要返回报名参加者的列表
     """
     try:
-        act = Activity.objects.annotate(comment_num=Count('comments')).annotate(like_num=Count("liked_by"))\
-            .get(id=act_id)
+        act = Activity.objects.get(id=act_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
 

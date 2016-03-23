@@ -4,6 +4,8 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
 
 from custom.models_template import comment_image_path, BaseCommentManager
 from custom.utils import time_to_string
@@ -47,6 +49,8 @@ class Activity(models.Model):
 
     appliers = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                       through="ActivityJoin", verbose_name="申请者", related_name="applied_acts")
+    like_num = models.IntegerField(default=0)
+    comment_num = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -89,17 +93,18 @@ class Activity(models.Model):
 
     def dict_description(self):
         result = dict(
-                actID=self.id,
-                name=self.name,
-                description=self.description,
-                max_attend=self.max_attend,
-                start_at=time_to_string(self.start_at),
-                end_at=time_to_string(self.end_at) if not self.closed \
-                    else time_to_string(self.closed_at),
-                poster=self.poster.url,
-                location=self.location.dict_description(),
-                created_at=time_to_string(self.created_at),
-                user=self.user.profile.simple_dict_description()
+            actID=self.id,
+            name=self.name,
+            description=self.description,
+            max_attend=self.max_attend,
+            start_at=time_to_string(self.start_at),
+            end_at=time_to_string(self.end_at) if not self.closed else time_to_string(self.closed_at),
+            poster=self.poster.url,
+            location=self.location.dict_description(),
+            created_at=time_to_string(self.created_at),
+            user=self.user.profile.simple_dict_description(),
+            like_num=self.like_num,
+            comment_num=self.comment_num
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
@@ -127,7 +132,10 @@ class ActivityJoin(models.Model):
 class ActivityLikeThrough(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="用户")
     activity = models.ForeignKey(Activity, verbose_name="活动")
-    create_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at", )
 
 
 class ActivityComment(models.Model):
@@ -198,3 +206,21 @@ class ActivityInvitation(models.Model):
                 responsed=self.responsed,
                 agree=self.agree
         )
+
+@receiver(post_save, sender=ActivityLikeThrough)
+def auto_incr_like_num(sender, instance, created, **kwargs):
+    if created:
+        instance.activity.like_num += 1
+        instance.activity.save()
+
+
+@receiver(post_save, sender=ActivityComment)
+def auto_incr_comment_num(sender, instance, created, **kwargs):
+    if created:
+        instance.activity.comment_num += 1
+        instance.activity.save()
+
+
+@receiver(post_delete, sender=ActivityLikeThrough)
+def auto_decr_like_num(sender, instance, **kwargs):
+    instance.activity.like_num -= 1
