@@ -6,6 +6,7 @@ import string
 import json
 import time
 import StringIO
+import plistlib
 
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen, ioloop, queues
@@ -31,16 +32,16 @@ MODULE_PATH = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir
 INDEX_FILE_PATH = os.path.join(MODULE_PATH, "data", "index.html")
 
 
-def parse_index_block(soup):
+def parse_index_block(soup, index):
     if soup is None:
         return
-    manufacturer = parse_brand(soup.find("dt"))
+    manufacturer = parse_brand(soup.find("dt"), index)
     cars = soup.find_all("li", {"class": None})
     for car in cars:
         parse_car_record(car, manufacturer)
 
 
-def parse_brand(soup):
+def parse_brand(soup, index):
     brand_logo = soup.find("a").find("img")["src"]
     brand_name_element = soup.find("div").find("a")
     brand_name = brand_name_element.getText()
@@ -49,6 +50,8 @@ def parse_brand(soup):
     manufacturer, _ = Manufacturer.objects.get_or_create(
         remote_id=brand_id, name=brand_name, detail_url=brand_detial_url, logo_remote=brand_logo
     )
+    manufacturer.index = index
+    manufacturer.save()
     return manufacturer
 
 
@@ -72,7 +75,7 @@ def index_resolver():
                 continue
             brands = brands.find_all("dl")
             for brand_block in brands:
-                parse_index_block(brand_block)
+                parse_index_block(brand_block, alpha)
     print "done parsing"
 
 
@@ -269,7 +272,7 @@ def image_downloader():
                 continue
             io = StringIO.StringIO()
             io.write(response.body)
-            ext = car.remote_image.split(".")[-1]
+            ext = image_url.split(".")[-1]
             if worker_type == "thumbnail":
                 car.thumbnail = InMemoryUploadedFile(
                     file=io, field_name=None, name="foo.%s" % ext, size=io.len,
@@ -298,3 +301,83 @@ def image_downloader():
 def start_image_downloader():
     io_loop = ioloop.IOLoop.current()
     io_loop.run_sync(image_downloader)
+
+
+@gen.coroutine
+def logo_downloader():
+    data = Manufacturer.objects.all()
+
+    image_task_queue = queues.Queue()
+    client = httpclient.AsyncHTTPClient()
+    for manufacturer in data:
+        yield image_task_queue.put(manufacturer)
+
+    @gen.coroutine
+    def worker(worker_id, task_queue):
+        print "WORKER %s START!" % worker_id
+        while True:
+            task = yield task_queue.get()
+            if task is None:
+                print u"[worker %s] 退出" % worker_id
+                break
+
+            print u"[worker %s] 为厂商 %s 下载标志: %s" % (worker_id, task.name, task.logo_remote)
+            try:
+                response = yield client.fetch(task.logo_remote)
+            except Exception, e:
+                print e
+                yield task_queue.put(task)
+                task_queue.task_done()
+                time.sleep(1)
+                continue
+            io = StringIO.StringIO()
+            io.write(response.body)
+            ext = task.logo_remote.split(".")[-1]
+            task.logo = InMemoryUploadedFile(
+                file=io, field_name=None, name="foo.%s" % ext, size=io.len,
+                charset=None, content_type="image/%s" % ext
+            )
+            task.save()
+            io.close()
+            print u"[worker %s] 成功!" % worker_id
+            task_queue.task_done()
+
+    print '###############爬虫开始！##################'
+    for i in range(4):
+        worker(i, task_queue=image_task_queue)
+    yield image_task_queue.join()
+    print '###############爬虫停止！##################'
+
+
+def start_logo_downloader():
+    io_loop = ioloop.IOLoop.current()
+    io_loop.run_sync(logo_downloader)
+
+
+def output_to_plist():
+    letters = Manufacturer.objects.all().order_by("index").distinct("index").values_list("index", flat=True)
+    result = dict()
+    for letter in letters:
+        manufacturers = Manufacturer.objects.filter(index=letter)
+
+        def get_car_data(manufactuer):
+            cars = Sportscar.objects.filter(manufacturer=manufactuer)
+            return [car.name for car in cars]
+
+        info = dict()
+        for manufacturer in manufacturers:
+            info[manufacturer.name] = get_car_data(manufacturer)
+
+        result[letter] = info
+
+    plistlib.writePlist(result, os.path.abspath(os.path.join(__file__, os.pardir, 'data', 'cars.plist')))
+
+
+def main():
+    print "Task Begin"
+    start_car_detail_resolver()
+    start_image_downloader()
+    print "Task Done"
+
+if __name__ == "__main__":
+    main()

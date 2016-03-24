@@ -82,7 +82,7 @@ def cars_detail(request, car_id):
                 transmission=car.transmission,
                 max_speed=car.max_speed,
                 zeroTo60=car.zeroTo60,
-                logo_url=car.logo.url,
+                logo_url=car.manufacturer.logo.url,
                 image_url=car.image.url,
                 body=car.body,
                 price=car.price,

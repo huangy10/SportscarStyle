@@ -55,7 +55,9 @@ class Manufacturer(models.Model):
     name = models.CharField(max_length=128, verbose_name=u'名称(中文)', unique=True)
     remote_id = models.IntegerField(default=0, unique=True)
     detail_url = models.CharField(max_length=255, verbose_name=u"详情链接")
+    logo = models.ImageField(upload_to=car_logo, verbose_name=u"厂商logo")
     logo_remote = models.CharField(max_length=255, verbose_name=u"厂商的logo的url")
+    index = models.CharField(max_length=1, verbose_name=u"音序")
 
     class Meta:
         verbose_name = u'汽车生产商'
@@ -95,14 +97,16 @@ class Sportscar(models.Model):
         return dict(
             name=self.name,
             carID=self.id,
-            logo=self.logo.url,
+            logo=self.manufacturer.logo_remote,
             image=self.image.url,
-            price=str(self.price),
+            thumbnail=self.thumbnail.url,
+            price=self.price,
             engine=self.engine,
             trans=self.transmission,
             body=self.body,
             speed=self.max_speed,
-            acce=self.zeroTo60
+            acce=self.zeroTo60,
+            torque=self.torque,
         )
 
     class Meta:
