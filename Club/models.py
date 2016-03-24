@@ -156,5 +156,7 @@ class ClubAuthRequest(models.Model):
     """ 俱乐部认证
     """
     approve = models.BooleanField(default=False)
+    checked = models.BooleanField(default=False)
     club = models.ForeignKey("Club.Club", verbose_name="待认证的俱乐部")
-
+    city = models.CharField(max_length=100, verbose_name="俱乐部所处的城市", default="")
+    description = models.CharField(max_length=100, verbose_name="俱乐部简介", default="")

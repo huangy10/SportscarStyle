@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1532125943">
+  <component name="DataSourceManagerImpl" format="xml" hash="2710060758">
     <data-source source="LOCAL" name="PostgreSQL - sport_car_db@localhost" uuid="e9e1c8a5-452f-40af-ae2a-c115bc39c67e">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>

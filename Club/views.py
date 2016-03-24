@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, Case, When, Sum, IntegerField
 
 from .forms import ClubCreateForm
-from .models import Club, ClubJoining
+from .models import Club, ClubJoining, ClubAuthRequest
 from custom.utils import post_data_loader, login_first
 from Chat.models import ChatRecordBasic
 # Create your views here.
@@ -190,3 +190,30 @@ def club_member_change(request, data, club_id):
         return JsonResponse(dict(success=True))
     else:
         return JsonResponse(dict(success=False, message="Undefined operation type"))
+
+
+@require_POST
+@login_first
+@post_data_loader()
+def club_auth(request, data, club_id):
+    city = data.get("city")
+    des = data.get("description")
+    try:
+        club = Club.objects.get(id=club_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="Club not found"))
+    if club.host != request.user:
+        return JsonResponse(dict(success=False, message="No permission"))
+
+    auth, created = ClubAuthRequest.objects.get_or_create(club=club)
+    if not created and not auth.approve and auth.checked:
+        return JsonResponse(dict(success=False, message="Already Denied"))
+
+    if not created and auth.approve:
+        return JsonResponse(dict(success=False, message="Already Identified"))
+
+    auth.city = city
+    auth.description = des
+    auth.save()
+
+    return JsonResponse(dict(success=True))
