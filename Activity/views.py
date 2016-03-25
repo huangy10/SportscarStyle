@@ -123,6 +123,7 @@ def activity_create(request, data):
        |- lon
        |- description
     """
+    print data
     if 'inform_of' in data:
         inform_of = json.loads(data['inform_of'])
         users = get_user_model().objects.filter(id__in=inform_of)
@@ -144,8 +145,8 @@ def activity_create(request, data):
         name=data['name'],
         description=data['description'],
         max_attend=data['max_attend'],
-        start_at=timezone.make_aware(datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z')),
-        end_at=timezone.make_aware(datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z')),
+        start_at=datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z'),
+        end_at=datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z'),
         location=loc,
         allowed_club=club_limit,
         poster=request.FILES['poster'],

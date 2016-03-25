@@ -130,33 +130,35 @@ def club_discover(request):
     if query_type == "nearby":
         city = user.profile.district.split(" ")[0]
         result = Club.objects.filter(city=city, deleted=False)\
-            .annotate(members_num=Count("members"))[skip: skip + limit]
+            .annotate(members_num=Count("members"))
     elif query_type == "value":
         result = Club.objects.filter(deleted=False).order_by("-value_total")\
-            .annotate(members_num=Count("members"))[skip: skip + limit]
+            .annotate(members_num=Count("members"))
     elif query_type == "members":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
-            .order_by("-members_num")[skip: skip + limit]
+            .order_by("-members_num")
     elif query_type == "average":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
-        .order_by("-value_average")[skip: skip + limit]
+        .order_by("-value_average")
     elif query_type == "beauty":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
             .annotate(beauty_num=Sum(
                 Case(When(members__profile__gender="f", then=1),
                      default=0, output_field=IntegerField())))\
-            .order_by("-beauty_num")[skip: skip + limit]
+            .order_by("-beauty_num")
     elif query_type == "recent":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
-            .order_by("-created_at")[skip: skip + limit]
+            .order_by("-created_at")
     else:
         return JsonResponse(dict(success=False))
-    return JsonResponse(dict(success=True,
-                             data=map(lambda x: x.dict_description(show_value=True, show_members_num=True), result)))
+    return JsonResponse(
+        dict(success=True,
+             data=map(lambda x: x.dict_description(show_value=True, show_members_num=True),
+                      result[skip: skip + limit])))
 
 
 @require_POST

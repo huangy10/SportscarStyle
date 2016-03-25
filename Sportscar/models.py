@@ -151,11 +151,11 @@ class SportCarIdentificationRequestRecord(models.Model):
     
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        send_notification.send(
-            sender=SportCarIdentificationRequestRecord,
-            target=self.ownership.user,
-            message_type="auth_car_approved" if self.approved else "auth_car_denied",
-            related_own=self.ownership,
-            message_body=""
-        )
+        # send_notification.send(
+        #     sender=SportCarIdentificationRequestRecord,
+        #     target=self.ownership.user,
+        #     message_type="auth_car_approved" if self.approved else "auth_car_denied",
+        #     related_own=self.ownership,
+        #     message_body=""
+        # )
         super(SportCarIdentificationRequestRecord, self).save()
