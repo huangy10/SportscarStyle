@@ -25,9 +25,9 @@ def chat_list(request):
     result = ChatRecordBasic.objects.select_related("sender__profile", "target_club")\
         .order_by("distinct_identifier", "-created_at")\
         .filter(
-            Q(target_user=request.user) |
+            Q(target_user=request.user, chat_type="private") |
             Q(target_club__members=request.user) |
-            Q(sender=request.user),
+            Q(sender=request.user, chat_type="private"),
             deleted=False)\
         .distinct("distinct_identifier")
     # 获取相关的clubs
@@ -61,7 +61,7 @@ def unread_chat_message_num(request):
 
     user_list = map(f, user_result)
     club_list = map(g, club_result)
-
+    print user_list, club_list
     return JsonResponse(dict(success=True, data=(user_list + club_list)))
 
 

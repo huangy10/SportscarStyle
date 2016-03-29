@@ -37,7 +37,7 @@ def activity_discover(request):
     #
     acts = Activity.objects\
         .filter(location__location__distance_lte=(user_position, D(km=query_distance)),
-                closed=False, end_at__gt=timezone.now())\
+                closed=False, end_at__gt=timezone.now(), allowed_club=None)\
         .distinct()[skip: skip + limit]
 
     return JsonResponse(dict(success=True,
@@ -269,9 +269,13 @@ def activity_operation(request, data, act_id):
             return JsonResponse(dict(success=False, message="activity not found"))
         if act.liked_by.filter(id=request.user.id).exists():
             act.liked_by.remove(request.user)
+            act.like_num -= 1
+            act.save()
             return JsonResponse(dict(success=True, data=dict(liked=False, like_num=act.liked_by.count())))
         else:
+            act.like_num += 1
             act.liked_by.add(request.user)
+            act.save()
             return JsonResponse(dict(success=True, data=dict(liked=True, like_num=act.liked_by.count())))
     return JsonResponse(dict(success=False, message="Undefined operation type"))
 
@@ -295,6 +299,7 @@ def activity_detail(request, act_id):
                                             user=x.user.profile.complete_dict_description()),
                              apply_list)
     data["liked"] = act.liked_by.filter(id=request.user.id).exists()
+    data["applied"] = ActivityJoin.objects.filter(user=request.user, activity=act, approved=True).exists()
     return JsonResponse(dict(success=True, data=data))
 
 

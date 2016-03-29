@@ -11,6 +11,7 @@ from .forms import ClubCreateForm
 from .models import Club, ClubJoining, ClubAuthRequest
 from custom.utils import post_data_loader, login_first
 from Chat.models import ChatRecordBasic
+from Activity.models import Activity
 # Create your views here.
 
 
@@ -69,15 +70,15 @@ def club_infos(request, club_id):
         return JsonResponse(dict(success=True, code="2002", message="club not found"))
     try:
         club_join = ClubJoining.objects.get(user=request.user, club=club)
-        if request.user == club.host:
-            return JsonResponse(
-                dict(success=True, data=club_join.dict_description(show_members=True, for_host=True)))
-        else:
-            return JsonResponse(
-                dict(success=True, data=club_join.dict_description(show_members=True, for_host=True)))
+        response_data = club_join.dict_description(show_members=True, for_host=True)
+        recent_act = Activity.objects.filter(allowed_club=club).first()
+        if recent_act is not None:
+            response_data.update(recent_act=recent_act.dict_description_with_aggregation(with_user_info=True))
+        return JsonResponse(
+            dict(success=True, data=response_data))
     except ObjectDoesNotExist:
-        return JsonResponse(success=True, data=club.dict_description(show_members=club.show_members_to_public,
-                                                                     show_setting=False))
+        return JsonResponse(dict(success=True, data=club.dict_description(show_members=club.show_members_to_public,
+                                                                     show_setting=False)))
 
 
 @require_POST
@@ -219,3 +220,32 @@ def club_auth(request, data, club_id):
     auth.save()
 
     return JsonResponse(dict(success=True))
+
+
+@require_POST
+@login_first
+@post_data_loader()
+def club_quit(request, data, club_id):
+    print data
+    try:
+        join = ClubJoining.objects.select_related("club").get(club_id=club_id, user=request.user)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="Not joined"))
+    club = join.club
+    print data
+    if join.user == club.host:
+        new_host = data["new_host"]
+        try:
+            new_host = ClubJoining.objects.get(club_id=club_id, user_id=new_host)
+            if new_host == join:
+                return JsonResponse(dict(success=False, message="Invalid data"))
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="User not Found"))
+        club.host = new_host.user
+        club.save()
+    join.delete()
+    return JsonResponse(dict(success=True))
+
+
+def club_apply():
+    pass

@@ -2,7 +2,7 @@
 
 from SportscarStyle.celery import app
 
-from Club.models import Club
+from Club.models import Club, ClubJoining
 
 def inform_of_related_waiters(message, global_message_dispatch):
     """ 根据给定的message内容,通知所有的相关的用户通知相
@@ -23,14 +23,20 @@ def inform_of_related_waiters(message, global_message_dispatch):
     else:
         # group,群聊
         target_club = Club.objects.get(id=message.target_id)
-        target_users = target_club.members.all()
-        for user in target_users:
+        target_joins = ClubJoining.objects.filter(club=target_club)
+        print "waiters", waiters
+        print target_joins.values("user_id")
+        for join in target_joins:
+            user = join.user
             waiter = waiters.get(user.id, None)
             if message.sender == user:
                 # 不需要讲消息发送给消息的发送者
                 continue
             if waiter is not None:
+                print message.target_id, "receive"
                 waiter.set_result([message])
             else:
+                print user.id, "unread"
+                join.unread_chats += 1
+                join.save()
                 # TODO: 当目标用户不是waiter时,需要发送notification
-                pass

@@ -46,7 +46,7 @@ def account_login(request, data):
         return JsonResponse(dict(success=False, message=error_reason, code=error_code))
     else:
         auth.login(request, user)
-        return JsonResponse(dict(success=True, userID=user.id))
+        return JsonResponse(dict(success=True, data=user.profile.simple_dict_description()))
 
 
 @http_decorators.require_POST
@@ -88,7 +88,7 @@ def account_register(request, data):
         AuthenticationCode.objects.deactivate(code=data['auth_code'], phone=data['username'])
         new_user = auth.authenticate(username=data["username"], password=data["password1"])
         auth.login(request, new_user)
-        return JsonResponse(dict(success=True, userID=new_user.id))
+        return JsonResponse(dict(success=True, data=new_user.profile.simple_dict_description()))
     else:
         response_dict = dict(success=False, code='1002')
         response_dict.update(form.errors)
@@ -463,7 +463,7 @@ def profile_black_list(request, date_threshold, op_type, limit):
             search_filter = search_filter | Q(target__profile__nick_name__icontains=filter_element)
 
     users = UserRelationSetting.objects.select_related("user__profile", "target__profile")\
-        .order_by("-blacklist_at").filter(date_filter & search_filter, user=request.user)[0:limit]
+        .order_by("-blacklist_at").filter(date_filter & search_filter, user=request.user, allow_see_status=False)[0:limit]
 
     def data_organize(x):
         result = x.dict_description()

@@ -50,6 +50,7 @@ class MessageDispatch(object):
         """ 将一个用户注册为新消息的监听者
          我们创建了一个Future对象来实现
         """
+        print user_id, "start waiting"
         result_future = MessageFuture(user_id=user_id, waiting_date=waiting_date)
         if waiting_date is not None:
             new_messages = ChatRecordBasic.objects.filter(created_at__gt=waiting_date)
@@ -62,7 +63,8 @@ class MessageDispatch(object):
         return result_future
 
     def cancel_wait(self, future):
-        del self.waiters[future.user_id]
+        if self.waiters.has_key(future.user_id):
+            del self.waiters[future.user_id]
         future.set_result([])
 
     # @app.task(filter=task_method, name="message_dispatch.new_mewssage")
@@ -72,6 +74,7 @@ class MessageDispatch(object):
         """
         # 用celery来异步完成这一操作
         global global_message_dispatch
+        print message.sender_id, "to", message.target_id, message.chat_type
         inform_of_related_waiters(message, global_message_dispatch)
 
 
@@ -114,6 +117,7 @@ class ChatUpdateHandler(JSONResponseHandler):
             return
         self.future = global_message_dispatch.wait_for_message(self.current_user.id, waiting_date=waiting_date)
         messages = yield self.future
+        print messages
         if self.request.connection.stream.closed():
             self.JSONResponse(dict(success=False))
             return

@@ -207,6 +207,7 @@ class ActivityInvitation(models.Model):
                 agree=self.agree
         )
 
+
 @receiver(post_save, sender=ActivityLikeThrough)
 def auto_incr_like_num(sender, instance, created, **kwargs):
     if created:

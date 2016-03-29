@@ -113,10 +113,8 @@ def car_follow(request, data, car_id):
             message='Sport car not found.',
             code='1004'
         ))
-    SportCarOwnership.objects.get_or_create(user=request.user,
-                                            car=car,
-                                            signature=data['signature'])
-    return JsonResponse(dict(success=True))
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+    return JsonResponse(dict(success=True, data=own.dict_description()))
 
 
 @http_decorators.require_POST

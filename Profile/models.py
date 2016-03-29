@@ -205,6 +205,7 @@ class UserRelationSetting(models.Model):
     allow_see_status = models.BooleanField(default=True, verbose_name="允许查看我的动态")
     see_his_status = models.BooleanField(default=True, verbose_name="是否查看他的动态")
     remark_name = models.CharField(max_length=255, verbose_name="备注名称")
+    # TODO: always on top
 
     blacklist_at = models.DateTimeField(verbose_name="拉黑时间", auto_now_add=True)
 
@@ -230,6 +231,7 @@ class UserRelationSetting(models.Model):
             allow_see_status=self.allow_see_status,
             blacklist_at=time_to_string(self.blacklist_at)
         )
+
 
 class AuthenticationManager(models.Manager):
 

@@ -9,5 +9,6 @@ urlpatterns = patterns('Club.views',
                        url(r'^(?P<club_id>\d+)/update$', 'update_club_settings', name="update"),
                        url(r'^(?P<club_id>\d+)/members$', 'club_member_change', name="members_update"),
                        url(r'^(?P<club_id>\d+)/auth$', 'club_auth', name="auth"),
+                       url(r'^(?P<club_id>\d+)/quit$', 'club_quit', name="auth"),
                        )
 
