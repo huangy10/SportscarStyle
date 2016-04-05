@@ -76,13 +76,13 @@ def status_list(request, date_threshold, op_type, limit):
     # 这里我们认为黑名单的长度是有限的,故将黑名单全部载入内存然后筛选
     blacklist1 = UserRelationSetting.objects.filter(
         user=request.user, see_his_status=False
-    ).values_list("target__id")
+    ).values_list("target__id", flat=True)
     blacklist2 = UserRelationSetting.objects.filter(
-        target=request.user, allow_see_status=False
-    ).values_list("target__id")
-    blacklist = list(blacklist1) + list(blacklist1)
+        user=request.user, allow_see_status=False
+    ).values_list("target__id", flat=True)
+    blacklist = list(blacklist1) + list(blacklist2)
     blacklist_filter = ~Q(user__id__in=blacklist)
-
+    print blacklist
     data = Status.objects\
         .select_related('user__profile__avatar_club')\
         .select_related('car')\
@@ -204,7 +204,8 @@ def status_post_comment(request, data, status_id):
                                target=response_to.user,
                                message_body=comment.content,
                                related_status_comment=comment,
-                               related_status=status)
+                               related_status=status,
+                               related_user=comment.user)
         if response_to.user == status.user:
             # avoid duplicated notifications about the same comment
             return JsonResponse(dict(success=True, id=comment.id))
@@ -214,7 +215,8 @@ def status_post_comment(request, data, status_id):
                            target=status.user,
                            message_body=comment.content,
                            related_status_comment=comment,
-                           related_status=status)
+                           related_status=status,
+                           related_user=comment.user)
     return JsonResponse(dict(success=True, id=comment.id))
 
 
@@ -236,7 +238,8 @@ def status_operation(request, data, status_id):
                                                                status=status)
         if not created:
             obj.delete()
-        elif status.user == request.user:
+        elif status.user != request.user:
+            print "send"
             send_notification.send(sender=Status,
                                    message_type="status_like",
                                    related_user=request.user,

@@ -97,7 +97,7 @@ class Sportscar(models.Model):
         return dict(
             name=self.name,
             carID=self.id,
-            logo=self.manufacturer.logo_remote,
+            logo=self.manufacturer.logo.url,
             image=self.image.url,
             thumbnail=self.thumbnail.url,
             price=self.price,

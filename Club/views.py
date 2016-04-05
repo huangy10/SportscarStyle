@@ -5,13 +5,14 @@ from django.views.decorators.http import require_POST, require_GET
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Count, Case, When, Sum, IntegerField
+from django.db.models import Count, Case, When, Sum, IntegerField,BooleanField
 
 from .forms import ClubCreateForm
 from .models import Club, ClubJoining, ClubAuthRequest
 from custom.utils import post_data_loader, login_first
 from Chat.models import ChatRecordBasic
 from Activity.models import Activity
+from Notification.signal import send_notification
 # Create your views here.
 
 
@@ -131,34 +132,40 @@ def club_discover(request):
     if query_type == "nearby":
         city = user.profile.district.split(" ")[0]
         result = Club.objects.filter(city=city, deleted=False)\
-            .annotate(members_num=Count("members"))
+            .annotate(members_num=Count("members"))\
+            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))
     elif query_type == "value":
         result = Club.objects.filter(deleted=False).order_by("-value_total")\
-            .annotate(members_num=Count("members"))
+            .annotate(members_num=Count("members"))\
+            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))
     elif query_type == "members":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
+            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
             .order_by("-members_num")
     elif query_type == "average":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
-        .order_by("-value_average")
+            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
+            .order_by("-value_average")
     elif query_type == "beauty":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
             .annotate(beauty_num=Sum(
                 Case(When(members__profile__gender="f", then=1),
                      default=0, output_field=IntegerField())))\
+            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
             .order_by("-beauty_num")
     elif query_type == "recent":
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
+            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
             .order_by("-created_at")
     else:
         return JsonResponse(dict(success=False))
     return JsonResponse(
         dict(success=True,
-             data=map(lambda x: x.dict_description(show_value=True, show_members_num=True),
+             data=map(lambda x: x.dict_description(show_value=True, show_members_num=True, show_attended=True),
                       result[skip: skip + limit])))
 
 
@@ -247,5 +254,10 @@ def club_quit(request, data, club_id):
     return JsonResponse(dict(success=True))
 
 
-def club_apply():
-    pass
+@require_POST
+@login_first
+def club_apply(request, club_id):
+    if ClubJoining.objects.filter(user=request.user, club_id=club_id).exists():
+        return JsonResponse(dict(success=False, message="already join"))
+    send_notification.send(sender=Club,
+                           target=Club.host)

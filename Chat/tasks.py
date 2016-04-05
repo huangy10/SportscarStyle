@@ -3,6 +3,8 @@
 from SportscarStyle.celery import app
 
 from Club.models import Club, ClubJoining
+from Notification.tasks import push_notification
+from Notification.models import RegisteredDevices
 
 def inform_of_related_waiters(message, global_message_dispatch):
     """ 根据给定的message内容,通知所有的相关的用户通知相
@@ -18,8 +20,9 @@ def inform_of_related_waiters(message, global_message_dispatch):
         if target_waiter is not None:
             target_waiter.set_result([message])
         else:
-            # TODO: 当目标用户不是waiter时,需要发送notification
-            pass
+            tokens = RegisteredDevices.objects.filter(user=message.target_user, is_active=True)\
+                .values_list("token", flat=True)
+            push_notification.delay(message.target_user, tokens, 1, message_body=message.message_body_des())
     else:
         # group,群聊
         target_club = Club.objects.get(id=message.target_id)

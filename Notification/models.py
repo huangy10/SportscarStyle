@@ -3,8 +3,9 @@ from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
 
-from .signal import send_notification
 from custom.utils import time_to_string
+from .tasks import push_notification
+from .signal import send_notification
 # Create your models here.
 
 
@@ -36,6 +37,7 @@ class Notification(models.Model):
         ("auth_act_denied", ""),
         ("relation_follow", ""),
         ("chat", ""),
+        ("club_apply", ""),
     ))
     related_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+", null=True)
     related_act = models.ForeignKey("Activity.Activity", related_name="+", null=True)
@@ -80,7 +82,7 @@ class Notification(models.Model):
                     result[attribute_name] = attribute.dict_description()
         set_related("related_user")
         set_related("related_act")
-        set_related("related_act_invite")
+        set_related("+related_act_invite")
         set_related("related_act_join")
         set_related("related_act_comment")
         set_related("related_club")
@@ -91,6 +93,15 @@ class Notification(models.Model):
         set_related("related_own")
 
         return result
+
+    def apns_des(self):
+        if self.message_type == "status_like":
+            return "{0} 赞了你的动态".format(self.related_user.profile.nick_name)
+        elif self.message_type == "status_comment":
+            return "{0} 评论了你的动态".format(self.related_user.profile.nick_name)
+        elif self.message_type == "relation_follow":
+            return "{} 关注了你".format(self.related_user.profile.nick_name)
+        return u"未定义的消息"
 
 
 @receiver(send_notification)
@@ -115,8 +126,19 @@ def send_notification_handler(sender, **kwargs):
         related_own=kwargs.get("related_own", None)
     )
 
-    Notification.objects.create(**create_params)
+    notif = Notification.objects.create(**create_params)
+    tokens = RegisteredDevices.objects.filter(
+        user=notif.target, is_active=True
+    ).values_list("token", flat=True)
+    print "push"
+    push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des())
 
 
-
+class RegisteredDevices(models.Model):
+    token = models.CharField(max_length=255)
+    update_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="devices")
+    is_active = models.BooleanField(default=True)
+    # save badge_number in the redis database, the key is the device_t
+    # badge_number = models.IntegerField(default=0)
 

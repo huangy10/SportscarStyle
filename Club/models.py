@@ -117,7 +117,11 @@ class Club(models.Model):
         verbose_name = u"俱乐部"
         verbose_name_plural = u'俱乐部'
 
-    def dict_description(self, show_members=False, show_setting=False, show_value=False, show_members_num=False):
+    def dict_description(self, show_members=False,
+                         show_setting=False,
+                         show_value=False,
+                         show_members_num=False,
+                         show_attended=False):
         result = dict(
             id=self.id, club_logo=self.logo.url,
             club_name=self.name, description=self.description,
@@ -142,6 +146,8 @@ class Club(models.Model):
                 result.update(members_num=self.members_num)
             else:
                 result.update(members_num=ClubJoining.objects.filter(club=self).count())
+        if show_attended:
+            result.update(attended=self.attended)
         return result
 
     def update_settings(self, settings):

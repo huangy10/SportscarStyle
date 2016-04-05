@@ -56,4 +56,3 @@ def notification_mark_read(request, notif_id):
     notif.read = True
     notif.save()
     return JsonResponse(dict(success=True))
-

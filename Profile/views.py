@@ -15,6 +15,7 @@ from Sportscar.models import Sportscar, SportCarOwnership
 from Status.models import Status, StatusLikeThrough
 from custom.utils import *
 from Notification.signal import send_notification
+from Notification.models import RegisteredDevices
 #######################################################################################################################
 #
 # 以下是登陆注册部分使用的API
@@ -34,6 +35,7 @@ def account_login(request, data):
     """
     username = data.get('username', '')
     password = data.get('password', '')
+    token = data.get('device_token', None)
     user = auth.authenticate(username=username,
                              password=password)
     if user is None:
@@ -46,7 +48,22 @@ def account_login(request, data):
         return JsonResponse(dict(success=False, message=error_reason, code=error_code))
     else:
         auth.login(request, user)
+        if token is not None:
+            device, _ = RegisteredDevices.objects.get_or_create(user=user, token=token)
+            if not device.is_active:
+                device.is_active = True
+                device.save()
         return JsonResponse(dict(success=True, data=user.profile.simple_dict_description()))
+
+
+@http_decorators.require_POST
+@login_first
+@post_data_loader()
+def account_logout(request, data):
+    token = data.get("device_token", None)
+    if token is not None:
+        RegisteredDevices.objects.filter(user=request.user, token=token).update(is_active=False)
+    return JsonResponse(dict(success=True))
 
 
 @http_decorators.require_POST
@@ -82,12 +99,18 @@ def account_register(request, data):
         - auth_code: authentication code
     """
     form = RegistrationForm(data)
+    token = data.get('device_token', None)
     if form.is_valid():
         form.save()
         # form验证通过保证了下面这个查询一定是存在的
         AuthenticationCode.objects.deactivate(code=data['auth_code'], phone=data['username'])
         new_user = auth.authenticate(username=data["username"], password=data["password1"])
         auth.login(request, new_user)
+        if token is not None:
+            device, _ = RegisteredDevices.objects.get_or_create(user=new_user, token=token)
+            if not device.is_active:
+                device.is_active = True
+                device.save()
         return JsonResponse(dict(success=True, data=new_user.profile.simple_dict_description()))
     else:
         response_dict = dict(success=False, code='1002')
@@ -205,7 +228,7 @@ def profile_info(request, user_id):
         job=profile.job,
         signature=profile.signature,
     )
-    user_info['status_num'] = Status.objects.filter(user=user).count()
+    user_info['status_num'] = Status.objects.filter(user=user, deleted=False).count()
     user_info['fans_num'] = UserFollow.objects.filter(target_user=user).count()
     user_info['follow_num'] = UserFollow.objects.filter(source_user=user).count()
     car = profile.avatar_car
@@ -216,6 +239,8 @@ def profile_info(request, user_id):
         user_info['avatar_club'] = club.dict_description()
     if user.id != request.user.id:
         user_info['followed'] = UserFollow.objects.filter(source_user=request.user, target_user=user).exists()
+        user_info.update(blacklisted=UserRelationSetting.objects\
+            .filter(user=request.user, target=user, allow_see_status=False).exists())
     return JsonResponse(dict(success=True, user_profile=user_info))
 
 
@@ -232,6 +257,7 @@ def profile_corporation_user_authenticate(request):
     else:
         print(form.errors)
         return JsonResponse(dict(success=False))
+
 
 @http_decorators.require_GET
 @login_first
@@ -482,7 +508,7 @@ def profile_black_list(request, date_threshold, op_type, limit):
 
 @http_decorators.require_POST
 @login_first
-@post_data_loader(json_fields="users")
+@post_data_loader()
 def profile_black_list_update(request, data):
     """ 更新的黑名单,上传参数形式为:
      | op_type: add/remove
@@ -491,6 +517,7 @@ def profile_black_list_update(request, data):
      只需要返回是否是成功
 
     """
+    print ""
     op_type = data["op_type"]
     if op_type == "add":
         id_list = data["users"]

@@ -77,6 +77,15 @@ class ChatRecordBasic(models.Model):
     # 2. 对于group类型而言,通过标注ClubJoining中的chat_sync_date属性来区分已读和未读的消息数量
     read = models.BooleanField(default=False, verbose_name="是否已读")
 
+    def message_body_des(self):
+        if self.message_type == "text":
+            content = self.text_content
+        elif self.message_type == "audio":
+            content = "[语音]"
+        else:
+            content = "[图片]"
+        return "{0}: {1}".format(self.sender.profile.nick_name, content)
+
     def dict_description(self):
         result = dict(
             chatID=self.id,
