@@ -1080,3 +1080,839 @@ Traceback (most recent call last):
   File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
     attribute = getattr(self, attribute_name)
 AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:40:17,858 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:03,340 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:07,456 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:11,330 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:15,454 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:19,617 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:23,648 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:27,650 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:31,625 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:35,618 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:39,615 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:43,665 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:47,685 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:52,520 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:54:57,027 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:01,346 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:05,742 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:10,049 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:14,288 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:27,874 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:31,859 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:36,175 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:39,938 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:47,300 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:51,505 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:55,505 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:55:59,675 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:56:03,706 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 08:57:18,766 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 44, in <lambda>
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 85, in dict_description
+    set_related("+related_act_invite")
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py", line 77, in set_related
+    attribute = getattr(self, attribute_name)
+AttributeError: 'Notification' object has no attribute '+related_act_invite'
+2016-04-05 09:00:45,997 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:00:49,295 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:00:52,577 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:00:55,873 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:00:59,173 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:01:02,445 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:01:05,728 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:01:09,026 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:01:12,096 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:01:15,311 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 7
+    url(r'^(?P<notif_id>\d+)$', 'notification_mark_read', name="mark_read")
+      ^
+SyntaxError: invalid syntax
+2016-04-05 09:01:18,593 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 6
+    url(r'^clear$', name='notification_clear', name="clear"),
+SyntaxError: keyword argument repeated
+2016-04-05 09:01:21,893 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 6
+    url(r'^clear$', name='notification_clear', name="clear"),
+SyntaxError: keyword argument repeated
+2016-04-05 09:01:25,194 [ERROR] django.request: Internal Server Error: /notification/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/urls.py", line 30, in <module>
+    url(r'^notification/', include('Notification.urls', namespace="notification")),
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/urls.py", line 6
+    url(r'^clear$', name='notification_clear', name="clear"),
+SyntaxError: keyword argument repeated
+2016-04-05 12:42:53,458 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-05 14:31:28,095 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif

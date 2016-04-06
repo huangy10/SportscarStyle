@@ -15,12 +15,18 @@ logger = logging.getLogger(__name__)
 
 
 @app.task()
-def push_notification(user, tokens, badge_incr, message_body, data=None):
+def push_notification(user, tokens, badge_incr, message_body, type="", data=None):
     """ push notification to the user
     """
+    if not type in ["chat", "notif"]:
+        logger.warn("Invalid notification type")
+        return
     if tokens is None or len(tokens) == 0:
         return
-    badge = my_redis.incr(user.id, badge_incr)
+    if type == "chat":
+        badge = my_redis.incr_chat(user.id, badge_incr)
+    else:
+        badge = my_redis.incr_notif(user.id, badge_incr)
     message = Message(tokens, alert=message_body, badge=badge, sound="default")
     con = session.get_connection(
         "push_sandbox", cert_file=os.path.abspath(os.path.join(__file__, os.pardir, "data", "sportcar.pem")))
@@ -41,3 +47,9 @@ def push_notification(user, tokens, badge_incr, message_body, data=None):
             retry_message = res.retry()
             logger.debug("Retry sending message to {0}, message: {1}".format(user, retry_message))
 
+
+@app.task()
+def clear_notification_unread_num(user):
+    """ clear the notification unread number
+    """
+    my_redis.clear_notif(user.id)

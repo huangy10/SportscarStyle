@@ -82,7 +82,7 @@ class Notification(models.Model):
                     result[attribute_name] = attribute.dict_description()
         set_related("related_user")
         set_related("related_act")
-        set_related("+related_act_invite")
+        set_related("related_act_invite")
         set_related("related_act_join")
         set_related("related_act_comment")
         set_related("related_club")
@@ -131,7 +131,7 @@ def send_notification_handler(sender, **kwargs):
         user=notif.target, is_active=True
     ).values_list("token", flat=True)
     print "push"
-    push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des())
+    push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des(), type="notif")
 
 
 class RegisteredDevices(models.Model):

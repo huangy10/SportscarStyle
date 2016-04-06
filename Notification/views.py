@@ -7,6 +7,7 @@ from django.db.models import Q
 
 from custom.utils import login_first, page_separator_loader
 from .models import Notification
+from .tasks import clear_notification_unread_num
 # Create your views here.
 
 
@@ -55,4 +56,11 @@ def notification_mark_read(request, notif_id):
         return JsonResponse(dict(success=False, code="7000", message="Notification Not Found"))
     notif.read = True
     notif.save()
+    return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_POST
+@login_first
+def notification_clear(request):
+    clear_notification_unread_num.delay(request.user)
     return JsonResponse(dict(success=True))

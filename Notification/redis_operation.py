@@ -1,33 +1,30 @@
 import redis
 
-
 REDIS_DB_INDEX = 10
+r = redis.Redis(db=REDIS_DB_INDEX, host='localhost', port=6379)
 
 
-def incr(key, badge):
-    """ increment the badge number
-     :param key     the key to access the badge number
-     :param badge   the badge number to add
-
-     :return the total badge number
-    """
-    r = redis.Redis(db=REDIS_DB_INDEX, host='localhost', port=6379)
-    return r.incrby(key, badge)
+def incr_notif(key, badge):
+    notif_num = r.incrby("notif:{}".format(key), badge)
+    chat_num = int(r.get("chat:{}".format(key)))
+    if chat_num is None:
+        chat_num = 0
+    return notif_num + chat_num
 
 
-def incr_in_batch(values):
-    """ increase the badge number in batch
-     :param values key value pair to describe the badge nunber
-    """
-    r = redis.Redis(db=REDIS_DB_INDEX)
-    pipe = r.pipeline()
-    badges = dict()
-    for (key, badge) in values:
-        badges.update(key=pipe.incrby(key, badge))
-    pipe.execute()
-    return badges
+def incr_chat(key, badge):
+    chat_num = r.incrby("chat:{}".format(key), badge)
+    notif_num = int(r.get("notif:{}".format(key)))
+    if notif_num is None:
+        notif_num = 0
+    return chat_num + notif_num
 
 
-def clear_badge(key):
-    r = redis.Redis(db=REDIS_DB_INDEX, host='localhost', port=6379)
-    r.delete(key)
+def clear_notif(key):
+    r.delete("notif:{}".format(key))
+    chat_num = int(r.get("chat:{}".format(key)))
+    if chat_num is None:
+        chat_num = 0
+    return chat_num
+
+
