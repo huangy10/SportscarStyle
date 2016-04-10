@@ -63,10 +63,10 @@ def status_list(request, date_threshold, op_type, limit):
         # content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
         content_filter = Q()
     elif query_type == 'nearby':
-        lat = request.GET["lat"]
-        lon = request.GET["lon"]
-        distance = request.GET["distance"]
-        content_filter = Q(location__distance_lte=(Point(lon, lat), D(m=distance)))
+        lat = float(request.GET["lat"])
+        lon = float(request.GET["lon"])
+        distance = float(request.GET["distance"])
+        content_filter = Q(location__location__distance_lte=(Point(lon, lat), D(m=distance)))
     elif query_type == "hot":
         # TODO: 剩下一个"热门"需要"实现
         content_filter = Q()
@@ -82,7 +82,7 @@ def status_list(request, date_threshold, op_type, limit):
     ).values_list("target__id", flat=True)
     blacklist = list(blacklist1) + list(blacklist2)
     blacklist_filter = ~Q(user__id__in=blacklist)
-    print blacklist
+
     data = Status.objects\
         .select_related('user__profile__avatar_club')\
         .select_related('car')\

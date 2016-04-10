@@ -108,3 +108,80 @@
 2016-04-06 02:30:40,497 [DEBUG] amqp: Open OK!
 2016-04-06 02:30:40,497 [DEBUG] amqp: using channel_id: 1
 2016-04-06 02:30:40,497 [DEBUG] amqp: Channel open
+2016-04-06 03:09:05,403 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:09:05,403 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:25:06,685 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2014 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'per_consumer_qos': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'cluster_name': u'rabbit@Woody-Huang', u'platform': u'Erlang/OTP', u'version': u'3.5.1'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2016-04-06 03:25:06,686 [DEBUG] amqp: Open OK!
+2016-04-06 03:25:06,686 [DEBUG] amqp: using channel_id: 1
+2016-04-06 03:25:06,687 [DEBUG] amqp: Channel open
+2016-04-06 03:28:43,921 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:28:44,186 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:28:48,756 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:28:55,992 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2014 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'per_consumer_qos': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'cluster_name': u'rabbit@Woody-Huang', u'platform': u'Erlang/OTP', u'version': u'3.5.1'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2016-04-06 03:28:55,993 [DEBUG] amqp: Open OK!
+2016-04-06 03:28:55,993 [DEBUG] amqp: using channel_id: 1
+2016-04-06 03:28:55,994 [DEBUG] amqp: Channel open
+2016-04-06 03:29:11,049 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:29:11,183 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:29:14,498 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 03:29:17,648 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2014 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'per_consumer_qos': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'cluster_name': u'rabbit@Woody-Huang', u'platform': u'Erlang/OTP', u'version': u'3.5.1'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2016-04-06 03:29:17,648 [DEBUG] amqp: Open OK!
+2016-04-06 03:29:17,649 [DEBUG] amqp: using channel_id: 1
+2016-04-06 03:29:17,649 [DEBUG] amqp: Channel open
+2016-04-06 12:54:03,380 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 12:54:04,233 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 12:54:08,612 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-06 12:54:35,953 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-07 06:53:27,711 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2014 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'per_consumer_qos': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'cluster_name': u'rabbit@Woody-Huang', u'platform': u'Erlang/OTP', u'version': u'3.5.1'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2016-04-07 06:53:27,714 [DEBUG] amqp: Open OK!
+2016-04-07 06:53:27,715 [DEBUG] amqp: using channel_id: 1
+2016-04-07 06:53:27,716 [DEBUG] amqp: Channel open
+2016-04-07 07:28:54,161 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-07 07:29:25,588 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-07 07:30:01,682 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-07 07:30:04,737 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2014 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'per_consumer_qos': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'cluster_name': u'rabbit@Woody-Huang', u'platform': u'Erlang/OTP', u'version': u'3.5.1'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2016-04-07 07:30:04,737 [DEBUG] amqp: Open OK!
+2016-04-07 07:30:04,737 [DEBUG] amqp: using channel_id: 1
+2016-04-07 07:30:04,738 [DEBUG] amqp: Channel open
+2016-04-07 14:29:45,212 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 06:20:49,793 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 06:20:50,607 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 06:20:59,809 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 06:21:00,612 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 06:21:09,020 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 06:21:45,076 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:02:57,968 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:04:34,812 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:04:34,812 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:04:47,864 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:04:48,266 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:04:58,105 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:04:58,516 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:05:03,069 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:05:03,340 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:05:14,945 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:05:15,546 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:05:22,458 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:05:22,775 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:02,514 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:02,745 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:15,333 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:15,398 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:17,655 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:17,716 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:20,707 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:06:20,919 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:07:17,356 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-08 13:07:17,436 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-09 12:49:43,589 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-09 13:02:20,332 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-09 13:02:41,274 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-09 13:03:39,942 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-10 09:00:58,819 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-10 09:02:11,717 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-10 14:16:49,472 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2014 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'per_consumer_qos': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'cluster_name': u'rabbit@Woody-Huang', u'platform': u'Erlang/OTP', u'version': u'3.5.1'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2016-04-10 14:16:49,474 [DEBUG] amqp: Open OK!
+2016-04-10 14:16:49,475 [DEBUG] amqp: using channel_id: 1
+2016-04-10 14:16:49,475 [DEBUG] amqp: Channel open
+2016-04-10 15:15:42,541 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-10 15:16:04,091 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio

@@ -1916,3 +1916,148 @@ Traceback (most recent call last):
 SyntaxError: keyword argument repeated
 2016-04-05 12:42:53,458 [WARNING] django.request: Not Found: /http:/www.baidu.com/
 2016-04-05 14:31:28,095 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-06 03:00:17,096 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-06 12:55:10,430 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-06 13:53:28,228 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-07 02:18:31,095 [ERROR] django.request: Internal Server Error: /activity/mine
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py", line 58, in activity_mine
+    .filter(date_filter, user=request.user).order_by("-created_at")[0: limit]
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1194, in build_filter
+    lookups, value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 1740, in get_lookup_constraint
+    lookup_class(target.get_col(alias, source), val), AND)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 96, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 134, in get_prep_lookup
+    return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 727, in get_prep_lookup
+    return self.get_prep_value(value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 985, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string or a number, not 'SimpleLazyObject'
+2016-04-07 05:46:09,634 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-08 06:44:50,819 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-08 14:01:58,904 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-08 14:12:32,881 [WARNING] django.request: Not Found: /
+2016-04-08 14:18:46,733 [WARNING] django.request: Not Found: //phpMyAdmin/scripts/setup.php
+2016-04-08 14:18:47,348 [WARNING] django.request: Not Found: //phpmyadmin/scripts/setup.php
+2016-04-08 14:18:47,801 [WARNING] django.request: Not Found: //pma/scripts/setup.php
+2016-04-08 14:18:48,261 [WARNING] django.request: Not Found: //myadmin/scripts/setup.php
+2016-04-09 02:13:53,205 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 03:27:17,083 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 04:05:59,017 [WARNING] django.request: Not Found: /search.yahoo.com:443
+2016-04-09 04:40:32,611 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 05:03:26,583 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-09 05:53:31,737 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 06:12:52,398 [WARNING] django.request: Not Found: /muieblackcat
+2016-04-09 06:53:37,120 [WARNING] django.request: Not Found: /phpMyAdmin/scripts/setup.php
+2016-04-09 06:53:37,287 [WARNING] django.request: Not Found: /pma/scripts/setup.php
+2016-04-09 06:53:37,439 [WARNING] django.request: Not Found: /myadmin/scripts/setup.php
+2016-04-09 07:06:05,988 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 08:18:42,424 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 08:38:23,003 [WARNING] django.request: Not Found: /smtp.mail.yahoo.com:25
+2016-04-09 08:38:40,233 [WARNING] django.request: Not Found: /smtp.mail.yahoo.com:25
+2016-04-09 09:03:25,940 [WARNING] django.request: Not Found: /http:/testp1.piwo.pila.pl/testproxy.php
+2016-04-09 09:06:10,038 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-09 09:31:49,210 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 10:45:20,825 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 12:53:59,136 [WARNING] django.request: Not Found: /
+2016-04-09 13:10:33,231 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-09 13:53:11,686 [WARNING] django.request: Not Found: /
+2016-04-09 14:23:52,266 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-10 06:05:48,917 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-10 06:23:12,442 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-10 06:36:29,586 [WARNING] django.request: Not Found: /vip163mx01.mxmail.netease.com:25
+2016-04-10 07:34:46,624 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-10 08:46:20,906 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-10 09:00:34,347 [ERROR] django.request: Internal Server Error: /status/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py", line 69, in status_list
+    content_filter = Q(location__distance_lte=(Point(lon, lat), D(m=distance)))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/gis/geos/point.py", line 36, in __init__
+    raise TypeError('Invalid parameters given for Point initialization.')
+TypeError: Invalid parameters given for Point initialization.
+2016-04-10 09:01:05,550 [ERROR] django.request: Internal Server Error: /status/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py", line 91, in status_list
+    .filter(date_filter & content_filter & blacklist_filter, deleted=False)\
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1326, in _add_q
+    current_negated, allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1194, in build_filter
+    lookups, value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 1756, in get_lookup_constraint
+    raise TypeError('Related Field got invalid lookup: %s' % lookup_type)
+TypeError: Related Field got invalid lookup: distance_lte
+2016-04-10 09:01:47,906 [ERROR] django.request: Internal Server Error: /status/
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 112, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py", line 91, in status_list
+    .filter(date_filter & content_filter & blacklist_filter, deleted=False)\
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1326, in _add_q
+    current_negated, allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1194, in build_filter
+    lookups, value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 1756, in get_lookup_constraint
+    raise TypeError('Related Field got invalid lookup: %s' % lookup_type)
+TypeError: Related Field got invalid lookup: distance_lte
+2016-04-10 09:01:56,767 [WARNING] django.request: Not Found: /http:/www.mafengwo.cn/
+2016-04-10 09:53:45,285 [WARNING] django.request: Not Found: /http:/www.sogou.com/
+2016-04-10 09:53:45,465 [WARNING] django.request: Not Found: /http:/www.1dvj.com/
+2016-04-10 09:53:45,644 [WARNING] django.request: Not Found: /http:/www.kuaidaili.com/
+2016-04-10 09:57:38,392 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-10 10:10:21,639 [WARNING] django.request: Not Found: /
+2016-04-10 11:08:56,637 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr

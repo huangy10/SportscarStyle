@@ -2,6 +2,7 @@
 import uuid
 import datetime
 import os
+import ephem
 
 from django.db import models
 from django.conf import settings
@@ -138,6 +139,12 @@ class UserProfile(models.Model):
         if self.avatar_car is not None:
             result["avatar_car"] = self.avatar_car.dict_description()
         return result
+
+    def save(self, **kwargs):
+        sun = ephem.Sun()
+        sun.compute(self.birth_date)
+        self.star_sign = ephem.constellation(sun)[1]
+        super(UserProfile, self).save(**kwargs)
 
     class Meta:
         verbose_name = u'用户详情'

@@ -81,10 +81,10 @@ class ChatRecordBasic(models.Model):
         if self.message_type == "text":
             content = self.text_content
         elif self.message_type == "audio":
-            content = "[语音]"
+            content = u"[语音]"
         else:
-            content = "[图片]"
-        return "{0}: {1}".format(self.sender.profile.nick_name, content)
+            content = u"[图片]"
+        return u"{0}: {1}".format(self.sender.profile.nick_name, content)
 
     def dict_description(self):
         result = dict(

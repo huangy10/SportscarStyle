@@ -109,7 +109,8 @@ class ChatUpdateHandler(JSONResponseHandler):
     def post(self, *args, **kwargs):
         """ 更新聊天信息
         """
-        waiting_date = timezone.now()
+        waiting_date = self.get_argument("last_update", timezone.now())
+
         if self.current_user is None:
             self.JSONResponse(dict(success=False, message='You need to login first', code='1402'))
             return

@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 def push_notification(user, tokens, badge_incr, message_body, type="", data=None):
     """ push notification to the user
     """
+    logger.debug("push!!!")
+    print "push!"
     if not type in ["chat", "notif"]:
         logger.warn("Invalid notification type")
         return

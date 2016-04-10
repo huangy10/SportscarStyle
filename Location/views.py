@@ -41,6 +41,7 @@ def radar_cars(request, data):
     # 首先更新用户的位置
     lat = float(data["loc"]["lat"])
     lon = float(data["loc"]["lon"])
+    print lat, lon
     tracking = request.user.location
     loc = tracking.location
     loc.location = Point(lon, lat)
@@ -51,7 +52,10 @@ def radar_cars(request, data):
     if not tracking.location_available:
         tracking.location_available = True
         tracking.save()
-
+    # load the scan center
+    lat = float(data["scan_center"]["lat"])
+    lon = float(data["scan_center"]["lon"])
+    print lat, lon
     filter_type = data["filter"]
     if filter_type == "distance":
         distance = float(data["filter_param"])
@@ -59,13 +63,10 @@ def radar_cars(request, data):
         # TODO: 添加其他的筛选条件
 
         results = get_user_model().objects.select_related("profile", "location")\
-            .annotate(authed_cars_num=Case(
-                        When(
-                                ownership__identified=True,
-                                then=1),
-                        default=0, output_field=models.IntegerField()))\
+            .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
+                                           default=0, output_field=models.IntegerField()))\
             .filter(~Q(id=request.user.id), authed_cars_num__gte=0,
-                    location__location__location__distance_lte=(loc.location, D(km=distance)),
+                    location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
                     location__location_available=True,
                     location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300)))\
             .distinct()
