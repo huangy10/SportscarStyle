@@ -226,10 +226,11 @@ def activity_operation(request, data, act_id):
         try:
             notif = Notification.objects.get(message_type="act_invited",
                                              target=request.user,
-                                             related_act__id=act_id, flag=False)
+                                             related_act__id=act_id, checked=False)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="Not invited"))
         notif.flag = True
+        notif.checked = True
         notif.save()
         send_notification.send(
             sender=Activity,
@@ -240,7 +241,7 @@ def activity_operation(request, data, act_id):
             message_body=""
         )
         ActivityJoin.objects.create(user=request.user, activity=notif.related_act,
-                                    approve=True)
+                                    approved=True)
         return JsonResponse(dict(success=True))
     elif op_type == "invite_denied":
         try:
@@ -249,7 +250,8 @@ def activity_operation(request, data, act_id):
                                              related_act__id=act_id, flag=False)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="Not invited"))
-        notif.flag = True
+        notif.flag = False
+        notif.checked = True
         notif.save()
         send_notification.send(
             sender=Activity,

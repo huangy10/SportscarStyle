@@ -55,6 +55,7 @@ class Notification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     read = models.BooleanField(default=False, verbose_name="是否已读")
     flag = models.BooleanField(default=False, verbose_name="保留字段")      # 额外供特殊消息类型使用的字段
+    checked = models.BooleanField(default=False, verbose_name="是否已经操作")
 
     class Meta:
         ordering = ("-created_at", )
@@ -70,7 +71,8 @@ class Notification(models.Model):
             message_type=self.message_type,
             read=self.read,
             created_at=time_to_string(self.created_at),
-            flag=self.flag
+            flag=self.flag,
+            checked=self.checked
         )
 
         def set_related(attribute_name):
