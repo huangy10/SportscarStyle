@@ -201,3 +201,6 @@
 2016-04-11 01:53:56,091 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
 2016-04-11 02:11:31,830 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
 2016-04-11 02:19:57,412 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-12 07:38:29,223 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-13 02:07:57,565 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-13 07:37:36,850 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
