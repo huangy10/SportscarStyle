@@ -161,10 +161,14 @@ def activity_create(request, data):
 
 
 @require_POST
-def activity_edit(request):
+def activity_edit(request, act_id):
     """ 活动编辑
     """
-
+    try:
+        act = Activity.objects.get(id=act_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="act not found"))
+    properties = [""]
 
 def activity_close(request, act_id):
     """ 关闭活动报名

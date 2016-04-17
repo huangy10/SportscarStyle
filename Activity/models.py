@@ -104,7 +104,7 @@ class Activity(models.Model):
             created_at=time_to_string(self.created_at),
             user=self.user.profile.simple_dict_description(),
             like_num=self.like_num,
-            comment_num=self.comment_num
+            comment_num=self.comment_num,
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())

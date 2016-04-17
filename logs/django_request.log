@@ -2946,3 +2946,68 @@ TypeError: 'approve' is an invalid keyword argument for this function
 2016-04-11 09:12:40,424 [WARNING] django.request: Not Found: /http:/www.baidu.com/
 2016-04-11 09:45:05,876 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
 2016-04-11 10:08:23,359 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-14 14:14:40,737 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-14 14:35:13,592 [WARNING] django.request: Not Found: /http:/www.example.com/
+2016-04-14 15:29:21,497 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-14 19:12:25,381 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 04:08:01,373 [WARNING] django.request: Not Found: /smtp.mail.yahoo.com:25
+2016-04-15 04:08:18,619 [WARNING] django.request: Not Found: /smtp.mail.yahoo.com:25
+2016-04-15 05:34:01,150 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 05:41:43,253 [WARNING] django.request: Not Found: /http:/m.baidu.com/
+2016-04-15 05:41:43,437 [WARNING] django.request: Not Found: /http:/www.sogou.com/
+2016-04-15 05:41:46,908 [WARNING] django.request: Not Found: /http:/www.1dvj.com/
+2016-04-15 05:41:47,147 [WARNING] django.request: Not Found: /http:/www.kuaidaili.com/
+2016-04-15 06:42:11,478 [WARNING] django.request: Not Found: /163mx02.mxmail.netease.com:25
+2016-04-15 06:48:38,852 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 07:20:14,073 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-15 08:03:29,311 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 11:44:07,288 [WARNING] django.request: Not Found: /
+2016-04-15 11:52:56,583 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 12:49:22,334 [WARNING] django.request: Not Found: /manager/html
+2016-04-15 13:07:44,586 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 14:23:48,807 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 15:38:18,196 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 15:40:09,099 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-15 16:00:25,776 [WARNING] django.request: Not Found: /
+2016-04-15 16:53:12,538 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-15 19:23:19,795 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-16 14:05:56,999 [ERROR] django.request: Internal Server Error: /status/10
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py", line 111, in status_detail
+    return JsonResponse(dict(success=True, data=status.dict_description(show_liked=True)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py", line 82, in dict_description
+    result["liked"] = StatusLikeThrough.objects.filter(status=self, user=user).exists()
+NameError: global name 'user' is not defined
+2016-04-16 14:06:31,838 [ERROR] django.request: Internal Server Error: /status/10
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py", line 111, in status_detail
+    return JsonResponse(dict(success=True, data=status.dict_description(show_liked=True)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py", line 82, in dict_description
+    result["liked"] = StatusLikeThrough.objects.filter(status=self, user=user).exists()
+NameError: global name 'user' is not defined
+2016-04-16 14:07:14,529 [ERROR] django.request: Internal Server Error: /status/10
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py", line 111, in status_detail
+    return JsonResponse(dict(success=True, data=status.dict_description(show_liked=True)))
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py", line 82, in dict_description
+    result["liked"] = StatusLikeThrough.objects.filter(status=self, user=user).exists()
+NameError: global name 'user' is not defined
+2016-04-17 02:38:24,023 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr

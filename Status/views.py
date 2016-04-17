@@ -98,6 +98,18 @@ def status_list(request, date_threshold, op_type, limit):
         data=data
     ))
 
+@http_decorator.require_GET
+@login_first
+def status_detail(request, status_id):
+    try:
+        status = Status.objects \
+            .annotate(comment_num=Count('comments', distinct=True)) \
+            .annotate(like_num=Count('liked_by', distinct=True))\
+            .get(id=status_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="status not found"))
+    return JsonResponse(dict(success=True, data=status.dict_description(show_liked=True, user=request.user)))
+
 
 @http_decorator.require_POST
 @login_first
@@ -210,13 +222,14 @@ def status_post_comment(request, data, status_id):
             # avoid duplicated notifications about the same comment
             return JsonResponse(dict(success=True, id=comment.id))
     # send a notification message to the sender of the status
-    send_notification.send(sender=Status,
-                           message_type="status_comment",
-                           target=status.user,
-                           message_body=comment.content,
-                           related_status_comment=comment,
-                           related_status=status,
-                           related_user=comment.user)
+    if status.user != request.user:
+        send_notification.send(sender=Status,
+                               message_type="status_comment",
+                               target=status.user,
+                               message_body=comment.content,
+                               related_status_comment=comment,
+                               related_status=status,
+                               related_user=comment.user)
     return JsonResponse(dict(success=True, id=comment.id))
 
 
