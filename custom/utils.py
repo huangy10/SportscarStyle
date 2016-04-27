@@ -72,7 +72,7 @@ def login_first(method):
     """ 这个装饰器和django自带的不同，如果发现当前用户没有登陆，会返回一个Json告知
     """
     def wrapper(request, *args, **kwargs):
-        if not request.user.is_authenticated():
+        if request.user is None or not request.user.is_authenticated():
             return JsonResponse(dict(success=False, message='You need to login first',
                                 code='1402'))
         else:

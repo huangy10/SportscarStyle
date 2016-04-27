@@ -13,7 +13,7 @@ class ClubJoining(models.Model):
     """这里定义了用户关于一个群聊的设置
     """
     # Basic information
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u"用户")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u"用户", related_name="clubs")
     nick_name = models.CharField(max_length=100, verbose_name=u"本群昵称")
     club = models.ForeignKey("Club.Club", verbose_name=u"俱乐部")
     join_date = models.DateTimeField(auto_now_add=True, verbose_name=u"加入日期")

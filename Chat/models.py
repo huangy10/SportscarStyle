@@ -125,3 +125,13 @@ def auto_create_distince_identifier(sender, instance, **kwargs):
             instance.distinct_identifier = "{0}_{1}".format(target_id, sender_id)
     else:
         instance.distinct_identifier = str(instance.target_club.id)
+
+
+class ChatEntity(models.Model):
+
+    pass
+
+
+class RosterItem(models.Model):
+    pass
+

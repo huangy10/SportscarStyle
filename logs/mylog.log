@@ -240,3 +240,464 @@
 2016-04-16 14:26:48,169 [DEBUG] amqp: Open OK!
 2016-04-16 14:26:48,169 [DEBUG] amqp: using channel_id: 1
 2016-04-16 14:26:48,170 [DEBUG] amqp: Channel open
+2016-04-20 13:16:32,058 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-20 17:22:12,101 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-20 17:22:12,986 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-20 17:22:20,041 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-20 17:23:42,536 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-21 06:28:08,118 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-21 06:28:08,984 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-22 08:34:42,944 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-22 08:46:30,278 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-22 08:47:23,619 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-22 09:33:34,363 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-23 02:34:05,098 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-23 08:52:46,601 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-23 08:52:52,570 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 06:56:26,917 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 06:57:03,488 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:13:53,089 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:14:37,253 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:15:35,030 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:25:27,673 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:25:53,583 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:29:24,454 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:29:25,262 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:31:23,429 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:31:30,028 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:31:37,990 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:32:07,264 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:32:17,536 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:33:23,331 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:33:24,771 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:33:41,269 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:34:38,215 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:37:37,604 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:37:59,785 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:38:11,037 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:38:27,873 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:38:33,378 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:39:18,694 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:39:23,166 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:40:24,301 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:40:32,958 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:41:04,523 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:41:19,192 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:07,525 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:12,788 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:24,665 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:28,963 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:36,616 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:42,707 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:42:56,983 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:43:10,886 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:43:16,140 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:43:55,860 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:44:15,482 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:44:27,603 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:44:33,872 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:44:39,488 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:44:46,357 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:45:11,745 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:45:18,648 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:45:36,942 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:46:04,558 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:46:14,450 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:46:36,199 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:46:37,693 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_manufacturer" DROP COLUMN "logo" CASCADE; (params [])
+2016-04-27 07:46:37,947 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_manufacturer" DROP COLUMN "index" CASCADE; (params [])
+2016-04-27 07:46:38,098 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportscar" DROP COLUMN "thumbnail" CASCADE; (params [])
+2016-04-27 07:46:38,105 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportscar" DROP COLUMN "remote_thumbnail" CASCADE; (params [])
+2016-04-27 07:46:38,186 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportscar" DROP COLUMN "remote_image" CASCADE; (params [])
+2016-04-27 07:46:38,993 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportscar" ALTER COLUMN "fuel_consumption" TYPE double precision, ALTER COLUMN "fuel_consumption" SET DEFAULT %s; (params [0.0])
+2016-04-27 07:46:41,976 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:46:45,172 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:46:50,896 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" DROP COLUMN "deleted" CASCADE; (params [])
+2016-04-27 07:46:50,970 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" DROP COLUMN "checked" CASCADE; (params [])
+2016-04-27 07:46:51,106 [DEBUG] django.db.backends.schema: DROP TABLE "Notification_registereddevices" CASCADE; (params [])
+2016-04-27 07:46:51,123 [DEBUG] django.db.backends.schema: DELETE FROM geometry_columns WHERE f_table_name = 'Notification_registereddevices'; (params [])
+2016-04-27 07:46:51,482 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" DROP CONSTRAINT "f270bed976409ad2ae117f6a18b57c6d"; (params [])
+2016-04-27 07:46:51,483 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" DROP COLUMN "related_own_id" CASCADE; (params [])
+2016-04-27 07:46:51,605 [DEBUG] django.db.backends.schema: DROP TABLE "Notification_notification" CASCADE; (params [])
+2016-04-27 07:46:51,615 [DEBUG] django.db.backends.schema: DELETE FROM geometry_columns WHERE f_table_name = 'Notification_notification'; (params [])
+2016-04-27 07:46:52,382 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" DROP CONSTRAINT "Status_sta_location_id_1a0f10e646d6dd97_fk_Location_location_id"; (params [])
+2016-04-27 07:46:52,384 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ALTER COLUMN "location_id" SET NOT NULL; (params [])
+2016-04-27 07:46:52,385 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ADD CONSTRAINT "Status_sta_location_id_1a0f10e646d6dd97_fk_Location_location_id" FOREIGN KEY ("location_id") REFERENCES "Location_location" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 07:46:52,423 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" DROP CONSTRAINT "Status_status_car_id_7b2a2adb8f3c149_fk_Sportscar_sportscar_id"; (params [])
+2016-04-27 07:46:52,423 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ALTER COLUMN "car_id" SET NOT NULL; (params [])
+2016-04-27 07:47:03,961 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:47:09,144 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:47:13,707 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:47:38,916 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:48:03,895 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:48:45,876 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:49:10,900 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:50:09,527 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:53:51,892 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:53:53,358 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" serial NOT NULL PRIMARY KEY, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" timestamp with time zone NOT NULL); (params None)
+2016-04-27 07:54:00,918 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:54:06,440 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:54:18,553 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:54:29,515 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:57:17,273 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 07:57:41,339 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:32:54,068 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:33:19,049 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:33:34,188 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:34:41,057 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:34:49,883 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:35:56,126 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:36:01,061 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:36:24,883 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:37:17,170 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:40:21,615 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:40:30,045 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 08:40:31,454 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" serial NOT NULL PRIMARY KEY, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:34,265 [DEBUG] django.db.backends.schema: CREATE TABLE "Sportscar_manufacturer" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(128) NOT NULL UNIQUE, "remote_id" integer NOT NULL UNIQUE, "detail_url" varchar(255) NOT NULL, "logo" varchar(100) NOT NULL, "logo_remote" varchar(255) NOT NULL, "index" varchar(1) NOT NULL); (params None)
+2016-04-27 08:40:34,276 [DEBUG] django.db.backends.schema: CREATE TABLE "Sportscar_sportcaridentificationrequestrecord" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "approved" boolean NOT NULL, "drive_license" varchar(100) NOT NULL, "id_card" varchar(100) NOT NULL, "photo" varchar(100) NOT NULL, "license_num" varchar(30) NOT NULL); (params None)
+2016-04-27 08:40:34,281 [DEBUG] django.db.backends.schema: CREATE TABLE "Sportscar_sportcarownership" ("id" serial NOT NULL PRIMARY KEY, "signature" varchar(255) NOT NULL, "identified" boolean NOT NULL, "identified_at" timestamp with time zone NULL, "created_at" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:34,288 [DEBUG] django.db.backends.schema: CREATE TABLE "Sportscar_sportscar" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(128) NOT NULL UNIQUE, "remote_id" integer NOT NULL, "price" varchar(18) NOT NULL, "fuel_consumption" varchar(100) NOT NULL, "engine" varchar(100) NOT NULL, "transmission" varchar(100) NOT NULL, "max_speed" varchar(20) NOT NULL, "zeroTo60" varchar(7) NOT NULL, "body" varchar(255) NOT NULL, "torque" varchar(255) NOT NULL, "logo" varchar(100) NOT NULL, "image" varchar(100) NOT NULL, "thumbnail" varchar(100) NOT NULL, "remote_image" varchar(255) NOT NULL, "remote_thumbnail" varchar(255) NOT NULL, "data_fetched" boolean NOT NULL, "manufacturer_id" integer NOT NULL); (params None)
+2016-04-27 08:40:34,294 [DEBUG] django.db.backends.schema: CREATE INDEX "Sportscar_manufacturer_name_5d09de94f3245d69_like" ON "Sportscar_manufacturer" ("name" varchar_pattern_ops); (params [])
+2016-04-27 08:40:34,295 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportscar" ADD CONSTRAINT "Sp_manufacturer_id_a4af0334e3b7325_fk_Sportscar_manufacturer_id" FOREIGN KEY ("manufacturer_id") REFERENCES "Sportscar_manufacturer" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,299 [DEBUG] django.db.backends.schema: CREATE INDEX "Sportscar_sportscar_4d136c4a" ON "Sportscar_sportscar" ("manufacturer_id"); (params [])
+2016-04-27 08:40:34,300 [DEBUG] django.db.backends.schema: CREATE INDEX "Sportscar_sportscar_name_7860bc8f1cba7962_like" ON "Sportscar_sportscar" ("name" varchar_pattern_ops); (params [])
+2016-04-27 08:40:34,309 [DEBUG] django.db.backends.schema: CREATE TABLE "Club_club" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "logo" varchar(100) NOT NULL, "description" text NOT NULL, "identified" boolean NOT NULL, "identified_at" timestamp with time zone NOT NULL, "city" varchar(30) NOT NULL, "created_at" timestamp with time zone NOT NULL, "value_total" integer NOT NULL, "value_average" integer NOT NULL, "only_host_can_invite" boolean NOT NULL, "show_members_to_public" boolean NOT NULL, "deleted" boolean NOT NULL); (params None)
+2016-04-27 08:40:34,315 [DEBUG] django.db.backends.schema: CREATE TABLE "Club_clubauthrequest" ("id" serial NOT NULL PRIMARY KEY, "approve" boolean NOT NULL, "checked" boolean NOT NULL, "city" varchar(100) NOT NULL, "description" varchar(100) NOT NULL); (params None)
+2016-04-27 08:40:34,325 [DEBUG] django.db.backends.schema: CREATE TABLE "Club_clubjoining" ("id" serial NOT NULL PRIMARY KEY, "nick_name" varchar(100) NOT NULL, "join_date" timestamp with time zone NOT NULL, "show_nick_name" boolean NOT NULL, "no_disturbing" boolean NOT NULL, "always_on_top" boolean NOT NULL, "always_on_to_date" timestamp with time zone NULL, "unread_chats" integer NOT NULL, "club_id" integer NOT NULL); (params None)
+2016-04-27 08:40:34,328 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubjoining" ADD CONSTRAINT "Club_clubjoining_club_id_148f76eff9a236cb_fk_Club_club_id" FOREIGN KEY ("club_id") REFERENCES "Club_club" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,329 [DEBUG] django.db.backends.schema: CREATE INDEX "Club_clubjoining_7115697a" ON "Club_clubjoining" ("club_id"); (params [])
+2016-04-27 08:40:34,335 [DEBUG] django.db.backends.schema: CREATE TABLE "User_authenticationcode" ("id" serial NOT NULL PRIMARY KEY, "phone_num" varchar(20) NOT NULL, "code" varchar(6) NOT NULL, "created_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL); (params None)
+2016-04-27 08:40:34,342 [DEBUG] django.db.backends.schema: CREATE TABLE "User_userrelation" ("id" serial NOT NULL PRIMARY KEY, "is_friend" boolean NOT NULL, "created_at" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:34,353 [DEBUG] django.db.backends.schema: CREATE TABLE "User_user" ("id" serial NOT NULL PRIMARY KEY, "password" varchar(128) NOT NULL, "last_login" timestamp with time zone NULL, "username" varchar(20) NOT NULL UNIQUE, "nick_name" varchar(100) NOT NULL, "avatar" varchar(100) NOT NULL, "gender" varchar(1) NOT NULL, "birth_date" date NOT NULL, "star_sign" varchar(25) NOT NULL, "district" varchar(255) NOT NULL, "signature" varchar(255) NOT NULL, "job" varchar(64) NOT NULL, "corporation_identified" boolean NOT NULL, "fans_num" integer NOT NULL, "follows_num" integer NOT NULL, "status_num" integer NOT NULL, "act_num" integer NOT NULL, "avatar_car_id" integer NULL, "avatar_club_id" integer NULL); (params None)
+2016-04-27 08:40:34,367 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ADD COLUMN "source_user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,367 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ALTER COLUMN "source_user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,378 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ADD COLUMN "target_user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,378 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ALTER COLUMN "target_user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,387 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ADD CONSTRAINT "User_userrelation_source_user_id_10f0526500e4b506_uniq" UNIQUE ("source_user_id", "target_user_id"); (params [])
+2016-04-27 08:40:34,389 [DEBUG] django.db.backends.schema: ALTER TABLE "User_user" ADD CONSTRAINT "a71690f5cfa12496ef40c71304d5a95a" FOREIGN KEY ("avatar_car_id") REFERENCES "Sportscar_sportcarownership" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,391 [DEBUG] django.db.backends.schema: ALTER TABLE "User_user" ADD CONSTRAINT "User_user_avatar_club_id_7b21f121efcabb45_fk_Club_club_id" FOREIGN KEY ("avatar_club_id") REFERENCES "Club_club" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,392 [DEBUG] django.db.backends.schema: CREATE INDEX "User_user_85672b9b" ON "User_user" ("avatar_car_id"); (params [])
+2016-04-27 08:40:34,393 [DEBUG] django.db.backends.schema: CREATE INDEX "User_user_12dd1664" ON "User_user" ("avatar_club_id"); (params [])
+2016-04-27 08:40:34,394 [DEBUG] django.db.backends.schema: CREATE INDEX "User_user_username_28dd6452812ae0af_like" ON "User_user" ("username" varchar_pattern_ops); (params [])
+2016-04-27 08:40:34,395 [DEBUG] django.db.backends.schema: CREATE INDEX "User_userrelation_c1aa6cff" ON "User_userrelation" ("source_user_id"); (params [])
+2016-04-27 08:40:34,396 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ADD CONSTRAINT "User_userrelati_source_user_id_17b22e5c46bae3b2_fk_User_user_id" FOREIGN KEY ("source_user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,397 [DEBUG] django.db.backends.schema: CREATE INDEX "User_userrelation_35cad009" ON "User_userrelation" ("target_user_id"); (params [])
+2016-04-27 08:40:34,398 [DEBUG] django.db.backends.schema: ALTER TABLE "User_userrelation" ADD CONSTRAINT "User_userrelati_target_user_id_2054e78bbdec3fee_fk_User_user_id" FOREIGN KEY ("target_user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,407 [DEBUG] django.db.backends.schema: CREATE TABLE "Location_location" ("id" serial NOT NULL PRIMARY KEY, "location" geometry(POINT,4326) NOT NULL, "description" varchar(255) NOT NULL); (params None)
+2016-04-27 08:40:34,411 [DEBUG] django.db.backends.schema: CREATE INDEX "Location_location_location_id" ON "Location_location" USING GIST ("location" ); (params [])
+2016-04-27 08:40:34,418 [DEBUG] django.db.backends.schema: CREATE TABLE "Location_usertracking" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "updated_at" timestamp with time zone NOT NULL, "location_available" boolean NOT NULL, "location_id" integer NOT NULL); (params None)
+2016-04-27 08:40:34,421 [DEBUG] django.db.backends.schema: ALTER TABLE "Location_usertracking" ADD CONSTRAINT "Location_u_location_id_59b5d516d9f669b8_fk_Location_location_id" FOREIGN KEY ("location_id") REFERENCES "Location_location" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,422 [DEBUG] django.db.backends.schema: CREATE INDEX "Location_usertracking_e274a5da" ON "Location_usertracking" ("location_id"); (params [])
+2016-04-27 08:40:34,431 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "description" text NOT NULL, "max_attend" integer NOT NULL CHECK ("max_attend" >= 0), "start_at" timestamp with time zone NOT NULL, "end_at" timestamp with time zone NOT NULL, "poster" varchar(100) NOT NULL, "closed" boolean NOT NULL, "closed_at" timestamp with time zone NOT NULL, "like_num" integer NOT NULL, "comment_num" integer NOT NULL, "created_at" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:34,438 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activitycomment" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "image" varchar(100) NOT NULL, "content" varchar(255) NOT NULL); (params None)
+2016-04-27 08:40:34,445 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activityinvitation" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "responsed" boolean NOT NULL, "agree" boolean NOT NULL); (params None)
+2016-04-27 08:40:34,452 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activityjoin" ("id" serial NOT NULL PRIMARY KEY, "approved" boolean NOT NULL, "created_at" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:34,462 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activitylikethrough" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "activity_id" integer NOT NULL); (params None)
+2016-04-27 08:40:34,465 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitylikethrough" ADD CONSTRAINT "Activity_a_activity_id_2cd5900a4c9ff782_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,466 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitylikethrough_f8a3193a" ON "Activity_activitylikethrough" ("activity_id"); (params [])
+2016-04-27 08:40:34,488 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitylikethrough" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,489 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitylikethrough" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,503 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityjoin" ADD COLUMN "activity_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,503 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityjoin" ALTER COLUMN "activity_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,518 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityjoin" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,519 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityjoin" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,537 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ADD COLUMN "activity_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,538 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ALTER COLUMN "activity_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,554 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ADD COLUMN "inviter_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,554 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ALTER COLUMN "inviter_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,653 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ADD COLUMN "target_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,654 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ALTER COLUMN "target_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,670 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ADD COLUMN "activity_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,671 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ALTER COLUMN "activity_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,688 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activitycomment_inform_of" ("id" serial NOT NULL PRIMARY KEY, "activitycomment_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("activitycomment_id", "user_id")); (params None)
+2016-04-27 08:40:34,710 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ADD COLUMN "response_to_id" integer NULL; (params [])
+2016-04-27 08:40:34,711 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ALTER COLUMN "response_to_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,728 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,728 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,748 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "allowed_club_id" integer NULL; (params [])
+2016-04-27 08:40:34,748 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "allowed_club_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,782 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity_inform_of" ("id" serial NOT NULL PRIMARY KEY, "activity_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("activity_id", "user_id")); (params None)
+2016-04-27 08:40:34,807 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity_liked_by" ("id" serial NOT NULL PRIMARY KEY, "activity_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("activity_id", "user_id")); (params None)
+2016-04-27 08:40:34,834 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "location_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,835 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "location_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,859 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,859 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,860 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitylikethrough_e8701ad4" ON "Activity_activitylikethrough" ("user_id"); (params [])
+2016-04-27 08:40:34,861 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitylikethrough" ADD CONSTRAINT "Activity_activityliket_user_id_3e3030db0c3e0d50_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,862 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityjoin_f8a3193a" ON "Activity_activityjoin" ("activity_id"); (params [])
+2016-04-27 08:40:34,863 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityjoin" ADD CONSTRAINT "Activity_a_activity_id_60e812d71ee12cdf_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,864 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityjoin_e8701ad4" ON "Activity_activityjoin" ("user_id"); (params [])
+2016-04-27 08:40:34,865 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityjoin" ADD CONSTRAINT "Activity_activityjoin_user_id_3fb90c039b7612d_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,866 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityinvitation_f8a3193a" ON "Activity_activityinvitation" ("activity_id"); (params [])
+2016-04-27 08:40:34,867 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ADD CONSTRAINT "Activity_a_activity_id_43933ca65cbef2da_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,868 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityinvitation_d9678107" ON "Activity_activityinvitation" ("inviter_id"); (params [])
+2016-04-27 08:40:34,869 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ADD CONSTRAINT "Activity_activityin_inviter_id_2144b3053d3873eb_fk_User_user_id" FOREIGN KEY ("inviter_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,870 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityinvitation_55e2df16" ON "Activity_activityinvitation" ("target_id"); (params [])
+2016-04-27 08:40:34,871 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityinvitation" ADD CONSTRAINT "Activity_activityinvi_target_id_37141bcdd8327a0_fk_User_user_id" FOREIGN KEY ("target_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,873 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitycomment_f8a3193a" ON "Activity_activitycomment" ("activity_id"); (params [])
+2016-04-27 08:40:34,874 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ADD CONSTRAINT "Activity_a_activity_id_757c4b08abe6a72f_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,876 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment_inform_of" ADD CONSTRAINT "D4d638a6ebc8129de0eeb1210951d5af" FOREIGN KEY ("activitycomment_id") REFERENCES "Activity_activitycomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,877 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment_inform_of" ADD CONSTRAINT "Activity_activitycomme_user_id_2badddeb41ca0781_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,878 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitycomment_inform_of_c1f3da39" ON "Activity_activitycomment_inform_of" ("activitycomment_id"); (params [])
+2016-04-27 08:40:34,879 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitycomment_inform_of_e8701ad4" ON "Activity_activitycomment_inform_of" ("user_id"); (params [])
+2016-04-27 08:40:34,880 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitycomment_6bd7b554" ON "Activity_activitycomment" ("response_to_id"); (params [])
+2016-04-27 08:40:34,881 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ADD CONSTRAINT "response_to_id_4d22e05e02d2e50a_fk_Activity_activitycomment_id" FOREIGN KEY ("response_to_id") REFERENCES "Activity_activitycomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,882 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitycomment_e8701ad4" ON "Activity_activitycomment" ("user_id"); (params [])
+2016-04-27 08:40:34,882 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitycomment" ADD CONSTRAINT "Activity_activitycomme_user_id_502df5e10e1a977d_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,884 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_cf0e38c1" ON "Activity_activity" ("allowed_club_id"); (params [])
+2016-04-27 08:40:34,885 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "Activity_activi_allowed_club_id_d236cf8660dd001_fk_Club_club_id" FOREIGN KEY ("allowed_club_id") REFERENCES "Club_club" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,886 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity_inform_of" ADD CONSTRAINT "Activity_a_activity_id_2e804ebc10d50f19_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,887 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity_inform_of" ADD CONSTRAINT "Activity_activity_info_user_id_1954e5c09189d90d_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,888 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_inform_of_f8a3193a" ON "Activity_activity_inform_of" ("activity_id"); (params [])
+2016-04-27 08:40:34,889 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_inform_of_e8701ad4" ON "Activity_activity_inform_of" ("user_id"); (params [])
+2016-04-27 08:40:34,890 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity_liked_by" ADD CONSTRAINT "Activity_a_activity_id_4aa93831f2126f3a_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,891 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity_liked_by" ADD CONSTRAINT "Activity_activity_like_user_id_4c0c30f7c7f847ac_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,893 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_liked_by_f8a3193a" ON "Activity_activity_liked_by" ("activity_id"); (params [])
+2016-04-27 08:40:34,893 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_liked_by_e8701ad4" ON "Activity_activity_liked_by" ("user_id"); (params [])
+2016-04-27 08:40:34,894 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_e274a5da" ON "Activity_activity" ("location_id"); (params [])
+2016-04-27 08:40:34,895 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "Activity_a_location_id_528b0afa15af8e67_fk_Location_location_id" FOREIGN KEY ("location_id") REFERENCES "Location_location" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,897 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_e8701ad4" ON "Activity_activity" ("user_id"); (params [])
+2016-04-27 08:40:34,898 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "Activity_activity_user_id_4dc4d544c73c8031_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:34,907 [DEBUG] django.db.backends.schema: CREATE TABLE "Chat_chatentity" ("id" serial NOT NULL PRIMARY KEY); (params None)
+2016-04-27 08:40:34,915 [DEBUG] django.db.backends.schema: CREATE TABLE "Chat_chatrecordbasic" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "chat_type" varchar(10) NOT NULL, "distinct_identifier" varchar(20) NOT NULL, "message_type" varchar(15) NOT NULL, "image" varchar(100) NULL, "text_content" varchar(255) NULL, "audio" varchar(100) NULL, "related_id" integer NOT NULL, "deleted" boolean NOT NULL, "read" boolean NOT NULL); (params None)
+2016-04-27 08:40:34,924 [DEBUG] django.db.backends.schema: CREATE TABLE "Chat_rosteritem" ("id" serial NOT NULL PRIMARY KEY); (params None)
+2016-04-27 08:40:34,955 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ADD COLUMN "sender_id" integer NOT NULL; (params [])
+2016-04-27 08:40:34,956 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ALTER COLUMN "sender_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:34,984 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ADD COLUMN "target_club_id" integer NULL; (params [])
+2016-04-27 08:40:34,985 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ALTER COLUMN "target_club_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,010 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ADD COLUMN "target_user_id" integer NULL; (params [])
+2016-04-27 08:40:35,011 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ALTER COLUMN "target_user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,011 [DEBUG] django.db.backends.schema: CREATE INDEX "Chat_chatrecordbasic_924b1846" ON "Chat_chatrecordbasic" ("sender_id"); (params [])
+2016-04-27 08:40:35,013 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ADD CONSTRAINT "Chat_chatrecordbasic_sender_id_636b1fe18f41e413_fk_User_user_id" FOREIGN KEY ("sender_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,014 [DEBUG] django.db.backends.schema: CREATE INDEX "Chat_chatrecordbasic_f2db3d20" ON "Chat_chatrecordbasic" ("target_club_id"); (params [])
+2016-04-27 08:40:35,015 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ADD CONSTRAINT "Chat_chatrecord_target_club_id_1f332463134a2635_fk_Club_club_id" FOREIGN KEY ("target_club_id") REFERENCES "Club_club" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,016 [DEBUG] django.db.backends.schema: CREATE INDEX "Chat_chatrecordbasic_35cad009" ON "Chat_chatrecordbasic" ("target_user_id"); (params [])
+2016-04-27 08:40:35,017 [DEBUG] django.db.backends.schema: ALTER TABLE "Chat_chatrecordbasic" ADD CONSTRAINT "Chat_chatrecord_target_user_id_1e7726467fa56af0_fk_User_user_id" FOREIGN KEY ("target_user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,045 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubjoining" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,046 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubjoining" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,076 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubauthrequest" ADD COLUMN "club_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,077 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubauthrequest" ALTER COLUMN "club_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,110 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_club" ADD COLUMN "host_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,111 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_club" ALTER COLUMN "host_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,161 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubjoining" ADD CONSTRAINT "Club_clubjoining_user_id_63a6fc53091d85ca_uniq" UNIQUE ("user_id", "club_id"); (params [])
+2016-04-27 08:40:35,164 [DEBUG] django.db.backends.schema: CREATE INDEX "Club_clubjoining_e8701ad4" ON "Club_clubjoining" ("user_id"); (params [])
+2016-04-27 08:40:35,165 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubjoining" ADD CONSTRAINT "Club_clubjoining_user_id_37aa6be2e9fd7382_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,167 [DEBUG] django.db.backends.schema: CREATE INDEX "Club_clubauthrequest_7115697a" ON "Club_clubauthrequest" ("club_id"); (params [])
+2016-04-27 08:40:35,167 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_clubauthrequest" ADD CONSTRAINT "Club_clubauthrequest_club_id_801a0a04a8b603e_fk_Club_club_id" FOREIGN KEY ("club_id") REFERENCES "Club_club" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,169 [DEBUG] django.db.backends.schema: CREATE INDEX "Club_club_8396f175" ON "Club_club" ("host_id"); (params [])
+2016-04-27 08:40:35,169 [DEBUG] django.db.backends.schema: ALTER TABLE "Club_club" ADD CONSTRAINT "Club_club_host_id_574d64a04b7a0f42_fk_User_user_id" FOREIGN KEY ("host_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,202 [DEBUG] django.db.backends.schema: ALTER TABLE "Location_usertracking" ADD COLUMN "user_id" integer NOT NULL UNIQUE; (params [])
+2016-04-27 08:40:35,203 [DEBUG] django.db.backends.schema: ALTER TABLE "Location_usertracking" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,204 [DEBUG] django.db.backends.schema: ALTER TABLE "Location_usertracking" ADD CONSTRAINT "Location_usertracking_user_id_58489b3d8f7c2240_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,213 [DEBUG] django.db.backends.schema: CREATE TABLE "News_news" ("id" serial NOT NULL PRIMARY KEY, "cover" varchar(100) NULL, "title" varchar(255) NOT NULL, "content" text NOT NULL, "video" varchar(100) NULL, "shared_times" integer NOT NULL CHECK ("shared_times" >= 0), "created_at" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:35,222 [DEBUG] django.db.backends.schema: CREATE TABLE "News_newscomment" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "image" varchar(100) NOT NULL, "content" varchar(255) NULL); (params None)
+2016-04-27 08:40:35,233 [DEBUG] django.db.backends.schema: CREATE TABLE "News_newslikethrough" ("id" serial NOT NULL PRIMARY KEY, "like_at" timestamp with time zone NOT NULL, "news_id" integer NOT NULL); (params None)
+2016-04-27 08:40:35,236 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newslikethrough" ADD CONSTRAINT "News_newslikethrough_news_id_5104764c0f1ba10_fk_News_news_id" FOREIGN KEY ("news_id") REFERENCES "News_news" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,238 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newslikethrough_c660c5da" ON "News_newslikethrough" ("news_id"); (params [])
+2016-04-27 08:40:35,274 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newslikethrough" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,274 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newslikethrough" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,314 [DEBUG] django.db.backends.schema: CREATE TABLE "News_newscomment_inform_of" ("id" serial NOT NULL PRIMARY KEY, "newscomment_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("newscomment_id", "user_id")); (params None)
+2016-04-27 08:40:35,355 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ADD COLUMN "news_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,356 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ALTER COLUMN "news_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,389 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ADD COLUMN "response_to_id" integer NULL; (params [])
+2016-04-27 08:40:35,390 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ALTER COLUMN "response_to_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,424 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,425 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,456 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newslikethrough_e8701ad4" ON "News_newslikethrough" ("user_id"); (params [])
+2016-04-27 08:40:35,458 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newslikethrough" ADD CONSTRAINT "News_newslikethrough_user_id_4f7eaf69bb0249d4_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,460 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment_inform_of" ADD CONSTRAINT "News_new_newscomment_id_5af9da750b0270a3_fk_News_newscomment_id" FOREIGN KEY ("newscomment_id") REFERENCES "News_newscomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,461 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment_inform_of" ADD CONSTRAINT "News_newscomment_infor_user_id_60eae14afa96823d_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,462 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newscomment_inform_of_5f1366c7" ON "News_newscomment_inform_of" ("newscomment_id"); (params [])
+2016-04-27 08:40:35,463 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newscomment_inform_of_e8701ad4" ON "News_newscomment_inform_of" ("user_id"); (params [])
+2016-04-27 08:40:35,464 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newscomment_c660c5da" ON "News_newscomment" ("news_id"); (params [])
+2016-04-27 08:40:35,465 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ADD CONSTRAINT "News_newscomment_news_id_602b45de941b9e5b_fk_News_news_id" FOREIGN KEY ("news_id") REFERENCES "News_news" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,466 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newscomment_6bd7b554" ON "News_newscomment" ("response_to_id"); (params [])
+2016-04-27 08:40:35,467 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ADD CONSTRAINT "News_new_response_to_id_7129e3c86288e0e6_fk_News_newscomment_id" FOREIGN KEY ("response_to_id") REFERENCES "News_newscomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,468 [DEBUG] django.db.backends.schema: CREATE INDEX "News_newscomment_e8701ad4" ON "News_newscomment" ("user_id"); (params [])
+2016-04-27 08:40:35,469 [DEBUG] django.db.backends.schema: ALTER TABLE "News_newscomment" ADD CONSTRAINT "News_newscomment_user_id_336b2bdeb2e9675f_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,551 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ADD COLUMN "car_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,551 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ALTER COLUMN "car_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,590 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,591 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,628 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcaridentificationrequestrecord" ADD COLUMN "ownership_id" integer NOT NULL; (params [])
+2016-04-27 08:40:35,628 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcaridentificationrequestrecord" ALTER COLUMN "ownership_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:35,667 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ADD CONSTRAINT "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq" UNIQUE ("user_id", "car_id"); (params [])
+2016-04-27 08:40:35,670 [DEBUG] django.db.backends.schema: CREATE INDEX "Sportscar_sportcarownership_cf8b1f8d" ON "Sportscar_sportcarownership" ("car_id"); (params [])
+2016-04-27 08:40:35,671 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ADD CONSTRAINT "Sportscar_spor_car_id_b259a3f79d1b693_fk_Sportscar_sportscar_id" FOREIGN KEY ("car_id") REFERENCES "Sportscar_sportscar" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,672 [DEBUG] django.db.backends.schema: CREATE INDEX "Sportscar_sportcarownership_e8701ad4" ON "Sportscar_sportcarownership" ("user_id"); (params [])
+2016-04-27 08:40:35,673 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcarownership" ADD CONSTRAINT "Sportscar_sportcarowner_user_id_68a00457162d865_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,674 [DEBUG] django.db.backends.schema: CREATE INDEX "Sportscar_sportcaridentificationrequestrecord_724e3a12" ON "Sportscar_sportcaridentificationrequestrecord" ("ownership_id"); (params [])
+2016-04-27 08:40:35,675 [DEBUG] django.db.backends.schema: ALTER TABLE "Sportscar_sportcaridentificationrequestrecord" ADD CONSTRAINT "D592de7bb868099b92198d27af4e1029" FOREIGN KEY ("ownership_id") REFERENCES "Sportscar_sportcarownership" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:35,720 [DEBUG] django.db.backends.schema: CREATE TABLE "Status_status" ("id" serial NOT NULL PRIMARY KEY, "image1" varchar(100) NULL, "image2" varchar(100) NULL, "image3" varchar(100) NULL, "image4" varchar(100) NULL, "image5" varchar(100) NULL, "image6" varchar(100) NULL, "image7" varchar(100) NULL, "image8" varchar(100) NULL, "image9" varchar(100) NULL, "content" varchar(255) NOT NULL, "created_at" timestamp with time zone NOT NULL, "deleted" boolean NOT NULL, "car_id" integer NULL); (params None)
+2016-04-27 08:40:35,725 [DEBUG] django.db.backends.schema: CREATE TABLE "Status_status_inform_of" ("id" serial NOT NULL PRIMARY KEY, "status_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("status_id", "user_id")); (params None)
+2016-04-27 08:40:35,894 [DEBUG] django.db.backends.schema: CREATE TABLE "Status_statuscomment" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "image" varchar(100) NOT NULL, "content" varchar(255) NULL, "response_to_id" integer NULL, "status_id" integer NOT NULL, "user_id" integer NOT NULL); (params None)
+2016-04-27 08:40:35,899 [DEBUG] django.db.backends.schema: CREATE TABLE "Status_statuscomment_inform_of" ("id" serial NOT NULL PRIMARY KEY, "statuscomment_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("statuscomment_id", "user_id")); (params None)
+2016-04-27 08:40:35,949 [DEBUG] django.db.backends.schema: CREATE TABLE "Status_statuslikethrough" ("id" serial NOT NULL PRIMARY KEY, "like_at" timestamp with time zone NOT NULL, "status_id" integer NOT NULL, "user_id" integer NOT NULL); (params None)
+2016-04-27 08:40:36,042 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ADD COLUMN "location_id" integer NULL; (params [])
+2016-04-27 08:40:36,043 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ALTER COLUMN "location_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,086 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:36,087 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,132 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuslikethrough" ADD CONSTRAINT "Status_statuslikethrough_user_id_7c4345bcfc5476ce_uniq" UNIQUE ("user_id", "status_id"); (params [])
+2016-04-27 08:40:36,134 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ADD CONSTRAINT "Status_status_car_id_7b2a2adb8f3c149_fk_Sportscar_sportscar_id" FOREIGN KEY ("car_id") REFERENCES "Sportscar_sportscar" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,135 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_status_cf8b1f8d" ON "Status_status" ("car_id"); (params [])
+2016-04-27 08:40:36,136 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status_inform_of" ADD CONSTRAINT "Status_status_in_status_id_59d18902bf3be402_fk_Status_status_id" FOREIGN KEY ("status_id") REFERENCES "Status_status" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,138 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status_inform_of" ADD CONSTRAINT "Status_status_inform_o_user_id_507194543a5198b5_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,139 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_status_inform_of_dc91ed4b" ON "Status_status_inform_of" ("status_id"); (params [])
+2016-04-27 08:40:36,140 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_status_inform_of_e8701ad4" ON "Status_status_inform_of" ("user_id"); (params [])
+2016-04-27 08:40:36,141 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuscomment" ADD CONSTRAINT "Stat_response_to_id_66b42b720d06d024_fk_Status_statuscomment_id" FOREIGN KEY ("response_to_id") REFERENCES "Status_statuscomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,142 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuscomment" ADD CONSTRAINT "Status_statuscomm_status_id_b32e6734e1e8620_fk_Status_status_id" FOREIGN KEY ("status_id") REFERENCES "Status_status" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,143 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuscomment" ADD CONSTRAINT "Status_statuscomment_user_id_3b707f6fd5536a5d_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,145 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuscomment_6bd7b554" ON "Status_statuscomment" ("response_to_id"); (params [])
+2016-04-27 08:40:36,146 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuscomment_dc91ed4b" ON "Status_statuscomment" ("status_id"); (params [])
+2016-04-27 08:40:36,147 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuscomment_e8701ad4" ON "Status_statuscomment" ("user_id"); (params [])
+2016-04-27 08:40:36,148 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuscomment_inform_of" ADD CONSTRAINT "St_statuscomment_id_74776a705ded9e72_fk_Status_statuscomment_id" FOREIGN KEY ("statuscomment_id") REFERENCES "Status_statuscomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,149 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuscomment_inform_of" ADD CONSTRAINT "Status_statuscomment_i_user_id_1115c7202ec3146f_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,150 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuscomment_inform_of_0eefb7d2" ON "Status_statuscomment_inform_of" ("statuscomment_id"); (params [])
+2016-04-27 08:40:36,151 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuscomment_inform_of_e8701ad4" ON "Status_statuscomment_inform_of" ("user_id"); (params [])
+2016-04-27 08:40:36,152 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuslikethrough" ADD CONSTRAINT "Status_statuslik_status_id_73b662f0bb23c847_fk_Status_status_id" FOREIGN KEY ("status_id") REFERENCES "Status_status" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,153 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_statuslikethrough" ADD CONSTRAINT "Status_statuslikethrou_user_id_4d3c22f247476242_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,154 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuslikethrough_dc91ed4b" ON "Status_statuslikethrough" ("status_id"); (params [])
+2016-04-27 08:40:36,155 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_statuslikethrough_e8701ad4" ON "Status_statuslikethrough" ("user_id"); (params [])
+2016-04-27 08:40:36,156 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_status_e274a5da" ON "Status_status" ("location_id"); (params [])
+2016-04-27 08:40:36,157 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ADD CONSTRAINT "Status_sta_location_id_1a0f10e646d6dd97_fk_Location_location_id" FOREIGN KEY ("location_id") REFERENCES "Location_location" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,159 [DEBUG] django.db.backends.schema: CREATE INDEX "Status_status_e8701ad4" ON "Status_status" ("user_id"); (params [])
+2016-04-27 08:40:36,160 [DEBUG] django.db.backends.schema: ALTER TABLE "Status_status" ADD CONSTRAINT "Status_status_user_id_1848c69bc14b2441_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:36,173 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_notification" ("id" serial NOT NULL PRIMARY KEY, "message_type" varchar(100) NOT NULL, "message_body" varchar(255) NOT NULL, "created_at" timestamp with time zone NOT NULL, "read" boolean NOT NULL, "flag" boolean NOT NULL, "checked" boolean NOT NULL); (params None)
+2016-04-27 08:40:36,181 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_registereddevices" ("id" serial NOT NULL PRIMARY KEY, "token" varchar(255) NULL, "device_id" varchar(255) NOT NULL, "device_type" varchar(50) NOT NULL, "update_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL); (params None)
+2016-04-27 08:40:36,243 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_registereddevices" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:36,244 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_registereddevices" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,292 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_act_id" integer NULL; (params [])
+2016-04-27 08:40:36,292 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_act_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,342 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_act_comment_id" integer NULL; (params [])
+2016-04-27 08:40:36,343 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_act_comment_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,393 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_act_invite_id" integer NULL; (params [])
+2016-04-27 08:40:36,394 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_act_invite_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,446 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_act_join_id" integer NULL; (params [])
+2016-04-27 08:40:36,446 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_act_join_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,498 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_club_id" integer NULL; (params [])
+2016-04-27 08:40:36,499 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_club_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,551 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_news_id" integer NULL; (params [])
+2016-04-27 08:40:36,551 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_news_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,605 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_news_comment_id" integer NULL; (params [])
+2016-04-27 08:40:36,606 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_news_comment_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,657 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_own_id" integer NULL; (params [])
+2016-04-27 08:40:36,657 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_own_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,711 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_status_id" integer NULL; (params [])
+2016-04-27 08:40:36,712 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_status_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,765 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_status_comment_id" integer NULL; (params [])
+2016-04-27 08:40:36,765 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_status_comment_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:36,945 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "related_user_id" integer NULL; (params [])
+2016-04-27 08:40:36,946 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "related_user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:37,002 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD COLUMN "target_id" integer NOT NULL; (params [])
+2016-04-27 08:40:37,002 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ALTER COLUMN "target_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:37,003 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_registereddevices_e8701ad4" ON "Notification_registereddevices" ("user_id"); (params [])
+2016-04-27 08:40:37,005 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_registereddevices" ADD CONSTRAINT "Notification_registere_user_id_63b461493a81aa30_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,006 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_88e52962" ON "Notification_notification" ("related_act_id"); (params [])
+2016-04-27 08:40:37,007 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "Notific_related_act_id_13ac6f5ac686c3c5_fk_Activity_activity_id" FOREIGN KEY ("related_act_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,009 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_b78ee9a7" ON "Notification_notification" ("related_act_comment_id"); (params [])
+2016-04-27 08:40:37,010 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "bbed9bee6754e72b5de3d10690b1803e" FOREIGN KEY ("related_act_comment_id") REFERENCES "Activity_activitycomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,011 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_7d5505ae" ON "Notification_notification" ("related_act_invite_id"); (params [])
+2016-04-27 08:40:37,012 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "D7a8a6fd960bf67bb0ad5a9c24a57296" FOREIGN KEY ("related_act_invite_id") REFERENCES "Activity_activityinvitation" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,013 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_e32d6521" ON "Notification_notification" ("related_act_join_id"); (params [])
+2016-04-27 08:40:37,014 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "D1047da8f55f5245098c3e8154cbeb46" FOREIGN KEY ("related_act_join_id") REFERENCES "Activity_activityjoin" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,015 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_c5750af4" ON "Notification_notification" ("related_club_id"); (params [])
+2016-04-27 08:40:37,017 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "Notification_n_related_club_id_56f53f898ae4ab1a_fk_Club_club_id" FOREIGN KEY ("related_club_id") REFERENCES "Club_club" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,018 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_6195f406" ON "Notification_notification" ("related_news_id"); (params [])
+2016-04-27 08:40:37,019 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "Notification_n_related_news_id_568bed9e71eef6d3_fk_News_news_id" FOREIGN KEY ("related_news_id") REFERENCES "News_news" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,021 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_5d9299ca" ON "Notification_notification" ("related_news_comment_id"); (params [])
+2016-04-27 08:40:37,021 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "D9057e03550e1f203fe1ed7f263d0316" FOREIGN KEY ("related_news_comment_id") REFERENCES "News_newscomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,023 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_998abb4b" ON "Notification_notification" ("related_own_id"); (params [])
+2016-04-27 08:40:37,024 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "f270bed976409ad2ae117f6a18b57c6d" FOREIGN KEY ("related_own_id") REFERENCES "Sportscar_sportcarownership" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,025 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_33e0aec1" ON "Notification_notification" ("related_status_id"); (params [])
+2016-04-27 08:40:37,026 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "Notifica_related_status_id_682901cfaee50a32_fk_Status_status_id" FOREIGN KEY ("related_status_id") REFERENCES "Status_status" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,028 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_2afc23f5" ON "Notification_notification" ("related_status_comment_id"); (params [])
+2016-04-27 08:40:37,029 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "ad23d023de32263d5875c04b11c3dd2b" FOREIGN KEY ("related_status_comment_id") REFERENCES "Status_statuscomment" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,030 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_78df12e4" ON "Notification_notification" ("related_user_id"); (params [])
+2016-04-27 08:40:37,031 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "Notification_no_related_user_id_11f782a89e38e49_fk_User_user_id" FOREIGN KEY ("related_user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,032 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_notification_55e2df16" ON "Notification_notification" ("target_id"); (params [])
+2016-04-27 08:40:37,033 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notification" ADD CONSTRAINT "Notification_notific_target_id_456198757e4c2ed5_fk_User_user_id" FOREIGN KEY ("target_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,045 [DEBUG] django.db.backends.schema: CREATE TABLE "SettingCenter_settingcenter" ("id" serial NOT NULL PRIMARY KEY, "notification_accept" boolean NOT NULL, "notification_sound" boolean NOT NULL, "notification_shake" boolean NOT NULL, "location_visible_to" varchar(10) NOT NULL, "accept_invitation" varchar(20) NOT NULL, "show_on_map" boolean NOT NULL); (params None)
+2016-04-27 08:40:37,053 [DEBUG] django.db.backends.schema: CREATE TABLE "SettingCenter_suggestion" ("id" serial NOT NULL PRIMARY KEY, "content" varchar(255) NOT NULL, "created_at" timestamp with time zone NOT NULL, "read" boolean NOT NULL); (params None)
+2016-04-27 08:40:37,115 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_suggestion" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2016-04-27 08:40:37,116 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_suggestion" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:37,170 [DEBUG] django.db.backends.schema: CREATE TABLE "SettingCenter_settingcenter_blacklist" ("id" serial NOT NULL PRIMARY KEY, "settingcenter_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("settingcenter_id", "user_id")); (params None)
+2016-04-27 08:40:37,231 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_settingcenter" ADD COLUMN "user_id" integer NOT NULL UNIQUE; (params [])
+2016-04-27 08:40:37,232 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_settingcenter" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2016-04-27 08:40:37,233 [DEBUG] django.db.backends.schema: CREATE INDEX "SettingCenter_suggestion_e8701ad4" ON "SettingCenter_suggestion" ("user_id"); (params [])
+2016-04-27 08:40:37,233 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_suggestion" ADD CONSTRAINT "SettingCenter_suggesti_user_id_7982fe6933f558a9_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,235 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_settingcenter_blacklist" ADD CONSTRAINT "D36a7bc2cb52359608156185d3b7dda4" FOREIGN KEY ("settingcenter_id") REFERENCES "SettingCenter_settingcenter" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,236 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_settingcenter_blacklist" ADD CONSTRAINT "SettingCenter_settingc_user_id_155cfe5b9f3a49e3_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,237 [DEBUG] django.db.backends.schema: CREATE INDEX "SettingCenter_settingcenter_blacklist_7fbdc361" ON "SettingCenter_settingcenter_blacklist" ("settingcenter_id"); (params [])
+2016-04-27 08:40:37,238 [DEBUG] django.db.backends.schema: CREATE INDEX "SettingCenter_settingcenter_blacklist_e8701ad4" ON "SettingCenter_settingcenter_blacklist" ("user_id"); (params [])
+2016-04-27 08:40:37,239 [DEBUG] django.db.backends.schema: ALTER TABLE "SettingCenter_settingcenter" ADD CONSTRAINT "SettingCenter_settingc_user_id_6042da030aca1857_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,250 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-04-27 08:40:37,261 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" ADD CONSTRAINT "django_content_type_app_label_45f3b1d93ec8c61c_uniq" UNIQUE ("app_label", "model"); (params [])
+2016-04-27 08:40:37,335 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" serial NOT NULL PRIMARY KEY, "action_time" timestamp with time zone NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL, "user_id" integer NOT NULL); (params None)
+2016-04-27 08:40:37,340 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" ADD CONSTRAINT "djan_content_type_id_697914295151027a_fk_django_content_type_id" FOREIGN KEY ("content_type_id") REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,341 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" ADD CONSTRAINT "django_admin_log_user_id_52fdd58701c5f563_fk_User_user_id" FOREIGN KEY ("user_id") REFERENCES "User_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,342 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-04-27 08:40:37,343 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-04-27 08:40:37,467 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" ALTER COLUMN "name" DROP NOT NULL; (params [])
+2016-04-27 08:40:37,533 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" DROP COLUMN "name" CASCADE; (params [])
+2016-04-27 08:40:37,602 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL, "codename" varchar(100) NOT NULL, UNIQUE ("content_type_id", "codename")); (params None)
+2016-04-27 08:40:37,672 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(80) NOT NULL UNIQUE); (params None)
+2016-04-27 08:40:37,675 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group_permissions" ("id" serial NOT NULL PRIMARY KEY, "group_id" integer NOT NULL, "permission_id" integer NOT NULL, UNIQUE ("group_id", "permission_id")); (params None)
+2016-04-27 08:40:37,751 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" ADD CONSTRAINT "auth_content_type_id_508cf46651277a81_fk_django_content_type_id" FOREIGN KEY ("content_type_id") REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,753 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-04-27 08:40:37,754 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_name_253ae2a6331666e8_like" ON "auth_group" ("name" varchar_pattern_ops); (params [])
+2016-04-27 08:40:37,754 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_group_permissions" ADD CONSTRAINT "auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id" FOREIGN KEY ("group_id") REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,756 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_group_permissions" ADD CONSTRAINT "auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id" FOREIGN KEY ("permission_id") REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2016-04-27 08:40:37,757 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id"); (params [])
+2016-04-27 08:40:37,758 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id"); (params [])
+2016-04-27 08:40:37,829 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" ALTER COLUMN "name" TYPE varchar(255); (params [])
+2016-04-27 08:40:38,207 [DEBUG] django.db.backends.schema: CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" timestamp with time zone NOT NULL); (params None)
+2016-04-27 08:40:38,214 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date"); (params [])
+2016-04-27 08:40:38,216 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_session_key_461cfeaa630ca218_like" ON "django_session" ("session_key" varchar_pattern_ops); (params [])
+2016-04-27 08:41:54,647 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 13:14:18,291 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 13:27:54,912 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 13:46:07,969 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:05:20,972 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:05:21,809 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:08:31,831 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:08:54,253 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:17:18,409 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:23:40,458 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:32:53,057 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:33:16,509 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:33:26,116 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:33:26,373 [DEBUG] django.db.backends.schema: ALTER TABLE "User_user" ADD COLUMN "register_finished" boolean DEFAULT %s NOT NULL; (params [False])
+2016-04-27 14:33:26,387 [DEBUG] django.db.backends.schema: ALTER TABLE "User_user" ALTER COLUMN "register_finished" DROP DEFAULT; (params [])
+2016-04-27 14:33:36,821 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:33:37,668 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:35:27,638 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:36:44,812 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:39:44,228 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:41:18,965 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:41:19,808 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:42:04,551 [ERROR] User.views: fatal error!
+2016-04-27 14:43:52,338 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:48:35,061 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:54:52,144 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:57:07,564 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 14:59:53,539 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:00:20,154 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:00:51,624 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:01:17,112 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:02:40,457 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:02:42,393 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:03:16,893 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:03:44,365 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:04:18,950 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:04:38,259 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:05:00,656 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:11:37,411 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:12:25,639 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:13:37,639 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:13:38,526 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:14:49,695 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:15:08,026 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:17:23,326 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:17:57,804 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:20:53,548 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio
+2016-04-27 15:37:17,994 [DEBUG] apnsclient.transport: New session, WB: 2048b/20s, RB: 2048b/20s, TT: 3s, Pool: apnsclient.backends.stdio

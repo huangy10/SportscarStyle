@@ -3011,3 +3011,307 @@ Traceback (most recent call last):
     result["liked"] = StatusLikeThrough.objects.filter(status=self, user=user).exists()
 NameError: global name 'user' is not defined
 2016-04-17 02:38:24,023 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-20 17:58:24,203 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-21 02:51:05,164 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 05:16:59,016 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 05:44:00,115 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-21 06:29:42,490 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 06:56:21,733 [WARNING] django.request: Not Found: /
+2016-04-21 07:06:12,135 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-21 07:11:28,713 [WARNING] django.request: Not Found: /
+2016-04-21 07:41:55,844 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 08:43:25,588 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-21 08:54:57,931 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 11:20:23,773 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 11:48:05,362 [WARNING] django.request: Not Found: /zecmd/zecmd.jsp
+2016-04-21 12:49:57,618 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 14:04:38,229 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-21 15:13:21,283 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-21 15:26:08,566 [WARNING] django.request: Not Found: /
+2016-04-27 14:08:33,801 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 96, in account_register
+    device_id = data('device_id', None)
+TypeError: 'dict' object is not callable
+2016-04-27 14:11:01,101 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 100, in account_register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/forms.py", line 29, in clean
+    auth_code = self.cleaned_data['auth_code']
+KeyError: 'auth_code'
+2016-04-27 14:13:32,903 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 101, in account_register
+    user = form.save()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/models.py", line 463, in save
+    construct=False)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/models.py", line 105, in save_instance
+    instance.save()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: null value in column "birth_date" violates not-null constraint
+DETAIL:  Failing row contains (1, huang9040601, null, 15201525181, , , , null, Aries, , , , f, 0, 0, 0, 0, null, null).
+
+2016-04-27 14:32:41,480 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 101, in account_register
+    user = form.save()
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/forms.py", line 46, in save
+    gender='m'
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 346, in create
+    obj = self.model(**kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 480, in __init__
+    raise TypeError("'%s' is an invalid keyword argument for this function" % list(kwargs)[0])
+TypeError: 'birth_data' is an invalid keyword argument for this function
+2016-04-27 14:32:55,355 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 101, in account_register
+    user = form.save()
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/forms.py", line 46, in save
+    gender='m'
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column "register_finished" of relation "User_user" does not exist
+LINE 1: ...User_user" ("password", "last_login", "username", "register_...
+                                                             ^
+
+2016-04-27 14:33:39,960 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 102, in account_register
+    auth.login(request, user)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/__init__.py", line 112, in login
+    request.session[BACKEND_SESSION_KEY] = user.backend
+AttributeError: 'User' object has no attribute 'backend'
+2016-04-27 14:42:04,558 [ERROR] django.request: Internal Server Error: /account/register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 104, in account_register
+    auth.login(request, user)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/__init__.py", line 111, in login
+    request.session[SESSION_KEY] = user._meta.pk.value_to_string(user)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/utils/functional.py", line 227, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute '_meta'
+2016-04-27 14:54:25,830 [WARNING] django.request: Not Found: /account/logout
+2016-04-27 14:57:17,575 [ERROR] django.request: Internal Server Error: /account/logout
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 80, in account_logout
+    RegisteredDevices.objects.filter(user=request.user, token=token)\
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1194, in build_filter
+    lookups, value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 1740, in get_lookup_constraint
+    lookup_class(target.get_col(alias, source), val), AND)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 96, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 134, in get_prep_lookup
+    return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 727, in get_prep_lookup
+    return self.get_prep_value(value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 985, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string or a number, not 'AnonymousUser'
+2016-04-27 14:59:07,792 [WARNING] django.request: Not Found: /account/login
+2016-04-27 15:00:00,811 [ERROR] django.request: Internal Server Error: /account/login
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 37, in account_login
+    device_id = data('device_id', None)
+TypeError: 'dict' object is not callable
+2016-04-27 15:00:30,509 [ERROR] django.request: Internal Server Error: /account/logout
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 80, in account_logout
+    RegisteredDevices.objects.filter(user=request.user, token=token)\
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1194, in build_filter
+    lookups, value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 1740, in get_lookup_constraint
+    lookup_class(target.get_col(alias, source), val), AND)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 96, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 134, in get_prep_lookup
+    return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 727, in get_prep_lookup
+    return self.get_prep_value(value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 985, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string or a number, not 'AnonymousUser'
+2016-04-27 15:01:02,288 [ERROR] django.request: Internal Server Error: /account/logout
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 79, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py", line 81, in account_logout
+    RegisteredDevices.objects.filter(user=request.user, token=token)\
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1194, in build_filter
+    lookups, value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 1740, in get_lookup_constraint
+    lookup_class(target.get_col(alias, source), val), AND)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 96, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/lookups.py", line 134, in get_prep_lookup
+    return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 727, in get_prep_lookup
+    return self.get_prep_value(value)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 985, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string or a number, not 'AnonymousUser'
+2016-04-27 15:02:48,771 [ERROR] django.request: Internal Server Error: /account/logout
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 75, in wrapper
+    if not request.user.is_authenticated():
+AttributeError: 'NoneType' object has no attribute 'is_authenticated'

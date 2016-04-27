@@ -375,6 +375,7 @@ def output_to_plist():
 
 def main():
     print "Task Begin"
+    index_resolver()
     start_car_detail_resolver()
     start_image_downloader()
     print "Task Done"

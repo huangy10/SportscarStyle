@@ -137,7 +137,9 @@ def send_notification_handler(sender, **kwargs):
 
 
 class RegisteredDevices(models.Model):
-    token = models.CharField(max_length=255)
+    token = models.CharField(max_length=255, verbose_name=u"推送使用的token", null=True, blank=True)
+    device_id = models.CharField(max_length=255, verbose_name=u"设备的id")
+    device_type = models.CharField(max_length=50)
     update_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="devices")
     is_active = models.BooleanField(default=True)
