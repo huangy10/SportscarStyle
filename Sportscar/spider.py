@@ -378,6 +378,7 @@ def main():
     index_resolver()
     start_car_detail_resolver()
     start_image_downloader()
+    start_logo_downloader()
     print "Task Done"
 
 if __name__ == "__main__":

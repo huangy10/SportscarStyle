@@ -67,7 +67,7 @@ class Status(models.Model):
             statusID=self.id,
             images=self.images,
             content=self.content,
-            user=self.user.profile.complete_dict_description(),
+            user=self.user.dict_description(detail=True),
             created_at=time_to_string(self.created_at)
         )
         if self.car is not None:
@@ -106,7 +106,7 @@ class StatusComment(models.Model):
             created_at=time_to_string(self.created_at),
             image=self.image.url if self.image else "",
             content=self.content,
-            user=self.user.profile.simple_dict_description(),
+            user=self.user.dict_description(),
             response_to=self.response_to_id
         )
 

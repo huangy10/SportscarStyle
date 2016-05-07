@@ -3,34 +3,36 @@ import redis
 REDIS_DB_INDEX = 10
 r = redis.Redis(db=REDIS_DB_INDEX, host='localhost', port=6379)
 
+class UnreadUtil(object):
 
-def incr_notif(key, badge):
-    notif_num = r.incrby("notif:{}".format(key), badge)
-    chat_num = r.get("chat:{}".format(key))
-    if chat_num is None:
-        chat_num = 0
-    else:
-        chat_num = int(chat_num)
-    return notif_num + chat_num
+    r = redis.Redis(db=REDIS_DB_INDEX, host='localhost', port=6379)
 
+    @classmethod
+    def incr(cls, key):
+        """
+        :param key: id of the user
+        :return:
+        """
+        key = "unread:{}".format(key)
+        return r.incr(key)
 
-def incr_chat(key, badge):
-    chat_num = r.incrby("chat:{}".format(key), badge)
-    notif_num = r.get("notif:{}".format(key))
-    if notif_num is None:
-        notif_num = 0
-    else:
-        notif_num = int(notif_num)
-    return chat_num + notif_num
+    @classmethod
+    def get(cls, key):
+        key = "unread:{}".format(key)
+        return r.get(key)
 
+    @classmethod
+    def clear(cls, key):
+        key = "unread:{}".format(key)
+        r.delete(key)
 
-def clear_notif(key):
-    r.delete("notif:{}".format(key))
-    chat_num = r.get("chat:{}".format(key))
-    if chat_num is None:
-        chat_num = 0
-    else:
-        chat_num = int(chat_num)
-    return chat_num
+    @classmethod
+    def set(cls, key, badge):
+        cur = cls.get(key)
+        if badge < cur:
+            cls._set(key, badge)
 
-
+    @classmethod
+    def _set(cls, key, value):
+        key = "unread:{}".format(key)
+        r.set(key, value)

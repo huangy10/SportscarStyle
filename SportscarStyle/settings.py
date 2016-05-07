@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     # 'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_jinja',
     # 'Profile',
     'User',
     'Sportscar',
@@ -49,8 +48,7 @@ INSTALLED_APPS = (
     'SettingCenter',
     'Activity',
     'Chat',
-    'Notification',
-
+    'Notification'
 )
 
 MIDDLEWARE_CLASSES = (

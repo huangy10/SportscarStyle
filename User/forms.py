@@ -5,7 +5,7 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import User
+from .models import User, CorporationAuthenticationRequest
 from .models import AuthenticationCode
 from Profile.utils import star_sign_from_date
 
@@ -106,5 +106,11 @@ class PasswordResetForm(forms.ModelForm):
             self.user.save()
         return self.user
 
+
+class CorporationUserApplicationCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = CorporationAuthenticationRequest
+        fields = ("license_image", "id_card_image", 'other_info_image', 'user')
 
 

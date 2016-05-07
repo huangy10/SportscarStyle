@@ -59,7 +59,7 @@ class User(AbstractBaseUser):
     # Profile information
     nick_name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to=profile_avatar)
-    avatar_club = models.ForeignKey('Club.Club', null=True, blank=True, related_name="+")
+    avatar_club = models.ForeignKey('Club.ClubJoining', null=True, blank=True, related_name="+")
     avatar_car = models.ForeignKey('Sportscar.SportCarOwnership', null=True, blank=True, related_name="+")
     gender = models.CharField(max_length=1, choices=(
         ('m', u'男'),
@@ -104,6 +104,7 @@ class User(AbstractBaseUser):
     follows_num = models.IntegerField(default=0, verbose_name=u"关注数量")
     status_num = models.IntegerField(default=0, verbose_name=u"动态数量")
     act_num = models.IntegerField(default=0, verbose_name=u"活动数量")
+    most_recent_status = models.ForeignKey('Status.Status', blank=True, null=True, related_name='+')
 
     # User Relations
     fans = models.ManyToManyField(
@@ -131,19 +132,22 @@ class User(AbstractBaseUser):
     def __str__(self):
         return smart_str(self.nick_name)
 
-    def dict_description(self, basic=True):
+    def dict_description(self, detail=False, host=None):
         result = dict(
             ssid=self.id,
             nick_name=self.nick_name,
-            avatar=self.avatar.url
+            avatar=self.avatar.url,
         )
-        if basic:
+        if self.most_recent_status is not None:
+            result.update(recent_status_des=self.most_recent_status.content)
+        if not detail:
             return result
         if self.avatar_car is not None:
             result.update(avatar_car=self.avatar_car.dict_description())
         if self.avatar_club is not None:
             result.update(avatar_club=self.avatar_club.dict_description())
         result.update(
+            ssid=self.id,
             phone_num=self.username,
             gender=self.get_gender_display(),
             age=self.age,
@@ -152,7 +156,12 @@ class User(AbstractBaseUser):
             signature=self.signature,
             job=self.job,
             corporation_identified=self.corporation_identified,
+            follow_num=self.follows_num,
+            fans_num=self.fans_num,
+            status_num=self.status_num,
         )
+        if host is not None and host.id != self.id:
+            result.update(followed=UserRelation.objects.filter(source_user=host, target_user=self).exists())
         return result
 
     def get_full_name(self):
@@ -184,6 +193,13 @@ class UserRelation(models.Model):
         except ObjectDoesNotExist:
             return None
 
+    def dict_description(self, reversed=False):
+        result = dict(
+            user=self.source_user.dict_description() if reversed else self.target_user.dict_description(),
+            created_at=self.created_at,
+        )
+        return result
+
     class Meta:
         ordering = ("-created_at", )
         unique_together = ("source_user", "target_user")
@@ -191,6 +207,12 @@ class UserRelation(models.Model):
 
 @receiver(post_delete, sender=UserRelation)
 def auto_maintain_relation(sender, instance, **kwargs):
+    source = instance.source_user
+    target = instance.target_user
+    source.follows_num -= 1
+    target.fans_num -= 1
+    source.save()
+    target.save()
     reverse_relation = instance.reverse_relation
     if reverse_relation is not None:
         reverse_relation.is_friend = False
@@ -200,6 +222,12 @@ def auto_maintain_relation(sender, instance, **kwargs):
 @receiver(post_save, sender=UserRelation)
 def auto_maintain_relation_create(sender, instance, created, **kwargs):
     if created:
+        source = instance.source_user
+        target = instance.target_user
+        source.follows_num += 1
+        target.fans_num += 1
+        source.save()
+        target.save()
         reverse_relation = instance.reverse_relation
         if reverse_relation is not None:
             reverse_relation.is_friend = True
@@ -270,3 +298,21 @@ class AuthenticationCode(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class CorporationAuthenticationRequest(models.Model):
+
+    user = models.ForeignKey(User, verbose_name=u'申请人')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    license_image = models.ImageField(upload_to=auth_image, verbose_name=u'营业执照')
+    id_card_image = models.ImageField(upload_to=auth_image, verbose_name=u'身份证图片')
+    other_info_image = models.ImageField(upload_to=auth_image, verbose_name=u'补充材料')
+
+    approved = models.BooleanField(default=False, verbose_name=u'是否已经批准')
+    revoked = models.BooleanField(default=False, verbose_name=u'申请是否已经驳回')
+
+    class Meta:
+        verbose_name = u'企业申请'
+        verbose_name_plural = u'企业申请'
+        ordering = ("-created_at", )

@@ -126,11 +126,11 @@ class Club(models.Model):
             id=self.id, club_logo=self.logo.url,
             club_name=self.name, description=self.description,
             identified=self.identified, city=self.city,
-            host=self.host.profile.simple_dict_description()
+            host=self.host.dict_description()
         )
         if show_members:
             result.update(
-                members=map(lambda x: x.profile.simple_dict_description(), self.members.all())
+                members=map(lambda x: x.dict_description(), self.members.all())
             )
         if show_setting:
             result.update(dict(

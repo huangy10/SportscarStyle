@@ -13,24 +13,11 @@ from .tasks import clear_notification_unread_num
 
 @http_decorators.require_GET
 @login_first
-@page_separator_loader
-def notification_list(request, date_threshold, op_type, limit):
-    """ 获取当前用户相关的所有消息内容,复合标准的分页参数标准
-     :param date_threshold  时间分割阈值
-     :param op_type         操作类型,more/latest
-     :param limit           最大获取的条目数量
+def notification_list(request):
+    """ 获取当前用户相关的所有消息内容
     """
-    date_fix = request.GET.get("date_fix", None)
-    if date_fix is not None and date_fix != "":
-        try:
-            date_fix = Notification.objects.get(id=date_fix).created_at
-            date_threshold = date_fix
-        except ObjectDoesNotExist:
-            pass
-    if op_type == 'latest':
-        date_filter = Q(created_at__gt=date_threshold)
-    else:
-        date_filter = Q(created_at__lt=date_threshold)
+    skips = int(request.GET["skips"])
+    limit = int(request.GET["limit"])
 
     notif = Notification.objects.select_related(
         "related_user__profile",
@@ -40,7 +27,7 @@ def notification_list(request, date_threshold, op_type, limit):
         "related_status_comment",
         "related_news",
         "related_news_comment"
-    ).order_by("-created_at").filter(date_filter, target=request.user)[0:limit]
+    ).order_by("-created_at").filter(target=request.user)[skips:(limit + skips)]
     return JsonResponse(
         dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
 

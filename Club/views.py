@@ -10,9 +10,9 @@ from django.db.models import Count, Case, When, Sum, IntegerField,BooleanField
 from .forms import ClubCreateForm
 from .models import Club, ClubJoining, ClubAuthRequest
 from custom.utils import post_data_loader, login_first
-from Chat.models import ChatRecordBasic
 from Activity.models import Activity
 from Notification.signal import send_notification
+from Chat.models import ChatEntity
 # Create your views here.
 
 
@@ -37,12 +37,15 @@ def club_create(request):
             ClubJoining.objects.create(club=club, user=user, nick_name=user.profile.nick_name)
         # Also add the host as a member of the club
         ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.profile.nick_name)
-        try:
-            ChatRecordBasic.objects.create(target_club=club, chat_type="group", message_type="placeholder",
-                                       sender=request.user)
-        except Exception, e:
-            print e
-        return JsonResponse(dict(success=True, club=club.dict_description(show_members_num=True)))
+        entity, _ = ChatEntity.objects.get_or_create(host=request.user, club=club)
+        # try:
+        #     ChatRecordBasic.objects.create(target_club=club, chat_type="group", message_type="placeholder",
+        #                                sender=request.user)
+        # except Exception, e:
+        #     print e
+        result = club.dict_description(show_members_num=True)
+        result.update(roster=entity.dict_description())
+        return JsonResponse(dict(success=True, club=result))
     else:
         return JsonResponse(dict(success=False))
 

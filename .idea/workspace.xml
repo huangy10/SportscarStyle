@@ -2,707 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab0b551-2c12-4d23-b0b0-305e7ba2be2e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Activity/migrations/0002_auto_20160427_0840.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Club/migrations/0002_auto_20160427_0840.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/News/migrations/0002_auto_20160427_0840.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Notification/migrations/0002_auto_20160427_0840.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SettingCenter/migrations/0002_auto_20160427_0840.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Sportscar/migrations/0002_auto_20160427_0840.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/admin.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/auth.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/forms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/middleware.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/migrations/0001_initial.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/urls.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/utils.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/views.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0002_auto_20151110_0859.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0003_activity_poster.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0005_activity_created_at.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0006_auto_20160205_0720.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0007_activity_user.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0008_auto_20160216_0839.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0009_auto_20160217_1050.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0010_auto_20160217_1101.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0011_auto_20160217_1102.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0012_auto_20160219_1411.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0013_auto_20160219_1411.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0014_auto_20160319_0844.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Activity/migrations/0015_auto_20160319_0859.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0002_auto_20160123_0857.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0003_auto_20160123_0857.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0004_auto_20160131_0604.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0006_chatrecordbasic_distinct_identifier.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0007_chatrecordbasic_read.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0008_auto_20160226_1508.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0009_auto_20160226_1511.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0010_auto_20160229_0948.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0011_auto_20160229_0953.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0012_auto_20160302_1241.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0013_auto_20160302_1303.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0014_auto_20160316_1212.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/migrations/0015_auto_20160316_1217.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0002_auto_20160226_1428.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0003_auto_20160228_1212.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0004_clubjoining_chat_sync_date.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0005_auto_20160229_1234.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0006_auto_20160302_1440.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0007_auto_20160306_0404.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0008_clubauthrequest.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0009_auto_20160324_1344.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Club/migrations/0010_auto_20160324_1348.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Location/migrations/0002_auto_20151110_1418.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Location/migrations/0003_auto_20160225_0821.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/News/migrations/0002_auto_20151016_0430.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/News/migrations/0003_auto_20160102_1357.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Notification/migrations/0002_auto_20160307_0346.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Notification/migrations/0003_auto_20160312_0817.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Notification/migrations/0004_auto_20160405_0657.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Notification/migrations/0005_notification_checked.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0002_auto_20150930_0455.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0003_auto_20151003_0509.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0004_auto_20151003_0756.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0005_userprofile_avatar_club.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0006_auto_20151028_0729.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0007_auto_20151029_1357.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0008_auto_20151029_1538.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0009_auto_20151110_0857.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0010_friendship.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0011_auto_20160121_0556.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0012_auto_20160121_0613.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0013_userrelationsetting.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0014_userrelationsetting_blacklist_at.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0015_auto_20160211_1453.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0016_auto_20160212_1114.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Profile/migrations/0017_auto_20160319_0844.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/SettingCenter/migrations/0002_auto_20160212_0400.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0002_auto_20151003_0843.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0003_auto_20151005_0053.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0004_sportcaridentificationrequestrecord.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0005_sportscar_body.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0006_auto_20160302_0829.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0007_auto_20160323_1208.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0008_auto_20160323_1211.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0009_auto_20160323_1214.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0010_sportscar_remote_image.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0011_auto_20160323_1543.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0012_auto_20160324_0856.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sportscar/migrations/0013_manufacturer_logo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Status/migrations/0002_auto_20160120_0754.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Status/migrations/0003_status_deleted.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/00aaea5390d148519d6778a35d87e17d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/02645f21b60c4797ba33db7174960098.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/1a1d8cf7017249a0995d70e6758aeb7d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/242f0035b8f54245a6adc4b86e273459.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/634aacd9bbef4f178b5fe5457c109df8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/72467f1a9db1433898c5a0627f499d99.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/7fe559a7813b4fc3ada84bf60ea9057c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/99b77bef9e844c3183b2d00808c960ff.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/c3cc5b68570c4a7982fa8e1249dbe9c5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/c8a370a439764c92b43b2221fbbb3b4f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/d0f9f990ea8147d9b2846ac0964e0766.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/d1f460e63361475f88bbcf02550c796d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/d8b945a9c63046728b7a606b8f0a6618.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/e148ff6340954b068a4e94ab8f09b19b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/20/e14f4f29559e436383cd64abf7bc23c5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/0257b3bd03204c02b14ed987a787c53f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/25e85facb37546249a59637221d09775.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/27fa370c5b5e47e0b9b35005c485c237.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/2af19e85f34b4d65bc3d5bac1b93e936.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/389ab8bcd5454317ab7d2d62aceac08a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/73c66af258cf4f4988b26c4fd5292472.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/75f85e2d36da41a0bfc8fa1d5b05cee5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/7919172c60aa42e5850c0f7a54852adc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/a3c54f31601044ef960585a8abab1ac6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/a40ec42a1bef4abfb55e17595e52d56d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/c4f89e03a4c846738a7e1178593ae52d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/21/dd57980d18ee4502a9c583c2572a0896.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/22/11cabb53eb174d70b083c840356832df.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/22/834810664d2f4e69934651b3075f649e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/22/a10e63c781c04745918df9ccf4de693e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/22/b2f1051d40a94696add1e8854be31c1b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/22/d705a189e9594d37a4b1cbdd8793c9f7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/1/22/db6c3b0811ef4f758e0f1efe3b707a38.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/2/8/3914eba71d004c5ab27438c6d2841e73.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/2/8/5551787c6f914f8cba9e12c37910f0c5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/activity_poster/2016/2/8/b41cad62777b471bbb1e3b117db8265e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/20/3a1490d440294d709f0554a1edb394b0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/20/6fcce3ee7c4e4df7ad0e134ba2762013.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/20/7b072f5009864d37b3df04daf6e0288f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/20/b8dc1d89a8c646a9bb2e2103f717b791.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/20/e2f0511609ac48448676352b140dea10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/21/3407bfdf3fc4410785076648a36fb047.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/21/34f3deec7f764603a092cf9496f97bce.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/21/44808706dcf442b690087185ae890aea.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/21/7f18be4767124fd58fde6f370c4d24b1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/22/928c79e5484b4617b9435cd6dbc174e0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/00a50c40fa87479c8e7fde2ca132894e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/04231f62ec9c495e847d050b9d075004.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/04df34c9edcc42b6a0fbbae5468ca33b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/05fe029b0feb43f18221b357bb9e9542.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/06689bb249df461ea0321da70e57773b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/0a2f41e06aab423a86b1c1ba21096c64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/0c8c34c1c47f401ca6651c2989deb2ab.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/0f4414b359e94e659a30cdcad6a6400c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/102cdf1c5e4147a68abd22d1c736849b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/116b58d774ee4a689ae3a268edb702d7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/1398623b274148f39b1426d5f75c6f59.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/154a67d3d9cf4b7895250e803e803604.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/16593b6be59142feaed8a0f7a8ca0c51.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/187e9bc4bdbd4cda8a3ed809b9bd183a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/18f475bdd0974225a231c3c8d8dccc76.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/1c1d015b5ae64e378259a28d90876a39.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/1c69bf85079e46d68d4741203a1a1e70.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/234d10dc82ef48ba885e0e371cca9c2c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/2453c55375da46048355eb9070103fb3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/252c872ce55a47728a7d7e85af1754bf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/27bf585875a74541a72b5c84ab0d8f95.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/27c70fffb2a04466b32ab974b73cf2a8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/283b9d97e05e41d295b08b86a124a59c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/28dcadf085c84f08982a7dd1f61cfb74.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/2aec874c1e384b99ba40bb7437c49c37.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/2b9e9b4b319b4c04a71ff6866f709200.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/3216e39381e844dab772f1e2231d3f1b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/3fa02d5e81cb4ebeaac88e3b0aed983e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/451ecbc36db544478a7baadf05166400.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/45861db3683d4e43bcbc3db0f1e58422.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/48442240f8814553af6e5f23a8d32378.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/4de2fb65fd134ef38998cd524c6cc8c9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/50e353269b314edfb79c521f2645a7b3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/564f4fa286cb4bbc86f6d52f0c243614.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/566257ee29a5490fa3e73a3bc6a1f31f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/584464303f46460285224736c4ce78d3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/5987f51bc3ba47b68aeb0dbaaf7c2e90.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/5c0c901a369747aca33f4f540dabb3e0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/5e0205db1b5442f4adae7870c61337c0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/60e3b7d1ee564741a5ecf4f73c223d95.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/63b487ea568347be8445d3f5b388e0de.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/664e1d3e9114441995b39fc359fde5c6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/671bf70642f54e6c8f408a69b46f9d04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/6807641989b249aba96c15a76d0d7aa8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/686eb336f72b44d88c4d282b7a7bcb45.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/6c756aa6065b4d51b75ace8c8a924955.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/75d1f9f064064dd7b3320b2cb1831f36.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/772e5f82ba6b46feaf10b8c432c929a3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/799b263ee19d4071ab43af0a7db1b345.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/7a9ab2074a77496d97cf30e46a124566.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/7c6689dc441b4f1e806ccfef12efcda5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/7eecaa5ad4be4dc2a4db6fcbf15f4edb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/81be4535242a4206a7e6ce77e55f2873.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/81caa6a62da34778aee6d45b7feacbcd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/83d4efa65e0542e3bebaae2cbbb45ce2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/8a5d4a231a214869aade1c778ff6b4ac.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/8ccc0410fb7d4424899a5bbb10173570.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/8d86514614874e42a16c1e8e9a2f95fa.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/8f93361422a44968898f98228a86f933.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/955d4b6640e643bba20e720fd5865491.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/95c240cb9697408d9b9103c5e84460ed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/97e5b6baeaff4b50ae691901e46d5a19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/9db2fbee975e47e08b55bc438c18ee65.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/9fc9fa5cf43e45ce9ee36880ee35b90f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/a3613b3cd3c549978276fde9ee33e421.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/a4efb37010c14408ae6ff3be2ad0671b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/a8e921b71f144638915fe1c3088462ec.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/a98679e33c6a4787b56e62b1c00e1faf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/ad9ab30fab5c44d881e29f929e597cfd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/ae6237949f9142c586dcaeef6e189429.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/ae6782763e26467691a49599035d9be8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/b2b2281d5d224cd89295cdc075bb97a2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/b592b857a4ad44a7a08b0dadedbef426.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/b5fae6b313614c6ca1e2616d062bea93.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/b876046bd7a840b48b550a690c71b1c5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/bbfe27603c434745871ae98b15887c20.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/bfca8846800d49c7b83b29c5446faa72.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/c16fb96254ca411e951dad1b1d249c02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/c1da19c13206449bbe6b0d4f48e5ff80.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/c36fe81c5c334bec8fbac0cc30580181.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/c77c5aa57d27439497acb567aebe331e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/c9bcc515775b4992be4f653de86edf58.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/d96c2626332344b68d9992feba38c01b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/de0ee3082c4f4549945a58412bd5e48b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/e60a049948ad4314ab7f1ee610629237.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/e9768dbc14704dfba61eb85d47706bf9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/e9d4499d553a4af1a8c06492dad4e35d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/ea293cac24a34d5db5d86e9305757809.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/ed4acb0e9b294b00bb6715da346d8446.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/f0ac669ff8b74868a3c4f6cb477b84ab.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/f184ab1355924592a3d9b3773bcb0254.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/f47be45b192a49c2a8d906551eb2ee2e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/f4a6f944005247f5bfb20d2242826477.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/f9ab5899123444139ffaf4c933f24408.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/f9b4bf7445544b38b488cd5867933d0d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/20/fb1ecbd9523c4a309094c602f9d2358e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/031007d97e8742a7b58177413808ed3e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/071c8517f8d0415d876eb221b9d8af36.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/0a9a062b1b9a49768b1ad89bfb9ef834.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/0dcd89d8b8944906a7839d37ff8363bf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/0ddaa59d95434dc784fbfad7efe54893.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/0e664854415f4fdb9673ab6b6c65c119.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/12f6767d942d4043bf9d77805a2a43c6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/1301f9e75b724cabbe4532658841d1eb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/13a772c3af0c454285036fcc434cc959.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/13da603d365546c1ab93b6c9f7226e1c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/1607445cf6d04d6184fbbccb0751ad72.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/1d42a0cf0e0e4d51b2adbd31b20f80c4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/1efa7a9bb12e41f09d62c6c15c4fab3a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/244589cbc92a47a4beb7504792899792.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/26f56539fbc44520863c54f8d85e8398.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/2a8cd819b9454e2782abd7d22ff48ff7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/2f501922b9c34bcda53fc427cfabadc4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/308d168228ff48f7b01c767e81169f1a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/31092541617c4b0890176880a07a4fa6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/3185c41e8c2e45d5a25c19a53e5ddcf7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/34433c6b3b7f4dd28288a9b4ac57d6d3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/35f485774ec6482cb128a8a45dbdab71.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/3a8b2aba159442abb41410b26c3ecdb4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/3ab684a3d194476aad7934b387825d96.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/3b478cd0b4de4201ae4de3a6b0139b89.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/3e2ca95f2fd94465a80e3b330247edf3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/43f80aac69f5463cb96473e1673e7855.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/44e89ec0c4a24a46b4c71e348c9bc938.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/47005498b9a0468b810b588d4fcab71e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/4ea2827a63314079803680112d876751.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/535488f89dd34cb5b9d6bea7c43c3ad6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/5a467e8c7f7443159024c06e7faae21d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/60f289b77f8f42c2b39b3b1c635df287.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/624ca4ef04c049658ed1f4f41e11b6f9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/650c5de4628041dca982faf66daadb83.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/661db280dfa841e592e685f3f26592e7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/66be7407292f4ad1a20eecfdee12802c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/6cde6fb2738b443c9ac0fe2d95361e81.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/6d02ec5e2e4944168cd14959bdbb01bf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/73ea49efdc5a4bc3b6d9811a2d1f1b25.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/7796c43715b846d991b29526c3d4bd32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/79898c9c71e041088d0b2625b940ef31.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/7acc3b04073b492e88d36f875c34d7db.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/7ca15156daa343abac302d46bbef9a28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/7ce3f89a88cd434aa56a6e9c2444a8e4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/8018bb86ddf04ffa903781d83ba474b1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/83832f2b890441a9b2f95dc4350fc23c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/84396f7dbaf2425b83afe47d5cedfa6c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/85fe6796f7454d2496028d9b2d64dfc7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/86df823a26a6422f80af360c7fe86462.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/88610f1e9953406c973644f3742e6645.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/8c565deeecc84d6d9672ffda0b2fc9ec.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/8d26b7f6ab6741c5ae61b4ce29283254.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/8e780b3dd73b4a2f82cbbc1316f65da7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/8f8e97ac7705412f87e6f7751b35114d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/95f70af6a5fb48538425000bacefc338.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9606195df3aa4b319e4e7d696cf3baf5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9905fbb61d2c4812b066343365f36882.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9911924a0e094acd824c71297e4e82ba.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9b089129fe174e638d0658b770fef547.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9bfdb2f350784b92a4cf9920a1aac9bc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9c80c51b1e0442f08db5c768e6bac713.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9d021c71574e465cae5d3df41a1f5b70.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9dfbbac786f24415a61323bb1edb5eb1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/9fa33e1deba74dce999af07162f49b89.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/a22e4f554ca446568c8551f87dd61eca.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/a280c6f442f9415db87df90e166bce19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/a435108d4308485891dcb095624963b1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/a9a074ced9a34debba4b455c4011a39e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/ab0e4870b341423bb044bf3b10bc6e12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/afe8189f9db44467aed0e93547dd85fe.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/b1c4aa7c93f54377b554e8ad22839845.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/b26f3e5c78224eaf828be4429e2b66b1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/b3ce77a6185c4c448a8047a954262dc7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/b697901812314bd391e4c096415108ae.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/b8604cc0d76f4398819f29223f39d315.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/bae74a07c9ba449e8c6a90dd86fe91a9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/c0995e25200c4159a563b76e4ea34e65.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/c356e0b16b8745279a5a82a742616c0e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/c628aeb2f8564d99a76234eb73b7a189.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/c6b0e865c9c34b4ab779c665c575303d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/c70574e89abb4b79b7804558e7165663.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/ca860664ecbc496eadd245b0fa806948.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/cef7f94774d44469b705df46e92f91e3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/cfb890baba814abbbab8fddb44520c7d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/d9edffb22f1b4cdfa7db23fa97453fb6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/db98e5b052484d36a0705cdee2847152.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/dc5e7a457a8744bea0067f8257facd5a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/ddbf600b49f340828d1d99a1f8a49bf9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/dea0ebe43a3f46ec8c2d6f36d0d8a701.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/ed2f68c8655c42daa417728766cb0ec5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/f2667106bdfb4f448fc2b5fad32cb6e6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/f35a57a76a7541ca892216ab0d288e35.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/f454af46a990431280d2c4976ac8a023.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/f753c03903aa4cffb1625027229adfc9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/f7997ed237c74f3cbe64ffd7ba7dda0e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/f94bc3f276be43ff86e1e3489c468a11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/fc89c5d15e37488a9a943aaf10201a22.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/fde66f67f4fb426480c50961b48fa9d9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/21/ff671144952f41b59a701ae70125a16f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/002f5034eb3d4ae7b419119fe12fb18d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/03921bbf923e462ca490401dcfc10e2e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/14ea7312509149ccabf8cf853a2273a8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/1c80cdb6ee3a433f858d4ff86f9621fa.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/1e78d0954e0c48158e0417e5e9d96ac9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/24c0cd7ce40e407594b43ba11f882e4c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/3b7d504c1a8b466cb849b01a32178776.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/45d0c3ebf6564ac3979ac953982f83e7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/4fabe7b1c8644c00bd2149b8cdd7537a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/57bf34fc5ceb49a69c1bb0645fb3afe8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/5870f0bee7ea4584b24e2306f32196d5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/628ce549bd694608800d2523fbe7932a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/74a3eee3b6cc4406a75a933333cb3a14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/80e7e85bece747618e6aa16ce7b703d6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/82b7c0238fb445dc99a14908b7b19c2f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/97e5528c5314477ab992c086ecf3ff9f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/989dc745c0564220b733766d5523576d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/a0aa70568ce94655a47bdf5c875e92d8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/afa8fa60400f498888c1673c3b3adf8b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/b3afbeb7d590476aac32128abf330155.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/bd3a4d4b90f744128137a0cb8d3cd24c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/beef619cfffb41028de62726ffca8c90.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/c3396c4216164603b793097e21f88a19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/c3ee95609fd94cef8b517a3960e1e288.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/cf2843b94e4c48c896e8a7aa231350ec.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/e056055f95ea4e1483dc3b659d7f0cc5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/e1ffae2e79244596b78d67d986439415.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/e5ab8570be3f4d06bf6b216767456591.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/f29f7daa63a8410685621bbe8735421a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/1/22/ff14a4a4361e4d7fa0ce9f08b517a02a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/04af6fd637a14017927fcef7e0be5d98.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/04f9c5a0f84f457fa2a749da351888db.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/1d2eebed2d764c24adfb87fcf02e5e91.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/2690ddf511364dff98e4b5cf4515f844.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/276ed761bdcf4405ab3a52970e316ff4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/3936e09b28414116825da03af863e464.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/41cd1ceba7b24d18a5149c24522df86f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/593ec41dcb5c4fe1ab353144d2903f88.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/6080c7d905fb46bdbf07a88e88cf6cac.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/6b5593334cb34099952929a45d112670.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/6e97eedc8dd14191b9d36ac772c1fd7b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/6fedd334edc840be844299ae0c838f4e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/75f97361496540b7a173d2739dd8a2f1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/8531dbd10eb742bab08b0a8ff0a47d63.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/999138d61f2b4e879c39605545b050c1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/a1a00ed4f9c64085bc38b3400c176bbf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/a36c9e447d7142aeb2f66ab1d13fd313.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/aceb87e01ff0420ca09d7966d38c4689.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/ae62aa64d73e4f62a738883da2941ca6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/afad704b903747a3a4197f0d195d57ac.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/b64d88d0e4c64bc28823d9fcf4900773.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/bbc6561b62f84acdab67cabd1b2c3c64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/c653a9e73f114a3db16eb80d6c78445b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/cbcdb6eb753b4769a0aeb3bbeb7b5492.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/cfb4da27edd1411f8c6303e2c8fbb87b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/d701f27fd1da47b1834b97464e611a26.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/eb87d7e00dad4c8f888c19cbbc3c2fed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/edf76178a4d242bdb129c982ea2879db.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/f3260e4bc80844e5b04ff4d082685e7d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_image/2016/2/8/fdf5e6996c11494493ee3ece64388814.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/0025407f8654420080b3b2e27fd549e7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/03c3c38acb8643aca4e9e010c40fa37f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/04db164e942f48b8a267097a48a24c74.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/06f9366a1e88438fb8992f64813510c8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/0bb5cf7bdfbe429084dd63a466c54730.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/0e0def8c14e94fad85a8b991b943f43f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/0e0f69b73a0c477aad32ce4fe6960cd8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/0fa4002c3ac2447a8739beb865a0ad40.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/0fb30bb7f10d4a5ea06d5382817ba9ac.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/12d0e10763e64bf4972a65d435af49ec.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/12ea161446ca4d1f94708bcf53c72178.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/13b3a35f6431470b9b49019d852dfcef.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/15e4a2d213b2477193e6b2ac98d4cbe1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/190ba11b7c314706a2c0e3cbea1e407d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/1d057136eeed4ef6802fdc06c3c1e0b9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/22dd120c8e724cb2b1e59b3dddc8ce3f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/23319143e56144a6a7c6a7c0d0dacc76.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/23dcf9758ec843aa96cc00fca976c420.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/2415421eca2f45e4bda13dbadff820b3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/250216b8c7c24bfdbcfc290484570857.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/288597334a9949ffade1ee8ff255caf4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/299270380de6475ab1b6f683fb9a27cd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/2e882f4a249149818bb6a88eb472c804.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/301cd790eefc450089b511d19e7932a4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/32bf581f8c074830a07b7a77ade2e7e9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/335f49a3a5e5477d9daaa3bc9a067ffc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/34240f43b14c48c0b5edf9fc790cf414.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/34bf7f92d0264385bf0c1e76194a3b7d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/381046ac60324c27bdcdee5a0ad265d9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/397a46ac2af64fc381c0c5d9e1f2ad6c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/3d1f3d73016a47c98ea2a750dd09c02c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/45e6b98442894cb389e0eff1087a1911.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/47a9fae16ebc414ca8ac3a1186ae6ada.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/4cf8a9831fef46c786d044d85307d9f9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/4f5e536bf7094e5fa243bffb934f676b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/526f7f272f7a47a6b8676505f860bb25.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/5685c60654654ac2b5c95b14e3f547ce.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/56ae1bf669a74990a6185afe09a236c4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/57408fc85c024c41a2da51e28d965d01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/57958ccb0ff84765b142d170a9be7fe5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/587b52645d17457189213de949a70ab7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/6359a51795de4cd6bdf4b7becba7baca.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/66635cf49bb2496fb262c061dd377b79.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/68157837e74d4642ae9fa66c658423af.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/6af6ef70ab1d456ca95f8b94e68d78dd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/6fe57f86d34b42ce854e7891bfbd11ff.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/77edd78a140a4386b17f1df74a1c8219.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/78b9c6ecbc7b41b087a04f84717dd82c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/7bab2b76ea9e41f88812433869470a9b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/7dc379eb232c43dbb0ebb1f158e052fb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/7fe3085b543c4f5ab97d99d57d0955f8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/82041411d7cb4e3d9fdf96080cef199d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/820c29699b394acda9407753e5c0e540.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/822720a259b24065a9ec601685d77d23.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/82a24c4aa7fb4a5e9f3b4404f07792a8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/82a566a00aaf4792bfa3ded6b431e23f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/82bb4a6dddb446be808a5ccab4af5f3d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/874b39af5e544c5b903af4dd51a9b543.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/895ef124226d43b692188f83a593c32b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/9c4128a0662e4e44bebbad526599c8cd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/a118559afca2463aaa242653bd19a43c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/a68bc0175b9b46ec8c3617b266bc8376.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/a7ef0284e63f472ba6c1860b3c05e93e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/a8b6e683d76241aa9f9aa4739fe6d7c8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/a9e58ccbd54f45398c009be1f8b9ec4a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/aa142b5c25104cc29f51caea5288ff11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/ab154be2c02b481084e65cf3c4764d80.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/ac6d955db28642e589a01ba7d12c4c0e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/ade54989237e4c70b8be6302a108edb1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/b17140282de843c39e4fc19630f4cf28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/b1f4cb0b48464e2aac8788fd1769d85c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/b2319b8984bd4d9dba096429e32a7011.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/b367692b3ca54f5a8dba3246fbcc6b84.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/b437ddc01b1a44f2a0a6ccdefe0d6e4b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/beed39900207456296c5b95692d51070.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/c0dd5da1b41443659b76f2bcfb38f053.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/c68bb29e23024334bf5f3fb385a74b8c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/cb7251878903473cbcc2fbc1708857a6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/cccf691cb53c4203bd163c208835da2c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/d0d98b7cf72b41b3a5faa22bb9480e3c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/d9a56e63e604477b8eb2bef8651aab44.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e21da921e41e4f86b79089712c2fa3d6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e50c24af098746ea9830650d2ea844a6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e54458d78d37440495359469c9bdf9ee.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e5700807c8f244e5a69f0ef451c21a98.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e69e398ede194a909c248cdcdec4e3a0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e762f100eee843b8acc707cb8b7f45dd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/e79891cc5880485f8ca9aa5540d3ea70.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/ec102219ec9c4fef8be3f82f80d9a24b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/f0c611b5f85643e898d8b14ff701ed0a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/f1b28885164e44148d5bc13e750cc38c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/f22b56934df84c9f84fda6d40d0bf9f2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/f58b37d1ba174965a7c49d6d2b92676d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/f9a084859b0b41ef87fde7523b3686cf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/fbe83cc7d4f3433eb696fb4600a700d5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/20/fde006a002184ff3b2b1defd0a4516b3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/0015ce096c0a4457bcd1aacd496b7db9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/01b2f1689b614835a980f45a9d5dba7e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/056228d7679149de9263451bf6bde4b7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/065f806ec1ba428e97fb318f8f2f82bb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/0825a1e600654b16bf147bebafb7dbcd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/0ccc0cdc6afa4bfaba10abad775cf8c4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/0cf738f0eb9f4193806ceb0eb1287846.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/0f012c8b2e8f41e0a9a1a8ea38702ea5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/113930c289cf4435b97d0a6c044ada41.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/113b0d619c344ac19580fe0e47977f86.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/166425c96b894aa7a4cda1ddbafe2595.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/177913efd9414230b836eac8c3a96922.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/187a5229b7d64403b15a02a5771359d9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/1a23e51fb56f4da29a548a7b9fa59b63.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/1c91f8f77ad5475ca0fd7bd3a1ac9621.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/1df551d00882405e90388484a4bd7c1c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/1e1f5ae980f54eae89e10ba3795892e9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/1ee509d7e9bb47108f9b79fbed7a6e19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/20a82f4c33bc4c27bef9615ced395658.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/22a057cdc7ea4977acd6fa68d03689fb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/24f6351f54264e5c864c31c2f514fd65.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/24fbfe191bc049cd9006ab218955e6d3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/262e6a92b7a146e9828f7a66e14c7b3f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/2c4cfa13fd5748fab605bf1878948c74.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/2dfd3879c916448c8d8d7d9bd89057bc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/2f9fffdab79944ae8364533f61e67016.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/3419e7b469b74a89a83c9b5f403e80a3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/38204f62bce34c06b090381c77a23600.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/39094bf280bb4ff9a256d125130cf4b2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/3bdffaa4e5f64b948712f31219ccd486.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/3d5398875bbf423a8baa597dc1c680a5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/3e68b5e0386349ca85034d1ccffd4fe4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/41b1a815a1bc43bf84c873e8f79a1b0e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/423093beb60647e69511d90f3808101b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/434739e5fddf48dd95d77df313587978.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/46f1359055274748ac88ed3fea92ec28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/4b040fbfd9f94fddab597ef60cc7e3f5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/4be8f406ed8346ff9c0d11317893b319.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/4ca9455b3bd141aba8d2f9e505097d2f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/4e725af7c0234313a6763b83279a79fc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/5079dbaf01494cb19f7ccdeebbaa03d6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/50a4f0ac8e7e4d10be141ba7b140ca6c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/523f1d1d7be444ffab871923faf1ff38.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/5493d0e1981d48838c1277fbd30f89a1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/54f4fbb7596943e7a146aae6e9f779c2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/59d67a371b52405d9bb930b897cf8759.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/5aa0e05c021748b996c0e18cdcadcf65.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/60665d1ae65d433ea5b635bb332459f2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/667f1db41bb448bebe1cc7bbc304324c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/69c0781baa6d41828bd14ebe8fa01882.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/6c4ff0cba3374d75a443d4b91e3baef8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/6c7b750943c24bbcbf17bc6809dd78e6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/6ec46316907846b89bcbb0cedf6eb8b4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/6f5f7db1fc4e46949da6d9879384d96e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/72fa3100091e454dbf1a8ee56e43e3f7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/73d63642f1aa4d618a28abf16fd4711d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/7a5941f80c9944ee96aae0f3353a5ac5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/7bbc6ef6a52c48b1b0bfc8e1e2bf8d86.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/7e97499bc0f648359a6027b35a023d75.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/80b7c086221b44f1ad90d51ec5bdc383.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/86264645e70540438995ff997884aa31.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/89c02773bb14450fafab2139e58fff4e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/956fd795ce934040aa8dd2ba5896182e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/9765cfff5e554dd185b0260a2de45c64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/9ad40efdff344ca687c22c718af9fe61.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/9b5ae436a2e44fe087ba28ec424e004f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/9dba9327a6a34dd6af7277f5a7b59fdf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/a0b0d6b7e41e4c309a74f0a38713f0a4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/a1261a6f41c749e6b0ced388bfa2ce47.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/a190ae1da2424ae899d6e390b34acb7c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/a369867bb35b4709a51d884ed337ba33.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/a979fba02b5d40a083c252bd9a63f2c5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/af47d7da90404ef5939924dbb8c85994.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/b210b602372143b3a0d4830411b000aa.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/b41f4b13aa9944b68f17c409feaa641f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/b79045f07cbd48be9acefbdc75b5d662.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/b9740f50132f4e3c99c080d367540de8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/bc2f2bc3f9d2477186097a0ca381aaa5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/bc303643ff474780a0945ffcdfeed178.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/bd1ed6d718574e85bf91c2ba3cf96045.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/be5435b5edc145368d1e5c7f92e9e297.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/bec0bfbfd01a4b10994171d0a1c0f1cd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/c4481c22f3404ca2b8f2388c56c979bc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/ca29f63524a646449ba619db85e2c809.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/d3916f1029774847851fcdaf872180ac.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/d4688bcee43c4b96985789dd65cdf5ae.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/d7a0fdbc07b846deb191dc2b611a88b5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/d9b0440227014415be7773ace1e287ba.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/ded2a41221ee49d3ac5dc470cc243fc9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/e32c05d4a46e4cab90f943a22a76428b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/e6f4dc607e9544ff99ea2a403bad4a61.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/e87e101e11a948cc8908b27382733023.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/e9ea357388eb466783ce76d5d7bd4cb3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/eece8982eb864095bed4b83306276d28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/ef311c2096e04b449eeed1538fd1181c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/f03556ae878249d1a37301012b82736e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/f27612797a094b4fbc9be2ce0d40d0be.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/f477cef9e9bf46d19abd0819631809cf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/fdcc3929445445a1941d8098d334ecb2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/21/fdd7c229f35249199a847ee775248e54.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/08e5ecd7f29d4f079a041d61462cc3ab.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/172a2de780854ee2bce64e8636ad451c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/2197f421be2041ec888981c336cd323f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/27f2586c61914ea6ae964e51eba54af3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/2910b3b5d0774c7298eb24ebd13b4955.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/2a5a2db74f2f49fdb6dfec0932a5569f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/33940e06dc75401f83f47eb3e348fb7d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/44429045d891404bb67cdd978a341236.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/54cb6ed18c4046af9d7cadbc1fd0765f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/57d67e1d29ec4e8fb08a9a997c29a6dd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/5b0fe24cc1484a3193adf39edef1a4a1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/5e68fb1cb9684568b6e0afdc874123e5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/6194c7592afa4ebca23df8420ca3387e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/6317013efe3545578d7a0ecf38b71433.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/6aab22b9ce944a8a8a8bb48ccd823047.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/6e757ac2da024aec844737537e4cb088.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/79f4b3b0d831461b92a202ddbd8cd866.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/9950f7791b764451acc7f8da96a0e608.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/99bb5b2af7bf462196b827b9b6da5957.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/a254af075357415a93633739373a13bd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/c29bcb330cf74f03b5cb65ba2ed65e4b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/c5ae4cde3a2d409baffe905647a60279.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/c8eae2cbf7fd416dbe128d163a5beb08.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/cb0921b039054edfa4abf4ca67367fc9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/cdb59de973754f89853f2915cced6b18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/e7bd8f47923443eeaa049d486c9735f0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/f15e135bbc3b4989b5124123a1f91447.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/f92a32804bb94cb3a4dd6c3949a832c2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/fa2ad5e3ba8240cd855598f59a588e04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/1/22/fb481a9177a244879ed16b79c8612946.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/003b7ecc8b6f4882bb74ac7b94dff85b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/03c9d669b9594367a6fa9883f2f86d46.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/052736036fb643cdb4894c8dca2c8dfd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/0e420c19cb184858b4d4cd2e6899435c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/1ab733db846942c489459d90f019cbe4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/215073f1971f44f99fa5766325dfb3ae.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/2794b6c3d1fb4218832352239c81d628.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/2de55d0ef6ab447bac5574d3725a8e7f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/3573aa1e4151417fa791dc79623b497e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/3685fbf9468641f0b8df1cd809ab8d2d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/3b128431141d4be2a92f23805d56f74f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/3c8eac821acf4f818a312e723b95cb50.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/3db4ee573b60477097fe7b1fd3a9ff04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/3e52cc07f32646cc9d945eadcea40179.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/4259fd1dd1c74e57a8147ab548d2eb06.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/5b82c8520d43408c9649ee5d07662a9a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/5ee497165732422385cee9abfe9e2257.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/6f3eacc7bbb04c18aa0219c5ec9eb607.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/716af962e23549feacdd32221c33463e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/7685588ea7d64936a772b60c89f4e7a7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/7afdc4e2123f4535948a6f332874324d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/966518c0473042e598b549cc075c7dd1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/a87dcab61b0c4949a3275106ee6fa146.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/b0e063d7c395445fb7c92493bae90610.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/b41b72a0bb4e45859cedf8e0a2294955.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/ca7726c55a0b404bbec30cd36991b72e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/cf1944f3c2904d0d8f671101e90fa80e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/eba97eb612e74646a92876e8ab1dee33.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/f5e14eeb319d4101ba5171ebaee1f410.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/car_logo/2016/2/8/f987e10a27f147728b50832a30ddd1b2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/defaults/default_avatar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2015/11/10/c48b75028fb643539ca17c1df07f63f8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2015/12/12/c5aac51b282243c5ad7f351ed6491541.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2015/12/28/215fe44b2012487787067126a722617c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2015/12/28/4ed2bb23cf82425abb3bbf20cd918a41.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/0af37ce278f047d2af455f51e964e52d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/111401444f58413d9dfb0a3641a15dff.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/14222aa7777144d5af74b1ab7b9d62ca.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/6d006965bb244865a6e9f2437d5eb0b9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/854c8d0eed924aa6888987d8a8db8792.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/97ebe397befd407d8ae43e90fcce41e5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/d3f9b8483f85412c9ca8aa60dfd6ca95.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/20/e548433645a049eba664bae0604e1f77.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/0a2c51585e5a41b4a43a06bc1847cca4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/235f883547164cfbb3678eeafb4142eb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/2e1342a1fc9f494895547759f57bbe46.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/3511424afc8c4b488ac625f47c1d81d8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/39db2ff1ab2c4fbf98577392843f6368.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/7d471a69b62a4c96891f33531ea63d5a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/c66f1e0d19ac4ec9bb12597731139966.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/21/cf950cdb9dc44ff1912bf5752795b90e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/22/287edecdb62c4145a3d62e4f1cf0ccf7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/1/22/d5cd502cb149454ebd26790dc053333e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/2/8/1a1df7e533554f5ca6860a065a80b9b0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile_avatar/2016/2/8/54388c6dc66d4c998f6284c670e70a8d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/tests/test.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/tests/test2.png" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Activity/migrations/0004_activityjoin_approved.py" afterPath="$PROJECT_DIR$/User/migrations/0002_user_register_finished.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Chat/migrations/0005_auto_20160203_0556.py" afterPath="$PROJECT_DIR$/Chat/migrations/0002_auto_20160427_0840.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Location/migrations/0004_auto_20160225_0823.py" afterPath="$PROJECT_DIR$/Location/migrations/0002_usertracking_user.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/1/22/de48881e5be447c19b3ab7d093b09809.png" afterPath="$PROJECT_DIR$/User/redis.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/2/8/87a864ad59384d198254bae32c9c1561.png" afterPath="$PROJECT_DIR$/User/migrations/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/media/car_auth_image/2016/2/8/f9b2317eb72e43268cff89e68aa54b32.png" afterPath="$PROJECT_DIR$/User/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Chat/ChatServer/runner.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Chat/ChatServer/utils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Chat/migrations/0003_auto_20160503_0457.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Chat/utils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Notification/migrations/0003_auto_20160503_0453.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/User/migrations/0003_auto_20160503_0453.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/ChatServer/chat_server.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Chat/ChatServer/redis_access.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Lena.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Lena.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Activity/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Chat/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Activity/models.py" afterPath="$PROJECT_DIR$/Activity/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/ChatServer/dispatch.py" afterPath="$PROJECT_DIR$/Chat/ChatServer/dispatch.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/models.py" afterPath="$PROJECT_DIR$/Chat/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Club/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Club/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/tasks.py" afterPath="$PROJECT_DIR$/Chat/tasks.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/urls.py" afterPath="$PROJECT_DIR$/Chat/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chat/views.py" afterPath="$PROJECT_DIR$/Chat/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Club/models.py" afterPath="$PROJECT_DIR$/Club/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Location/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Location/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/News/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/News/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Notification/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Notification/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Club/views.py" afterPath="$PROJECT_DIR$/Club/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/News/views.py" afterPath="$PROJECT_DIR$/News/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Notification/models.py" afterPath="$PROJECT_DIR$/Notification/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SettingCenter/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/SettingCenter/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sportscar/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Sportscar/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Notification/redis_operation.py" afterPath="$PROJECT_DIR$/Notification/redis_operation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Notification/tasks.py" afterPath="$PROJECT_DIR$/Notification/tasks.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Notification/views.py" afterPath="$PROJECT_DIR$/Notification/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sportscar/spider.py" afterPath="$PROJECT_DIR$/Sportscar/spider.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sportscar/urls.py" afterPath="$PROJECT_DIR$/Sportscar/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SportscarStyle/settings.py" afterPath="$PROJECT_DIR$/SportscarStyle/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SportscarStyle/urls.py" afterPath="$PROJECT_DIR$/SportscarStyle/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/Status/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/models.py" afterPath="$PROJECT_DIR$/Status/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/urls.py" afterPath="$PROJECT_DIR$/Status/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status/views.py" afterPath="$PROJECT_DIR$/Status/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/User/forms.py" afterPath="$PROJECT_DIR$/User/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/User/middleware.py" afterPath="$PROJECT_DIR$/User/middleware.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/User/models.py" afterPath="$PROJECT_DIR$/User/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/User/urls.py" afterPath="$PROJECT_DIR$/User/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/User/views.py" afterPath="$PROJECT_DIR$/User/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/custom/utils.py" afterPath="$PROJECT_DIR$/custom/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/erl_crash.dump" afterPath="$PROJECT_DIR$/erl_crash.dump" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/django_request.log" afterPath="$PROJECT_DIR$/logs/django_request.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/mylog.log" afterPath="$PROJECT_DIR$/logs/mylog.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
@@ -803,106 +138,7 @@
     <favorites_list name="SportscarStyle" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/User/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2790">
-                  <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#15#29#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/User/forms.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1110">
-                  <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
-                  <folding>
-                    <element signature="e#0#15#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/User/urls.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/User/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#15#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/.gitignore">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="389">
-                  <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Profile/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2370">
-                  <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#15#46#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="account_urls.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Profile/account_urls.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Profile/forms.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="298">
-                  <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
-                  <folding>
-                    <element signature="e#0#54#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -921,57 +157,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Sportscar/urls.py" />
-        <option value="$PROJECT_DIR$/Sportscar/tests.py" />
-        <option value="$PROJECT_DIR$/SettingCenter/tests.py" />
-        <option value="$PROJECT_DIR$/Activity/urls.py" />
-        <option value="$PROJECT_DIR$/Location/urls.py" />
-        <option value="$PROJECT_DIR$/News/views.py" />
-        <option value="$PROJECT_DIR$/Profile/tests.py" />
-        <option value="$PROJECT_DIR$/Activity/tests.py" />
-        <option value="$PROJECT_DIR$/News/tests.py" />
-        <option value="$PROJECT_DIR$/Status/tests.py" />
-        <option value="$PROJECT_DIR$/Club/urls.py" />
-        <option value="$PROJECT_DIR$/Chat/views.py" />
         <option value="$PROJECT_DIR$/Sportscar/models.py" />
-        <option value="$PROJECT_DIR$/Club/views.py" />
         <option value="$PROJECT_DIR$/Profile/views.py" />
         <option value="$PROJECT_DIR$/Profile/account_urls.py" />
         <option value="$PROJECT_DIR$/Notification/signal.py" />
-        <option value="$PROJECT_DIR$/Chat/tasks.py" />
         <option value="$PROJECT_DIR$/Notification/urls.py" />
-        <option value="$PROJECT_DIR$/Notification/views.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/Notification/redis_operation.py" />
-        <option value="$PROJECT_DIR$/Notification/tasks.py" />
         <option value="$PROJECT_DIR$/Profile/models.py" />
         <option value="$PROJECT_DIR$/Location/views.py" />
         <option value="$PROJECT_DIR$/Chat/chat_server.py" />
-        <option value="$PROJECT_DIR$/Chat/ChatServer/redis_access.py" />
-        <option value="$PROJECT_DIR$/Chat/ChatServer/dispatch.py" />
-        <option value="$PROJECT_DIR$/Activity/models.py" />
         <option value="$PROJECT_DIR$/Activity/views.py" />
-        <option value="$PROJECT_DIR$/Status/urls.py" />
-        <option value="$PROJECT_DIR$/Status/models.py" />
-        <option value="$PROJECT_DIR$/Status/views.py" />
         <option value="$PROJECT_DIR$/Chat/jabber.py" />
         <option value="$PROJECT_DIR$/Chat/fake.py" />
-        <option value="$PROJECT_DIR$/Chat/models.py" />
         <option value="$PROJECT_DIR$/User/auth.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/Notification/models.py" />
-        <option value="$PROJECT_DIR$/Club/models.py" />
-        <option value="$PROJECT_DIR$/Sportscar/spider.py" />
         <option value="$PROJECT_DIR$/SportscarStyle/urls.py" />
-        <option value="$PROJECT_DIR$/User/models.py" />
-        <option value="$PROJECT_DIR$/Sportscar/views.py" />
-        <option value="$PROJECT_DIR$/custom/utils.py" />
         <option value="$PROJECT_DIR$/User/utils.py" />
-        <option value="$PROJECT_DIR$/User/middleware.py" />
         <option value="$PROJECT_DIR$/SportscarStyle/settings.py" />
         <option value="$PROJECT_DIR$/User/forms.py" />
+        <option value="$PROJECT_DIR$/Activity/models.py" />
+        <option value="$PROJECT_DIR$/Club/models.py" />
+        <option value="$PROJECT_DIR$/News/views.py" />
+        <option value="$PROJECT_DIR$/Chat/utils.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/redis_access.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/models.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/server.py" />
+        <option value="$PROJECT_DIR$/Chat/tasks.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/utils.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/apns.py" />
+        <option value="$PROJECT_DIR$/Notification/tasks.py" />
+        <option value="$PROJECT_DIR$/Chat/__init__.py" />
+        <option value="$PROJECT_DIR$/Notification/models.py" />
+        <option value="$PROJECT_DIR$/User/models.py" />
+        <option value="$PROJECT_DIR$/Notification/redis_operation.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/dispatch.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/Chat/views.py" />
+        <option value="$PROJECT_DIR$/Chat/urls.py" />
+        <option value="$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/librosa/__init__.py" />
+        <option value="$PROJECT_DIR$/Chat/models.py" />
+        <option value="$PROJECT_DIR$/Club/views.py" />
         <option value="$PROJECT_DIR$/User/urls.py" />
+        <option value="$PROJECT_DIR$/Chat/ChatServer/runner.py" />
         <option value="$PROJECT_DIR$/User/views.py" />
+        <option value="$PROJECT_DIR$/Sportscar/views.py" />
+        <option value="$PROJECT_DIR$/Notification/views.py" />
+        <option value="$PROJECT_DIR$/custom/utils.py" />
+        <option value="$PROJECT_DIR$/Status/urls.py" />
+        <option value="$PROJECT_DIR$/Sportscar/urls.py" />
+        <option value="$PROJECT_DIR$/Sportscar/spider.py" />
+        <option value="$PROJECT_DIR$/User/middleware.py" />
+        <option value="$PROJECT_DIR$/Status/models.py" />
+        <option value="$PROJECT_DIR$/Status/views.py" />
       </list>
     </option>
   </component>
@@ -1030,8 +266,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1074,6 +308,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Status" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SportscarStyle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SportscarStyle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="SportscarStyle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1102,21 +350,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Profile" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SportscarStyle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SportscarStyle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Club" />
+              <option name="myItemId" value="Notification" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1134,8 +368,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SportscarStyle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SportscarStyle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1148,7 +402,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="setting&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/settings.py&#10;Status/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py&#10;Profile/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/models.py&#10;redis&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/redis_operation.py&#10;Notifi&#9;null&#9;null&#10;chat_&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/chat_server.py&#10;News/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/News/models.py&#10;Profile/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py&#10;chat&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/chat_server.py&#10;status/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py&#10;Profile/vi&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py&#10;status/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py&#10;sett&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/settings.py&#10;Status/vi&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py&#10;Notif&#9;null&#9;null&#10;activity/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;clubj&#9;null&#9;null&#10;Notification/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py&#10;Club/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/models.py&#10;Activity/vie&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;car_det&#9;null&#9;null&#10;Activity/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;Activit&#9;null&#9;null&#10;Notification/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py&#10;Status/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py&#10;Profile/mod&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/models.py&#10;Activity/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/models.py&#10;custom/u&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py&#10;page_se&#9;null&#9;null&#10;Location/ur&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Location/urls.py&#10;Location/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Location/views.py&#10;Profile/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/models.py&#10;Location/views&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Location/views.py&#10;activity/vie&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;Club/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/models.py&#10;Club/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py&#10;Club&#9;null&#9;null&#10;Chat/models&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/models.py&#10;Chat/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/views.py&#10;activity_co&#9;null&#9;null&#10;profile/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py&#10;activity_comm&#9;null&#9;null&#10;act_det&#9;null&#9;null&#10;StatuSComment&#9;null&#9;null&#10;models&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py&#10;Status.models&#9;null&#9;null&#10;ChatSetti&#9;null&#9;null&#10;UserPr&#9;null&#9;null&#10;chat_setting&#9;null&#9;null&#10;chat_ser&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/chat_server.py" />
+    <property name="SearchEverywhereHistoryKey" value="User/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/User/views.py&#10;Notifi&#9;null&#9;null&#10;clubJ&#9;null&#9;null&#10;setting&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/settings.py&#10;Status/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py&#10;Profile/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/models.py&#10;redis&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/redis_operation.py&#10;chat_&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/chat_server.py&#10;News/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/News/models.py&#10;Profile/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py&#10;chat&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/chat_server.py&#10;status/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py&#10;Profile/vi&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py&#10;status/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py&#10;sett&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/SportscarStyle/settings.py&#10;Status/vi&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py&#10;Notif&#9;null&#9;null&#10;activity/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;clubj&#9;null&#9;null&#10;Notification/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/models.py&#10;Club/mo&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/models.py&#10;Activity/vie&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;car_det&#9;null&#9;null&#10;Activity/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;Activit&#9;null&#9;null&#10;Notification/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py&#10;Status/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/views.py&#10;Profile/mod&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/models.py&#10;Activity/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/models.py&#10;custom/u&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py&#10;page_se&#9;null&#9;null&#10;Location/ur&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Location/urls.py&#10;Location/v&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Location/views.py&#10;Profile/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/models.py&#10;Location/views&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Location/views.py&#10;activity/vie&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Activity/views.py&#10;Club/m&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/models.py&#10;Club/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py&#10;Club&#9;null&#9;null&#10;Chat/models&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/models.py&#10;Chat/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/views.py&#10;activity_co&#9;null&#9;null&#10;profile/view&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py&#10;activity_comm&#9;null&#9;null&#10;act_det&#9;null&#9;null&#10;StatuSComment&#9;null&#9;null&#10;models&#9;FILE&#9;file:///Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Status/models.py&#10;Status.models&#9;null&#9;null&#10;ChatSetti&#9;null&#9;null&#10;UserPr&#9;null&#9;null" />
   </component>
   <component name="RunManager" selected="Python.fake">
     <configuration default="false" name="Test: Profile.tests.UserBlackListTest.test_add_blacklist" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
@@ -1615,16 +869,16 @@
     <frame x="0" y="23" width="1440" height="830" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18955651" sideWeight="0.8655462" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16165951" sideWeight="0.77710843" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29228857" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17256637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50631136" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50560224" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31687897" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.67238915" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26696166" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32856005" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18955651" sideWeight="0.13445379" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3548387" sideWeight="0.49713877" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20243205" sideWeight="0.22289157" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35434175" sideWeight="0.49713877" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1633,10 +887,33 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39551193" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3300248" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="manage.py@SportscarStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3548387" sideWeight="0.49713877" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29228857" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="95" y="23" width="2360" height="832" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50631136" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31687897" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39551193" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32856005" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20243205" sideWeight="0.77710843" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17256637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30252102" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.67205167" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20243205" sideWeight="0.22289157" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1656,89 +933,253 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Chat/tasks.py">
+    <entry file="file://$PROJECT_DIR$/Activity/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+        <state relative-caret-position="346">
+          <caret line="202" column="31" selection-start-line="202" selection-start-column="31" selection-end-line="202" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Notification/tasks.py">
+    <entry file="file://$PROJECT_DIR$/Profile/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        <state relative-caret-position="-27">
+          <caret line="205" column="6" selection-start-line="205" selection-start-column="6" selection-end-line="205" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Club/views.py">
+    <entry file="file://$PROJECT_DIR$/Profile/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+        <state relative-caret-position="459">
+          <caret line="69" column="45" selection-start-line="69" selection-start-column="45" selection-end-line="69" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/profile_urls.py">
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/chat_server.py" />
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/redis_access.py" />
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/server.py" />
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/models.py" />
+    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/redisco/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="65" selection-start-line="12" selection-start-column="65" selection-end-line="12" selection-end-column="65" />
+        <state relative-caret-position="0">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/dispatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/chat_server.py">
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/apns.py" />
+    <entry file="file://$PROJECT_DIR$/User/auth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Notification/redis_operation.py">
+    <entry file="file://$PROJECT_DIR$/User/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+        <state relative-caret-position="390">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Status/views.py">
+    <entry file="file://$PROJECT_DIR$/Chat/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="224" column="35" selection-start-line="224" selection-start-column="35" selection-end-line="224" selection-end-column="35" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Status/models.py">
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="78" column="37" selection-start-line="78" selection-start-column="37" selection-end-line="78" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Activity/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Activity/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="104" column="47" selection-start-line="104" selection-start-column="47" selection-end-line="104" selection-end-column="47" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chat/chat_server.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="207" column="25" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Notification/signal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Notification/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/redisco/containers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="220" column="26" selection-start-line="220" selection-start-column="26" selection-end-line="220" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Notification/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Notification/redis_operation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Club/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/librosa/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SettingCenter/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SettingCenter/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3600">
+          <caret line="255" column="13" selection-start-line="255" selection-start-column="13" selection-end-line="255" selection-end-column="13" />
+          <folding>
+            <element signature="e#15#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Club/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1736">
+          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Club/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/profile_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="82" selection-start-line="4" selection-start-column="82" selection-end-line="4" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="79" column="18" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SportscarStyle/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Profile/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="316" column="11" selection-start-line="316" selection-start-column="11" selection-end-line="316" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1749,293 +1190,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/redis_access.py">
+    <entry file="file://$PROJECT_DIR$/custom/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xmlrpclib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="1305" column="0" selection-start-line="1305" selection-start-column="0" selection-end-line="1305" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/xmpp/commands.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4410">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/xmpp/features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="106" column="4" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chat/fake.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/xmpp/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chat/jabber.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/xmpp/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1585">
-          <caret line="188" column="6" selection-start-line="188" selection-start-column="6" selection-end-line="188" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chat/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="134" column="29" selection-start-line="134" selection-start-column="29" selection-end-line="134" selection-end-column="29" />
+        <state relative-caret-position="223">
+          <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/hashlib.py">
+    <entry file="file://$PROJECT_DIR$/Notification/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+        <state relative-caret-position="330">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/django/utils/functional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="342" column="50" selection-start-line="342" selection-start-column="50" selection-end-line="342" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/jwt/exceptions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/middleware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="41" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User/auth.py">
+    <entry file="file://$PROJECT_DIR$/Chat/ChatServer/dispatch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/User/redis.py">
+    <entry file="file://$PROJECT_DIR$/Status/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/hashers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="441" column="7" selection-start-line="441" selection-start-column="7" selection-end-line="441" selection-end-column="7" />
+        <state relative-caret-position="165">
+          <caret line="134" column="23" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#15#73#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Notification/models.py">
+    <entry file="file://$PROJECT_DIR$/Status/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="125" column="34" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
+        <state relative-caret-position="348">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sportscar/spider.py">
+    <entry file="file://$PROJECT_DIR$/User/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="373" column="0" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
+        <state relative-caret-position="945">
+          <caret line="283" column="6" selection-start-line="283" selection-start-column="6" selection-end-line="283" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sportscar/models.py">
+    <entry file="file://$PROJECT_DIR$/User/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
+        <state relative-caret-position="1809">
+          <caret line="146" column="40" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sportscar/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Sportscar/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1020">
-          <caret line="75" column="46" selection-start-line="75" selection-start-column="46" selection-end-line="75" selection-end-column="46" />
+        <state relative-caret-position="416">
+          <caret line="164" column="31" selection-start-line="164" selection-start-column="31" selection-end-line="164" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SportscarStyle/urls.py">
+    <entry file="file://$PROJECT_DIR$/Sportscar/spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Club/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SportscarStyle/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+        <state relative-caret-position="561">
+          <caret line="380" column="27" selection-start-line="380" selection-start-column="27" selection-end-line="380" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/User/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/account_urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2370">
-          <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
-          <folding>
-            <element signature="e#15#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2790">
-          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Profile/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding>
-            <element signature="e#15#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
+        <state relative-caret-position="405">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
           <folding />
         </state>
       </provider>

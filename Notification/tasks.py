@@ -6,7 +6,7 @@ import OpenSSL
 
 from SportscarStyle.celery import app
 from django.contrib.auth.models import User
-import redis_operation as my_redis
+from .redis_operation import UnreadUtil
 
 OpenSSL.SSL.SSLv3_METHOD = OpenSSL.SSL.TLSv1_METHOD
 
@@ -18,17 +18,22 @@ logger = logging.getLogger(__name__)
 def push_notification(user, tokens, badge_incr, message_body, type="", data=None):
     """ push notification to the user
     """
-    logger.debug("push!!!")
-    print "push!"
-    if not type in ["chat", "notif"]:
+    if type not in ["chat", "notif"]:
         logger.warn("Invalid notification type")
         return
     if tokens is None or len(tokens) == 0:
         return
     if type == "chat":
-        badge = my_redis.incr_chat(user.id, badge_incr)
+        if badge_incr > 0:
+            badge = UnreadUtil.incr(user.id)
+        else:
+            badge = UnreadUtil.get(user.id)
     else:
-        badge = my_redis.incr_notif(user.id, badge_incr)
+        if badge_incr > 0:
+            badge = UnreadUtil.incr(user.id)
+        else:
+            badge = UnreadUtil.get(user.id)
+
     message = Message(tokens, alert=message_body, badge=badge, sound="default")
     con = session.get_connection(
         "push_sandbox", cert_file=os.path.abspath(os.path.join(__file__, os.pardir, "data", "sportcar.pem")))
@@ -54,4 +59,4 @@ def push_notification(user, tokens, badge_incr, message_body, type="", data=None
 def clear_notification_unread_num(user):
     """ clear the notification unread number
     """
-    my_redis.clear_notif(user.id)
+    UnreadUtil.clear(user.id)

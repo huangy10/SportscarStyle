@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from custom.utils import time_to_string
 from .tasks import push_notification
 from .signal import send_notification
+# from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
 
@@ -67,7 +68,7 @@ class Notification(models.Model):
         """
         result = dict(
             notification_id=self.id,
-            target=self.target.profile.simple_dict_description(),
+            target=self.target.dict_description(),
             message_type=self.message_type,
             read=self.read,
             created_at=time_to_string(self.created_at),
@@ -77,11 +78,12 @@ class Notification(models.Model):
 
         def set_related(attribute_name):
             attribute = getattr(self, attribute_name)
-            if attribute is not None:
-                if attribute_name == "related_user":
-                    result[attribute_name] = attribute.profile.simple_dict_description()
-                else:
-                    result[attribute_name] = attribute.dict_description()
+            result[attribute_name] = attribute.dict_description()
+            # if attribute is not None:
+            #     if attribute_name == "related_user":
+            #         result[attribute_name] = attribute.profile.simple_dict_description()
+            #     else:
+
         set_related("related_user")
         set_related("related_act")
         set_related("related_act_invite")
@@ -108,6 +110,7 @@ class Notification(models.Model):
 
 @receiver(send_notification)
 def send_notification_handler(sender, **kwargs):
+    from Chat.ChatServer.runner import get_global_dispatcher
     message_type = kwargs["message_type"]
     target = kwargs["target"]
     message_body = kwargs.get("message_body", None)
@@ -129,17 +132,18 @@ def send_notification_handler(sender, **kwargs):
     )
 
     notif = Notification.objects.create(**create_params)
-    tokens = RegisteredDevices.objects.filter(
-        user=notif.target, is_active=True
-    ).values_list("token", flat=True)
-    print "push"
-    push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des(), type="notif")
+    get_global_dispatcher().new_message(notif)
+    # tokens = RegisteredDevices.objects.filter(
+    #     user=notif.target, is_active=True
+    # ).values_list("token", flat=True)
+    # print "push"
+    # push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des(), type="notif")
 
 
 class RegisteredDevices(models.Model):
     token = models.CharField(max_length=255, verbose_name=u"推送使用的token", null=True, blank=True)
     device_id = models.CharField(max_length=255, verbose_name=u"设备的id")
-    device_type = models.CharField(max_length=50)
+    device_type = models.CharField(max_length=50, default='ios')
     update_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="devices")
     is_active = models.BooleanField(default=True)

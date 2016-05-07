@@ -73,9 +73,11 @@ def login_first(method):
     """
     def wrapper(request, *args, **kwargs):
         if request.user is None or not request.user.is_authenticated():
+            print "Authorization Failed"
             return JsonResponse(dict(success=False, message='You need to login first',
                                 code='1402'))
         else:
+            print "Authorization Pass"
             return method(request, *args, **kwargs)
     return wrapper
 
