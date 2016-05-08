@@ -19,7 +19,7 @@ from Notification.redis_operation import UnreadUtil
 from Chat.ChatServer.dispatch import MessageDispatch
 from Chat.models import Chat, ChatEntity
 from Club.models import Club
-from Notification.models import RegisteredDevices
+from Notification.models import RegisteredDevices, Notification
 from User.models import User
 from User.utils import JWTUtil
 
@@ -171,6 +171,21 @@ class ChatNewHandler(JsonResponseHandler):
         self.JSONResponse(dict(success=True, chat_record_id=message.id))
 
 
+class NewNotificationHanlder(JsonResponseHandler):
+
+    @gen.coroutine
+    def post(self, *args, **kwargs):
+        print "internal request"
+        notif_id = self.get_argument("id")
+        try:
+            notif = Notification.objects.get(pk=notif_id)
+        except ObjectDoesNotExist:
+            self.JSONResponse(dict(success=False))
+            return
+        self.dispatcher.new_message(notif)
+        self.JSONResponse(dict(success=True))
+
+
 def start_tornado_service():
 
     app = Application(
@@ -183,8 +198,17 @@ def start_tornado_service():
         debug=True
     )
     app.listen(port=8888)
-    ioloop.IOLoop.current().start()
 
+    app2 = Application(
+        [
+            (r"/notification/internal", NewNotificationHanlder),
+        ],
+        cookie_secret="463a2380-39c9-450a-a884-3f7b8857d720",
+        xsrf_cookies=False,
+        debug=True)
+    app2.listen(address="localhost", port=8887)
+
+    ioloop.IOLoop.current().start()
 
 if __name__ == "__main__":
     start_tornado_service()

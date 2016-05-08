@@ -1,4 +1,6 @@
 # coding=utf-8
+import urllib
+
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -6,6 +8,7 @@ from django.dispatch import receiver
 from custom.utils import time_to_string
 from .tasks import push_notification
 from .signal import send_notification
+from tornado.httpclient import HTTPClient
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
@@ -78,7 +81,8 @@ class Notification(models.Model):
 
         def set_related(attribute_name):
             attribute = getattr(self, attribute_name)
-            result[attribute_name] = attribute.dict_description()
+            if attribute is not None:
+                result[attribute_name] = attribute.dict_description()
             # if attribute is not None:
             #     if attribute_name == "related_user":
             #         result[attribute_name] = attribute.profile.simple_dict_description()
@@ -100,17 +104,17 @@ class Notification(models.Model):
 
     def apns_des(self):
         if self.message_type == "status_like":
-            return "{0} 赞了你的动态".format(self.related_user.profile.nick_name)
+            return "{0} 赞了你的动态".format(self.related_user.nick_name)
         elif self.message_type == "status_comment":
-            return "{0} 评论了你的动态".format(self.related_user.profile.nick_name)
+            return "{0} 评论了你的动态".format(self.related_user.nick_name)
         elif self.message_type == "relation_follow":
-            return "{} 关注了你".format(self.related_user.profile.nick_name)
+            return "{} 关注了你".format(self.related_user.nick_name)
         return u"未定义的消息"
 
 
 @receiver(send_notification)
 def send_notification_handler(sender, **kwargs):
-    from Chat.ChatServer.runner import get_global_dispatcher
+    print "haha"
     message_type = kwargs["message_type"]
     target = kwargs["target"]
     message_body = kwargs.get("message_body", None)
@@ -130,9 +134,13 @@ def send_notification_handler(sender, **kwargs):
         related_news_comment=kwargs.get("related_news_commnet", None),
         related_own=kwargs.get("related_own", None)
     )
-
+    print "send notification"
     notif = Notification.objects.create(**create_params)
-    get_global_dispatcher().new_message(notif)
+    client = HTTPClient()
+    response = client.fetch(
+        "http://localhost:8887/notification/internal", method="POST",
+        body=urllib.urlencode({"id": notif.id})
+    )
     # tokens = RegisteredDevices.objects.filter(
     #     user=notif.target, is_active=True
     # ).values_list("token", flat=True)

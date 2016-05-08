@@ -70,7 +70,27 @@ class MessageFuture(Future):
         super(MessageFuture, self).__init__()
 
 
+class Singleton(type):
+
+    _instance = {}
+
+    def __call__(cls, *more):
+        print "call create"
+        if cls not in cls._instance:
+            print "actual create"
+            cls._instance[cls] = super(Singleton, cls).__call__(*more)
+        return cls._instance[cls]
+
+    # def __call__(cls, *args, **kwargs):
+    #     if cls not in cls._instance:
+    #         cls._instance[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+    #     return cls._instance[cls]
+
+
 class MessageDispatch(object):
+
+    __metaclass__ = Singleton
+
     def __init__(self):
         # use the id of the device as the key
         self.waiters = dict()
@@ -142,7 +162,8 @@ class MessageDispatch(object):
             # synchronous
             # self.handle_new_chat(chat=message, callback=None)
         elif isinstance(message, Notification):
-            gen.Task(self.handle_new_notification, notification=message)
+            self.handle_new_notification(message, callback=None)
+            # gen.Task(self.handle_new_notification, notification=message)
 
     def handle_new_chat(self, chat, callback):
         if chat is None:
@@ -227,17 +248,21 @@ class MessageDispatch(object):
         devices = RegisteredDevices.objects.filter(user=user, is_active=True)
         tokens = []
         badge = 1
+        print "a"
         for device in devices:
+            print device.id, self.waiters
             waiter = self.waiters.get(device.id)
+            print waiter
             if waiter is not None and waiter.future is not None and not waiter.future.done():
+                print "sent!!!"
                 waiter.take_response(notification.dict_description())
                 # badge = 0
             elif waiter is not None:
                 Waiter.cache_chat(notification.dict_description(), user)
             tokens.append(device.token)
-        push_notification.delay(
-            user, tokens, badge, notification.apns_des(), 'notif'
-        )
+        # push_notification.delay(
+        #     user, tokens, badge, notification.apns_des(), 'notif'
+        # )
         if callback is not None:
             callback()
 

@@ -243,7 +243,6 @@ def status_operation(request, data, status_id):
         if not created:
             obj.delete()
         elif status.user != request.user:
-            print "send"
             send_notification.send(sender=Status,
                                    message_type="status_like",
                                    related_user=request.user,

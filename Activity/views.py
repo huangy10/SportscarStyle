@@ -299,10 +299,10 @@ def activity_detail(request, act_id):
         return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
 
     data = act.dict_description_with_aggregation(with_user_info=True)
-    apply_list = ActivityJoin.objects.select_related('user__profile__avatar_club').filter(activity=act, approved=True)
+    apply_list = ActivityJoin.objects.select_related('user__avatar_club').filter(activity=act, approved=True)
     data['apply_list'] = map(lambda x: dict(approved=x.approved,
                                             like_at=time_to_string(x.created_at),
-                                            user=x.user.profile.complete_dict_description()),
+                                            user=x.user.dict_description()),
                              apply_list)
     data["liked"] = act.liked_by.filter(id=request.user.id).exists()
     data["applied"] = ActivityJoin.objects.filter(user=request.user, activity=act, approved=True).exists()
@@ -321,7 +321,7 @@ def activity_detail_comment(request, date_threshold, op_type, limit, act_id):
         date_filter = Q(created_at__lt=date_threshold)
 
     comments = ActivityComment.objects\
-        .select_related("user__profile")\
+        .select_related("user")\
         .filter(date_filter, activity_id=act_id)[0:limit]
 
     comments = map(lambda x: x.dict_description_simple(), comments)
