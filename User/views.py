@@ -429,8 +429,7 @@ def profile_operation(request, data, user_id):
                                    message_type="relation_follow",
                                    related_user=request.user,
                                    message_body="")
-
-            return JsonResponse(dict(success=True, followed=created))
+        return JsonResponse(dict(success=True, followed=created))
     else:
         return JsonResponse(dict(success=False, code='2301', message='Invalid operation'))
 

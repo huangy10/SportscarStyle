@@ -20819,3 +20819,572 @@ Traceback (most recent call last):
   File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 32, in notification_list
     dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
 TypeError: argument 2 to map() must support iteration
+2016-05-08 05:17:21,892 [ERROR] django.request: Internal Server Error: /notification/list
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Notification/views.py", line 32, in notification_list
+    dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+TypeError: argument 2 to map() must support iteration
+2016-05-08 06:21:26,249 [ERROR] django.request: Internal Server Error: /profile/2/follows
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 114, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Profile/views.py", line 440, in profile_follow_list
+    return JsonResponse(dict(success=True, follow=map(data_organize, follows)))
+TypeError: argument 2 to map() must support iteration
+2016-05-08 06:25:52,682 [WARNING] django.request: Not Found: /account/2/fans)
+2016-05-08 06:29:26,123 [WARNING] django.request: Not Found: /account/2/fans)
+2016-05-08 06:37:18,680 [ERROR] django.request: Internal Server Error: /account/1/operation
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view custom.utils._wrapper didn't return an HttpResponse object. It returned None instead.
+2016-05-08 06:38:49,333 [ERROR] django.request: Internal Server Error: /account/1/operation
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view custom.utils._wrapper didn't return an HttpResponse object. It returned None instead.
+2016-05-08 06:42:08,293 [ERROR] django.request: Internal Server Error: /account/1/operation
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view custom.utils._wrapper didn't return an HttpResponse object. It returned None instead.
+2016-05-08 06:44:15,097 [ERROR] django.request: Internal Server Error: /account/1/operation
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view custom.utils._wrapper didn't return an HttpResponse object. It returned None instead.
+2016-05-08 06:44:58,184 [ERROR] django.request: Internal Server Error: /account/1/operation
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view custom.utils._wrapper didn't return an HttpResponse object. It returned None instead.
+2016-05-08 07:31:08,538 [WARNING] django.request: Not Found: /chat/speak
+2016-05-08 07:31:49,688 [WARNING] django.request: Not Found: /chat/speak
+2016-05-08 07:32:03,686 [WARNING] django.request: Not Found: /chat/speak
+2016-05-08 07:35:34,870 [WARNING] django.request: Not Found: /profile/1/settings
+2016-05-08 14:22:36,627 [ERROR] django.request: Internal Server Error: /club/discover
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py", line 136, in club_discover
+    city = user.profile.district.split(" ")[0]
+AttributeError: 'User' object has no attribute 'profile'
+2016-05-08 14:26:17,916 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-05-08 14:31:07,505 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 14:31:11,534 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 14:45:25,700 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 116, in car_follow
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:46:38,976 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 116, in car_follow
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:47:05,197 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 117, in car_follow
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:48:08,709 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 117, in car_follow
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:48:24,426 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 117, in car_follow
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:49:56,315 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 117, in car_follow
+    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:51:01,627 [WARNING] django.request: Not Found: /
+2016-05-08 14:51:01,944 [WARNING] django.request: Not Found: /robots.txt
+2016-05-08 14:51:02,266 [WARNING] django.request: Not Found: /sitemap.xml
+2016-05-08 14:51:48,741 [WARNING] django.request: Method Not Allowed (GET): /cars/4/follow
+2016-05-08 14:54:15,475 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 120, in car_follow
+    signature=data['signature']
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:54:25,455 [ERROR] django.request: Internal Server Error: /cars/4/follow
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Sportscar/views.py", line 120, in car_follow
+    signature=data['signature']
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 407, in get_or_create
+    return self._create_object_from_params(lookup, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 447, in _create_object_from_params
+    six.reraise(*exc_info)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 439, in _create_object_from_params
+    obj = self.create(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 971, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+IntegrityError: duplicate key value violates unique constraint "Sportscar_sportcarownership_user_id_557fb55cbc357264_uniq"
+DETAIL:  Key (user_id, car_id)=(5, 4) already exists.
+
+2016-05-08 14:55:59,356 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 14:56:10,397 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 14:57:40,565 [WARNING] django.request: Not Found: /profile/5/fans
+2016-05-08 14:57:42,014 [WARNING] django.request: Not Found: /profile/5/follows
+2016-05-08 14:58:21,833 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 14:58:33,909 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:01:04,240 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:01:05,649 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:02:28,083 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:02:35,783 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:13:26,789 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:13:43,055 [WARNING] django.request: Not Found: /media/defaults/default_avatar.png
+2016-05-08 15:14:32,064 [ERROR] django.request: Internal Server Error: /chat/start
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/views.py", line 83, in start_chat
+    target_user = User.objects.get(pk=target_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 276, in __get__
+    self.model._meta.object_name, self.model._meta.swapped
+AttributeError: Manager isn't available; User has been swapped for 'User.User'
+2016-05-08 15:17:02,245 [ERROR] django.request: Internal Server Error: /chat/start
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/views.py", line 83, in start_chat
+    target_user = User.objects.get(pk=target_id)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 276, in __get__
+    self.model._meta.object_name, self.model._meta.swapped
+AttributeError: Manager isn't available; User has been swapped for 'User.User'
+2016-05-08 15:33:36,186 [ERROR] django.request: Internal Server Error: /club/create
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py", line 33, in club_create
+    users.append(User.objects.get(id=user_id))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 276, in __get__
+    self.model._meta.object_name, self.model._meta.swapped
+AttributeError: Manager isn't available; User has been swapped for 'User.User'
+2016-05-08 15:35:32,955 [ERROR] django.request: Internal Server Error: /club/create
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py", line 34, in club_create
+    users.append(User.objects.get(id=user_id))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 276, in __get__
+    self.model._meta.object_name, self.model._meta.swapped
+AttributeError: Manager isn't available; User has been swapped for 'User.User'
+2016-05-08 15:36:15,350 [ERROR] django.request: Internal Server Error: /club/create
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py", line 34, in club_create
+    users.append(User.objects.get(id=user_id))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 276, in __get__
+    self.model._meta.object_name, self.model._meta.swapped
+AttributeError: Manager isn't available; User has been swapped for 'User.User'
+2016-05-08 15:38:19,417 [ERROR] django.request: Internal Server Error: /club/create
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Club/views.py", line 34, in club_create
+    users.append(User.objects.get(id=user_id))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 276, in __get__
+    self.model._meta.object_name, self.model._meta.swapped
+AttributeError: Manager isn't available; User has been swapped for 'User.User'
+2016-05-08 15:40:06,541 [ERROR] django.request: Internal Server Error: /chat/start
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 81, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/custom/utils.py", line 66, in _wrapper
+    return method(request, data, **kwargs)
+  File "/Users/Lena/Project/IOS/SportFan/Backend/SportscarStyle/Chat/views.py", line 93, in start_chat
+    entity, created = ChatEntity.objects.get_or_create(user=target_club, host=request.user)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 405, in get_or_create
+    return self.get(**lookup), False
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 325, in get
+    clone = self.filter(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 679, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 697, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1304, in add_q
+    clause, require_inner = self._add_q(where_part, self.used_aliases)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1331, in _add_q
+    current_negated=current_negated, connector=connector, allow_joins=allow_joins)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1173, in build_filter
+    self.check_related_objects(field, value, opts)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1068, in check_related_objects
+    self.check_query_object_type(value, opts)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1052, in check_query_object_type
+    (value, opts.object_name))
+ValueError: Cannot query "Grace in Good": Must be "User" instance.
+2016-05-08 17:39:41,357 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif

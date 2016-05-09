@@ -107,9 +107,9 @@ class User(AbstractBaseUser):
     most_recent_status = models.ForeignKey('Status.Status', blank=True, null=True, related_name='+')
 
     # User Relations
-    fans = models.ManyToManyField(
+    follows = models.ManyToManyField(
         "self", through="UserRelation",
-        related_name="follows", symmetrical=False
+        related_name="fans", symmetrical=False
     )
 
     def follow_user(self, user):

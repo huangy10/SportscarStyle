@@ -20,7 +20,7 @@ def notification_list(request):
     limit = int(request.GET["limit"])
 
     notif = Notification.objects.select_related(
-        "related_user__profile",
+        "related_user",
         "related_club",
         "related_act",
         "related_status",
@@ -29,7 +29,7 @@ def notification_list(request):
         "related_news_comment"
     ).order_by("-created_at").filter(target=request.user)[skips:(limit + skips)]
     return JsonResponse(
-        dict(success=True, notifications=map(lambda x: x.dict_description(), notif)))
+        dict(success=True, data=map(lambda x: x.dict_description(), notif)))
 
 
 @http_decorators.require_POST

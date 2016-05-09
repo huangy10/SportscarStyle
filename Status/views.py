@@ -50,7 +50,6 @@ def status_list(request, date_threshold, op_type, limit):
                | logo:
                | image:
     """
-    print "hahahaha"
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
     else:
@@ -61,7 +60,7 @@ def status_list(request, date_threshold, op_type, limit):
     if query_type == 'follow':
         # 获取关注的特点
         # content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
-        content_filter = Q()
+        content_filter = Q(user=request.user) | Q(user__fans=request.user)
     elif query_type == 'nearby':
         lat = float(request.GET["lat"])
         lon = float(request.GET["lon"])

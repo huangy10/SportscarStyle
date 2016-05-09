@@ -75,9 +75,7 @@ class Singleton(type):
     _instance = {}
 
     def __call__(cls, *more):
-        print "call create"
         if cls not in cls._instance:
-            print "actual create"
             cls._instance[cls] = super(Singleton, cls).__call__(*more)
         return cls._instance[cls]
 
@@ -162,13 +160,15 @@ class MessageDispatch(object):
             # synchronous
             # self.handle_new_chat(chat=message, callback=None)
         elif isinstance(message, Notification):
-            self.handle_new_notification(message, callback=None)
-            # gen.Task(self.handle_new_notification, notification=message)
+            # self.handle_new_notification(message, callback=None)
+            gen.Task(self.handle_new_notification, notification=message)
 
     def handle_new_chat(self, chat, callback):
+
         if chat is None:
             return
         if chat.chat_type == 'user':
+
             target_user = chat.target_user
             activate_devices = RegisteredDevices.objects.filter(user=target_user, is_active=True)
             entity, created = ChatEntity.objects.get_or_create(host=target_user, user=chat.sender)

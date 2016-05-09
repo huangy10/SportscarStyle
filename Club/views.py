@@ -2,13 +2,13 @@
 import json
 
 from django.views.decorators.http import require_POST, require_GET
-from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Count, Case, When, Sum, IntegerField,BooleanField
+from django.db.models import Count, Case, When, Sum, IntegerField, BooleanField
 
 from .forms import ClubCreateForm
 from .models import Club, ClubJoining, ClubAuthRequest
+from User.models import User
 from custom.utils import post_data_loader, login_first
 from Activity.models import Activity
 from Notification.signal import send_notification
@@ -26,17 +26,19 @@ def club_create(request):
     request.POST.update({"host": request.user.id})
     form = ClubCreateForm(request.POST, request.FILES)
     if form.is_valid():
+
         club = form.save()
         users = []
         try:
             for user_id in users_id:
-                users.append(User.objects.select_related("profile").get(id=user_id))
+                users.append(User.objects.get(id=user_id))
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, code=3002, message="User not Found"))
         for user in users:
-            ClubJoining.objects.create(club=club, user=user, nick_name=user.profile.nick_name)
+            ClubJoining.objects.create(club=club, user=user, nick_name=user.nick_name)
         # Also add the host as a member of the club
-        ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.profile.nick_name)
+        print "success"
+        ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.nick_name)
         entity, _ = ChatEntity.objects.get_or_create(host=request.user, club=club)
         # try:
         #     ChatRecordBasic.objects.create(target_club=club, chat_type="group", message_type="placeholder",
@@ -133,7 +135,7 @@ def club_discover(request):
     user = request.user
 
     if query_type == "nearby":
-        city = user.profile.district.split(" ")[0]
+        city = user.district.split(" ")[0]
         result = Club.objects.filter(city=city, deleted=False)\
             .annotate(members_num=Count("members"))\
             .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))
@@ -155,7 +157,7 @@ def club_discover(request):
         result = Club.objects.filter(deleted=False)\
             .annotate(members_num=Count("members"))\
             .annotate(beauty_num=Sum(
-                Case(When(members__profile__gender="f", then=1),
+                Case(When(members__gender="f", then=1),
                      default=0, output_field=IntegerField())))\
             .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
             .order_by("-beauty_num")

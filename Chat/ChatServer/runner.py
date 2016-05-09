@@ -75,6 +75,9 @@ class ChatUpdateHandler(JsonResponseHandler):
     def post(self, *args, **kwargs):
         user = self.current_user
         device = self.device
+        print "User {0} start waiting for message on device: {1}".format(
+            user.username, device.token
+        )
         if user is None or device is None:
             self.JSONResponse(dict(success=False, message='You need to login first', code='1402'))
             return
@@ -89,12 +92,14 @@ class ChatUpdateHandler(JsonResponseHandler):
             self.JSONResponse(dict(success=False, message='You need to login first', code='1402'))
             return
         messages = yield self.dispatcher.wait_for_message(device, cur_focused_entity=cur_focus_chat)
+        print "user: {0} receive message: {1}".format(user.username, messages)
         if self.request.connection.stream.closed():
             self.JSONResponse(dict(success=False))
             return
         self.JSONResponse(dict(success=True, data=messages))
 
     def on_connection_close(self):
+        print "disconnect: {}".format(self.current_user.username)
         if self.device is None:
             return
         self.dispatcher.cancel_wait(self.device)
@@ -175,7 +180,6 @@ class NewNotificationHanlder(JsonResponseHandler):
 
     @gen.coroutine
     def post(self, *args, **kwargs):
-        print "internal request"
         notif_id = self.get_argument("id")
         try:
             notif = Notification.objects.get(pk=notif_id)

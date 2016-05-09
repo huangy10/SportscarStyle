@@ -113,7 +113,13 @@ def car_follow(request, data, car_id):
             message='Sport car not found.',
             code='1004'
         ))
-    own, created = SportCarOwnership.objects.get_or_create(user=request.user, car=car, signature=data['signature'])
+
+    own, created = SportCarOwnership.objects.get_or_create(
+        user=request.user,
+        car=car,
+        signature=data['signature']
+    )
+    print own
     return JsonResponse(dict(success=True, data=own.dict_description()))
 
 

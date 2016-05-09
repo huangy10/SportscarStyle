@@ -114,7 +114,6 @@ class Notification(models.Model):
 
 @receiver(send_notification)
 def send_notification_handler(sender, **kwargs):
-    print "haha"
     message_type = kwargs["message_type"]
     target = kwargs["target"]
     message_body = kwargs.get("message_body", None)

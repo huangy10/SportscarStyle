@@ -3,11 +3,11 @@ from django.shortcuts import render
 from django.views.decorators.http import require_GET, require_POST
 from django.http import JsonResponse
 from django.db.models import Q
-from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
 from custom.utils import login_first, page_separator_loader, post_data_loader
 from .models import ChatEntity, Chat
+from User.models import User
 from Club.models import Club, ClubJoining
 from .utils import UnreadMessageNumStorage
 # Create your views here.
@@ -23,6 +23,16 @@ def chat_list(request):
     return JsonResponse(dict(
         success=True, data=map(lambda x: x.dict_description(), result)
     ))
+
+@require_POST
+@login_first
+@post_data_loader()
+def roster_update(request, data, roster_id):
+    try:
+        entity = ChatEntity.objects.get(id=roster_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="Roster Item not found"))
+
 
 
 @require_GET
