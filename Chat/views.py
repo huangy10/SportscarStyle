@@ -24,6 +24,7 @@ def chat_list(request):
         success=True, data=map(lambda x: x.dict_description(), result)
     ))
 
+
 @require_POST
 @login_first
 @post_data_loader()
@@ -32,7 +33,10 @@ def roster_update(request, data, roster_id):
         entity = ChatEntity.objects.get(id=roster_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="Roster Item not found"))
-
+    entity.always_on_top = data["always_on_top"]
+    entity.no_disturbing = data["no_disturbing"]
+    entity.set_nick_name(data["nick_name"])
+    return JsonResponse(dict(success=True))
 
 
 @require_GET

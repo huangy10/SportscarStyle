@@ -149,6 +149,11 @@ class ChatEntity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def set_nick_name(self, name):
+        if self.user is None:
+            return
+        ChatRemarkNameStorage.set_nick_name(self.host, self.user, name=name)
+
     def dict_description(self):
         result = dict(
             ssid=self.id,
