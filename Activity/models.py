@@ -88,7 +88,7 @@ class Activity(models.Model):
         result["like_num"] = self.like_num
         result["comment_num"] = self.comment_num
         if show_members:
-            result["members"] = map(lambda x: x.profile.simple_dict_description(), self.applications.all())
+            result["members"] = map(lambda x: x.dict_description(), self.applications.all())
         return result
 
     def dict_description(self):
@@ -102,7 +102,7 @@ class Activity(models.Model):
             poster=self.poster.url,
             location=self.location.dict_description(),
             created_at=time_to_string(self.created_at),
-            user=self.user.profile.simple_dict_description(),
+            user=self.user.dict_description(),
             like_num=self.like_num,
             comment_num=self.comment_num,
         )
@@ -122,7 +122,7 @@ class ActivityJoin(models.Model):
 
     def dict_description(self):
         return dict(
-                user=self.user.profile.simple_dict_description(),
+                user=self.user.dict_description(),
                 activity=self.activity.dict_description(),
                 approved=self.approved,
                 created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S %Z')
@@ -156,12 +156,12 @@ class ActivityComment(models.Model):
 
     def dict_description(self):
         result = dict(
-                activity=self.activity.dict_description(),
-                user=self.user.profile.simple_dict_description(),
-                created_at=time_to_string(self.created_at),
-                image=self.image.url if self.image else None,
-                content=self.content,
-                commentID=self.id
+            activity=self.activity.dict_description(),
+            user=self.user.dict_description(),
+            created_at=time_to_string(self.created_at),
+            image=self.image.url if self.image else None,
+            content=self.content,
+            commentID=self.id
         )
         if self.response_to is not None:
             result.update(response_to=self.response_to_id)
@@ -171,11 +171,11 @@ class ActivityComment(models.Model):
         """ 相比之下,这个函数返回的字典不包含activity的信息
         """
         result = dict(
-                user=self.user.profile.simple_dict_description(),
-                created_at=time_to_string(self.created_at),
-                image=self.image.url if self.image else None,
-                content=self.content,
-                commentID=self.id
+            user=self.user.dict_description(),
+            created_at=time_to_string(self.created_at),
+            image=self.image.url if self.image else None,
+            content=self.content,
+            commentID=self.id
         )
         if self.response_to is not None:
             result.update(response_to=self.response_to_id)
@@ -199,12 +199,12 @@ class ActivityInvitation(models.Model):
 
     def dict_description(self):
         return dict(
-                inviter=self.inviter.profile.simple_dict_description(),
-                target=self.target.profile.simple_dict_description(),
-                activity=self.target.dict_description(),
-                created_at=time_to_string(self.created_at),
-                responsed=self.responsed,
-                agree=self.agree
+            inviter=self.inviter.dict_description(),
+            target=self.target.dict_description(),
+            activity=self.target.dict_description(),
+            created_at=time_to_string(self.created_at),
+            responsed=self.responsed,
+            agree=self.agree
         )
 
 

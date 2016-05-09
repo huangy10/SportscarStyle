@@ -1,4 +1,6 @@
 # coding=utf-8
+import urllib
+
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -6,6 +8,8 @@ from django.dispatch import receiver
 from custom.utils import time_to_string
 from .tasks import push_notification
 from .signal import send_notification
+from tornado.httpclient import HTTPClient
+# from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
 
@@ -67,7 +71,7 @@ class Notification(models.Model):
         """
         result = dict(
             notification_id=self.id,
-            target=self.target.profile.simple_dict_description(),
+            target=self.target.dict_description(),
             message_type=self.message_type,
             read=self.read,
             created_at=time_to_string(self.created_at),
@@ -78,10 +82,12 @@ class Notification(models.Model):
         def set_related(attribute_name):
             attribute = getattr(self, attribute_name)
             if attribute is not None:
-                if attribute_name == "related_user":
-                    result[attribute_name] = attribute.profile.simple_dict_description()
-                else:
-                    result[attribute_name] = attribute.dict_description()
+                result[attribute_name] = attribute.dict_description()
+            # if attribute is not None:
+            #     if attribute_name == "related_user":
+            #         result[attribute_name] = attribute.profile.simple_dict_description()
+            #     else:
+
         set_related("related_user")
         set_related("related_act")
         set_related("related_act_invite")
@@ -98,11 +104,11 @@ class Notification(models.Model):
 
     def apns_des(self):
         if self.message_type == "status_like":
-            return "{0} 赞了你的动态".format(self.related_user.profile.nick_name)
+            return "{0} 赞了你的动态".format(self.related_user.nick_name)
         elif self.message_type == "status_comment":
-            return "{0} 评论了你的动态".format(self.related_user.profile.nick_name)
+            return "{0} 评论了你的动态".format(self.related_user.nick_name)
         elif self.message_type == "relation_follow":
-            return "{} 关注了你".format(self.related_user.profile.nick_name)
+            return "{} 关注了你".format(self.related_user.nick_name)
         return u"未定义的消息"
 
 
@@ -127,17 +133,24 @@ def send_notification_handler(sender, **kwargs):
         related_news_comment=kwargs.get("related_news_commnet", None),
         related_own=kwargs.get("related_own", None)
     )
-
+    print "send notification"
     notif = Notification.objects.create(**create_params)
-    tokens = RegisteredDevices.objects.filter(
-        user=notif.target, is_active=True
-    ).values_list("token", flat=True)
-    print "push"
-    push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des(), type="notif")
+    client = HTTPClient()
+    response = client.fetch(
+        "http://localhost:8887/notification/internal", method="POST",
+        body=urllib.urlencode({"id": notif.id})
+    )
+    # tokens = RegisteredDevices.objects.filter(
+    #     user=notif.target, is_active=True
+    # ).values_list("token", flat=True)
+    # print "push"
+    # push_notification.delay(target, tokens, badge_incr=1, message_body=notif.apns_des(), type="notif")
 
 
 class RegisteredDevices(models.Model):
-    token = models.CharField(max_length=255)
+    token = models.CharField(max_length=255, verbose_name=u"推送使用的token", null=True, blank=True)
+    device_id = models.CharField(max_length=255, verbose_name=u"设备的id")
+    device_type = models.CharField(max_length=50, default='ios')
     update_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="devices")
     is_active = models.BooleanField(default=True)

@@ -8,7 +8,6 @@ from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 
 from .models import Status, StatusLikeThrough, StatusComment
-from Profile.models import UserRelationSetting
 from .forms import StatusCreationForm
 from custom.utils import post_data_loader, page_separator_loader, login_first
 from Notification.signal import send_notification
@@ -61,7 +60,7 @@ def status_list(request, date_threshold, op_type, limit):
     if query_type == 'follow':
         # 获取关注的特点
         # content_filter = Q(user__friendship__fans=request.user) | Q(user=request.user)
-        content_filter = Q()
+        content_filter = Q(user=request.user) | Q(user__fans=request.user)
     elif query_type == 'nearby':
         lat = float(request.GET["lat"])
         lon = float(request.GET["lon"])
@@ -73,22 +72,12 @@ def status_list(request, date_threshold, op_type, limit):
     else:
         return JsonResponse(dict(success=False, message="Undefined query type"))
 
-    # 这里我们认为黑名单的长度是有限的,故将黑名单全部载入内存然后筛选
-    blacklist1 = UserRelationSetting.objects.filter(
-        user=request.user, see_his_status=False
-    ).values_list("target__id", flat=True)
-    blacklist2 = UserRelationSetting.objects.filter(
-        user=request.user, allow_see_status=False
-    ).values_list("target__id", flat=True)
-    blacklist = list(blacklist1) + list(blacklist2)
-    blacklist_filter = ~Q(user__id__in=blacklist)
-
     data = Status.objects\
-        .select_related('user__profile__avatar_club')\
+        .select_related('user__avatar_club')\
         .select_related('car')\
         .select_related('location')\
         .order_by(*order_by_properties)\
-        .filter(date_filter & content_filter & blacklist_filter, deleted=False)\
+        .filter(date_filter & content_filter, deleted=False)\
         .annotate(comment_num=Count('comments', distinct=True))\
         .annotate(like_num=Count('liked_by', distinct=True))[0:limit]
 
@@ -115,6 +104,7 @@ def status_detail(request, status_id):
 @login_first
 @post_data_loader(json_fields=("inform_of", ))
 def post_new_status(request, data):
+    print data
     form = StatusCreationForm(data, request.FILES)
     if form.is_valid():
         status = form.save()
@@ -160,7 +150,7 @@ def status_comments(request, date_threshold, op_type, limit, status_id):
         status = Status.objects.get(id=status_id, deleted=False)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, code="4002", message="status not found"))
-    comments = StatusComment.objects.select_related("user__profile").filter(date_filter, status=status)[0:limit]
+    comments = StatusComment.objects.select_related("user").filter(date_filter, status=status)[0:limit]
 
     return JsonResponse(dict(
         success=True,
@@ -252,7 +242,6 @@ def status_operation(request, data, status_id):
         if not created:
             obj.delete()
         elif status.user != request.user:
-            print "send"
             send_notification.send(sender=Status,
                                    message_type="status_like",
                                    related_user=request.user,

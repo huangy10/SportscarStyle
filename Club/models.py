@@ -13,7 +13,7 @@ class ClubJoining(models.Model):
     """这里定义了用户关于一个群聊的设置
     """
     # Basic information
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u"用户")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u"用户", related_name="clubs")
     nick_name = models.CharField(max_length=100, verbose_name=u"本群昵称")
     club = models.ForeignKey("Club.Club", verbose_name=u"俱乐部")
     join_date = models.DateTimeField(auto_now_add=True, verbose_name=u"加入日期")
@@ -27,7 +27,7 @@ class ClubJoining(models.Model):
     unread_chats = models.IntegerField(default=0, verbose_name=u"未读消息数量")
 
     def __str__(self):
-        return smart_str("{0} in {1}".format(self.user.profile.nick_name, self.club.name))
+        return smart_str("{0} in {1}".format(self.user.nick_name, self.club.name))
 
     class Meta:
         unique_together = ("user", "club")
@@ -80,7 +80,7 @@ class ClubManager(models.Manager):
         host = kwargs.get('host')
         ClubJoining.objects.create(user=host,
                                    club=obj,
-                                   nick_name=host.profile.nick_name)
+                                   nick_name=host.nick_name)
         return obj
 
 
@@ -126,11 +126,11 @@ class Club(models.Model):
             id=self.id, club_logo=self.logo.url,
             club_name=self.name, description=self.description,
             identified=self.identified, city=self.city,
-            host=self.host.profile.simple_dict_description()
+            host=self.host.dict_description()
         )
         if show_members:
             result.update(
-                members=map(lambda x: x.profile.simple_dict_description(), self.members.all())
+                members=map(lambda x: x.dict_description(), self.members.all())
             )
         if show_setting:
             result.update(dict(

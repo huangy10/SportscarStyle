@@ -6,6 +6,7 @@ from Club.models import Club, ClubJoining
 from Notification.tasks import push_notification
 from Notification.models import RegisteredDevices
 
+
 def inform_of_related_waiters(message, global_message_dispatch):
     """ 根据给定的message内容,通知所有的相关的用户通知相
      :param message

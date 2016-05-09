@@ -2,17 +2,14 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_GET, require_POST
 from django.http import JsonResponse
-from django.db.models import Q, Count, F, Case, When, Sum
-from django.db import models
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
+from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils import timezone
 
 from custom.utils import login_first, page_separator_loader, post_data_loader
-from .models import ChatRecordBasic
+from .models import ChatEntity, Chat
+from User.models import User
 from Club.models import Club, ClubJoining
-from Profile.models import UserRelationSetting
+from .utils import UnreadMessageNumStorage
 # Create your views here.
 
 
@@ -22,26 +19,24 @@ def chat_list(request):
     """ 暂时先返回所有的聊天单元
      返回的信息包括每个单元的类型(private/group),目标信息(target_user/target_club),以及最近的一条聊天的内容
     """
-    result = ChatRecordBasic.objects.select_related("sender__profile", "target_club")\
-        .order_by("distinct_identifier", "-created_at")\
-        .filter(
-            Q(target_user=request.user, chat_type="private") |
-            Q(target_club__members=request.user) |
-            Q(sender=request.user, chat_type="private"),
-            deleted=False)\
-        .distinct("distinct_identifier")
-    # 获取相关的clubs
-    clubs = [x.target_club for x in result if x.chat_type == "group"]
-    club_joins = ClubJoining.objects.filter(user=request.user, club__in=clubs)
-    users = [x.target_user for x in result if x.chat_type == "private"]
-    relation_settings = UserRelationSetting.objects.filter(user=request.user, target__in=users)
-    #
-    data = dict(
-        chats=map(lambda x: x.dict_description(), result),
-        club_settings=map(lambda x: x.dict_description(for_host=True, show_members_num=True), club_joins),
-        private_settings=map(lambda x: x.dict_description_simple(), relation_settings)
-    )
-    return JsonResponse(dict(success=True, data=data))
+    result = ChatEntity.objects.filter(host=request.user)
+    return JsonResponse(dict(
+        success=True, data=map(lambda x: x.dict_description(), result)
+    ))
+
+
+@require_POST
+@login_first
+@post_data_loader()
+def roster_update(request, data, roster_id):
+    try:
+        entity = ChatEntity.objects.get(id=roster_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="Roster Item not found"))
+    entity.always_on_top = data["always_on_top"]
+    entity.no_disturbing = data["no_disturbing"]
+    entity.set_nick_name(data["nick_name"])
+    return JsonResponse(dict(success=True))
 
 
 @require_GET
@@ -49,68 +44,72 @@ def chat_list(request):
 def unread_chat_message_num(request):
     """ 统计未读消息数量
     """
-    user_result = User.objects.filter(chats__target_user=request.user, chats__read=False).distinct()\
-        .annotate(unread_num=Count("chats")).filter(unread_num__gt=0)
-    club_result = ClubJoining.objects.filter(user=request.user, unread_chats__gt=0)
-
-    def f(user):
-        return dict(user=user.profile.simple_dict_description(), unread=user.unread_num, chat_type="private")
-
-    def g(club):
-        return dict(club=club.club.dict_description(), unread=club.unread_chats, chat_type="group")
-
-    user_list = map(f, user_result)
-    club_list = map(g, club_result)
-    print user_list, club_list
-    return JsonResponse(dict(success=True, data=(user_list + club_list)))
-
+    return UnreadMessageNumStorage.get_redis_key(request.user)
 
 
 @require_GET
 @login_first
-@page_separator_loader
-def historical_record(request, date_threshold, op_type, limit):
+def historical_record(request):
     """ 获取历史聊天信息
      :param op_type only accept "more"
     """
-    if op_type != "more":
-        return JsonResponse(
-                dict(success=False, code="3400", message="op_type invalid")
-        )
-    target_id = request.GET["target_id"]
-    chat_type = request.GET["chat_type"]
+    roster_id = request.GET["roster"]
+    skips = int(request.GET["skips"])
+    limit = int(request.GET["limit"])
+    try:
+        entity = ChatEntity.objects\
+            .select_related("user", "club")\
+            .get(pk=roster_id, host=request.user)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="Chat entity not found"))
+    if entity.user is not None:
+        result = Chat.objects.order_by("-created_at").filter(
+            Q(sender=entity.user, target_user=entity.host) |
+            Q(sender=entity.host, target_user=entity.user)
+        )[skips: (skips + limit)]
 
-    if chat_type == "private":
-        try:
-            target_user = get_user_model().objects.get(id=target_id)
-        except ObjectDoesNotExist:
-            return JsonResponse(dict(success=False, code="3002", message="User not found"))
-        target_filter = Q(target_user=target_user, sender=request.user) | \
-                        Q(target_user=request.user, sender=target_user)
-    elif chat_type == "group":
-        try:
-            # 用户必须是俱乐部的成员才能获取历史信息
-            join = ClubJoining.objects.select_related("club").get(club__id=target_id, user=request.user)
-            target_club = join.club
-            join.chat_sync_date = timezone.now()
-            join.save()
-        except ObjectDoesNotExist:
-            return JsonResponse(dict(success=False, code="2002", message="club not found"))
-        target_filter = Q(target_club=target_club)
+    elif entity.club is not None:
+        club = entity.club.club
+        result = Chat.objects.order_by("-created_at").filter(
+            target_club=club
+        )[skips: (skips + limit)]
+
     else:
-        return JsonResponse(dict(success=False, code="6002", message="invalid chat type"))
+        return JsonResponse(dict(successs=False, message="Internal Error"))
 
-    result = ChatRecordBasic.objects.filter(
-        target_filter,
-        created_at__lt=date_threshold,
-        chat_type=chat_type,
-        deleted=False
-    )[0:limit]
-    if chat_type == "private":
-        # group类型下read属性无意义
-        ChatRecordBasic.objects.filter(target_filter, chat_type=chat_type, deleted=False).update(read=True)
-    return JsonResponse(dict(
-            success=True, chats=map(lambda x: x.dict_description(), result)))
+    return JsonResponse(
+        dict(success=True, data=map(lambda x: x.dict_description(host=request.user), result))
+    )
+
+
+@login_first
+@post_data_loader()
+def start_chat(request, data):
+    """
+     每次进入聊天前需要发送这个请求
+    :param request:
+    :return:
+    """
+    chat_type = data["chat_type"]
+    target_id = data["target_id"]
+    if chat_type == "user":
+        try:
+            target_user = User.objects.get(pk=target_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="User not found"))
+        entity, created = ChatEntity.objects.get_or_create(user=target_user, host=request.user)
+    elif chat_type == 'club':
+        try:
+            target_join = ClubJoining.objects.get(club_id=target_id, user=request.user)
+            target_club = target_join
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Club not found"))
+        entity, created = ChatEntity.objects.get_or_create(user=target_club, host=request.user)
+    else:
+        return JsonResponse(dict(success=False, message="Chat type not defined: %s" % chat_type))
+    result = entity.dict_description()
+    result.update(created=created)
+    return JsonResponse(dict(success=True, data=result))
 
 
 @require_POST
@@ -118,55 +117,40 @@ def historical_record(request, date_threshold, op_type, limit):
 def read_sync(request):
     """ 同步阅读状态, 将和目标用户/群组的所有对话
     """
-    target_id = request.GET["target_id"]
-    chat_type = request.GET["chat_type"]
-
-    if chat_type == "private":
+    target_id = request.POST["target_id"]
+    chat_type = request.POST["chat_type"]
+    cur_unread = request.POST["unread"]
+    if chat_type == 'user':
         try:
             target_user = User.objects.get(id=target_id)
+            entity = ChatEntity.objects.get(user=target_user, host=request.user)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, code="3002", message="User not found"))
-        ChatRecordBasic.objects\
-            .filter(sender=target_user, read=False, target_user=request.user)\
+        Chat.objects.filter(sender=target_user, read=False, target_user=request.user)\
             .update(read=True)
+        entity.unread_num = 0
+        entity.save()
+
+        unread = UnreadMessageNumStorage.get_redis_key(request.user)
+        if 0 <= cur_unread < unread:
+            UnreadMessageNumStorage.set_unread_num(request.user, cur_unread)
         return JsonResponse(dict(success=True))
-    elif chat_type == "group":
+    elif chat_type == 'club':
         try:
-            target_club = Club.objects.get(id=target_id)
-            join = ClubJoining.objects.get(club=target_club, user=request.user)
-            join.unread_chats = 0
-            join.save()
+            join = ClubJoining.objects\
+                .select_related('club')\
+                .get(club_id=target_id, user=request.user)
+            entity = ChatEntity.objects.get(club=join.club, host=request.user)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, code="2002", message="club not found"))
-    else:
-        return JsonResponse(dict(success=False, code="6002", message="invalid chat type"))
-#
-#
-# @require_POST
-# @login_first
-# @post_data_loader()
-# def start_chat(request, data):
-#     """ Start chat with a target(user or club)
-#     """
-#     chat_type = data["chat_type"]
-#     target_id = data["target_id"]
-#     if chat_type == "private":
-#         try:
-#             user = get_user_model().objects.get(id=target_id)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=False, message="User not found"))
-#         ChatRecordBasic.objects.get_or_create(
-#             target_user=user, message_type="placeholder",
-#             sender=request.user, chat_type="private"
-#         )
-#         return JsonResponse(dict(success=True))
-#     elif chat_type == "group":
-#         try:
-#             club = Club.objects.get(id=target_id)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=False, message="Club not found"))
-#         ChatRecordBasic.objects.get_or_create(
-#             target_club=club, message_type="placeholder",
-#             sender=request.user, chat_type="group"
-#         )
-#         return JsonResponse(dict(success=True))
+        join.unread_chats = 0
+        join.save()
+
+        entity.unread_num = 0
+        unread = UnreadMessageNumStorage.get_redis_key(request.user)
+        if 0 <= cur_unread < unread:
+            UnreadMessageNumStorage.set_unread_num(request.user, cur_unread)
+        return JsonResponse(dict(success=True))
+
+
+

@@ -3,6 +3,8 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 
 from custom.models_template import BaseCommentManager, comment_image_path
@@ -67,7 +69,7 @@ class Status(models.Model):
             statusID=self.id,
             images=self.images,
             content=self.content,
-            user=self.user.profile.complete_dict_description(),
+            user=self.user.dict_description(detail=True),
             created_at=time_to_string(self.created_at)
         )
         if self.car is not None:
@@ -106,7 +108,7 @@ class StatusComment(models.Model):
             created_at=time_to_string(self.created_at),
             image=self.image.url if self.image else "",
             content=self.content,
-            user=self.user.profile.simple_dict_description(),
+            user=self.user.dict_description(),
             response_to=self.response_to_id
         )
 
@@ -118,3 +120,11 @@ class StatusLikeThrough(models.Model):
 
     class Meta:
         unique_together = ('user', 'status')
+
+
+@receiver(post_save, sender=Status)
+def auto_set_most_recent_status(sender, instance, created, **kwargs):
+    if not created:
+        return
+    instance.user.most_recent_status = instance
+    instance.user.save()

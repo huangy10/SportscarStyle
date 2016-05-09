@@ -115,7 +115,7 @@ def news_comments_list(request, date_threshold, op_type, limit, news_id):
         result = dict(
             commentID=comment.id,
             content=comment.content,
-            user=user.profile.simple_dict_description(),
+            user=user.dict_description(),
             created_at=time_to_string(comment.created_at)
         )
         if comment.image:

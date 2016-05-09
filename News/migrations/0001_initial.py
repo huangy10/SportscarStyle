@@ -2,15 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import News.models
 import custom.models_template
-from django.conf import settings
+import News.models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -38,10 +36,6 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='\u8bc4\u8bba\u65f6\u95f4')),
                 ('image', models.ImageField(upload_to=custom.models_template.comment_image_path, verbose_name='\u8bc4\u8bba\u56fe\u7247', blank=True)),
                 ('content', models.CharField(max_length=255, null=True, verbose_name='\u8bc4\u8bba\u6b63\u6587', blank=True)),
-                ('inform_of', models.ManyToManyField(related_name='need_to_see_comments', verbose_name='@\u67d0\u4eba', to=settings.AUTH_USER_MODEL)),
-                ('news', models.ForeignKey(related_name='comments', to='News.News')),
-                ('response_to', models.ForeignKey(related_name='responses', to='News.NewsComment', null=True)),
-                ('user', models.ForeignKey(verbose_name='\u53d1\u5e03\u7528\u6237', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -55,12 +49,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('like_at', models.DateTimeField(auto_now_add=True)),
                 ('news', models.ForeignKey(to='News.News')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
-        ),
-        migrations.AddField(
-            model_name='news',
-            name='liked_by',
-            field=models.ManyToManyField(related_name='liked_news', verbose_name='\u70b9\u8d5e', through='News.NewsLikeThrough', to=settings.AUTH_USER_MODEL),
+            options={
+                'ordering': ('-like_at',),
+            },
         ),
     ]

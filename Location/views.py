@@ -41,7 +41,6 @@ def radar_cars(request, data):
     # 首先更新用户的位置
     lat = float(data["loc"]["lat"])
     lon = float(data["loc"]["lon"])
-    print lat, lon
     tracking = request.user.location
     loc = tracking.location
     loc.location = Point(lon, lat)
@@ -62,7 +61,7 @@ def radar_cars(request, data):
 
         # TODO: 添加其他的筛选条件
 
-        results = get_user_model().objects.select_related("profile", "location")\
+        results = get_user_model().objects.select_related("location")\
             .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
                                            default=0, output_field=models.IntegerField()))\
             .filter(~Q(id=request.user.id), authed_cars_num__gte=0,
@@ -72,7 +71,7 @@ def radar_cars(request, data):
             .distinct()
 
         def result_generator(user):
-            result = user.profile.complete_dict_description()
+            result = user.dict_description(detail=True)
             result["loc"] = user.location.location.dict_description()
             return result
 
@@ -85,6 +84,7 @@ def radar_cars(request, data):
 def radar_user_location_udpate(request, data):
     """ 更新用户的当前位置
     """
+    print data
     lat = float(data["lat"])
     lon = float(data["lon"])
     tracking = request.user.location
@@ -104,7 +104,7 @@ def track_user(request, user_id):
     """ Fetch the latest location of the given user
     """
     try:
-        target_user = get_user_model().objects.select_related("profile", "location").get(id=user_id)
+        target_user = get_user_model().objects.select_related("location").get(id=user_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="user not found"))
     time_delta = timezone.now() - target_user.location.updated_at
