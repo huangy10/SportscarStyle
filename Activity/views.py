@@ -227,9 +227,11 @@ def activity_operation(request, data, act_id):
                                    message_body="")
         return JsonResponse(dict(success=True))
     elif op_type == "invite_accepted":
+        applier = data.get("target_user")
         try:
             notif = Notification.objects.get(message_type="act_invited",
                                              target=request.user,
+                                             related_user_id=applier,
                                              related_act__id=act_id, checked=False)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="Not invited"))
@@ -248,9 +250,11 @@ def activity_operation(request, data, act_id):
                                     approved=True)
         return JsonResponse(dict(success=True))
     elif op_type == "invite_denied":
+        applier = data.get("target_user")
         try:
             notif = Notification.objects.get(message_type="act_invited",
                                              target=request.user,
+                                             related_user_id=applier,
                                              related_act__id=act_id, flag=False)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="Not invited"))

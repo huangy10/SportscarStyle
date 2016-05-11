@@ -1,3 +1,4 @@
+# coding=utf-8
 import json
 import os
 import sys
@@ -6,6 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.wsgi import get_wsgi_application
 from tornado import gen
 from tornado.concurrent import Future
+
+from User.models import User
 
 sys.path.extend([os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir, os.pardir, os.pardir))])
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SportscarStyle.settings')
@@ -154,6 +157,8 @@ class MessageDispatch(object):
         self.waiters[device.id] = None
 
     def new_message(self, message):
+        if message is None:
+            return
         if isinstance(message, Chat):
             # asynchronous
             gen.Task(self.handle_new_chat, chat=message)
@@ -162,6 +167,37 @@ class MessageDispatch(object):
         elif isinstance(message, Notification):
             # self.handle_new_notification(message, callback=None)
             gen.Task(self.handle_new_notification, notification=message)
+        elif isinstance(message, basestring):
+            pass
+
+    def general_json_message_handler(self, message):
+        """
+         You can use this method to "push" any kind of data to the user, the message is a json-serialized
+         string. The json-data should be
+          - target_user: id of the target user
+          - payload: actual data you want to send
+
+         :param message:
+        :return:
+        """
+        try:
+            data = json.loads(message)
+            user_id = data["target_user"]
+            payload = data["payload"]
+        except ValueError:
+            # log here
+            return
+        try:
+            target_user = User.objects.get(pk=user_id)
+        except ObjectDoesNotExist:
+            # log here
+            return
+        # find all active devices belong to this user
+        activate_devices = RegisteredDevices.objects.filter(user=target_user, is_active=True)
+        for device in activate_devices:
+            waiter = self.waiters.get(device.id)
+            if waiter is not None and waiter.future is not None and not waiter.future.done():
+                waiter.take_response(payload)
 
     def handle_new_chat(self, chat, callback):
 
@@ -181,14 +217,18 @@ class MessageDispatch(object):
                 waiter = self.waiters.get(device.id)
                 if waiter is not None and waiter.future is not None and not waiter.future.done():
                     # if waiter is online
-                    response = chat.dict_description(host=target_user)
-                    response.update(roster=entity.dict_description())
-                    waiter.take_response(response)
+                    entity_response = entity.dict_description()
                     if waiter.cur_focused_entity == entity.id:
                         # if the message belongs to the currently focused chat, then drop the unread increase
                         badge = 0
+                        entity_response["unread_num"] = 0
                     else:
-                        print waiter.cur_focused_entity, entity.id
+                        entity_response["unread_num"] += badge
+
+                    response = chat.dict_description(host=target_user)
+                    response.update(roster=entity_response)
+                    waiter.take_response(response)
+
                 elif waiter is not None:
                     response = chat.dict_description(host=target_user)
                     response.update(roster=entity.dict_description())
@@ -200,9 +240,9 @@ class MessageDispatch(object):
             elif entity.unread_num > 0:
                 entity.unread_num = 0
                 entity.save()
-            # push_notification.delay(
-            #     target_user, tokens, badge, message_body=chat.message_body_des(), type='chat'
-            # )
+            push_notification.delay(
+                target_user, tokens, badge, message_body=chat.message_body_des, type='chat'
+            )
         else:
             target_club = chat.target_club
             target_joins = ClubJoining.objects.filter(club=target_club)
@@ -218,11 +258,15 @@ class MessageDispatch(object):
                 for device in activate_devices:
                     waiter = self.waiters.get(device.id)
                     if waiter is not None and waiter.future is not None and not waiter.future.done():
+                        entity_response = entity.dict_description()
+                        if waiter.cur_focused_entity == entity.id:
+                            badge = 0
+                            entity_response["unread_num"] = 0
+                        else:
+                            entity_response["unread_num"] += badge
                         response = chat.dict_description(host=user)
                         response.update(roster=entity.dict_description())
                         waiter.take_response(response)
-                        if waiter.cur_focused_entity == entity.id:
-                            badge = 0
                     elif waiter is not None:
                         response = chat.dict_description(host=user)
                         response.update(roster=entity.dict_description())
@@ -236,10 +280,9 @@ class MessageDispatch(object):
                     entity.unread_num = 0
                     entity.save()
                 if not entity.no_disturbing:
-                    # push_notification.delay(
-                    #     user, tokens, badge, message_body=chat.message_body_des(), type='chat'
-                    # )
-                    pass
+                    push_notification.delay(
+                        user, tokens, badge, message_body=chat.message_body_des, type='chat'
+                    )
         if callback is not None:
             callback()
 
@@ -248,21 +291,19 @@ class MessageDispatch(object):
         devices = RegisteredDevices.objects.filter(user=user, is_active=True)
         tokens = []
         badge = 1
-        print "a"
         for device in devices:
             print device.id, self.waiters
             waiter = self.waiters.get(device.id)
             print waiter
             if waiter is not None and waiter.future is not None and not waiter.future.done():
-                print "sent!!!"
                 waiter.take_response(notification.dict_description())
                 # badge = 0
             elif waiter is not None:
                 Waiter.cache_chat(notification.dict_description(), user)
             tokens.append(device.token)
-        # push_notification.delay(
-        #     user, tokens, badge, notification.apns_des(), 'notif'
-        # )
+        push_notification.delay(
+            user, tokens, badge, notification.apns_des(), 'notif'
+        )
         if callback is not None:
             callback()
 

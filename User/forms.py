@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .models import User, CorporationAuthenticationRequest
 from .models import AuthenticationCode
-from Profile.utils import star_sign_from_date
+from .utils import star_sign_from_date
 
 
 class RegistrationForm(forms.ModelForm):

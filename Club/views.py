@@ -6,6 +6,8 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, Case, When, Sum, IntegerField, BooleanField
 
+from Chat.ChatServer.interface import send_string_message
+from Notification.models import Notification
 from .forms import ClubCreateForm
 from .models import Club, ClubJoining, ClubAuthRequest
 from User.models import User
@@ -181,7 +183,8 @@ def club_member_change(request, data, club_id):
     """ 俱乐部成员变更
     """
     op_type = data.get("op_type")
-    target_list = list(json.loads(data.get("target_list")))
+    target_list = data.get("target_users")
+    print target_list, type(target_list)
     try:
         club = Club.objects.get(id=club_id)
     except ObjectDoesNotExist:
@@ -190,10 +193,14 @@ def club_member_change(request, data, club_id):
     if club.only_host_can_invite and club.host != request.user:
         return JsonResponse(dict(success=False, message="no permisson"))
     if op_type == "delete":
+        if club.host != request.user:
+            return JsonResponse(dict(success=False, message="no permisson"))
         joins = ClubJoining.objects.filter(user__in=target_list, club_id=club_id)
         if joins.count() != len(target_list):
             return JsonResponse(dict(success=False, message="Invalid user data"))
         joins.delete()
+        entities = ChatEntity.objects.filter(club=club, hoster__in=target_list)
+        entities.delete()
         return JsonResponse(dict(success=True))
     elif op_type == "add":
         users = User.objects.filter(id__in=target_list)
@@ -244,7 +251,7 @@ def club_quit(request, data, club_id):
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="Not joined"))
     club = join.club
-    print data
+
     if join.user == club.host:
         new_host = data["new_host"]
         try:
@@ -262,7 +269,97 @@ def club_quit(request, data, club_id):
 @require_POST
 @login_first
 def club_apply(request, club_id):
-    if ClubJoining.objects.filter(user=request.user, club_id=club_id).exists():
+    try:
+        club = Club.objects.get(pk=club_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message="club not found"))
+    if ClubJoining.objects.filter(user=request.user, club=club).exists():
         return JsonResponse(dict(success=False, message="already join"))
-    send_notification.send(sender=Club,
-                           target=Club.host)
+    if Notification.objects.filter(
+        target=club.host,
+        related_user=request.user,
+        related_club=club,
+        message_type="club_apply",
+    ).exists():
+        return JsonResponse(dict(success=False, message="already applied"))
+    send_notification.send(
+        sender=Club,
+        target=club.host,
+        related_user=request.user,
+        related_club=club,
+        message_type="club_apply",
+        message_body=""
+    )
+    return JsonResponse(dict(success=True))
+
+
+@require_POST
+@login_first
+@post_data_loader()
+def club_operation(request, data, club_id):
+    op_type = data.get("op_type")
+    if op_type == "club_apply_agree":
+        applier = data.get("target_user")
+        try:
+            notif = Notification.objects\
+                .select_related("related_club", "related_user", "target")\
+                .get(
+                    message_type="club_apply",
+                    related_user_id=applier,
+                    target=request.user,
+                    related_club_id=club_id,
+                )
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Applicant not found"))
+        notif.checked = True
+        notif.flag = True
+        notif.save()
+        send_notification.send(
+            sender=Club,
+            target=notif.related_user,
+            related_user=notif.target,
+            related_club=notif.related_club,
+            message_type="club_apply_agreed",
+            message_body=""
+        )
+        ClubJoining.objects.get_or_create(
+            user=notif.related_user,
+            club=notif.related_club
+        )
+        # create the related chat entity
+        entity, created = ChatEntity.objects.get_or_create(
+            host=notif.related_user,
+            club=notif.related_club
+        )
+        if created:
+            message = entity.dict_description()
+            message = json.dumps({"target_user": entity.host.id, "payload": message})
+            send_string_message(message)
+        return JsonResponse(dict(success=True))
+    elif op_type == "club_apply_denied":
+        applier = data.get("target_user")
+        try:
+            notif = Notification.objects \
+                .select_related("related_club", "related_user", "target") \
+                .get(
+                    message_type="club_apply",
+                    related_user_id=applier,
+                    target=request.user,
+                    related_club_id=club_id,
+                )
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Applicant not found"))
+        notif.checked = True
+        notif.flag = False
+        notif.save()
+        send_notification.send(
+            sender=Club,
+            target=notif.related_user,
+            related_user=notif.target,
+            related_club=notif.related_club,
+            message_type="club_apply_denied",
+            message_body=""
+        )
+        return JsonResponse(dict(success=True))
+    else:
+        return JsonResponse(dict(success=False, message="Undefined Operation Type"))

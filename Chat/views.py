@@ -33,8 +33,9 @@ def roster_update(request, data, roster_id):
         entity = ChatEntity.objects.get(id=roster_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="Roster Item not found"))
-    entity.always_on_top = data["always_on_top"]
-    entity.no_disturbing = data["no_disturbing"]
+    print data
+    entity.always_on_top = bool(data["always_on_top"])
+    entity.no_disturbing = bool(data["no_disturbing"])
     entity.set_nick_name(data["nick_name"])
     return JsonResponse(dict(success=True))
 
@@ -69,7 +70,7 @@ def historical_record(request):
         )[skips: (skips + limit)]
 
     elif entity.club is not None:
-        club = entity.club.club
+        club = entity.club
         result = Chat.objects.order_by("-created_at").filter(
             target_club=club
         )[skips: (skips + limit)]

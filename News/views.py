@@ -121,7 +121,7 @@ def news_comments_list(request, date_threshold, op_type, limit, news_id):
         if comment.image:
             result["image"] = comment.image.url
         if comment.response_to is not None:
-            result["response_to"] = comment.response_to_id
+            result["response_to"] = comment.response_to.dict_decription()
         return result
 
     comments = map(format_fix, comments)

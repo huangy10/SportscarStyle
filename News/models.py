@@ -5,7 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 
-from custom.utils import path_creator
+from custom.utils import path_creator, time_to_string
 from custom.models_template import BaseCommentManager, comment_image_path
 # Create your models here.
 
@@ -62,10 +62,24 @@ class NewsComment(models.Model):
                                        related_name='news_comments_need_to_see')
     objects = BaseCommentManager()
 
+    def dict_description(self):
+        result = dict(
+            user=self.user.dict_description(),
+            created_at=time_to_string(self.created_at),
+            image=self.image.url if self.image else None,
+            content=self.content,
+            commentID=self.id
+        )
+        if self.response_to is not None:
+            result.update(response_to=self.response_to.dict_description())
+        return result
+
     class Meta:
         abstract = False
         verbose_name_plural = u'咨询评论'
         verbose_name = u'咨询评论'
+
+
 
 
 class NewsLikeThrough(models.Model):

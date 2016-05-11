@@ -7,4 +7,4 @@ urlpatterns = patterns('Chat.views',
                        url(r"^start", 'start_chat', name="start"),
                        url(r"^unread$", 'unread_chat_message_num', name="unread"),
                        url(r"^unread/sync$", 'read_sync', name="sync"),
-                       url(r"^settings/update", 'roster_update', name='update'))
+                       url(r"^(?P<roster_id>\d+)/update", 'roster_update', name='update'))

@@ -3,6 +3,8 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 from django.utils.encoding import smart_str
@@ -71,6 +73,7 @@ class Sportscar(models.Model):
     remote_id = models.IntegerField(default=0, verbose_name=u"汽车之家定义的id")
 
     price = models.CharField(max_length=18, verbose_name=u'价格', default="-")
+    price_number = models.IntegerField(default=0, verbose_name=u"价格数值")
     fuel_consumption = models.CharField(max_length=100, default="-", verbose_name=u'油耗', help_text=u'升每百公里')
     engine = models.CharField(max_length=100, verbose_name=u'发动机', default="-")
     transmission = models.CharField(max_length=100, verbose_name=u'变速器', default="-")
@@ -159,3 +162,15 @@ class SportCarIdentificationRequestRecord(models.Model):
         #     message_body=""
         # )
         super(SportCarIdentificationRequestRecord, self).save()
+
+
+@receiver(post_save, sender=SportCarIdentificationRequestRecord)
+def auto_update_user_value(sender, instance, created, **kwargs):
+    if created:
+        return
+    old = SportCarIdentificationRequestRecord.objects.get(pk=instance.pk)
+    if not old.approved and instance.approved:
+        user = instance.ownership.user
+        user.value += instance.ownership.car.value_number
+        user.save()
+

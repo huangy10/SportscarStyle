@@ -173,7 +173,7 @@ class ChatEntity(models.Model):
             )
         if self.club is not None:
             result.update(
-                club=self.club.dict_description(),
+                club=self.club.dict_description(show_members_num=True),
                 entity_type='club'
             )
         return result

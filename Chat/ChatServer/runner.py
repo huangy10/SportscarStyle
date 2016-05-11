@@ -18,7 +18,7 @@ application = get_wsgi_application()
 from Notification.redis_operation import UnreadUtil
 from Chat.ChatServer.dispatch import MessageDispatch
 from Chat.models import Chat, ChatEntity
-from Club.models import Club
+from Club.models import Club, ClubJoining
 from Notification.models import RegisteredDevices, Notification
 from User.models import User
 from User.utils import JWTUtil
@@ -143,6 +143,9 @@ class ChatNewHandler(JsonResponseHandler):
             creation_param["target_user"] = target_user
         elif chat_type == 'club':
             target_club = Club.objects.get(id=target_id)
+            if not ClubJoining.objects.filter(club=target_club, user=user).exists():
+                self.JSONResponse(dict(success=False, message="Not in club"))
+                return
             creation_param["target_club"] = target_club
         else:
             self.JSONResponse(dict(success=False, message="Undefined chat type"))
@@ -173,7 +176,7 @@ class ChatNewHandler(JsonResponseHandler):
         message = Chat.objects.create(**creation_param)
         message.save()
         self.dispatcher.new_message(message)
-        self.JSONResponse(dict(success=True, chat_record_id=message.id))
+        self.JSONResponse(dict(success=True, message=message.dict_description(host=user)))
 
 
 class NewNotificationHanlder(JsonResponseHandler):
@@ -187,6 +190,15 @@ class NewNotificationHanlder(JsonResponseHandler):
             self.JSONResponse(dict(success=False))
             return
         self.dispatcher.new_message(notif)
+        self.JSONResponse(dict(success=True))
+
+
+class GeneralMessageHandler(JsonResponseHandler):
+
+    @gen.coroutine
+    def post(self, *args, **kwargs):
+        message = self.get_argument("message")
+        self.dispatcher.new_message(message)
         self.JSONResponse(dict(success=True))
 
 
@@ -206,6 +218,7 @@ def start_tornado_service():
     app2 = Application(
         [
             (r"/notification/internal", NewNotificationHanlder),
+            (r'/notification/general', GeneralMessageHandler)
         ],
         cookie_secret="463a2380-39c9-450a-a884-3f7b8857d720",
         xsrf_cookies=False,

@@ -17,6 +17,7 @@ class MyJWTAuthorizationMiddleware(object):
 
     def get_user(self, request):
         header = request.META.get("HTTP_AUTHORIZATION")
+        print header
         if header is None:
             return None, None
         data = JWTUtil.jwt_decode(header)

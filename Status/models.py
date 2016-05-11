@@ -103,14 +103,26 @@ class StatusComment(models.Model):
         verbose_name_plural = u'状态评论'
 
     def dict_description(self):
-        return dict(
-            commentID=self.id,
-            created_at=time_to_string(self.created_at),
-            image=self.image.url if self.image else "",
-            content=self.content,
+        result = dict(
             user=self.user.dict_description(),
-            response_to=self.response_to_id
+            created_at=time_to_string(self.created_at),
+            image=self.image.url if self.image else None,
+            content=self.content,
+            commentID=self.id
         )
+        if self.response_to is not None:
+            result.update(response_to=self.response_to.dict_description())
+        return result
+
+    # def dict_description(self):
+    #     return dict(
+    #         commentID=self.id,
+    #         created_at=time_to_string(self.created_at),
+    #         image=self.image.url if self.image else "",
+    #         content=self.content,
+    #         user=self.user.dict_description(),
+    #         response_to=self.response_to_id
+    #     )
 
 
 class StatusLikeThrough(models.Model):

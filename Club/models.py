@@ -3,6 +3,9 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django.db.models import Sum
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from django.utils.encoding import smart_str
 from django.utils import timezone
 
@@ -99,7 +102,7 @@ class Club(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u"创建日期")
 
     value_total = models.IntegerField(default=0, verbose_name=u"俱乐部中所有成员的所有认证车辆的官方参考价格总和")
-    value_average = models.IntegerField(default=0, verbose_name=u"均价")
+    # value_average = models.IntegerField(default=0, verbose_name=u"均价")
 
     objects = ClubManager()
 
@@ -121,12 +124,15 @@ class Club(models.Model):
                          show_setting=False,
                          show_value=False,
                          show_members_num=False,
-                         show_attended=False):
+                         show_attended=False,
+                         target_user=None):
+        value = ClubJoining.objects.filter(club=self).aggregate(value=Sum("user__value"))["value"]
         result = dict(
             id=self.id, club_logo=self.logo.url,
             club_name=self.name, description=self.description,
             identified=self.identified, city=self.city,
-            host=self.host.dict_description()
+            host=self.host.dict_description(),
+            value_total=value,
         )
         if show_members:
             result.update(
@@ -143,11 +149,23 @@ class Club(models.Model):
             ))
         if show_members_num:
             if hasattr(self, "members_num"):
-                result.update(members_num=self.members_num)
+                result.update(
+                    members_num=self.members_num,
+                    value_average=value / self.members_num
+                )
             else:
-                result.update(members_num=ClubJoining.objects.filter(club=self).count())
+                member_num = ClubJoining.objects.filter(club=self).count()
+                result.update(
+                    members_num=member_num,
+                    value_average=value / member_num
+                )
         if show_attended:
-            result.update(attended=self.attended)
+            if hasattr(self, "attended"):
+                result.update(attended=self.attended)
+            else:
+                result.update(attended=ClubJoining.objects.filter(
+                    user=target_user, club=self
+                ).exists())
         return result
 
     def update_settings(self, settings):

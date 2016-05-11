@@ -112,6 +112,8 @@ class User(AbstractBaseUser):
         related_name="fans", symmetrical=False
     )
 
+    value = models.IntegerField(default=0, verbose_name=u"拥有的跑车的价值")
+
     def follow_user(self, user):
         relation, _ = UserRelation.objects.get_or_create(
             source_user=self,

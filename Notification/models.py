@@ -5,8 +5,8 @@ from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
 
+from Club.models import Club
 from custom.utils import time_to_string
-from .tasks import push_notification
 from .signal import send_notification
 from tornado.httpclient import HTTPClient
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
@@ -42,6 +42,8 @@ class Notification(models.Model):
         ("relation_follow", ""),
         ("chat", ""),
         ("club_apply", ""),
+        ("club_apply_agreed", ""),
+        ("club_apply_denied", ""),
     ))
     related_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+", null=True)
     related_act = models.ForeignKey("Activity.Activity", related_name="+", null=True)
@@ -82,7 +84,10 @@ class Notification(models.Model):
         def set_related(attribute_name):
             attribute = getattr(self, attribute_name)
             if attribute is not None:
-                result[attribute_name] = attribute.dict_description()
+                if isinstance(attribute, Club):
+                    result[attribute_name] = attribute.dict_description(show_attended=True)
+                else:
+                    result[attribute_name] = attribute.dict_description()
             # if attribute is not None:
             #     if attribute_name == "related_user":
             #         result[attribute_name] = attribute.profile.simple_dict_description()
@@ -140,6 +145,7 @@ def send_notification_handler(sender, **kwargs):
         "http://localhost:8887/notification/internal", method="POST",
         body=urllib.urlencode({"id": notif.id})
     )
+    client.close()
     # tokens = RegisteredDevices.objects.filter(
     #     user=notif.target, is_active=True
     # ).values_list("token", flat=True)

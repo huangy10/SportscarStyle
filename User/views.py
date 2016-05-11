@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q,F
 from django.utils import timezone
 
-from Profile.utils import send_sms, create_random_code, star_sign_from_date
+from .utils import send_sms, create_random_code, star_sign_from_date
 from .models import User, AuthenticationCode, CorporationAuthenticationRequest, UserRelation
 from .forms import RegistrationForm, PasswordResetForm, CorporationUserApplicationCreateForm
 from .utils import JWTUtil
@@ -263,6 +263,7 @@ def profile_corporation_user_authenticate(request):
 @login_first
 @page_separator_loader
 def profile_status_list(request, date_threshold, op_type, limit, user_id):
+    print "hahah"
     if op_type == 'latest':
         date_filter = Q(created_at__gt=date_threshold)
     else:
@@ -278,7 +279,6 @@ def profile_status_list(request, date_threshold, op_type, limit, user_id):
     data = map(lambda x: x.dict_description(), data)
     # TODO: 这里还需要返回status创建的时间
     return JsonResponse(dict(success=True, data=data))
-
 
 @http_decorators.require_POST
 @login_first
@@ -359,7 +359,7 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
     fans = UserRelation.objects.select_related('source_user')\
         .filter(date_filter & filter_q, target_user=user)[0:limit]
 
-    return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(), fans)))
+    return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(reversed=True), fans)))
 
 
 @http_decorators.require_GET

@@ -156,7 +156,6 @@ class ActivityComment(models.Model):
 
     def dict_description(self):
         result = dict(
-            activity=self.activity.dict_description(),
             user=self.user.dict_description(),
             created_at=time_to_string(self.created_at),
             image=self.image.url if self.image else None,
@@ -164,7 +163,7 @@ class ActivityComment(models.Model):
             commentID=self.id
         )
         if self.response_to is not None:
-            result.update(response_to=self.response_to_id)
+            result.update(response_to=self.response_to.dict_description())
         return result
 
     def dict_description_simple(self):
