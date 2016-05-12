@@ -139,4 +139,5 @@ def auto_set_most_recent_status(sender, instance, created, **kwargs):
     if not created:
         return
     instance.user.most_recent_status = instance
+    instance.user.status_num += 1
     instance.user.save()

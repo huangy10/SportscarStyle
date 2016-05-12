@@ -113,13 +113,15 @@ def car_follow(request, data, car_id):
             message='Sport car not found.',
             code='1004'
         ))
-
+    if SportCarOwnership.objects.filter(
+        user=request.user, identified=False
+    ).count() >= 1:
+        return JsonResponse(dict(success=False, message="No permission"))
     own, created = SportCarOwnership.objects.get_or_create(
         user=request.user,
         car=car,
         signature=data['signature']
     )
-    print own
     return JsonResponse(dict(success=True, data=own.dict_description()))
 
 

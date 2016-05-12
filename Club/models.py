@@ -102,7 +102,7 @@ class Club(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u"创建日期")
 
     value_total = models.IntegerField(default=0, verbose_name=u"俱乐部中所有成员的所有认证车辆的官方参考价格总和")
-    # value_average = models.IntegerField(default=0, verbose_name=u"均价")
+    value_average = models.IntegerField(default=0, verbose_name=u"均价")
 
     objects = ClubManager()
 

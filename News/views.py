@@ -10,7 +10,6 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 from .models import News, NewsComment, NewsLikeThrough
 from custom.utils import *
-from Profile.models import UserFollow
 
 # Create your views here.
 

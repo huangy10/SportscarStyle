@@ -80,7 +80,7 @@ def account_logout(request, data):
     if token is not None:
         RegisteredDevices.objects.filter(user=request.user, token=token)\
             .update(is_active=False)
-    auth.logout(request)
+    # auth.logout(request)
     return JsonResponse(dict(success=True))
 
 
@@ -94,7 +94,6 @@ def account_register(request, data):
     :param data:
     :return:
     """
-    print data
     token = data.get('device_token', None)
     device_id = data.get('device_id', None)
     if token is None and device_id is None:

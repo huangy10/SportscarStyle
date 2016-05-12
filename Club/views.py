@@ -185,8 +185,10 @@ def club_member_change(request, data, club_id):
     op_type = data.get("op_type")
     target_list = data.get("target_users")
     print target_list, type(target_list)
+    print request.user
     try:
         club = Club.objects.get(id=club_id)
+        print club.host
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="club not exists"))
     # Check the permisson
@@ -199,7 +201,7 @@ def club_member_change(request, data, club_id):
         if joins.count() != len(target_list):
             return JsonResponse(dict(success=False, message="Invalid user data"))
         joins.delete()
-        entities = ChatEntity.objects.filter(club=club, hoster__in=target_list)
+        entities = ChatEntity.objects.filter(club=club, host__in=target_list)
         entities.delete()
         return JsonResponse(dict(success=True))
     elif op_type == "add":

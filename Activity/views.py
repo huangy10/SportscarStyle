@@ -11,10 +11,11 @@ from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.db.models import Q, Count
 
+from User.models import User
 from .models import Activity, ActivityJoin, ActivityComment
 from custom.utils import post_data_loader, login_first, page_separator_loader, time_to_string
 from Location.models import Location
-from Club.models import Club
+from Club.models import Club, ClubJoining
 from Notification.signal import send_notification
 from Notification.models import Notification
 
@@ -123,7 +124,6 @@ def activity_create(request, data):
        |- lon
        |- description
     """
-    print data
     if 'inform_of' in data:
         inform_of = json.loads(data['inform_of'])
         users = get_user_model().objects.filter(id__in=inform_of)
@@ -155,12 +155,21 @@ def activity_create(request, data):
     # ActivityJoin.objects.create(user=request.user, activity=act)
     if users is not None:
         act.inform_of.add(*users)
+        for user in users:
+            send_notification(
+                sender=Activity,
+                related_activity=act,
+                related_user=user,
+                message_type="activity_invite",
+                message_body=""
+            )
     # TODO: 需要给这些用户发送相应的通知
 
     return JsonResponse(dict(success=True, id=act.id))
 
 
 @require_POST
+@login_first
 def activity_edit(request, act_id):
     """ 活动编辑
     """
@@ -168,7 +177,45 @@ def activity_edit(request, act_id):
         act = Activity.objects.get(id=act_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="act not found"))
-    properties = [""]
+    data = request.POST
+    if act.user != request.user :
+        return JsonResponse(dict(success=False, message="no permission"))
+    act.name = data['name']
+    act.description = data['description']
+    act.user = request.user
+    act.max_attend = data["max_attend"]
+    act.start_at = datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z')
+    act.end_at = datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z')
+    act.poster = request.FILES['poster']
+    if "allowed_club" in data:
+        try:
+            join = ClubJoining.objects\
+                .select_related('club')\
+                .get(
+                    club_id=data["allowed_club"],
+                    user=request.user,
+                    club__host=request.user
+                )
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="club not exist"))
+        act.allowed_club = join.club
+    else:
+        act.allowed_club = None
+    location = json.loads(data['location'])
+    loc, _ = Location.objects.get_or_create(
+        location=Point(location['lon'], location['lat']),
+        description=location['description'],
+    )
+    act.location = loc
+    if 'inform_of' in data:
+        inform_of = json.loads(data["inform"])
+        users = User.objects.filter(id__in=inform_of)
+        if not users.count() == len(inform_of):
+            return JsonResponse(dict(success=False, message="Invalid data"))
+        act.inform_of.add(*users)
+
+    act.save()
+    return JsonResponse(dict(success=True))
 
 def activity_close(request, act_id):
     """ 关闭活动报名
