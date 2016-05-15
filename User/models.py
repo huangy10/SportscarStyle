@@ -153,7 +153,7 @@ class User(AbstractBaseUser):
             phone_num=self.username,
             gender=self.get_gender_display(),
             age=self.age,
-            star_sign=self.star_sign,
+            star_sign=self.get_star_sign_display(),
             district=self.district,
             signature=self.signature,
             job=self.job,

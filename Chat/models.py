@@ -229,6 +229,18 @@ class Chat(models.Model):
             nick_name = self.sender.nick_name
         return u"{0}: {1}".format(nick_name, content)
 
+    @property
+    def message_content_des(self):
+        if self.chat_type == "club":
+            return self.message_body_des
+        if self.message_type == "text":
+            content = self.text
+        elif self.message_type == "audio":
+            content = u"[语音]"
+        else:
+            content = u"[图片]"
+        return content
+
     def dict_description(self, host):
         """
         :param host:
@@ -285,7 +297,7 @@ def auto_set_recent_chat(sender, instance, created, **kwargs):
         ChatEntity.objects.filter(
             Q(host=instance.sender, user=instance.target_user) |
             Q(host=instance.target_user, user=instance.sender))\
-            .update(recent_chat=instance.message_body_des)
+            .update(recent_chat=instance.message_content_des)
 
 
 @receiver(post_save, sender=Chat)

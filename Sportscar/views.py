@@ -127,6 +127,30 @@ def car_follow(request, data, car_id):
 
 @http_decorators.require_POST
 @login_first
+def car_delete(request, car_id):
+    try:
+        follow = SportCarOwnership.objects.get(user=request.user, car__id=car_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message=u"Car Not Found"))
+    follow.delete()
+    return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_POST
+@login_first
+def car_update_signature(request, car_id):
+    try:
+        follow = SportCarOwnership.objects\
+            .get(user=request.user, car__id=car_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, message=u"Car Not Found"))
+    follow.signature = request.POST['signature']
+    follow.save()
+    return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_POST
+@login_first
 @post_data_loader()
 def car_auth(request, data):
     """ 跑车认证接口, 车主通过这个车主认证跑车确实为自己所有
