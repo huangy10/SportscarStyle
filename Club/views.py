@@ -170,6 +170,11 @@ def club_discover(request):
             .order_by("-created_at")
     else:
         return JsonResponse(dict(success=False))
+
+    # city_limit = request.GET.get("city_limit")
+    # if city_limit is not None and city_limit != u"全国":
+    #     result = result.filter(city=city_limit)
+
     return JsonResponse(
         dict(success=True,
              data=map(lambda x: x.dict_description(show_value=True, show_members_num=True, show_attended=True),

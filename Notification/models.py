@@ -1,5 +1,6 @@
 # coding=utf-8
 import urllib
+import logging
 
 from django.db import models
 from django.conf import settings
@@ -11,6 +12,9 @@ from .signal import send_notification
 from tornado.httpclient import HTTPClient
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
+
+
+logger = logging.getLogger(__name__)
 
 
 class Notification(models.Model):
@@ -138,13 +142,20 @@ def send_notification_handler(sender, **kwargs):
         related_news_comment=kwargs.get("related_news_commnet", None),
         related_own=kwargs.get("related_own", None)
     )
-    print "send notification"
-    notif = Notification.objects.create(**create_params)
+    try:
+        notif = Notification.objects.create(**create_params)
+    except Exception, e:
+        logger.debug(u'-------->Fail to create Notification')
+        logger.debug(u'the error info is %s' % e)
+        logger.debug(u'message type is %s' % message_type)
+        # re-throw the exception, let it crash
+        raise e
     client = HTTPClient()
     response = client.fetch(
         "http://localhost:8887/notification/internal", method="POST",
         body=urllib.urlencode({"id": notif.id})
     )
+
     client.close()
     # tokens = RegisteredDevices.objects.filter(
     #     user=notif.target, is_active=True

@@ -1,4 +1,6 @@
 # coding=utf-8
+import logging
+
 from django.views.decorators import http as http_decorator
 from django.db.models import Q, Count
 from django.http import JsonResponse
@@ -13,6 +15,7 @@ from custom.utils import post_data_loader, page_separator_loader, login_first
 from Notification.signal import send_notification
 # Create your views here.
 
+logger = logging.getLogger(__name__)
 
 @http_decorator.require_GET
 @login_first
@@ -104,7 +107,6 @@ def status_detail(request, status_id):
 @login_first
 @post_data_loader(json_fields=("inform_of", ))
 def post_new_status(request, data):
-    print data
     form = StatusCreationForm(data, request.FILES)
     if form.is_valid():
         status = form.save()
@@ -120,7 +122,7 @@ def post_new_status(request, data):
     else:
         response_dict = dict(success=False)
         response_dict.update(form.errors)
-        print(response_dict)
+        logger.debug(u"Fail to post new status, the error info is %s" % response_dict)
         return JsonResponse(response_dict)
 
 

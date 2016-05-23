@@ -75,12 +75,12 @@ class ChatUpdateHandler(JsonResponseHandler):
     def post(self, *args, **kwargs):
         user = self.current_user
         device = self.device
-        print "User {0} start waiting for message on device: {1}".format(
-            user.username, device.token
-        )
         if user is None or device is None:
             self.JSONResponse(dict(success=False, message='You need to login first', code='1402'))
             return
+        print "User {0} start waiting for message on device: {1}".format(
+            user.username, device.token
+        )
         # Synchronous the unread numbers here
         client_unread_num = self.get_argument("unread", default=0)
         # Notice that if the client_unread_num is bigger than or equal to the unread data saved in redis server,

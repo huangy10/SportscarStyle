@@ -52,7 +52,8 @@ def news_list(request, date_threshold, op_type, limit):
             comment_num=news.comment_num,
             liked=NewsLikeThrough.objects.filter(user=request.user, news=news).exists()
         )
-        most_recent_like_record = NewsLikeThrough.objects.filter(user__friendship__friend=request.user, news=news)\
+        most_recent_like_record = NewsLikeThrough.objects\
+            .filter(user__fans=request.user, user__follows=request.user, news=news)\
             .order_by("-like_at").first()
         if most_recent_like_record is not None:
             result["recent_like_user_id"] = most_recent_like_record.user_id
@@ -73,12 +74,12 @@ def news_detail(requset, news_id):
      暂时这个接口用来返回最近点赞的人
     """
     try:
-        news = News.objects.prefetch_related('liked_by__profile').get(id=news_id)
+        news = News.objects.prefetch_related('liked_by').get(id=news_id)
         recent_like = news.liked_by.all().first()
         if recent_like is None:
             return JsonResponse(dict(success=True, recent_like=''))
         else:
-            return JsonResponse(dict(success=True, recent_like=recent_like.profile.nick_name))
+            return JsonResponse(dict(success=True, recent_like=recent_like.nick_name))
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, code='3000', message='News not found.'))
 
@@ -107,7 +108,7 @@ def news_comments_list(request, date_threshold, op_type, limit, news_id):
         date_filter = Q(created_at__gt=date_threshold)
     else:
         date_filter = Q(created_at__lt=date_threshold)
-    comments = NewsComment.objects.filter(date_filter, news__id=news_id).select_related("user__profile")[0: limit]
+    comments = NewsComment.objects.filter(date_filter, news__id=news_id).select_related("user")[0: limit]
 
     def format_fix(comment):
         user = comment.user
