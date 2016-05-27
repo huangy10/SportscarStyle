@@ -15,13 +15,13 @@ sys.path.extend([os.path.abspath(os.path.join(os.path.realpath(__file__), os.par
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SportscarStyle.settings')
 application = get_wsgi_application()
 
-from Notification.redis_operation import UnreadUtil
-from Chat.ChatServer.dispatch import MessageDispatch
 from Chat.models import Chat, ChatEntity
 from Club.models import Club, ClubJoining
 from Notification.models import RegisteredDevices, Notification
 from User.models import User
+from Notification.redis_operation import UnreadUtil
 from User.utils import JWTUtil
+from Chat.ChatServer.dispatch import MessageDispatch
 
 _dispatcher = MessageDispatch()
 

@@ -1,17 +1,20 @@
 # coding=utf-8
+import os
 import uuid
 import hashlib
 
+import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from django.contrib.auth.models import UserManager
+from django.contrib.auth.models import UserManager, AbstractUser
 from django.utils import timezone
 # Create your models here.
 from django.utils.encoding import smart_str
 from django.utils.functional import cached_property
 from django.contrib.auth.models import AbstractBaseUser
+from django.conf import settings
 
 from custom.utils import time_to_string
 
@@ -46,13 +49,42 @@ def auth_image(instance, filename, *args, **kwargs):
     return new_file_name
 
 
-class User(AbstractBaseUser):
-    REQUIRED_FIELDS = ["password", "nick_name"]
+class MyUserManager(UserManager):
+
+    def _create_user(self, username, password,
+                     is_staff, is_superuser,
+                     birth_date=datetime.date(year=1970, month=1, day=1),
+                     avatar=os.path.join('defaults', settings.DEFAULT_AVATAR_NAME),
+                     gender='m',
+                     **extra_fields):
+        now = timezone.now()
+        if not username:
+            raise ValueError(u'The given username must be set')
+        user = self.model(username=username, is_staff=is_staff,
+                          is_active=True, is_superuser=is_superuser,
+                          date_joined=now,
+                          birth_date=birth_date,
+                          avatar=avatar,
+                          gender=gender,
+                          **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_user(self, username, password=None, **extra_fields):
+        return self._create_user(username, password, False, False, **extra_fields)
+
+    def create_superuser(self, username, password, **extra_fields):
+        return self._create_user(username, password, True, True, **extra_fields)
+
+
+class User(AbstractUser):
+    REQUIRED_FIELDS = ["nick_name", "avatar", "email"]
     USERNAME_FIELD = "username"
 
-    objects = UserManager()
+    objects = MyUserManager()
     # Authentication property
-    username = models.CharField(max_length=20, unique=True)
+    # username = models.CharField(max_length=20, unique=True)
     register_finished = models.BooleanField(default=False)
     # password = models.CharField(max_length=50)
 

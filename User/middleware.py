@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest
 
@@ -8,9 +9,11 @@ from Notification.models import RegisteredDevices
 class MyJWTAuthorizationMiddleware(object):
 
     def process_request(self, request):
+        if request.user.is_superuser:
+            return
         if not hasattr(request, '_cached_user') or not hasattr(request, '_cached_device'):
             user, device = self.get_user(request)
-            request._cached_user = user
+            request._cached_user = user or AnonymousUser()
             request._cached_device = device
         request.user = request._cached_user
         request.device = request._cached_device

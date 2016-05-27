@@ -30,7 +30,7 @@ class ClubJoining(models.Model):
     unread_chats = models.IntegerField(default=0, verbose_name=u"未读消息数量")
 
     def __str__(self):
-        return smart_str("{0} in {1}".format(self.user.nick_name, self.club.name))
+        return smart_str(u"{0} in {1}".format(self.user.nick_name, self.club.name))
 
     class Meta:
         unique_together = ("user", "club")

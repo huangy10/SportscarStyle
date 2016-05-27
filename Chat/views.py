@@ -102,10 +102,10 @@ def start_chat(request, data):
     elif chat_type == 'club':
         try:
             target_join = ClubJoining.objects.get(club_id=target_id, user=request.user)
-            target_club = target_join
+            target_club = target_join.club
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="Club not found"))
-        entity, created = ChatEntity.objects.get_or_create(user=target_club, host=request.user)
+        entity, created = ChatEntity.objects.get_or_create(club=target_club, host=request.user)
     else:
         return JsonResponse(dict(success=False, message="Chat type not defined: %s" % chat_type))
     result = entity.dict_description()

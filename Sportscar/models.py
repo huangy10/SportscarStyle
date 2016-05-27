@@ -61,6 +61,9 @@ class Manufacturer(models.Model):
     logo_remote = models.CharField(max_length=255, verbose_name=u"厂商的logo的url")
     index = models.CharField(max_length=1, verbose_name=u"音序")
 
+    def __str__(self):
+        return smart_str(self.name)
+
     class Meta:
         verbose_name = u'汽车生产商'
         verbose_name_plural = u'汽车生产商'
@@ -80,7 +83,7 @@ class Sportscar(models.Model):
     max_speed = models.CharField(max_length=20, verbose_name=u'最高车速', default="-")
     zeroTo60 = models.CharField(max_length=7, verbose_name=u'百公里加速', default="-")
     body = models.CharField(max_length=255, verbose_name=u"车身结构", default="-")
-    torque = models.CharField(max_length=255, default=u"-")
+    torque = models.CharField(max_length=255, default=u"-", verbose_name=u'扭矩')
 
     logo = models.ImageField(verbose_name=u'车标', upload_to=car_logo)
     image = models.ImageField(verbose_name=u'跑车照片', upload_to=car_image)
