@@ -79,7 +79,7 @@ class MyUserManager(UserManager):
 
 
 class User(AbstractUser):
-    REQUIRED_FIELDS = ["nick_name", "avatar", "email"]
+    REQUIRED_FIELDS = ["nick_name"]
     USERNAME_FIELD = "username"
 
     objects = MyUserManager()

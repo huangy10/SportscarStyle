@@ -9,3 +9,4 @@ from .models import Sportscar
 class SportscarAdmin(admin.ModelAdmin):
     exclude = ("remote_id", 'price_number', 'remote_image', 'remote_thumbnail', 'data_fetched')
     list_display = ('name', 'price', 'fuel_consumption', 'engine', 'transmission', 'max_speed', 'torque')
+    search_fields = ("name", )

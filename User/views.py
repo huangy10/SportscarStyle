@@ -351,7 +351,7 @@ def profile_fans_list(request, date_threshold, op_type, limit, user_id):
         filter_elements = filter_str.split(" ")
         filter_q = Q()
         for filter_element in filter_elements:
-            filter_q = filter_q | Q(target_user__profile__nick_name__icontains=filter_element)
+            filter_q = filter_q | Q(target_user__nick_name__icontains=filter_element)
     else:
         filter_q = Q()
 
@@ -388,7 +388,7 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
         filter_elements = filter_str.split(" ")
         filter_q = Q()
         for filter_element in filter_elements:
-            filter_q = filter_q | Q(target_user__profile__nick_name__icontains=filter_element)
+            filter_q = filter_q | Q(target_user__nick_name__icontains=filter_element)
     else:
         filter_q = Q()
 

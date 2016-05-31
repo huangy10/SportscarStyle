@@ -1,12 +1,14 @@
 # coding=utf-8
 import uuid
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+from Sportscar.models import SportCarOwnership
 from custom.models_template import BaseCommentManager, comment_image_path
 from custom.utils import time_to_string
 # Create your models here.
@@ -73,7 +75,11 @@ class Status(models.Model):
             created_at=time_to_string(self.created_at)
         )
         if self.car is not None:
-            result["car"] = self.car.dict_description()
+            try:
+                own = SportCarOwnership.objects.get(user=self.user, car=self.car)
+                result["car"] = own.dict_description()
+            except ObjectDoesNotExist:
+                result["car"] = self.car.dict_description()
         if self.location is not None:
             result["location"] = self.location.dict_description()
         if hasattr(self, "comment_num"):
@@ -141,3 +147,20 @@ def auto_set_most_recent_status(sender, instance, created, **kwargs):
     instance.user.most_recent_status = instance
     instance.user.status_num += 1
     instance.user.save()
+
+
+class StatusReport(models.Model):
+    """
+     对动态的举报
+    """
+    status = models.ForeignKey(Status)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    reason = models.CharField(max_length=255)
+    checked = models.BooleanField(default=False)
+    flag = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = u"举报信息"
+        verbose_name_plural = u'举报信息'

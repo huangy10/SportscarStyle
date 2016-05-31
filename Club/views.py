@@ -1,10 +1,11 @@
 # coding=utf-8
 import json
+import logging
 
 from django.views.decorators.http import require_POST, require_GET
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Count, Case, When, Sum, IntegerField, BooleanField
+from django.db.models import Count, Case, When, Sum, IntegerField, BooleanField, Value
 
 from Chat.ChatServer.interface import send_string_message
 from Notification.models import Notification
@@ -16,6 +17,9 @@ from Activity.models import Activity
 from Notification.signal import send_notification
 from Chat.models import ChatEntity
 # Create your views here.
+
+
+logger = logging.getLogger(__name__)
 
 
 @require_POST
@@ -136,49 +140,87 @@ def club_discover(request):
     limit = int(request.GET.get("limit", 10))
     user = request.user
 
+    result = Club.objects.filter(deleted=False).annotate(members_num=Count("members"))\
+        .annotate(
+            attended_count=Sum(
+                Case(When(members=request.user, then=Value(1)), default=Value(0), output_field=IntegerField())
+            ))
     if query_type == "nearby":
-        city = user.district.split(" ")[0]
-        result = Club.objects.filter(city=city, deleted=False)\
-            .annotate(members_num=Count("members"))\
-            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))
+        city = user.district.split()[0]
+        result = result.filter(city=city)
     elif query_type == "value":
-        result = Club.objects.filter(deleted=False).order_by("-value_total")\
-            .annotate(members_num=Count("members"))\
-            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))
+        result = result.order_by("-value_total")
     elif query_type == "members":
-        result = Club.objects.filter(deleted=False)\
-            .annotate(members_num=Count("members"))\
-            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
-            .order_by("-members_num")
+        result = result.order_by("-members_num")
     elif query_type == "average":
-        result = Club.objects.filter(deleted=False)\
-            .annotate(members_num=Count("members"))\
-            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
-            .order_by("-value_average")
+        result = result.order_by("-value_average")
     elif query_type == "beauty":
-        result = Club.objects.filter(deleted=False)\
-            .annotate(members_num=Count("members"))\
-            .annotate(beauty_num=Sum(
+        result = result.annotate(
+            beauty_num=Sum(
                 Case(When(members__gender="f", then=1),
-                     default=0, output_field=IntegerField())))\
-            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
-            .order_by("-beauty_num")
+                     default=0, output_field=IntegerField())
+            )).order_by("-beauty_num")
     elif query_type == "recent":
-        result = Club.objects.filter(deleted=False)\
-            .annotate(members_num=Count("members"))\
-            .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
-            .order_by("-created_at")
+        result.order_by("-created_at")
     else:
         return JsonResponse(dict(success=False))
+
+    # if query_type == "nearby":
+    #     city = user.district.split(" ")[0]
+    #     result = Club.objects.filter(city=city, deleted=False)\
+    #         .annotate(members_num=Count("members"))\
+    #         .annotate(
+    #         attended_count=Sum(
+    #             Case(When(members=request.user, then=Value(1)), default=Value(0), output_field=IntegerField())
+    #         )
+    #     )
+    # elif query_type == "value":
+    #     result = Club.objects.filter(deleted=False).order_by("-value_total")\
+    #         .annotate(members_num=Count("members")) \
+    #         .annotate(
+    #         attended_count=Sum(
+    #             Case(When(members=request.user, then=Value(1)), default=Value(0), output_field=IntegerField())
+    #         )
+    #     )
+    # elif query_type == "members":
+    #     result = Club.objects.filter(deleted=False)\
+    #         .annotate(members_num=Count("members")) \
+    #         .order_by("-members_num")
+    #
+    # elif query_type == "average":
+    #     result = Club.objects.filter(deleted=False)\
+    #         .annotate(members_num=Count("members"))\
+    #         .annotate(attended=Case(When(members=request.user, then=True), default=False, output_field=BooleanField()))\
+    #         .order_by("-value_average")
+    # elif query_type == "beauty":
+    #     result = Club.objects.filter(deleted=False)\
+    #         .annotate(members_num=Count("members"))\
+    #         .annotate(beauty_num=Sum(
+    #             Case(When(members__gender="f", then=1),
+    #                  default=0, output_field=IntegerField())))\
+    #         .order_by("-beauty_num")
+    # elif query_type == "recent":
+    #     result = Club.objects.filter(deleted=False) \
+    #         .annotate(members_num=Count("members")) \
+    #         .order_by("-created_at")
+    # else:
+    #     return JsonResponse(dict(success=False))
 
     # city_limit = request.GET.get("city_limit")
     # if city_limit is not None and city_limit != u"全国":
     #     result = result.filter(city=city_limit)
 
+    result = result[skip: skip + limit]
+    print result
+    for temp in result:
+        setattr(temp, "attended", temp.attended_count > 0)
+
+    print result
+
     return JsonResponse(
         dict(success=True,
              data=map(lambda x: x.dict_description(show_value=True, show_members_num=True, show_attended=True),
-                      result[skip: skip + limit])))
+                      result)))
 
 
 @require_POST

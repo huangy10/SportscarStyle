@@ -18,6 +18,7 @@ from Location.models import Location
 from Club.models import Club, ClubJoining
 from Notification.signal import send_notification
 from Notification.models import Notification
+from Sportscar.models import SportCarOwnership
 
 # Create your views here.
 
@@ -124,6 +125,8 @@ def activity_create(request, data):
        |- lon
        |- description
     """
+    if not SportCarOwnership.objects.filter(user=request.user, identified=True).exists():
+        return JsonResponse(dict(success=False, message="no permission"))
     if 'inform_of' in data:
         inform_of = json.loads(data['inform_of'])
         users = get_user_model().objects.filter(id__in=inform_of)

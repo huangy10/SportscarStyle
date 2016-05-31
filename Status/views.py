@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 
-from .models import Status, StatusLikeThrough, StatusComment
+from .models import Status, StatusLikeThrough, StatusComment, StatusReport
 from .forms import StatusCreationForm
 from custom.utils import post_data_loader, page_separator_loader, login_first
 from Notification.signal import send_notification
@@ -262,6 +262,13 @@ def status_operation(request, data, status_id):
             return JsonResponse(dict(success=False, code="code", message="no permission"))
         status.deleted = True
         status.save()
+        return JsonResponse(dict(success=True))
+    elif op_type == "report":
+        StatusReport.objects.get_or_create(
+            user=request.user,
+            status=status,
+            reason=data["reason"]
+        )
         return JsonResponse(dict(success=True))
     else:
         return JsonResponse(dict(success=False, code='4004', message='Operation not defined'))

@@ -142,8 +142,9 @@ def send_notification_handler(sender, **kwargs):
         related_news_comment=kwargs.get("related_news_commnet", None),
         related_own=kwargs.get("related_own", None)
     )
+
     try:
-        notif = Notification.objects.create(**create_params)
+        notif, _ = Notification.objects.get_or_create(**create_params)
     except Exception, e:
         logger.debug(u'-------->Fail to create Notification')
         logger.debug(u'the error info is %s' % e)
