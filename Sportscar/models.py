@@ -85,7 +85,6 @@ class Sportscar(models.Model):
     body = models.CharField(max_length=255, verbose_name=u"车身结构", default="-")
     torque = models.CharField(max_length=255, default=u"-", verbose_name=u'扭矩')
 
-    logo = models.ImageField(verbose_name=u'车标', upload_to=car_logo)
     image = models.ImageField(verbose_name=u'跑车照片', upload_to=car_image)
     thumbnail = models.ImageField(verbose_name=u'缩略图', upload_to=car_thumbnail)
     remote_image = models.CharField(max_length=255, verbose_name=u"远程资源链接", default="")

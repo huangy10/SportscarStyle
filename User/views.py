@@ -123,9 +123,15 @@ def account_register(request, data):
         result.update(jwt_token=jwt_token)
         return JsonResponse(dict(success=True, data=result))
     else:
-        response_dict = dict(success=False, code='1002')
-        response_dict.update(form.errors)
-        print response_dict
+        response_dict = dict(success=False)
+        errors = form.errors
+        if 'username' in errors:
+            response_dict.update(code='1004')
+        elif 'password' in errors:
+            response_dict.update(code='1003')
+        elif 'auth_code' in errors:
+            response_dict.update(code='1002')
+        logger.debug(u"Register fails with error info: %s" % response_dict)
         return JsonResponse(response_dict)
 
 

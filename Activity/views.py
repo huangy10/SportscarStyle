@@ -1,6 +1,7 @@
 # coding=utf-8
 import json
 import datetime
+import logging
 
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.gis.geos import Point
@@ -21,6 +22,9 @@ from Notification.models import Notification
 from Sportscar.models import SportCarOwnership
 
 # Create your views here.
+
+
+logger = logging.getLogger(__name__)
 
 
 @require_GET
