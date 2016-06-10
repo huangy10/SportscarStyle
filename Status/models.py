@@ -36,7 +36,7 @@ class Status(models.Model):
     image8 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
     image9 = models.ImageField(upload_to=status_image_path, verbose_name=u'状态图', null=True, blank=True)
 
-    content = models.CharField(max_length=255, verbose_name=u'正文')
+    content = models.CharField(max_length=255, verbose_name=u'正文', default="")
     location = models.ForeignKey('Location.Location', verbose_name=u'发布地点', null=True, blank=True)
     car = models.ForeignKey('Sportscar.Sportscar', verbose_name=u'签名跑车', null=True, blank=True)
 

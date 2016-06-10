@@ -118,7 +118,7 @@ def post_new_status(request, data):
                                        target=at,
                                        message_body="",
                                        related_status=status)
-        return JsonResponse(dict(success=True, statusID=status.id))
+        return JsonResponse(dict(success=True, data=status.dict_description()))
     else:
         response_dict = dict(success=False)
         response_dict.update(form.errors)
