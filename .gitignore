@@ -64,4 +64,8 @@ target/
 
 # local logs
 /logs
+/.idea
 
+model.png
+temp.sql
+templates/
