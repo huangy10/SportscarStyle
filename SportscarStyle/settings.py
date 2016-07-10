@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'Profile',
+    'django_extensions',
     'User',
     'Sportscar',
     'News',
