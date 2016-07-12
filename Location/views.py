@@ -37,6 +37,9 @@ def radar_cars(request, data):
      - loc
       |- lat
       |- lon
+
+      Updated by Woody Huang, 2016.07.10
+        Enable "blacklist" functionality
     """
     # 首先更新用户的位置
     lat = float(data["loc"]["lat"])
@@ -64,7 +67,8 @@ def radar_cars(request, data):
         results = get_user_model().objects.select_related("location")\
             .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
                                            default=0, output_field=models.IntegerField()))\
-            .filter(~Q(id=request.user.id), authed_cars_num__gte=0,
+            .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user),
+                    authed_cars_num__gte=0,
                     location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
                     location__location_available=True,
                     location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300)))\

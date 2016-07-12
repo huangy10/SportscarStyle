@@ -144,6 +144,9 @@ class User(AbstractUser):
         related_name="fans", symmetrical=False
     )
 
+    # Added by Woody Huang, 2016.07.10
+    blacklist = models.ManyToManyField("self", related_name="blacklist_by", symmetrical=False)
+
     value = models.IntegerField(default=0, verbose_name=u"拥有的跑车的价值")
 
     def follow_user(self, user):
@@ -196,6 +199,7 @@ class User(AbstractUser):
         )
         if host is not None and host.id != self.id:
             result.update(followed=UserRelation.objects.filter(source_user=host, target_user=self).exists())
+            result.update(blacklist=host.blacklist.filter(id=self.id).exists())
         return result
 
     def get_full_name(self):

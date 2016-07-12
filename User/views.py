@@ -8,6 +8,7 @@ from django.views.decorators import http as http_decorators
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q,F
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 
 from .utils import send_sms, create_random_code, star_sign_from_date
 from .models import User, AuthenticationCode, CorporationAuthenticationRequest, UserRelation
@@ -19,6 +20,9 @@ from Status.models import Status, StatusLikeThrough
 from custom.utils import *
 from Notification.signal import send_notification
 from Notification.models import RegisteredDevices
+
+from custom.views import LoginFirstOperationView
+
 
 logger = logging.getLogger(__name__)
 
@@ -404,6 +408,48 @@ def profile_follow_list(request, date_threshold, op_type, limit, user_id):
     return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(), follows)))
 
 
+class ProfileOperation(LoginFirstOperationView):
+
+    operations = ["follow", "blacklist"]
+
+    def follow(self, request, data, user_id):
+        try:
+            target_user = User.objects.get(id=user_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="User Not Found"))
+
+        obj, created = UserRelation.objects.get_or_create(source_user=request.user, target_user=target_user)
+        if not created:
+            obj.delete()
+            return JsonResponse(dict(success=True, followed=False))
+        else:
+            send_notification.send(sender=User,
+                                   target=target_user,
+                                   message_type="relation_follow",
+                                   related_user=request.user,
+                                   message_body="")
+            return JsonResponse(dict(success=True, followed=True))
+
+    def blacklist(self, request, data, user_id):
+        try:
+            target_user = User.objects.get(id=user_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="User Not Found"))
+
+        cur_user = request.user
+        block = data["block"] == u'1'
+        cur_blocked = cur_user.blacklist.filter(id=target_user.id).exists()
+        print block, cur_blocked
+        if block and not cur_blocked:
+            cur_user.blacklist.add(target_user)
+            return JsonResponse(dict(success=True, blacklist=True))
+        elif not block and cur_blocked:
+            cur_user.blacklist.remove(target_user)
+            return JsonResponse(dict(success=True, blacklist=False))
+        else:
+            return JsonResponse(dict(success=True, blacklist=cur_blocked))
+
+
 @http_decorators.require_POST
 @post_data_loader()
 def profile_operation(request, data, user_id):
@@ -413,6 +459,8 @@ def profile_operation(request, data, user_id):
     :param data:
     :param user_id:
     :return:
+
+    deprecated by Woody Huang, 2016.07.10
     """
     op_type = data.get('op_type')
     if op_type not in ['follow']:
@@ -468,3 +516,22 @@ def profile_authed_cars(request, user_id):
         .filter(user_id=user_id).order_by("-created_at")
     cars_dict_data = map(lambda x: x.dict_description(), carsOwnerShip)
     return JsonResponse(dict(success=True, cars=cars_dict_data))
+
+
+@http_decorators.require_GET
+@login_first
+def blacklist(request):
+    cur_user = request.user
+    skip = request.GET["skip"]
+    limit = request.GET["limit"]
+    filter_str = request.GET.get("search_text", "")
+    if filter_str != "":
+        filter_keywords = filter_str.split()
+        filter_q = Q()
+        for keyword in filter_keywords:
+            filter_q |= Q(nick_name__icontains=keyword)
+    else:
+        filter_q = Q()
+
+    blocked_users = cur_user.blacklist.filter(filter_q)[skip: (skip + limit)]
+    return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(), blocked_users)))
