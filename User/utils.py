@@ -44,7 +44,7 @@ version = "v1"
 # 通用短信接口的uri
 sms_send_uri = "/" + version + "/sms/send.json"
 # 短信内容模板
-SMS_TEMPLATE = '您的验证码是%s【找米网】'
+SMS_TEMPLATE = '您的验证码是%s【跑车范】'
 SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"
 
 
