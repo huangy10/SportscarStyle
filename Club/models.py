@@ -41,6 +41,7 @@ class ClubJoining(models.Model):
          :param for_host     以host权限获取数据
         """
         result = dict(
+            id=self.id,
             nick_name=self.nick_name,
             club=self.club.dict_description(show_members=show_members,
                                             show_setting=for_host,
