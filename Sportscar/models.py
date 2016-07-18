@@ -165,6 +165,28 @@ class SportCarIdentificationRequestRecord(models.Model):
         # )
         super(SportCarIdentificationRequestRecord, self).save()
 
+    def __str__(self):
+        return smart_str(u"{user}->{car}".format(
+            user=self.ownership.user.username,
+            car=self.ownership.car.name
+        ))
+
+    @property
+    def drive_license_admin(self):
+        return "<img src=%s />" % self.drive_license.url
+
+    @property
+    def id_card_admin(self):
+        return "<img src=%s />" % self.id_card.url
+
+    @property
+    def photo_admin(self):
+        return "<img src=%s />" % self.photo.url
+
+    class Meta:
+        verbose_name = u"跑车认证请求"
+        verbose_name_plural = u"跑车认证请求"
+
 
 @receiver(post_save, sender=SportCarIdentificationRequestRecord)
 def auto_update_user_value(sender, instance, created, **kwargs):
