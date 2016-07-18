@@ -138,6 +138,7 @@ def club_discover(request):
     query_type = request.GET.get("query_type", "nearby")
     skip = int(request.GET.get("skip", 0))
     limit = int(request.GET.get("limit", 10))
+
     user = request.user
 
     result = Club.objects.filter(deleted=False).annotate(members_num=Count("members"))\
@@ -145,9 +146,10 @@ def club_discover(request):
             attended_count=Sum(
                 Case(When(members=request.user, then=Value(1)), default=Value(0), output_field=IntegerField())
             ))
+
     if query_type == "nearby":
-        city = user.district.split()[0]
-        result = result.filter(city=city)
+        city = user.district.split(u'市')[0]
+        result = result.filter(city__startswith=city)
     elif query_type == "value":
         result = result.order_by("-value_total")
     elif query_type == "members":
