@@ -163,11 +163,12 @@ def activity_create(request, data):
     if users is not None:
         act.inform_of.add(*users)
         for user in users:
-            send_notification(
+            send_notification.send(
                 sender=Activity,
-                related_activity=act,
-                related_user=user,
-                message_type="activity_invite",
+                target=user,
+                related_act=act,
+                related_user=request.user,
+                message_type="act_invited",
                 message_body=""
             )
     # TODO: 需要给这些用户发送相应的通知
@@ -185,7 +186,7 @@ def activity_edit(request, act_id):
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="act not found"))
     data = request.POST
-    if act.user != request.user :
+    if act.user != request.user:
         return JsonResponse(dict(success=False, message="no permission"))
     act.name = data['name']
     act.description = data['description']

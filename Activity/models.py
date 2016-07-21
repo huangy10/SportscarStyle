@@ -177,7 +177,7 @@ class ActivityComment(models.Model):
             commentID=self.id
         )
         if self.response_to is not None:
-            result.update(response_to=self.response_to_id)
+            result.update(response_to=self.response_to.dict_description_simple())
         return result
 
 

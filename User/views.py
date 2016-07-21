@@ -535,3 +535,15 @@ def blacklist(request):
 
     blocked_users = cur_user.blacklist.filter(filter_q)[skip: (skip + limit)]
     return JsonResponse(dict(success=True, data=map(lambda x: x.dict_description(), blocked_users)))
+
+
+@http_decorators.require_GET
+@login_first
+def permission_sync(request):
+    allow_to_release_acts = SportCarOwnership.objects.filter(
+        user=request.user,
+        identified=True
+    ).exists()
+    return JsonResponse(dict(success=True, data=dict(
+        allow_to_release_acts=allow_to_release_acts
+    )))

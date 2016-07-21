@@ -118,6 +118,9 @@ class Sportscar(models.Model):
         verbose_name = u'跑车'
         verbose_name_plural = u'跑车'
 
+    def secure_to_delete(self):
+        return not SportCarOwnership.objects.filter(car=self).exists()
+
 
 class SportCarOwnership(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='ownership')
@@ -149,21 +152,28 @@ class SportCarIdentificationRequestRecord(models.Model):
     ownership = models.ForeignKey(SportCarOwnership, verbose_name=u'待认证跑车')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'申请时间')
     approved = models.BooleanField(default=False, verbose_name=u'是否批准')
+    checked = models.BooleanField(default=False, verbose_name=u'是否已经处理')
     drive_license = models.ImageField(upload_to=car_auth_image, verbose_name=u"驾照")
     id_card = models.ImageField(upload_to=car_auth_image, verbose_name=u'身份证')
     photo = models.ImageField(upload_to=car_auth_image, verbose_name=u"合影")
     license_num = models.CharField(max_length=30, verbose_name=u'车牌号')
-    
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        # send_notification.send(
-        #     sender=SportCarIdentificationRequestRecord,
-        #     target=self.ownership.user,
-        #     message_type="auth_car_approved" if self.approved else "auth_car_denied",
-        #     related_own=self.ownership,
-        #     message_body=""
-        # )
-        super(SportCarIdentificationRequestRecord, self).save()
+
+    def approve(self):
+        if self.checked:
+            return
+        self.checked = True
+        self.approved = True
+        own = self.ownership
+        own.identified = True
+        own.identified_at = timezone.now()
+        self.save()
+
+    def deny(self):
+        if self.checked:
+            return
+        self.checked = True
+        self.approved = True
+        self.save()
 
     def __str__(self):
         return smart_str(u"{user}->{car}".format(
