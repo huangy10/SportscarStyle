@@ -95,6 +95,26 @@ class Sportscar(models.Model):
     # For the spider to check if the data of this car is fetched
     data_fetched = models.BooleanField(default=False, verbose_name=u"")
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.price_number = self.get_price_value(self.price)
+        super(Sportscar, self).save(force_insert, force_update, using, update_fields)
+
+    def get_price_value(self, price_str):
+        if price_str == "-" or price_str == "":
+            return 0
+        price_str = price_str.replace(",", "")
+        try:
+            result = int(price_str)
+            return result
+        except ValueError:
+            if price_str.endswith(u"万"):
+                try:
+                    result = int(float(price_str[0:-1]) * 10000)
+                    return result
+                except ValueError:
+                    return 0
+            return 0
+
     def __str__(self):
         return smart_str(self.name)
 

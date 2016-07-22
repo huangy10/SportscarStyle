@@ -11,6 +11,8 @@ from django.utils import timezone
 
 # Create your models here.
 
+from Sportscar.models import SportCarOwnership, Sportscar
+
 
 class ClubJoining(models.Model):
     """这里定义了用户关于一个群聊的设置
@@ -175,6 +177,13 @@ class Club(models.Model):
         self.show_members_to_public = settings.get("show_members_to_public", self.show_members_to_public)
         self.description = settings.get("description", self.description)
         self.save()
+
+    def recalculate_value(self, commit=True):
+        self.value_total = ClubJoining.objects.filter(club=self)\
+            .aggregate(total=models.Sum("user__value"))["total"] or 0
+        self.value_average = self.value_total / ClubJoining.objects.filter(club=self).count()
+        if commit:
+            self.save()
 
 
 class ClubAuthRequest(models.Model):

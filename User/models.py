@@ -18,6 +18,8 @@ from django.conf import settings
 
 from custom.utils import time_to_string
 
+from Sportscar.models import SportCarOwnership, Sportscar
+
 
 def profile_avatar(instance, filename, *args, **kwargs):
     current = timezone.now()
@@ -148,6 +150,12 @@ class User(AbstractUser):
     blacklist = models.ManyToManyField("self", related_name="blacklist_by", symmetrical=False)
 
     value = models.IntegerField(default=0, verbose_name=u"拥有的跑车的价值")
+
+    def recalculate_value(self, commit=True):
+        self.value = SportCarOwnership.objects.filter(user=self, identified=True)\
+            .aggregate(total=models.Sum("car__price_number"))["total"] or 0
+        if commit:
+            self.save()
 
     def follow_user(self, user):
         relation, _ = UserRelation.objects.get_or_create(
