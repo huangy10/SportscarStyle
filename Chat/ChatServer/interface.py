@@ -9,6 +9,7 @@ def send_string_message(message):
 
     response = client.fetch(
         "http://localhost:8887/notification/general",
+        method="POST",
         body=urllib.urlencode({"message": message})
     )
     print response

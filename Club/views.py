@@ -1,6 +1,5 @@
 # coding=utf-8
 import json
-import logging
 
 from django.views.decorators.http import require_POST, require_GET
 from django.http import JsonResponse
@@ -12,14 +11,14 @@ from Notification.models import Notification
 from .forms import ClubCreateForm
 from .models import Club, ClubJoining, ClubAuthRequest
 from User.models import User
-from custom.utils import post_data_loader, login_first
+from custom.utils import post_data_loader, login_first, get_logger
 from Activity.models import Activity
 from Notification.signal import send_notification
 from Chat.models import ChatEntity
 # Create your views here.
 
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 @require_POST
@@ -39,11 +38,12 @@ def club_create(request):
             for user_id in users_id:
                 users.append(User.objects.get(id=user_id))
         except ObjectDoesNotExist:
+            logger.error(u'创建活动时初始化成员失败,成员信息为%s' % users_id)
             return JsonResponse(dict(success=False, code=3002, message="User not Found"))
         for user in users:
             ClubJoining.objects.create(club=club, user=user, nick_name=user.nick_name)
         # Also add the host as a member of the club
-        print "success"
+
         ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.nick_name)
         entity, _ = ChatEntity.objects.get_or_create(host=request.user, club=club)
         # try:
@@ -55,6 +55,7 @@ def club_create(request):
         result.update(roster=entity.dict_description())
         return JsonResponse(dict(success=True, club=result))
     else:
+        logger.error(u'创建活动失败,错误信息为%s' % form.errors)
         return JsonResponse(dict(success=False))
 
 
@@ -79,7 +80,7 @@ def club_infos(request, club_id):
     try:
         club = Club.objects.get(id=club_id)
     except ObjectDoesNotExist:
-        return JsonResponse(dict(success=True, code="2002", message="club not found"))
+        return JsonResponse(dict(success=False, code="2002", message="club not found"))
     try:
         club_join = ClubJoining.objects.get(user=request.user, club=club)
         response_data = club_join.dict_description(show_members=True, for_host=True)
@@ -118,7 +119,7 @@ def update_club_settings(request, data, club_id):
         club_join = ClubJoining.objects.select_related("club").get(club_id=club_id, user=request.user)
         club = club_join.club
     except ObjectDoesNotExist:
-        return JsonResponse(dict(success=True, code="2002", message="club not found"))
+        return JsonResponse(dict(success=False, code="2002", message="club not found"))
     new_logo = request.FILES.get("logo", None)
     if new_logo is not None and club.host == request.user:
         club.logo = new_logo
@@ -126,7 +127,8 @@ def update_club_settings(request, data, club_id):
     if new_logo is not None:
         new_logo_url = club.logo.url
         return JsonResponse(dict(success=True, logo=new_logo_url))
-    return JsonResponse(dict(success=True))
+    else:
+        return JsonResponse(dict(success=True))
 
 
 @require_GET
@@ -213,11 +215,9 @@ def club_discover(request):
     #     result = result.filter(city=city_limit)
 
     result = result[skip: skip + limit]
-    print result
+
     for temp in result:
         setattr(temp, "attended", temp.attended_count > 0)
-
-    print result
 
     return JsonResponse(
         dict(success=True,
@@ -233,21 +233,26 @@ def club_member_change(request, data, club_id):
     """
     op_type = data.get("op_type")
     target_list = data.get("target_users")
-    print target_list, type(target_list)
-    print request.user
+
     try:
         club = Club.objects.get(id=club_id)
-        print club.host
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="club not exists"))
     # Check the permisson
     if club.only_host_can_invite and club.host != request.user:
+        logger.warning(u'俱乐部{club_id}只有群主才能加入新成员,现在有用户{phone}试图加入其它成员'.format(
+            club_id=club_id, phone=request.user.username
+        ))
         return JsonResponse(dict(success=False, message="no permisson"))
     if op_type == "delete":
         if club.host != request.user:
+            logger.warning(u'只有群主才能执行踢出成员的操作,现在的操作者是{phone}, 涉及俱乐部是{club_id}'.format(
+                phone=request.user.username, club_id=club_id
+            ))
             return JsonResponse(dict(success=False, message="no permisson"))
         joins = ClubJoining.objects.filter(user__in=target_list, club_id=club_id)
         if joins.count() != len(target_list):
+            logger.warning(u'删除群({club_id})成员时,数据一致性出现问题'.format(club_id=club_id))
             return JsonResponse(dict(success=False, message="Invalid user data"))
         joins.delete()
         entities = ChatEntity.objects.filter(club=club, host__in=target_list)
@@ -276,13 +281,18 @@ def club_auth(request, data, club_id):
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="Club not found"))
     if club.host != request.user:
+        logger.debug(u'只有群主才能发起俱乐部认证,当前操作用户是{phone}, 涉及俱乐部是{club_id}'.format(
+            phone=request.user.username, club_id=club_id
+        ))
         return JsonResponse(dict(success=False, message="No permission"))
 
     auth, created = ClubAuthRequest.objects.get_or_create(club=club)
     if not created and not auth.approve and auth.checked:
+        logger.debug(u'申请(%s->%s)已经被驳回' % (request.user.username, club_id))
         return JsonResponse(dict(success=False, message="Already Denied"))
 
     if not created and auth.approve:
+        logger.debug(u'申请(%s->%s)已经批准' % (request.user.username, club_id))
         return JsonResponse(dict(success=False, message="Already Identified"))
 
     auth.city = city
