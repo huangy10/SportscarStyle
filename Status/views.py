@@ -1,6 +1,4 @@
 # coding=utf-8
-import logging
-
 from django.views.decorators import http as http_decorator
 from django.db.models import Q, Count
 from django.http import JsonResponse
@@ -11,11 +9,12 @@ from django.contrib.gis.geos import Point
 
 from .models import Status, StatusLikeThrough, StatusComment, StatusReport
 from .forms import StatusCreationForm
-from custom.utils import post_data_loader, page_separator_loader, login_first
+from custom.utils import post_data_loader, page_separator_loader, login_first, get_logger
 from Notification.signal import send_notification
 # Create your views here.
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
+
 
 @http_decorator.require_GET
 @login_first
@@ -179,16 +178,18 @@ def status_post_comment(request, data, status_id):
         try:
             response_to = StatusComment.objects.get(id=data['response_to'])
         except ObjectDoesNotExist:
-            return JsonResponse(dict(success=False, code='4002', message='Status not found.'))
+            return JsonResponse(dict(success=False, code='4002', message='Comments not found.'))
     else:
         response_to = None
     try:
+        # Caution: image属性即将废除
         comment = StatusComment.objects.create(user=request.user,
                                                image=request.FILES.get('image', None),
                                                content=data.get('content', None),
                                                response_to=response_to,
                                                status=status)
     except ValidationError:
+        logger.debug(u'发表动态评论的时候失败,缺少必要数据。目前提交的内容为%s' % data.get('content', None))
         return JsonResponse(dict(success=False, code='4003', message=u'No valid content found for the comment'))
 
     if 'inform_of' in data:
@@ -230,6 +231,7 @@ def status_post_comment(request, data, status_id):
 @post_data_loader()
 def status_operation(request, data, status_id):
     if 'op_type' not in data:
+        logger.warn(u'动态操作错误')
         return JsonResponse(dict(success=False, code='4300', message='No valid operation type param found.'))
     op_type = data['op_type']
     try:
@@ -259,6 +261,10 @@ def status_operation(request, data, status_id):
         # 删除
         if status.user != request.user:
             # no permission
+            logger.warning(u'动态删除权限问题, 参与用户id:{user_id}, 涉及动态为{status_id}'.format(
+                user_id=request.user.id,
+                status_id=status.id
+            ))
             return JsonResponse(dict(success=False, code="code", message="no permission"))
         status.deleted = True
         status.save()
@@ -271,4 +277,5 @@ def status_operation(request, data, status_id):
         )
         return JsonResponse(dict(success=True))
     else:
+        logger.warning(u"非法操作, 涉及用户为%s" % request.user.id)
         return JsonResponse(dict(success=False, code='4004', message='Operation not defined'))

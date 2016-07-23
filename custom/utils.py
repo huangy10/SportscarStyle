@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import logging
 import uuid
 import json
 import pytz
@@ -117,3 +117,34 @@ def page_separator_loader(method):
 
 def time_to_string(t):
     return t.strftime("%Y-%m-%d %H:%M:%S.%f %Z")
+
+
+class MyLogger(object):
+
+    logger = logging.getLogger("scs")
+
+    def __init__(self, prefix):
+        self.prefix = prefix
+        super(MyLogger, self).__init__()
+
+    def build_content(self, info):
+        return u"{prefix}:{info}".format(prefix=self.prefix, info=info)
+
+    def debug(self, info):
+        self.debug(self.build_content(info))
+
+    def info(self, info):
+        self.info(self.build_content(info))
+
+    def warning(self, info):
+        self.warning(self.build_content(info))
+
+    def error(self, info):
+        self.error(self.build_content(info))
+
+
+def get_logger(name):
+    return MyLogger(name)
+
+
+

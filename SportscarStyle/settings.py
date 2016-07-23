@@ -142,7 +142,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+            'format': '%(asctime)s [%(levelname)s]: %(message)s'
         },
     },
     'handlers': {
@@ -172,8 +172,8 @@ LOGGING = {
         },
     },
     'loggers': {
-        '': {
-            'handlers': ['default'],
+        'scs': {
+            'handlers': ['default', 'error'],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -181,11 +181,6 @@ LOGGING = {
             'handlers': ['request_handler', ],
             'level': 'DEBUG',
             'propagate': False,
-        },
-        "error_logger": {
-            'handlers': ['error'],
-            'level': 'WARNING',
-            'propagate': True
         }
     },
 }

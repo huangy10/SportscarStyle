@@ -1,20 +1,19 @@
 # coding=utf-8
 import urllib
-import logging
 
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
 
 from Club.models import Club
-from custom.utils import time_to_string
+from custom.utils import time_to_string, get_logger
 from .signal import send_notification
 from tornado.httpclient import HTTPClient
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class Notification(models.Model):
@@ -146,9 +145,9 @@ def send_notification_handler(sender, **kwargs):
     try:
         notif, _ = Notification.objects.get_or_create(**create_params)
     except Exception, e:
-        logger.debug(u'-------->Fail to create Notification')
-        logger.debug(u'the error info is %s' % e)
-        logger.debug(u'message type is %s' % message_type)
+        logger.error(u'-------->Fail to create Notification')
+        logger.error(u'the error info is %s' % e)
+        logger.error(u'message type is %s' % message_type)
         # re-throw the exception, let it crash
         raise e
     client = HTTPClient()
