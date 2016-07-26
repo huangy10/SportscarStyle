@@ -57,10 +57,13 @@ def radar_cars(request, data):
     # load the scan center
     lat = float(data["scan_center"]["lat"])
     lon = float(data["scan_center"]["lon"])
-    print lat, lon
     filter_type = data["filter"]
-    if filter_type == "distance":
+    try:
+        distance = float(data["scan_distance"])
+    except KeyError:
+        # 向下兼容
         distance = float(data["filter_param"])
+    if filter_type == "distance":
 
         # TODO: 添加其他的筛选条件
 
@@ -80,6 +83,8 @@ def radar_cars(request, data):
             return result
 
         return JsonResponse(dict(success=True, result=map(result_generator, results)))
+    else:
+        return JsonResponse(dict(success=False))
 
 
 @require_POST

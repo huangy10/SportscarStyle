@@ -3,12 +3,13 @@ import uuid
 import json
 import librosa
 import numpy as np
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from django.utils.functional import cached_property
 
@@ -312,5 +313,12 @@ def auto_create_audio_wav_data(sender, instance, created, **kwargs):
         instance.save()
 
 
+@receiver(post_delete, sender=ClubJoining)
+def auto_delete_chat_after_club_quit(sender, instance, **kwargs):
+    try:
+        chat = ChatEntity.objects.get(user=instance.user, club=instance.club)
+        chat.delete()
+    except ObjectDoesNotExist:
+        pass
 
 

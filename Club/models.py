@@ -67,7 +67,6 @@ class ClubJoining(models.Model):
         self.nick_name = settings.get("nick_name", self.nick_name)
         self.save()
 
-
 def club_logo(instance, filename, *args, **kwargs):
     current = timezone.now()
     ext = filename.split('.')[-1]
@@ -138,8 +137,9 @@ class Club(models.Model):
             value_total=value,
         )
         if show_members:
+            from Club.views import CLUB_MEMBERS_DISPLAY_NUM
             result.update(
-                members=map(lambda x: x.dict_description(), self.members.all())
+                members=map(lambda x: x.dict_description(), self.members.all()[0: CLUB_MEMBERS_DISPLAY_NUM])
             )
         if show_setting:
             result.update(dict(

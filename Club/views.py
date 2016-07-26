@@ -4,7 +4,7 @@ import json
 from django.views.decorators.http import require_POST, require_GET
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Count, Case, When, Sum, IntegerField, BooleanField, Value
+from django.db.models import Count, Case, When, Sum, IntegerField, BooleanField, Value, Q
 
 from Chat.ChatServer.interface import send_string_message
 from Notification.models import Notification
@@ -15,10 +15,14 @@ from custom.utils import post_data_loader, login_first, get_logger
 from Activity.models import Activity
 from Notification.signal import send_notification
 from Chat.models import ChatEntity
+
+from custom.views import LoginFirstOperationView
+
 # Create your views here.
 
 
 logger = get_logger(__name__)
+CLUB_MEMBERS_DISPLAY_NUM = 12   # 3行,每行4个
 
 
 @require_POST
@@ -231,43 +235,70 @@ def club_discover(request):
 def club_member_change(request, data, club_id):
     """ 俱乐部成员变更
     """
-    op_type = data.get("op_type")
-    target_list = data.get("target_users")
+    def post():
+        op_type = data.get("op_type")
+        target_list = data.get("target_users")
 
-    try:
-        club = Club.objects.get(id=club_id)
-    except ObjectDoesNotExist:
-        return JsonResponse(dict(success=False, message="club not exists"))
-    # Check the permisson
-    if club.only_host_can_invite and club.host != request.user:
-        logger.warning(u'俱乐部{club_id}只有群主才能加入新成员,现在有用户{phone}试图加入其它成员'.format(
-            club_id=club_id, phone=request.user.username
-        ))
-        return JsonResponse(dict(success=False, message="no permisson"))
-    if op_type == "delete":
-        if club.host != request.user:
-            logger.warning(u'只有群主才能执行踢出成员的操作,现在的操作者是{phone}, 涉及俱乐部是{club_id}'.format(
-                phone=request.user.username, club_id=club_id
+        try:
+            club = Club.objects.get(id=club_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="club not exists"))
+        # Check the permisson
+        if club.only_host_can_invite and club.host != request.user:
+            logger.warning(u'俱乐部{club_id}只有群主才能加入新成员,现在有用户{phone}试图加入其它成员'.format(
+                club_id=club_id, phone=request.user.username
             ))
             return JsonResponse(dict(success=False, message="no permisson"))
-        joins = ClubJoining.objects.filter(user__in=target_list, club_id=club_id)
-        if joins.count() != len(target_list):
-            logger.warning(u'删除群({club_id})成员时,数据一致性出现问题'.format(club_id=club_id))
-            return JsonResponse(dict(success=False, message="Invalid user data"))
-        joins.delete()
-        entities = ChatEntity.objects.filter(club=club, host__in=target_list)
-        entities.delete()
-        return JsonResponse(dict(success=True))
-    elif op_type == "add":
-        users = User.objects.filter(id__in=target_list)
-        if users.count() != len(target_list):
-            return JsonResponse(dict(success=False, message="Invalid user data"))
-        ClubJoining.objects.bulk_create(
-            [ClubJoining(user=user, club=club) for user in users]
-        )
-        return JsonResponse(dict(success=True))
+        if op_type == "delete":
+            if club.host != request.user:
+                logger.warning(u'只有群主才能执行踢出成员的操作,现在的操作者是{phone}, 涉及俱乐部是{club_id}'.format(
+                    phone=request.user.username, club_id=club_id
+                ))
+                return JsonResponse(dict(success=False, message="no permisson"))
+            joins = ClubJoining.objects.filter(user__in=target_list, club_id=club_id)
+            if joins.count() != len(target_list):
+                logger.warning(u'删除群({club_id})成员时,数据一致性出现问题'.format(club_id=club_id))
+                return JsonResponse(dict(success=False, message="Invalid user data"))
+            joins.delete()
+            entities = ChatEntity.objects.filter(club=club, host__in=target_list)
+            entities.delete()
+            return JsonResponse(dict(success=True))
+        elif op_type == "add":
+            users = User.objects.filter(id__in=target_list)
+            if users.count() != len(target_list):
+                return JsonResponse(dict(success=False, message="Invalid user data"))
+            ClubJoining.objects.bulk_create(
+                [ClubJoining(user=user, club=club) for user in users]
+            )
+            return JsonResponse(dict(success=True))
+        else:
+            return JsonResponse(dict(success=False, message="Undefined operation type"))
+
+    def get():
+        try:
+            club = Club.objects.get(id=club_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(success=False, message=u"Club not found")
+        skip = request.GET.get("skip", 0)
+        limit = request.GET.get("limit", 10)
+
+        filter_str = request.GET.get("filter", "")
+        if filter_str != "":
+            filter_elements = filter_str.split(" ")
+            filter_q = Q()
+            for filter_element in filter_elements:
+                filter_q = filter_q | Q(user__nick_name__icontains=filter_element)
+        else:
+            filter_q = Q()
+
+        joins = ClubJoining.objects.filter(filter_q, club=club)[skip: (skip + limit)]
+        payload = map(lambda x: x.dict_description(), joins)
+        return JsonResponse(success=True, members=payload)
+
+    if request.method == "GET":
+        return get()
     else:
-        return JsonResponse(dict(success=False, message="Undefined operation type"))
+        return post()
 
 
 @require_POST
