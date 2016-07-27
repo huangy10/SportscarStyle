@@ -372,6 +372,7 @@ def club_apply(request, club_id):
         related_user=request.user,
         related_club=club,
         message_type="club_apply",
+        checked=False,
     ).exists():
         return JsonResponse(dict(success=False, message="already applied"))
     send_notification.send(

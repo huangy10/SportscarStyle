@@ -316,7 +316,7 @@ def auto_create_audio_wav_data(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=ClubJoining)
 def auto_delete_chat_after_club_quit(sender, instance, **kwargs):
     try:
-        chat = ChatEntity.objects.get(user=instance.user, club=instance.club)
+        chat = ChatEntity.objects.get(host=instance.user, club=instance.club)
         chat.delete()
     except ObjectDoesNotExist:
         pass

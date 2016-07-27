@@ -88,7 +88,9 @@ class Notification(models.Model):
             attribute = getattr(self, attribute_name)
             if attribute is not None:
                 if isinstance(attribute, Club):
-                    result[attribute_name] = attribute.dict_description(show_attended=True)
+                    result[attribute_name] = attribute.dict_description(
+                        show_attended=True, target_user=self.target
+                    )
                 else:
                     result[attribute_name] = attribute.dict_description()
             # if attribute is not None:
