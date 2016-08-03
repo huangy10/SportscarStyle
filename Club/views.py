@@ -293,7 +293,7 @@ def club_member_change(request, data, club_id):
 
         joins = ClubJoining.objects.filter(filter_q, club=club)[skip: (skip + limit)]
         payload = map(lambda x: x.dict_description(), joins)
-        return JsonResponse(success=True, members=payload)
+        return JsonResponse(dict(success=True, members=payload))
 
     if request.method == "GET":
         return get()

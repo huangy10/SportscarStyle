@@ -4,13 +4,24 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import User
+from .models import User, Sportscar, SportCarOwnership
+from Club.models import ClubJoining
 # Register your models here.
 
 
 class MyUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
+
+    def __init__(self, *args, **kwargs):
+        super(MyUserChangeForm, self).__init__(*args, **kwargs)
+        instance = kwargs.get("instance")
+        if instance is not None:
+            self.fields['avatar_car'].queryset = SportCarOwnership.objects.filter(
+                user=instance
+            )
+            self.fields['avatar_club'].queryset = ClubJoining.objects.filter(user=instance)
+
 
 class MyUserCreationForm(UserCreationForm):
 
@@ -26,9 +37,20 @@ class MyUserCreationForm(UserCreationForm):
         raise forms.ValidationError(self.error_messages['duplicate_username'])
 
 
+@admin.register(User)
 class MyUserAdmin(UserAdmin):
 
     form = MyUserChangeForm
     add_form = MyUserCreationForm
 
-admin.site.register(User, MyUserAdmin)
+    fields = ("username", "nick_name", "avatar", "avatar_club", "avatar_car",
+              "gender", "birth_date", "star_sign", "district", "signature",
+              "job", "corporation_identified", "fans_num", "follows_num",
+              "status_num", "act_num", "value")
+    fieldsets = None
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

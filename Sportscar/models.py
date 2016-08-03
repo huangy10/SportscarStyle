@@ -151,6 +151,13 @@ class SportCarOwnership(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'拥有日期')
 
+    def __str__(self):
+        return smart_str(
+            u"{username}->{car_name}".format(
+                username=self.user.username, car_name=self.car.name
+            )
+        )
+
     def dict_description(self):
         return dict(
             car=self.car.dict_description(),
@@ -201,17 +208,32 @@ class SportCarIdentificationRequestRecord(models.Model):
             car=self.ownership.car.name
         ))
 
-    @property
     def drive_license_admin(self):
-        return "<img src=%s />" % self.drive_license.url
+        return '<img src=%s style="max-width:600px"/>' % self.drive_license.url
+    drive_license_admin.short_description = u"驾驶执照"
+    drive_license_admin.allow_tags = True
 
-    @property
     def id_card_admin(self):
-        return "<img src=%s />" % self.id_card.url
+        return '<img src=%s style="max-width:600px"/>' % self.id_card.url
+    id_card_admin.short_description = u"身份证"
+    id_card_admin.allow_tags = True
 
-    @property
     def photo_admin(self):
-        return "<img src=%s />" % self.photo.url
+        return '<img src=%s style="max-width:600px"/>' % self.photo.url
+    photo_admin.short_description = u"照片"
+    photo_admin.allow_tags = True
+
+    def link_to_user(self):
+        return u'<a href="/admin/User/user/%s">%s(%s)</a>' % (self.ownership.user.id, self.ownership.user.nick_name,
+                                                              self.ownership.user.username)
+    link_to_user.short_description = u'申请人'
+    link_to_user.allow_tags = True
+
+    def link_to_car(self):
+        return u'<a href="/admin/Sportscar/sportscar/%s">%s</a>' % (self.ownership.car.id,
+                                                                    self.ownership.car.name)
+    link_to_car.short_description = u"跑车"
+    link_to_car.allow_tags = True
 
     class Meta:
         verbose_name = u"跑车认证请求"

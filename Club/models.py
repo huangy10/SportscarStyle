@@ -67,6 +67,7 @@ class ClubJoining(models.Model):
         self.nick_name = settings.get("nick_name", self.nick_name)
         self.save()
 
+
 def club_logo(instance, filename, *args, **kwargs):
     current = timezone.now()
     ext = filename.split('.')[-1]
