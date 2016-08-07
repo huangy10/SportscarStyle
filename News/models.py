@@ -4,6 +4,7 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.utils.encoding import smart_str
 
 from custom.utils import path_creator, time_to_string
 from custom.models_template import BaseCommentManager, comment_image_path
@@ -42,6 +43,9 @@ class News(models.Model):
                                       through='NewsLikeThrough')
     shared_times = models.PositiveIntegerField(default=0, verbose_name=u'被分享次数')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'创建日期')
+
+    def __str__(self):
+        return smart_str(self.title)
 
     class Meta:
         verbose_name = u'资讯'
