@@ -19,6 +19,7 @@ from django.conf import settings
 from custom.utils import time_to_string
 
 from Sportscar.models import SportCarOwnership, Sportscar
+from User.tasks import resize_image
 
 
 def profile_avatar(instance, filename, *args, **kwargs):
@@ -215,6 +216,9 @@ class User(AbstractUser):
 
     def get_short_name(self):
         return self.nick_name
+
+    def resize_avatar(self, size=(250, 250)):
+        resize_image.delay(self, "avatar", size)
 
     class Meta:
         verbose_name = u"用户"

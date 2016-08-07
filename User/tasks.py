@@ -1,6 +1,8 @@
 from PIL import Image
+import StringIO
+import os
 
-from django.core.files import File
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from SportscarStyle.celery import app
 
@@ -18,8 +20,21 @@ def resize_image(instance, field_name, target_size):
             tmp_w = int(height / h * w)
             new_im = im.resize((tmp_w, int(height)), resample=Image.LANCZOS)
             new_im = new_im.crop((tmp_w / 2 - int(width) / 2, 0, tmp_w / 2 + int(width) / 2, int(height)))
+        old_path = getattr(instance, field_name).path
 
-        setattr(instance, field_name, File(new_im))
+        zipped_io = StringIO.StringIO()
+        new_im.save(zipped_io, format='JPEG')
+        setattr(instance, field_name,
+                InMemoryUploadedFile(file=zipped_io,
+                                     field_name=None,
+                                     name='foo.jpg',
+                                     content_type='image/jpeg',
+                                     size=zipped_io.len,
+                                     charset=None)
+                )
 
         if callable(getattr(instance, "save")):
+            print "save"
             instance.save()
+
+        os.remove(old_path)
