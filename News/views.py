@@ -42,12 +42,8 @@ def news_list(request, date_threshold, op_type, limit):
                .annotate(comment_num=Count('comments', distinct=True))[0: limit]
 
     def format_fix(news):
-        result = dict(
-            id=news.id,
-            cover=news.cover.url,
-            created_at=time_to_string(news.created_at),
-            content=news.content,
-            title=news.title,
+        result = news.dict_description()
+        result.update(
             like_num=news.like_num,
             comment_num=news.comment_num,
             liked=NewsLikeThrough.objects.filter(user=request.user, news=news).exists()

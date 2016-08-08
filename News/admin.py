@@ -7,5 +7,5 @@ from .models import News
 
 @register(News)
 class NewsAdmin(admin.ModelAdmin):
-    exclude = ("liked_by", "shared_times", "created_at", "video")
+    exclude = ("liked_by", "shared_times", "created_at", )
     search_fields = ('title', )
