@@ -42,6 +42,7 @@ class Activity(models.Model):
     start_at = models.DateTimeField(verbose_name=u'开始时间')
     end_at = models.DateTimeField(verbose_name=u'结束时间')
     allowed_club = models.ForeignKey('Club.Club', verbose_name=u'允许加入的俱乐部', blank=True, null=True)
+    authed_user_only = models.BooleanField(default=False, verbose_name=u'只限认证用户参加')
     poster = models.ImageField(upload_to=activity_poster, verbose_name=u'活动海报')
     location = models.ForeignKey('Location.Location', verbose_name=u'活动地点')
 
@@ -110,8 +111,8 @@ class Activity(models.Model):
             like_num=self.like_num,
             comment_num=self.comment_num,
         )
-        if self.allowed_club is not None:
-            result.update(allowed_club=self.allowed_club.dict_description())
+        # if self.allowed_club is not None:
+        #     result.update(allowed_club=self.allowed_club.dict_description())
         return result
 
     def export_to_excel(self):

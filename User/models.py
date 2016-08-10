@@ -134,6 +134,10 @@ class User(AbstractUser):
     # Identification information
     corporation_identified = models.BooleanField(default=False, verbose_name=u"是否是经过认证的企业用户")
 
+    @property
+    def identified(self):
+        return SportCarOwnership.objects.filter(user=self, identified=True)
+
     # Statistic data
     fans_num = models.IntegerField(default=0, verbose_name=u"粉丝数量")
     follows_num = models.IntegerField(default=0, verbose_name=u"关注数量")
