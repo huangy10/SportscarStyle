@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from .views import ActivityOperation
 
 urlpatterns = patterns('Activity.views',
                        url(r'^mine$', 'activity_mine', name="mine"),
@@ -11,5 +12,5 @@ urlpatterns = patterns('Activity.views',
                        url(r'^(?P<act_id>\d+)/close$', 'activity_close', name='close'),
                        url(r'^(?P<act_id>\d+)/comments$', 'activity_detail_comment', name='detail_comment'),
                        url(r'^(?P<act_id>\d+)/post_comment$', 'post_activity_comment', name='comment'),
-                       url(r'^(?P<act_id>\d+)/operation$', 'activity_operation', name='operation'),
+                       url(r'^(?P<act_id>\d+)/operation$', ActivityOperation.as_view(), name='operation'),
                        )
