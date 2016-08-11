@@ -75,19 +75,20 @@ def cars_detail(request, car_id):
                 car = Sportscar.objects.get(id=car_id)
                 data["owned"] = False
 
-            data.update(dict(
-                manufacturer_name=car.manufacturer.name,
-                car_name=car.name,
-                engine=car.engine,
-                transmission=car.transmission,
-                max_speed=car.max_speed,
-                zeroTo60=car.zeroTo60,
-                logo_url=car.manufacturer.logo.url,
-                image_url=car.image.url,
-                body=car.body,
-                price=car.price,
-                carID=car.id,
-            ))
+            # data.update(dict(
+            #     manufacturer_name=car.manufacturer.name,
+            #     car_name=car.name,
+            #     engine=car.engine,
+            #     transmission=car.transmission,
+            #     max_speed=car.max_speed,
+            #     zeroTo60=car.zeroTo60,
+            #     logo_url=car.manufacturer.logo.url,
+            #     image_url=car.image.url,
+            #     body=car.body,
+            #     price=car.price,
+            #     carID=car.id,
+            # ))
+            data.update(car.dict_description())
             result["data"] = data
 
         except ObjectDoesNotExist:

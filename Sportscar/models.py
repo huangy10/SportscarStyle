@@ -1,6 +1,7 @@
 # coding=utf-8
 import uuid
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -119,7 +120,7 @@ class Sportscar(models.Model):
         return smart_str(self.name)
 
     def dict_description(self):
-        return dict(
+        result = dict(
             name=self.name,
             carID=self.id,
             logo=self.manufacturer.logo.url,
@@ -133,6 +134,12 @@ class Sportscar(models.Model):
             acce=self.zeroTo60,
             torque=self.torque,
         )
+        medias = self.medias.all()
+        media_data = dict(audio=[], image=[], video=[])
+        for item in medias:
+            media_data[item.item_type].append(item.item.url)
+        result.update(medias=media_data)
+        return result
 
     class Meta:
         verbose_name = u'跑车'
@@ -250,3 +257,29 @@ def auto_update_user_value(sender, instance, created, **kwargs):
         user.value += instance.ownership.car.value_number
         user.save()
 
+
+MAX_IMAGE_PER_CAR = 5
+MAX_VIDEO_PER_CAR = 1
+MAX_AUDIO_PER_CAR = 1
+
+
+class CarMediaItem(models.Model):
+
+    car = models.ForeignKey(Sportscar, verbose_name=u'相关跑车', related_name="medias")
+    item = models.FileField(upload_to=car_image, verbose_name=u'关联文件')
+    item_type = models.CharField(max_length=10, choices=(
+        ('image', u'图片'), ("video", u'视频'), ('audio', u'音频')
+    ))
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return smart_str('{car}的{item}'.format(
+            car=self.car.name, item=self.get_item_type_display()
+        ))
+
+
+    @classmethod
+    def migrate_from_old_version(cls):
+        for car in Sportscar.objects.all():
+            CarMediaItem.objects.create(car=car, item_type="image", item=car.image.name)
