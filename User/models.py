@@ -187,6 +187,7 @@ class User(AbstractUser):
             ssid=self.id,
             nick_name=self.nick_name,
             avatar=self.avatar.url,
+            identified=self.identified
         )
         if self.most_recent_status is not None:
             result.update(recent_status_des=self.most_recent_status.content)
