@@ -136,7 +136,7 @@ class User(AbstractUser):
 
     @property
     def identified(self):
-        return SportCarOwnership.objects.filter(user=self, identified=True)
+        return SportCarOwnership.objects.filter(user=self, identified=True).exists()
 
     # Statistic data
     fans_num = models.IntegerField(default=0, verbose_name=u"粉丝数量")

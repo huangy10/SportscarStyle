@@ -222,6 +222,8 @@ def account_set_profile(request, data):
     user.star_sign = star_sign_from_date(user.birth_date)
     user.avatar = request.FILES['avatar']
     user.save()
+
+    user.resize_avatar()
     return JsonResponse(dict(success=True))
 
 #######################################################################################################################
@@ -310,6 +312,7 @@ def profile_modify(request, data):
     if 'avatar' in request.FILES:
         user.avatar = request.FILES['avatar']
 
+
     user.nick_name = data.get('nick_name', user.nick_name)
     user.signature = data.get('signature', user.signature)
     user.job = data.get('job', user.job)
@@ -331,6 +334,8 @@ def profile_modify(request, data):
         user.avatar_car = ownership
 
     user.save()
+    if 'avatar' in request.FILES:
+        user.resize_avatar()
     return JsonResponse(dict(success=True, data=user.dict_description(detail=True)))
 
 
