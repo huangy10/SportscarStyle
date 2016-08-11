@@ -66,16 +66,17 @@ class Activity(models.Model):
 
     def dict_description_without_user(self):
         result = dict(
-                actID=self.id,
-                name=self.name,
-                description=self.description,
-                max_attend=self.max_attend,
-                start_at=time_to_string(self.start_at),
-                end_at=time_to_string(self.end_at) if not self.closed \
-                    else time_to_string(self.closed_at),
-                poster=self.poster.url,
-                location=self.location.dict_description(),
-                created_at=time_to_string(self.created_at),
+            actID=self.id,
+            name=self.name,
+            description=self.description,
+            max_attend=self.max_attend,
+            start_at=time_to_string(self.start_at),
+            end_at=time_to_string(self.end_at) if not self.closed \
+                else time_to_string(self.closed_at),
+            poster=self.poster.url,
+            location=self.location.dict_description(),
+            created_at=time_to_string(self.created_at),
+            authed_user_only=self.authed_user_only
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
@@ -110,6 +111,7 @@ class Activity(models.Model):
             user=self.user.dict_description(),
             like_num=self.like_num,
             comment_num=self.comment_num,
+            authed_user_only=self.authed_user_only
         )
         # if self.allowed_club is not None:
         #     result.update(allowed_club=self.allowed_club.dict_description())
