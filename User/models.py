@@ -127,9 +127,9 @@ class User(AbstractUser):
         ('Pisces', u'双鱼座'),
     ), verbose_name=u'星座', default='Aries')
 
-    district = models.CharField(max_length=255, verbose_name=u'地区', default='')
-    signature = models.CharField(max_length=255, verbose_name=u'签名', default='')
-    job = models.CharField(max_length=64, verbose_name='行业', default='')
+    district = models.CharField(max_length=255, verbose_name=u'地区', default='', blank=True)
+    signature = models.CharField(max_length=255, verbose_name=u'签名', default='', blank=True)
+    job = models.CharField(max_length=64, verbose_name='行业', default='', blank=True)
 
     # Identification information
     corporation_identified = models.BooleanField(default=False, verbose_name=u"是否是经过认证的企业用户")

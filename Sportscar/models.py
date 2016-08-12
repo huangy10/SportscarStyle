@@ -271,13 +271,12 @@ class CarMediaItem(models.Model):
         ('image', u'图片'), ("video", u'视频'), ('audio', u'音频')
     ))
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'添加时间')
 
     def __str__(self):
-        return smart_str('{car}的{item}'.format(
+        return smart_str(u'{car}的{item}'.format(
             car=self.car.name, item=self.get_item_type_display()
         ))
-
 
     @classmethod
     def migrate_from_old_version(cls):

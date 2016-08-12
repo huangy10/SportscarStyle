@@ -6,7 +6,22 @@ from django.core.urlresolvers import reverse
 from django.contrib.admin import register
 from django.utils import timezone
 
-from .models import Sportscar, SportCarIdentificationRequestRecord, SportCarOwnership
+from .models import Sportscar, SportCarIdentificationRequestRecord, SportCarOwnership, Manufacturer, CarMediaItem
+
+
+class SportscarInlineAdmin(admin.StackedInline):
+
+    model = Sportscar
+    exclude = ("remote_id", 'price_number', 'remote_image', 'remote_thumbnail', 'data_fetched')
+    extra = 1
+    show_change_link = True
+
+
+class CarMediaItemAdmin(admin.TabularInline):
+
+    model = CarMediaItem
+    extra = 1
+    readonly_fields = ("created_at", )
 
 
 @register(Sportscar)
@@ -14,6 +29,8 @@ class SportscarAdmin(admin.ModelAdmin):
     exclude = ("remote_id", 'price_number', 'remote_image', 'remote_thumbnail', 'data_fetched')
     list_display = ('name', 'price', 'fuel_consumption', 'engine', 'transmission', 'max_speed', 'torque')
     search_fields = ("name", )
+
+    inlines = (CarMediaItemAdmin, )
 
 
 class SportCarOwnershipInlineAdmin(admin.StackedInline):
@@ -59,3 +76,13 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
             print "AUTH"
         super(SportCarIdentificationRequestRecordAdmin, self)\
             .save_model(request, obj, form, change)
+
+
+@register(Manufacturer)
+class ManufacturerAdmin(admin.ModelAdmin):
+    exclude = ('remote_id', 'detail_url', 'logo_remote', )
+    list_display = ('name', 'index', )
+    search_fields = ('name', 'index', )
+
+    inlines = [SportscarInlineAdmin, ]
+
