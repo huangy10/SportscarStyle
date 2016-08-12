@@ -6,10 +6,11 @@ from django.conf import settings
 from django.utils import timezone
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
+from django.utils.encoding import smart_str
 
 from custom.models_template import comment_image_path, BaseCommentManager
 from custom.utils import time_to_string
-
+from Sportscar.models import SportCarOwnership
 # Create your models here.
 
 
@@ -41,6 +42,7 @@ class Activity(models.Model):
     start_at = models.DateTimeField(verbose_name=u'开始时间')
     end_at = models.DateTimeField(verbose_name=u'结束时间')
     allowed_club = models.ForeignKey('Club.Club', verbose_name=u'允许加入的俱乐部', blank=True, null=True)
+    authed_user_only = models.BooleanField(default=False, verbose_name=u'只限认证用户参加')
     poster = models.ImageField(upload_to=activity_poster, verbose_name=u'活动海报')
     location = models.ForeignKey('Location.Location', verbose_name=u'活动地点')
 
@@ -54,6 +56,9 @@ class Activity(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return smart_str(self.name)
+
     class Meta:
         verbose_name = u'活动'
         verbose_name_plural = u'活动'
@@ -61,16 +66,17 @@ class Activity(models.Model):
 
     def dict_description_without_user(self):
         result = dict(
-                actID=self.id,
-                name=self.name,
-                description=self.description,
-                max_attend=self.max_attend,
-                start_at=time_to_string(self.start_at),
-                end_at=time_to_string(self.end_at) if not self.closed \
-                    else time_to_string(self.closed_at),
-                poster=self.poster.url,
-                location=self.location.dict_description(),
-                created_at=time_to_string(self.created_at),
+            actID=self.id,
+            name=self.name,
+            description=self.description,
+            max_attend=self.max_attend,
+            start_at=time_to_string(self.start_at),
+            end_at=time_to_string(self.end_at) if not self.closed \
+                else time_to_string(self.closed_at),
+            poster=self.poster.url,
+            location=self.location.dict_description(),
+            created_at=time_to_string(self.created_at),
+            authed_user_only=self.authed_user_only
         )
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
@@ -105,10 +111,30 @@ class Activity(models.Model):
             user=self.user.dict_description(),
             like_num=self.like_num,
             comment_num=self.comment_num,
+            authed_user_only=self.authed_user_only
         )
-        if self.allowed_club is not None:
-            result.update(allowed_club=self.allowed_club.dict_description())
+        # if self.allowed_club is not None:
+        #     result.update(allowed_club=self.allowed_club.dict_description())
         return result
+
+    def export_to_excel(self):
+        """
+        导出excel文件
+        :return:
+        """
+        joins = ActivityJoin.objects.filter(activity=self, approved=True)
+        columns_name = ["名称", "手机号", "性别", "出生日期", "认证车型"]
+
+        def row_builder(join):
+            user = join.user
+            result = [user.nick_name, user.username, user.get_gender_display(), user.birth_date.strftime("%Y-%m-%d")]
+            cars = user.ownership.filter(identified=True)
+            cars_names = [x.car.name for x in cars]
+            result.append(", ".join(cars_names))
+            return result
+
+        data = map(row_builder, joins)
+        return [columns_name] + data
 
 
 class ActivityJoin(models.Model):

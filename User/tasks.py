@@ -12,6 +12,8 @@ def resize_image(instance, field_name, target_size):
     width, height = [float(x) for x in target_size]
     with Image.open(getattr(instance, field_name)) as im:
         w, h = im.size
+        if w == width and h == height:
+            return
         if w / width * height < h:
             tmp_h = int(width / w * h)
             new_im = im.resize((int(width), tmp_h), resample=Image.LANCZOS)
@@ -34,7 +36,6 @@ def resize_image(instance, field_name, target_size):
                 )
 
         if callable(getattr(instance, "save")):
-            print "save"
             instance.save()
 
         os.remove(old_path)

@@ -134,6 +134,10 @@ class User(AbstractUser):
     # Identification information
     corporation_identified = models.BooleanField(default=False, verbose_name=u"是否是经过认证的企业用户")
 
+    @property
+    def identified(self):
+        return SportCarOwnership.objects.filter(user=self, identified=True).exists()
+
     # Statistic data
     fans_num = models.IntegerField(default=0, verbose_name=u"粉丝数量")
     follows_num = models.IntegerField(default=0, verbose_name=u"关注数量")
@@ -183,6 +187,7 @@ class User(AbstractUser):
             ssid=self.id,
             nick_name=self.nick_name,
             avatar=self.avatar.url,
+            identified=self.identified
         )
         if self.most_recent_status is not None:
             result.update(recent_status_des=self.most_recent_status.content)

@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.db.models import Q, Count
 
 from User.models import User
+from custom.views import LoginFirstOperationView
 from .models import Activity, ActivityJoin, ActivityComment
 from custom.utils import post_data_loader, login_first, page_separator_loader, time_to_string, get_logger
 from Location.models import Location
@@ -93,13 +94,24 @@ def activity_apply(request, act_id):
         act = Activity.objects.get(id=act_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, code="7001", message="Activity with id %s not found" % act_id))
-    club = act.allowed_club
-    if club is not None:
-        if not ClubJoining.objects.filter(club=club, user=request.user).exists():
-            logger.debug(u'有个用户试图加入一个他并未加入的俱乐部的活动,权限问题。用户为{phone}, 活动为{act_id}'.format(
-                phone=request.user.username, act_id=act_id
-            ))
-            return JsonResponse(dict(success=False, message='Not Allowed'))
+    # permission check
+    if act.authed_user_only and not request.user.identified:
+        return JsonResponse(dict(success=False, message="no permission"))
+
+    # club = act.allowed_club
+    # if club is not None:
+    #     if not ClubJoining.objects.filter(club=club, user=request.user).exists():
+    #         logger.debug(u'有个用户试图加入一个他并未加入的俱乐部的活动,权限问题。用户为{phone}, 活动为{act_id}'.format(
+    #             phone=request.user.username, act_id=act_id
+    #         ))
+    #         return JsonResponse(dict(success=False, message='Not Allowed'))
+
+    # 检查是否已经报满了
+
+    current_join_count = ActivityJoin.objects.filter(activity=act, approved=True).count()
+    if current_join_count >= act.max_attend:
+        return JsonResponse(dict(success=False, message="full"))
+
     join, created = ActivityJoin.objects.get_or_create(user=request.user, activity=act)
 
     if not created:
@@ -143,13 +155,13 @@ def activity_create(request, data):
     else:
         users = None
     location = json.loads(data['location'])
-    if 'club_limit' in data:
-        try:
-            club_limit = Club.objects.get(id=data['club_limit'])
-        except ObjectDoesNotExist:
-            club_limit = None
-    else:
-        club_limit = None
+    # if 'club_limit' in data:
+    #     try:
+    #         club_limit = Club.objects.get(id=data['club_limit'])
+    #     except ObjectDoesNotExist:
+    #         club_limit = None
+    # else:
+    #     club_limit = None
     loc = Location.objects.create(
         location=Point(location['lon'], location['lat']),
         description=location['description'],
@@ -161,9 +173,10 @@ def activity_create(request, data):
         start_at=datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z'),
         end_at=datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z'),
         location=loc,
-        allowed_club=club_limit,
+        allowed_club=None,
         poster=request.FILES['poster'],
-        user=request.user
+        user=request.user,
+        authed_user_only=data["authed_user_only"]
     )
     # ActivityJoin.objects.create(user=request.user, activity=act)
     if users is not None:
@@ -200,23 +213,7 @@ def activity_edit(request, act_id):
     act.start_at = datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z')
     act.end_at = datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z')
     act.poster = request.FILES['poster']
-    if "allowed_club" in data:
-        try:
-            join = ClubJoining.objects\
-                .select_related('club')\
-                .get(
-                    club_id=data["allowed_club"],
-                    user=request.user,
-                    club__host=request.user
-                )
-        except ObjectDoesNotExist:
-            logger.warning(u'活动编辑:用户{phone}试图将活动{act_id}指派给一个他并未加入的俱乐部'.format(
-                phone=request.user.username, act_id=act_id
-            ))
-            return JsonResponse(dict(success=False, message="club not exist"))
-        act.allowed_club = join.club
-    else:
-        act.allowed_club = None
+    act.authed_user_only = data["authed_user_only"]
     location = json.loads(data['location'])
     loc, _ = Location.objects.get_or_create(
         location=Point(location['lon'], location['lat']),
@@ -245,6 +242,146 @@ def activity_close(request, act_id):
     act.closed_at = timezone.now()
     act.save()
     return JsonResponse(dict(success=True))
+
+
+class ActivityOperation(LoginFirstOperationView):
+
+    operations = ["apply_deny", "invite", "invite_accepted", "invite_denied", "like", "act_remove_member"]
+
+    def apply_deny(self, request, data, act_id):
+        # TODO: 去掉活动申请加入的审核,直接加进来就可以了
+        applier = data.get("target_user")
+        try:
+            join = ActivityJoin.objects.select_related("user", "activity").get(user_id=applier, activity_id=act_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Application not found"))
+        join.approved = False
+        join.save()
+        send_notification.send(
+            sender=ActivityJoin,
+            target=join.user,
+            related_act=join.activity,
+            message_type="act_denied",
+            message_body=""
+        )
+        return JsonResponse(dict(success=True))
+
+    def invite(self, request, data, act_id):
+        appliers = data.get('target_user')
+        appliers = json.loads(appliers)
+        try:
+            act = Activity.objects.get(id=act_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=True, message="Activity Not Found"))
+        users = User.objects.filter(~Q(id=request.user.id), id__in=appliers)
+        if len(users) != len(appliers):
+            return JsonResponse(dict(success=False, message="user id list is not valid"))
+        for user in users:
+            send_notification.send(
+                sender=ActivityJoin,
+                target=user,
+                related_user=request.user,
+                related_act=act,
+                message_type="act_invited",
+                message_body=""
+            )
+        return JsonResponse(dict(success=True))
+
+    def invite_accepted(self, request, data, act_id):
+        try:
+            notif = Notification.objects.select_related("related_act").get(
+                message_type="act_invited",
+                target=request.user,
+                related_act_id=act_id,
+                checked=False
+            )
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Not Invited"))
+        # 检查是否已经报满了
+        act = notif.related_act
+        cur_join_num = ActivityJoin.objects.filter(activity=act, approved=True).count()
+        if cur_join_num >= act.max_attend:
+            return JsonResponse(dict(success=False, message="full"))
+        notif.flag = True
+        notif.checked = True
+        notif.save()
+        send_notification.send(
+            sender=Activity,
+            target=notif.related_user,
+            related_user=request.user,
+            related_act=notif.related_act,
+            message_type="act_invitation_agreed",
+            message_body=""
+        )
+        join, created = ActivityJoin.objects.get_or_create(
+            user=request.user, activity=act
+        )
+        if not created:
+            join.approved = True
+            join.save()
+
+        return JsonResponse(dict(success=True))
+
+    def invite_denied(self, request, data, act_id):
+        applier = data.get('target_user')
+        try:
+            notif = Notification.objects.select_related("related_act", "related_user").get(
+                message_type="act_invited",
+                target=request.user,
+                related_user_id=applier,
+                related_act_id=act_id,
+                checked=False
+            )
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Not invited"))
+
+        notif.flag = False
+        notif.checked = True
+        notif.save()
+
+        send_notification.send(
+            sender=Activity,
+            target=notif.related_user,
+            related_act=notif.related_act,
+            related_user=request.user,
+            message_type="act_invitation_denied",
+            message_body=""
+        )
+        join, created = ActivityJoin.objects.get_or_create(
+            user=request.user, activity=notif.related_act
+        )
+        if created and join.approved:
+            join.approved = False
+            join.save()
+        return JsonResponse(dict(success=True))
+
+    def like(self, request, data, act_id):
+        try:
+            act = Activity.objects.get(id=act_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="activity not found"))
+        if act.liked_by.filter(id=request.user.id).exists():
+            act.liked_by.remove(request.user)
+            act.like_num -= 1
+            act.save()
+            return JsonResponse(dict(success=True, data=dict(liked=False, like_num=act.liked_by.count())))
+        else:
+            act.like_num += 1
+            act.liked_by.add(request.user)
+            act.save()
+            return JsonResponse(dict(success=True, data=dict(liked=True, like_num=act.liked_by.count())))
+
+    def act_remove_member(self, request, data, act_id):
+        applier = data.get('target_user')
+        try:
+            join = ActivityJoin.objects.select_related("activity")\
+                .get(user=applier, activity_id=act_id, approved=True)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Not Joined"))
+        join.approved = False
+        join.save()
+        return JsonResponse(dict(success=True))
+
 
 
 @require_POST
@@ -298,6 +435,11 @@ def activity_operation(request, data, act_id):
                                              related_act__id=act_id, checked=False)
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="Not invited"))
+        # 检查活动是否已经报满了
+        act = notif.related_act
+        cur_join_num = ActivityJoin.objects.filter(activity=act, approved=True).count()
+        if cur_join_num >= act.max_attend:
+            return JsonResponse(dict(success=False, message="full"))
         notif.flag = True
         notif.checked = True
         notif.save()
