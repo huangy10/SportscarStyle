@@ -73,7 +73,8 @@ class Manufacturer(models.Model):
 class Sportscar(models.Model):
     """这个类为对跑车的抽象
     """
-    name = models.CharField(max_length=128, verbose_name=u'名称(中文)', unique=True)
+    name = models.CharField(max_length=128, verbose_name=u'名称(中文)')
+    subname = models.CharField(max_length=128, verbose_name=u'子型号名称', blank=True)
     remote_id = models.IntegerField(default=0, verbose_name=u"汽车之家定义的id")
 
     price = models.CharField(max_length=18, verbose_name=u'价格', default="-")
@@ -144,6 +145,7 @@ class Sportscar(models.Model):
     class Meta:
         verbose_name = u'跑车'
         verbose_name_plural = u'跑车'
+        unique_together = ("name", "subname")
 
     def secure_to_delete(self):
         return not SportCarOwnership.objects.filter(car=self).exists()
