@@ -388,7 +388,7 @@ def output_to_plist_v2():
             for car in cars:
                 name = car.name
                 this_type = sub_types.get(name, [])
-                this_type.append(car.subname)
+                this_type.append(car.name + car.subname)
                 sub_types[name] = this_type
             cars_data[manufacturer.name] = sub_types
 
