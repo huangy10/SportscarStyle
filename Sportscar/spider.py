@@ -373,6 +373,31 @@ def output_to_plist():
     plistlib.writePlist(result, os.path.abspath(os.path.join(__file__, os.pardir, 'data', 'cars.plist')))
 
 
+def output_to_plist_v2():
+    letters = Manufacturer.objects.all().order_by('index').distinct("index").values_list("index", flat=True)
+    result = dict()
+
+    for letter in letters:
+        manufacturers = Manufacturer.objects.filter(index=letter)
+
+        cars_data = dict()
+
+        for manufacturer in manufacturers:
+            cars = Sportscar.objects.filter(manufacturer=manufacturer)
+            sub_types = dict()
+            for car in cars:
+                name = car.name
+                this_type = sub_types.get(name, [])
+                this_type.append(car.subname)
+                sub_types[name] = this_type
+            cars_data[manufacturer.name] = sub_types
+
+        result[letter] = cars_data
+
+    plistlib.writePlist(result, os.path.abspath(os.path.join(__file__, os.pardir, 'data', 'cars.plist')))
+
+
+
 def main():
     print "Task Begin"
     index_resolver()
