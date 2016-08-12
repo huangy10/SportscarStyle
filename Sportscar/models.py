@@ -123,6 +123,7 @@ class Sportscar(models.Model):
     def dict_description(self):
         result = dict(
             name=self.name,
+            subname=self.subname,
             carID=self.id,
             logo=self.manufacturer.logo.url,
             image=self.image.url,
