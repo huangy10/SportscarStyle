@@ -1,12 +1,15 @@
 # coding=utf-8
 from django.contrib import admin
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 
 # Register your models here.
 from django.contrib.admin import register
 from django.utils import timezone
+from django.forms.models import BaseInlineFormSet
 
 from .models import Sportscar, SportCarIdentificationRequestRecord, SportCarOwnership, Manufacturer, CarMediaItem
+from .models import MAX_AUDIO_PER_CAR, MAX_IMAGE_PER_CAR, MAX_VIDEO_PER_CAR
 
 
 class SportscarInlineAdmin(admin.StackedInline):
@@ -17,10 +20,38 @@ class SportscarInlineAdmin(admin.StackedInline):
     show_change_link = True
 
 
+class CarMediaItemFormset(BaseInlineFormSet):
+    def clean(self):
+        super(CarMediaItemFormset, self).clean()
+        image_num = 0
+        video_num = 0
+        audio_num = 0
+        for form in self.forms:
+            if not form.is_valid():
+                return
+            item_type = form.cleaned_data.get("item_type", None)
+            if item_type == "image":
+                image_num += 1
+            elif item_type == "video":
+                video_num += 1
+            elif item_type == "audio":
+                audio_num += 1
+            else:
+                raise ValidationError(message=u"没有定义的附件类型")
+
+        if image_num > MAX_IMAGE_PER_CAR:
+            raise ValidationError(message=u"最多只允许%s张图片" % MAX_IMAGE_PER_CAR)
+        if video_num > MAX_VIDEO_PER_CAR:
+            raise ValidationError(message=u"最多只允许%s个视频" % MAX_VIDEO_PER_CAR)
+        if audio_num > MAX_AUDIO_PER_CAR:
+            raise ValidationError(message=u'最多只允许%s个音频' % MAX_AUDIO_PER_CAR)
+
+
 class CarMediaItemAdmin(admin.TabularInline):
 
     model = CarMediaItem
-    extra = 1
+    formset = CarMediaItemFormset
+    extra = 0
     readonly_fields = ("created_at", )
 
 
