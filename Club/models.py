@@ -190,8 +190,29 @@ class Club(models.Model):
 class ClubAuthRequest(models.Model):
     """ 俱乐部认证
     """
-    approve = models.BooleanField(default=False)
-    checked = models.BooleanField(default=False)
+    approve = models.BooleanField(default=False, verbose_name=u'是否批准')
+    checked = models.BooleanField(default=False, verbose_name=u'是否已经处理')
     club = models.ForeignKey("Club.Club", verbose_name="待认证的俱乐部")
     city = models.CharField(max_length=100, verbose_name="俱乐部所处的城市", default="")
     description = models.CharField(max_length=100, verbose_name="俱乐部简介", default="")
+
+    class Meta:
+        verbose_name = u'俱乐部认证申请'
+        verbose_name_plural = u'俱乐部认证申请'
+
+
+class ClubBillboard(models.Model):
+
+    club = models.ForeignKey(Club, verbose_name=u'俱乐部')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
+    version = models.IntegerField(verbose_name=u'第*期')
+    order = models.IntegerField(verbose_name=u'排名')
+    scope = models.CharField(max_length=50, verbose_name=u'排序范围')
+
+    class Meta:
+        verbose_name_plural = u'排行榜'
+        verbose_name = u'排行榜'
+
+
+
+
