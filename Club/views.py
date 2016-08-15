@@ -15,6 +15,7 @@ from custom.utils import post_data_loader, login_first, get_logger
 from Activity.models import Activity
 from Notification.signal import send_notification
 from Chat.models import ChatEntity
+from Club.models import ClubBillboard
 
 from custom.views import LoginFirstOperationView
 
@@ -456,3 +457,16 @@ def club_operation(request, data, club_id):
         return JsonResponse(dict(success=True))
     else:
         return JsonResponse(dict(success=False, message="Undefined Operation Type"))
+
+
+@require_GET
+@login_first
+def club_billboard(request):
+    limit = request.GET['limit']
+    skip = request.GET['skip']
+    scope = request.GET['scope']
+    filter_type = request.GET['filter']
+
+    billboard = ClubBillboard.objects.filter(
+        scope=scope, filter_type=filter_type
+    )

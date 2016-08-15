@@ -218,18 +218,20 @@ class ClubBillboard(models.Model):
 
     club = models.ForeignKey(Club, verbose_name=u'俱乐部')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
-    version = models.IntegerField(verbose_name=u'第*期')
-    order = models.IntegerField(verbose_name=u'排名')
+    version = models.IntegerField(verbose_name=u'第*期', db_index=True)
+    order = models.IntegerField(verbose_name=u'排名', db_index=True)
     d_order = models.IntegerField(verbose_name=u'名次变化')
     new_to_list = models.BooleanField(verbose_name=u'是否是新上榜')
-    scope = models.CharField(max_length=50, verbose_name=u'排序范围', help_text=u'通常是城市的名称')
+    scope = models.CharField(
+        max_length=50, verbose_name=u'排序范围', help_text=u'通常是城市的名称', db_index=True
+    )
     # 包括价值,平均价值,成员数量,女性数量
     filter_type = models.CharField(max_length=20, verbose_name=u'排序的类型', choices=(
         ('total', "总价最高"),
         ('average', '均价最高'),
         ('members', '成员数量'),
         ('females', '美女最多')
-    ))
+    ), db_index=True)
 
     class Meta:
         verbose_name_plural = u'排行榜'
