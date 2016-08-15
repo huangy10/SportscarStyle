@@ -100,6 +100,3 @@ def club_value_change(club):
     club.recalculate_value(commit=True)
 
 
-@app.task()
-def test():
-    print "haha"

@@ -9,7 +9,6 @@ from django.dispatch import receiver
 from django.utils.encoding import smart_str
 from django.utils import timezone
 
-from tasks import club_value_change
 # Create your models here.
 
 from Sportscar.models import SportCarOwnership, Sportscar
@@ -73,13 +72,13 @@ class ClubJoining(models.Model):
 def auto_recalculate_club_value(sender, instance, created, **kwargs):
     if created:
         club = instance.club
-        club_value_change.delay(club)
+        club.recalculate_value()
 
 
 @receiver(post_delete, sender=ClubJoining)
 def auto_recalculate_club_value_after_delete(sender, instance, **kwargs):
     club = instance.club
-    club_value_change.delay(club)
+    club.recalculate_value()
 
 
 def club_logo(instance, filename, *args, **kwargs):
