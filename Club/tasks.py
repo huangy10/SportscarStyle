@@ -27,8 +27,8 @@ def update_billboard():
     else:
         next_billboard_version = latest_billboard_obj.version + 1
 
-    for provinces in cities.keys():
-        for city in provinces[0].keys():
+    for (_, prov) in cities.items():
+        for city in prov[0].keys():
 
             def update_club_at_billboard(filter_type, new_list):
                 for order, club in enumerate(new_list, 1):
@@ -39,11 +39,12 @@ def update_billboard():
                         old_order = old_billboard.order
                         ClubBillboard.objects.create(
                             club=club, order=order, d_order=order - old_order, scope=city, filter_type=filter_type,
-                            new_to_list=False
+                            new_to_list=False, version=next_billboard_version
                         )
                     except ObjectDoesNotExist:
                         ClubBillboard.objects.create(
-                            club=club, order=order, d_order=0, scope=city, filter_type=filter_type, new_to_list=True
+                            club=club, order=order, d_order=0, scope=city, filter_type=filter_type, new_to_list=True,
+                            version=next_billboard_version
                         )
 
             update_club_at_billboard(
@@ -92,6 +93,11 @@ def update_billboard():
             #         old_billboard = ClubBillboard.objects.get(
             #             ClubBillboard.objects
             #         )
+
+
+@app.task()
+def club_value_change(club):
+    club.recalculate_value(commit=True)
 
 
 @app.task()
