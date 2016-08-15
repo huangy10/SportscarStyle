@@ -12,5 +12,6 @@ urlpatterns = patterns('Club.views',
                        url(r'^(?P<club_id>\d+)/quit$', 'club_quit', name="auth"),
                        url(r'^(?P<club_id>\d+)/apply', 'club_apply', name="apply"),
                        url(r'^(?P<club_id>\d+)/operation', 'club_operation', name="operation"),
+                       url(r'^billboard$', 'club_billboard', name='billboard')
                        )
 
