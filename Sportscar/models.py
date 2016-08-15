@@ -4,7 +4,7 @@ import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
@@ -12,6 +12,7 @@ from django.utils.encoding import smart_str
 
 from Notification.signal import send_notification
 from custom.utils import time_to_string
+from User.tasks import user_value_change
 
 # Create your models here.
 
@@ -250,15 +251,31 @@ class SportCarIdentificationRequestRecord(models.Model):
         verbose_name_plural = u"跑车认证请求"
 
 
-@receiver(post_save, sender=SportCarIdentificationRequestRecord)
+# @receiver(post_save, sender=SportCarIdentificationRequestRecord)
+# def auto_update_user_value(sender, instance, created, **kwargs):
+#     if created:
+#         return
+#     old = SportCarIdentificationRequestRecord.objects.get(pk=instance.pk)
+#     if not old.approved and instance.approved:
+#         user = instance.ownership.user
+#         user.value += instance.ownership.car.value_number
+#         user.save()
+
+@receiver(post_save, sender=SportCarOwnership)
 def auto_update_user_value(sender, instance, created, **kwargs):
     if created:
         return
-    old = SportCarIdentificationRequestRecord.objects.get(pk=instance.pk)
-    if not old.approved and instance.approved:
-        user = instance.ownership.user
-        user.value += instance.ownership.car.value_number
-        user.save()
+    old_obj = SportCarOwnership.objects.get(pk=instance.pk)
+    if not old_obj.identified and instance.identified:
+        user = instance.user
+        user_value_change.delay(user)
+
+
+@receiver(post_delete, sender=SportCarOwnership)
+def auto_update_user_value_after_delete(sender, instance, **kwargs):
+    if instance.identified:
+        user = instance.user
+        user_value_change.delay(user)
 
 
 MAX_IMAGE_PER_CAR = 5

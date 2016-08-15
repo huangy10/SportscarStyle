@@ -157,9 +157,10 @@ class User(AbstractUser):
     value = models.IntegerField(default=0, verbose_name=u"拥有的跑车的价值")
 
     def recalculate_value(self, commit=True):
+        old_value = self.value
         self.value = SportCarOwnership.objects.filter(user=self, identified=True)\
             .aggregate(total=models.Sum("car__price_number"))["total"] or 0
-        if commit:
+        if commit and old_value != self.value:
             self.save()
 
     def follow_user(self, user):

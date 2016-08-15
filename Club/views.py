@@ -50,7 +50,7 @@ def club_create(request):
 
         ClubJoining.objects.create(user=request.user, club=club, nick_name=request.user.nick_name)
         entity, _ = ChatEntity.objects.get_or_create(host=request.user, club=club)
-        # try:
+        # try:90
         #     ChatRecordBasic.objects.create(target_club=club, chat_type="group", message_type="placeholder",
         #                                sender=request.user)
         # except Exception, e:

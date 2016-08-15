@@ -5,6 +5,7 @@ import os
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from SportscarStyle.celery import app
+from Club.models import Club
 
 
 @app.task()
@@ -39,3 +40,12 @@ def resize_image(instance, field_name, target_size):
             instance.save()
 
         os.remove(old_path)
+
+
+@app.task()
+def user_value_change(user):
+    old_value = user.value
+    user.recalculate_value(commit=True)
+    if user.value != old_value:
+        for club in Club.objects.filter(members=user, identified=True):
+            club.recalculate_value(commit=True)
