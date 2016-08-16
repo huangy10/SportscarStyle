@@ -111,9 +111,9 @@ class Club(models.Model):
     logo = models.ImageField(upload_to=club_logo, verbose_name=u"俱乐部标识")
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"成员", through='ClubJoining')
     description = models.TextField(verbose_name=u"俱乐部简介")
-    identified = models.BooleanField(default=False, verbose_name="是否认证")
+    identified = models.BooleanField(default=False, verbose_name="是否认证", db_index=True)
     identified_at = models.DateTimeField(default=timezone.now)
-    city = models.CharField(max_length=30, verbose_name=u"俱乐部所在的城市")
+    city = models.CharField(max_length=30, verbose_name=u"俱乐部所在的城市", db_index=True)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u"创建日期")
 
