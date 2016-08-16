@@ -473,7 +473,7 @@ def club_billboard(request):
 
     billboard = ClubBillboard.objects.select_related('club').filter(
         scope=scope, filter_type=filter_type, version=latest_version_obj.version
-    ).order_by('-order')[skip: limit + skip]
+    ).order_by('order')[skip: limit + skip]
 
     return JsonResponse(dict(success=True, data=map(
         lambda x: x.dict_description(), billboard

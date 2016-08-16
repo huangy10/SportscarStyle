@@ -48,22 +48,23 @@ def update_billboard():
         for city in prov[0].keys():
             update_club_at_billboard(
                 "total",
-                Club.objects.filter(identified=True).order_by("-value_total")[0:MAX_ORDER],
+                Club.objects.filter(identified=True, city=city).order_by("-value_total")[0:MAX_ORDER],
                 city
             )
             update_club_at_billboard(
                 'average',
-                Club.objects.filter(identified=True).order_by('-value_average')[0:MAX_ORDER],
+                Club.objects.filter(identified=True, city=city).order_by('-value_average')[0:MAX_ORDER],
                 city
             )
             update_club_at_billboard(
                 'members',
-                Club.objects.annotate(members_num=Count("members")).order_by('-members_num')[0:MAX_ORDER],
+                Club.objects.filter(identified=True, city=city)
+                    .annotate(members_num=Count("members")).order_by('-members_num')[0:MAX_ORDER],
                 city
             )
             update_club_at_billboard(
                 'females',
-                Club.objects.annotate(
+                Club.objects.filter(identified=True, city=city).annotate(
                     females=Sum(
                         Case(When(members__gender='f', then=Value(1)),
                              default=Value(0), output_field=IntegerField())
@@ -84,12 +85,13 @@ def update_billboard():
     )
     update_club_at_billboard(
         'members',
-        Club.objects.annotate(members_num=Count("members")).order_by('-members_num')[0:MAX_ORDER],
+        Club.objects.filter(identified=True)
+            .annotate(members_num=Count("members")).order_by('-members_num')[0:MAX_ORDER],
         city
     )
     update_club_at_billboard(
         'females',
-        Club.objects.annotate(
+        Club.objects.filter(identified=True).annotate(
             females=Sum(
                 Case(When(members__gender='f', then=Value(1)),
                      default=Value(0), output_field=IntegerField())
@@ -97,7 +99,6 @@ def update_billboard():
         ).order_by('-females')[0:MAX_ORDER],
         city
     )
-
 
 
 @app.task()
