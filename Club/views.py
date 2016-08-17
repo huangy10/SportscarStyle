@@ -483,7 +483,7 @@ def club_billboard(request):
 
     for item in billboard:
         club = item.club
-        setattr(club, "attended", billboard.attended_count > 0)
+        setattr(club, "attended", item.attended_count > 0)
 
     return JsonResponse(dict(success=True, data=map(
         lambda x: x.dict_description(request.user), billboard
