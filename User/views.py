@@ -517,9 +517,9 @@ def profile_authed_cars(request, user_id):
        |-- identified_date: 认证的时间
        |-- signature: 跑车签名
     """
-    carsOwnerShip = SportCarOwnership.objects.select_related("car") \
-        .filter(user_id=user_id).order_by("-created_at")
-    cars_dict_data = map(lambda x: x.dict_description(), carsOwnerShip)
+    cars_owner_ship = SportCarOwnership.objects.select_related("car") \
+        .filter(user_id=user_id).order_by("-identified", "-created_at")
+    cars_dict_data = map(lambda x: x.dict_description(), cars_owner_ship)
     return JsonResponse(dict(success=True, cars=cars_dict_data))
 
 

@@ -1,10 +1,10 @@
 # coding=utf-8
 import uuid
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
@@ -261,12 +261,14 @@ class SportCarIdentificationRequestRecord(models.Model):
 #         user.value += instance.ownership.car.value_number
 #         user.save()
 
-@receiver(post_save, sender=SportCarOwnership)
-def auto_update_user_value(sender, instance, created, **kwargs):
-    if created:
+@receiver(pre_save, sender=SportCarOwnership)
+def auto_update_user_value(sender, instance, raw, **kwargs):
+    print raw
+    try:
+        old_obj = SportCarOwnership.objects.get(pk=instance.pk)
+    except ObjectDoesNotExist:
         return
-    old_obj = SportCarOwnership.objects.get(pk=instance.pk)
-    if not old_obj.identified and instance.identified:
+    if old_obj.identified != instance.identified:
         user = instance.user
         user_value_change.delay(user)
 
