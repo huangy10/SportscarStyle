@@ -230,7 +230,6 @@ def club_discover(request):
                       result)))
 
 
-@require_POST
 @login_first
 @post_data_loader(force_json=True)
 def club_member_change(request, data, club_id):
@@ -288,12 +287,14 @@ def club_member_change(request, data, club_id):
             filter_elements = filter_str.split(" ")
             filter_q = Q()
             for filter_element in filter_elements:
-                filter_q = filter_q | Q(user__nick_name__icontains=filter_element)
+                filter_q = filter_q | Q(nick_name__icontains=filter_element)
         else:
             filter_q = Q()
 
-        joins = ClubJoining.objects.filter(filter_q, club=club)[skip: (skip + limit)]
-        payload = map(lambda x: x.dict_description(), joins)
+        # joins = ClubJoining.objects.filter(filter_q, club=club)[skip: (skip + limit)]
+        # payload = map(lambda x: x.dict_description(), joins)
+        members = club.members.filter(filter_q)[skip: (skip + limit)]
+        payload = map(lambda x: x.dict_description(), members)
         return JsonResponse(dict(success=True, members=payload))
 
     if request.method == "GET":
