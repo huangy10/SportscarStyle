@@ -6,8 +6,6 @@ from django.views.decorators.http import require_POST, require_GET
 from django.http import JsonResponse
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from django.db.models import Count, Case, When, Sum, Q
 from django.db import models
 from django.utils import timezone
@@ -15,6 +13,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Location, UserTracking
 from custom.utils import login_first, post_data_loader
+from User.models import User
+
+
 # Create your views here.
 
 filter_types = [
@@ -67,7 +68,7 @@ def radar_cars(request, data):
 
         # TODO: 添加其他的筛选条件
 
-        results = get_user_model().objects.select_related("location")\
+        results = User.objects.select_related("location")\
             .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
                                            default=0, output_field=models.IntegerField()))\
             .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user),
@@ -113,7 +114,7 @@ def track_user(request, user_id):
     """ Fetch the latest location of the given user
     """
     try:
-        target_user = get_user_model().objects.select_related("location").get(id=user_id)
+        target_user = User.objects.select_related("location").get(id=user_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, message="user not found"))
     time_delta = timezone.now() - target_user.location.updated_at
