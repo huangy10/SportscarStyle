@@ -233,10 +233,16 @@ class ClubBillboard(models.Model):
         ('females', '美女最多')
     ), db_index=True)
 
-    def dict_description(self):
-        result = dict(club=self.club.dict_description(
-            show_value=True, show_members_num=True, show_attended=True
-        ))
+    def dict_description(self, access_user):
+        if hasattr(self, "attended_num"):
+            result = dict(club=self.club.dict_description(
+                show_value=True, show_members_num=True,
+            ))
+            result.update(attended=self.attended_num > 0)
+        else:
+            result = dict(club=self.club.dict_description(
+                show_value=True, show_members_num=True, show_attended=True, target_user=access_user
+            ))
         result.update(
             version=self.version, order=self.order, order_change=self.d_order, new_to_list=self.new_to_list,
             scope=self.scope, filter_type=self.filter_type

@@ -460,21 +460,31 @@ def club_operation(request, data, club_id):
 
 
 @require_GET
+@login_first
 def club_billboard(request):
     limit = request.GET['limit']
     skip = request.GET['skip']
     scope = request.GET['scope']
     filter_type = request.GET['filter']
 
-    latest_version_obj = ClubBillboard.objects.order_by('version').first()
+    latest_version_obj = ClubBillboard.objects.order_by('-version').first()
 
     if latest_version_obj is None:
         return JsonResponse(dict(success=True, data=[]))
 
-    billboard = ClubBillboard.objects.select_related('club').filter(
+    billboard = ClubBillboard.objects.select_related('club').annotate(
+        members_num=Count("club__members")
+    ).annotate(
+        attended_count=Sum(Case(When(club__members=request.user, then=Value(1)), default=Value(0),
+                                output_field=IntegerField()))
+    ).filter(
         scope=scope, filter_type=filter_type, version=latest_version_obj.version
     ).order_by('order')[skip: limit + skip]
 
+    for item in billboard:
+        club = item.club
+        setattr(club, "attended", billboard.attended_count > 0)
+
     return JsonResponse(dict(success=True, data=map(
-        lambda x: x.dict_description(), billboard
+        lambda x: x.dict_description(request.user), billboard
     )))
