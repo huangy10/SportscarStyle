@@ -20,7 +20,9 @@ class Notification(models.Model):
 
     target = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="目标用户")
     # 消息类型定义如下: 消息类型为由横杠连接的两个部分,前一个部分是关联类的名字,后一个部分前端显示的分类标识
-    display_mode = models.CharField(max_length=20, choices=("minimal", "with_cover", "interact"))
+    display_mode = models.CharField(max_length=20, choices=(
+        ("minimal", "minimal"), ("with_cover", "with_cover"), ("interact", "interact")
+    ))
     extra_info = models.CharField(max_length=20)
     sender_class_name = models.CharField(max_length=50)
     related_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+", null=True)
@@ -89,9 +91,9 @@ class Notification(models.Model):
 
     @property
     def message_type(self):
-        result = "{sender}_{display_mode}".format(sender=self.sender_class_name, display_mode=self.display_mode)
+        result = "{sender}:{display_mode}".format(sender=self.sender_class_name, display_mode=self.display_mode)
         if self.extra_info != "":
-            result += "_%s" % self.extra_info
+            result += ":%s" % self.extra_info
         return result
 
     def apns_des(self):
