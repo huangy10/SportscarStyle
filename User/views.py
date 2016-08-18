@@ -22,9 +22,10 @@ from Notification.signal import send_notification
 from Notification.models import RegisteredDevices
 
 from custom.views import LoginFirstOperationView
+from custom.utils import get_logger
 
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 @http_decorators.require_POST
@@ -428,11 +429,18 @@ class ProfileOperation(LoginFirstOperationView):
             obj.delete()
             return JsonResponse(dict(success=True, followed=False))
         else:
-            send_notification.send(sender=User,
-                                   target=target_user,
-                                   message_type="relation_follow",
-                                   related_user=request.user,
-                                   message_body="")
+            # send_notification.send(sender=User,
+            #                        target=target_user,
+            #                        message_type="relation_follow",
+            #                        related_user=request.user,
+            #                        message_body="")
+            send_notification.send(
+                sender=User,
+                target=target_user,
+                display_mode="minimal",
+                extra_info="like",
+                related_user=request.user
+            )
             return JsonResponse(dict(success=True, followed=True))
 
     def blacklist(self, request, data, user_id):
@@ -454,42 +462,42 @@ class ProfileOperation(LoginFirstOperationView):
         else:
             return JsonResponse(dict(success=True, blacklist=cur_blocked))
 
-
-@http_decorators.require_POST
-@post_data_loader()
-def profile_operation(request, data, user_id):
-    """
-     Operations about account, For now, only follow/unfollow are implemented.
-    :param request:
-    :param data:
-    :param user_id:
-    :return:
-
-    deprecated by Woody Huang, 2016.07.10
-    """
-    op_type = data.get('op_type')
-    if op_type not in ['follow']:
-        return JsonResponse(dict(success=False, code='2300', message='No valid operation type param found.'))
-    if int(user_id) == request.user.id:
-        return JsonResponse(dict(success=False, code='2301', message='Invalid operation'))
-    try:
-        target_user = User.objects.get(id=user_id)
-    except ObjectDoesNotExist:
-        return JsonResponse(dict(success=False, message='User not found', code='2000'))
-
-    if op_type == 'follow':
-        obj, created = UserRelation.objects.get_or_create(source_user=request.user, target_user=target_user)
-        if not created:
-            obj.delete()
-        else:
-            send_notification.send(sender=User,
-                                   target=target_user,
-                                   message_type="relation_follow",
-                                   related_user=request.user,
-                                   message_body="")
-        return JsonResponse(dict(success=True, followed=created))
-    else:
-        return JsonResponse(dict(success=False, code='2301', message='Invalid operation'))
+#
+# @http_decorators.require_POST
+# @post_data_loader()
+# def profile_operation(request, data, user_id):
+#     """
+#      Operations about account, For now, only follow/unfollow are implemented.
+#     :param request:
+#     :param data:
+#     :param user_id:
+#     :return:
+#
+#     deprecated by Woody Huang, 2016.07.10
+#     """
+#     op_type = data.get('op_type')
+#     if op_type not in ['follow']:
+#         return JsonResponse(dict(success=False, code='2300', message='No valid operation type param found.'))
+#     if int(user_id) == request.user.id:
+#         return JsonResponse(dict(success=False, code='2301', message='Invalid operation'))
+#     try:
+#         target_user = User.objects.get(id=user_id)
+#     except ObjectDoesNotExist:
+#         return JsonResponse(dict(success=False, message='User not found', code='2000'))
+#
+#     if op_type == 'follow':
+#         obj, created = UserRelation.objects.get_or_create(source_user=request.user, target_user=target_user)
+#         if not created:
+#             obj.delete()
+#         else:
+#             send_notification.send(sender=User,
+#                                    target=target_user,
+#                                    message_type="relation_follow",
+#                                    related_user=request.user,
+#                                    message_body="")
+#         return JsonResponse(dict(success=True, followed=created))
+#     else:
+#         return JsonResponse(dict(success=False, code='2301', message='Invalid operation'))
 
 
 @login_first

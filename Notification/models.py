@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from Club.models import Club
 from custom.utils import time_to_string, get_logger
 from .signal import send_notification
-from tornado.httpclient import HTTPClient
+from .tasks import send_notification_handler as task
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
@@ -19,35 +19,10 @@ logger = get_logger(__name__)
 class Notification(models.Model):
 
     target = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="目标用户")
-    message_type = models.CharField(max_length=100, choices=(
-        ("status_like", "status_like"),
-        ("status_comment", "your_status_are_commmented_by_others"),
-        ("status_comment_replied", "your_comment_on_a_status_is_responsed_by_others"),
-        ("status_inform", ""),
-        ("news_comment_replied", "your commemnt_on_a_news_is_responsed_by_others"),
-        ("act_applied", "some_one_applys_your_activity"),
-        ("act_approved", "your_application_on_an_activity_is_approved"),
-        ("act_denied", "your_application_on_an_activity_is_denied"),
-        ("act_full", "one_of_your_activity_if_full_off_applicators"),
-        ("act_deleted", "one_of_your_applied_activity_is_deleted"),
-        ("act_application_cancel", "one_application_is_cancelled"),
-        ("act_invited", "some_one_invite_you_for_an_activity"),
-        ("act_invitation_agreed", "your_invitation_is_agreed"),
-        ("act_invitation_denied", "your_invitation_is_denied"),
-        ("act_comment", ""),
-        ("act_comment_replied", ""),
-        ("auth_car_approved", "your_application_for_sportscar_identification_is_approved"),
-        ("auth_car_denied", "your_application_for_sportscar_identification_is_denied"),
-        ("auth_club_approved", "your_application_for_club_identification_is_approved"),
-        ("auth_club_denied", "your_application_for_club_identification_is_denied"),
-        ("auth_act_approved", ""),
-        ("auth_act_denied", ""),
-        ("relation_follow", ""),
-        ("chat", ""),
-        ("club_apply", ""),
-        ("club_apply_agreed", ""),
-        ("club_apply_denied", ""),
-    ))
+    # 消息类型定义如下: 消息类型为由横杠连接的两个部分,前一个部分是关联类的名字,后一个部分前端显示的分类标识
+    display_mode = models.CharField(max_length=20, choices=("minimal", "with_cover", "interact"))
+    extra_info = models.CharField(max_length=20)
+    sender_class_name = models.CharField(max_length=50)
     related_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+", null=True)
     related_act = models.ForeignKey("Activity.Activity", related_name="+", null=True)
     related_act_invite = models.ForeignKey("Activity.ActivityInvitation", related_name="+", null=True)
@@ -60,7 +35,7 @@ class Notification(models.Model):
     related_news_comment = models.ForeignKey("News.NewsComment", related_name="+", null=True)
     related_own = models.ForeignKey("Sportscar.SportCarOwnership", related_name="+", null=True)
 
-    message_body = models.CharField(max_length=255, verbose_name="消息内容(Optional)")
+    # message_body = models.CharField(max_length=255, verbose_name="消息内容(Optional)")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     read = models.BooleanField(default=False, verbose_name="是否已读")
     flag = models.BooleanField(default=False, verbose_name="保留字段")      # 额外供特殊消息类型使用的字段
@@ -112,6 +87,13 @@ class Notification(models.Model):
 
         return result
 
+    @property
+    def message_type(self):
+        result = "{sender}_{display_mode}".format(sender=self.sender_class_name, display_mode=self.display_mode)
+        if self.extra_info != "":
+            result += "_%s" % self.extra_info
+        return result
+
     def apns_des(self):
         if self.message_type == "status_like":
             return "{0} 赞了你的动态".format(self.related_user.nick_name)
@@ -124,41 +106,42 @@ class Notification(models.Model):
 
 @receiver(send_notification)
 def send_notification_handler(sender, **kwargs):
-    message_type = kwargs["message_type"]
-    target = kwargs["target"]
-    message_body = kwargs.get("message_body", None)
-
-    create_params = dict(
-        message_type=message_type,
-        target=target, message_body=message_body,
-        related_user=kwargs.get("related_user", None),
-        related_act=kwargs.get("related_act", None),
-        related_act_invite=kwargs.get("related_act_invite", None),
-        related_act_join=kwargs.get("related_act_join", None),
-        related_act_comment=kwargs.get("related_act_join", None),
-        related_club=kwargs.get("related_club", None),
-        related_status=kwargs.get("related_status", None),
-        related_status_comment=kwargs.get("related_status_comment", None),
-        related_news=kwargs.get("related_news", None),
-        related_news_comment=kwargs.get("related_news_commnet", None),
-        related_own=kwargs.get("related_own", None)
-    )
-
-    try:
-        notif, _ = Notification.objects.get_or_create(**create_params)
-    except Exception, e:
-        logger.error(u'-------->Fail to create Notification')
-        logger.error(u'the error info is %s' % e)
-        logger.error(u'message type is %s' % message_type)
-        # re-throw the exception, let it crash
-        raise e
-    client = HTTPClient()
-    response = client.fetch(
-        "http://localhost:8887/notification/internal", method="POST",
-        body=urllib.urlencode({"id": notif.id})
-    )
-
-    client.close()
+    task.delay(sender, **kwargs)
+    # message_type = kwargs["message_type"]
+    # target = kwargs["target"]
+    # message_body = kwargs.get("message_body", None)
+    #
+    # create_params = dict(
+    #     message_type=message_type,
+    #     target=target, message_body=message_body,
+    #     related_user=kwargs.get("related_user", None),
+    #     related_act=kwargs.get("related_act", None),
+    #     related_act_invite=kwargs.get("related_act_invite", None),
+    #     related_act_join=kwargs.get("related_act_join", None),
+    #     related_act_comment=kwargs.get("related_act_join", None),
+    #     related_club=kwargs.get("related_club", None),
+    #     related_status=kwargs.get("related_status", None),
+    #     related_status_comment=kwargs.get("related_status_comment", None),
+    #     related_news=kwargs.get("related_news", None),
+    #     related_news_comment=kwargs.get("related_news_commnet", None),
+    #     related_own=kwargs.get("related_own", None)
+    # )
+    #
+    # try:
+    #     notif, _ = Notification.objects.get_or_create(**create_params)
+    # except Exception, e:
+    #     logger.error(u'-------->Fail to create Notification')
+    #     logger.error(u'the error info is %s' % e)
+    #     logger.error(u'message type is %s' % message_type)
+    #     # re-throw the exception, let it crash
+    #     raise e
+    # client = HTTPClient()
+    # response = client.fetch(
+    #     "http://localhost:8887/notification/internal", method="POST",
+    #     body=urllib.urlencode({"id": notif.id})
+    # )
+    #
+    # client.close()
     # tokens = RegisteredDevices.objects.filter(
     #     user=notif.target, is_active=True
     # ).values_list("token", flat=True)

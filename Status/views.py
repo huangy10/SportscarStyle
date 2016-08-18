@@ -112,11 +112,19 @@ def post_new_status(request, data):
         if 'inform_of' in data:
             ats = get_user_model().objects.filter(id__in=data['json_data'])
             for at in ats:
-                send_notification.send(sender=get_user_model(),
-                                       message_type="status_inform",
-                                       target=at,
-                                       message_body="",
-                                       related_status=status)
+                # send_notification.send(sender=get_user_model(),
+                #                        message_type="status_inform",
+                #                        target=at,
+                #                        message_body="",
+                #                        related_status=status)
+                send_notification.send(
+                    sender=Status,
+                    target=at,
+                    display_mode="with_cover",
+                    extra_info="at",
+                    related_user=request.user,
+                    related_status=status
+                )
         return JsonResponse(dict(success=True, data=status.dict_description()))
     else:
         response_dict = dict(success=False)
@@ -196,33 +204,60 @@ def status_post_comment(request, data, status_id):
         ats = get_user_model().objects.filter(id__in=data['json_data'])
         comment.inform_of.add(*ats)
         for at in ats:
-            send_notification.send(sender=get_user_model(),
-                                   message_type="status_inform",
-                                   target=at,
-                                   message_body="",
-                                   related_status=status)
+            # send_notification.send(sender=get_user_model(),
+            #                        message_type="status_inform",
+            #                        target=at,
+            #                        message_body="",
+            #                        related_status=status)
+            send_notification.send(
+                sender=StatusComment,
+                target=at,
+                display_mode="with_cover",
+                extra_info="at",
+                related_user=request.user,
+                related_status=status,
+                related_status_comment=comment
+            )
 
     # if the comment replies to another comment, send a notification to the sender of that comment as well.
     if 'response_to' in data:
-        send_notification.send(sender=StatusComment,
-                               message_type="status_comment_replied",
-                               target=response_to.user,
-                               message_body=comment.content,
-                               related_status_comment=comment,
-                               related_status=status,
-                               related_user=comment.user)
+        # send_notification.send(sender=StatusComment,
+        #                        message_type="status_comment_replied",
+        #                        target=response_to.user,
+        #                        message_body=comment.content,
+        #                        related_status_comment=comment,
+        #                        related_status=status,
+        #                        related_user=comment.user)
+        send_notification.send(
+            sender=StatusComment,
+            target=response_to.user,
+            display_mode="with_cover",
+            extra_info="response",
+            related_user=comment.user,
+            related_status=comment.status,
+            related_status_comment=comment
+        )
         if response_to.user == status.user:
             # avoid duplicated notifications about the same comment
             return JsonResponse(dict(success=True, id=comment.id))
     # send a notification message to the sender of the status
     if status.user != request.user:
-        send_notification.send(sender=Status,
-                               message_type="status_comment",
-                               target=status.user,
-                               message_body=comment.content,
-                               related_status_comment=comment,
-                               related_status=status,
-                               related_user=comment.user)
+        # send_notification.send(sender=Status,
+        #                        message_type="status_comment",
+        #                        target=status.user,
+        #                        message_body=comment.content,
+        #                        related_status_comment=comment,
+        #                        related_status=status,
+        #                        related_user=comment.user)
+        send_notification.send(
+            sender=StatusComment,
+            target=status.user,
+            display_mode="with_cover",
+            extra_info="response",
+            related_user=comment.user,
+            related_status=comment.status,
+            related_status_comment=comment
+        )
     return JsonResponse(dict(success=True, id=comment.id))
 
 
@@ -246,12 +281,20 @@ def status_operation(request, data, status_id):
         if not created:
             obj.delete()
         elif status.user != request.user:
-            send_notification.send(sender=Status,
-                                   message_type="status_like",
-                                   related_user=request.user,
-                                   related_status=status,
-                                   target=status.user,
-                                   message_body="")
+            # send_notification.send(sender=Status,
+            #                        message_type="status_like",
+            #                        related_user=request.user,
+            #                        related_status=status,
+            #                        target=status.user,
+            #                        message_body="")
+            send_notification.send(
+                sender=Status,
+                target=status.user,
+                display_mode="with_cover",
+                extra_info="like",
+                related_user=request.user,
+                related_status=status
+            )
         result = dict(
             like_state=created,
             like_num=StatusLikeThrough.objects.filter(status=status).count()

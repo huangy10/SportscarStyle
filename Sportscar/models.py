@@ -1,16 +1,14 @@
 # coding=utf-8
 import uuid
 
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save, post_delete, pre_save
+from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 from django.utils import timezone
-from django.contrib.postgres.fields import ArrayField
 from django.utils.encoding import smart_str
 
-from Notification.signal import send_notification
 from custom.utils import time_to_string
 from User.tasks import user_value_change
 

@@ -377,13 +377,21 @@ def club_apply(request, club_id):
         checked=False,
     ).exists():
         return JsonResponse(dict(success=False, message="already applied"))
+    # send_notification.send(
+    #     sender=Club,
+    #     target=club.host,
+    #     related_user=request.user,
+    #     related_club=club,
+    #     message_type="club_apply",
+    #     message_body=""
+    # )
     send_notification.send(
-        sender=Club,
+        sender=ClubJoining,
         target=club.host,
-        related_user=request.user,
+        display_mode="interact",
+        extra_info="apply",
         related_club=club,
-        message_type="club_apply",
-        message_body=""
+        related_user=request.user
     )
     return JsonResponse(dict(success=True))
 
@@ -409,13 +417,21 @@ def club_operation(request, data, club_id):
         notif.checked = True
         notif.flag = True
         notif.save()
+        # send_notification.send(
+        #     sender=Club,
+        #     target=notif.related_user,
+        #     related_user=notif.target,
+        #     related_club=notif.related_club,
+        #     message_type="club_apply_agreed",
+        #     message_body=""
+        # )
         send_notification.send(
-            sender=Club,
+            sender=ClubJoining,
             target=notif.related_user,
+            display_mode="with_cover",
+            extra_info="agree",
             related_user=notif.target,
-            related_club=notif.related_club,
-            message_type="club_apply_agreed",
-            message_body=""
+            related_club=notif.related_club
         )
         ClubJoining.objects.get_or_create(
             user=notif.related_user,
@@ -447,13 +463,21 @@ def club_operation(request, data, club_id):
         notif.checked = True
         notif.flag = False
         notif.save()
+        # send_notification.send(
+        #     sender=Club,
+        #     target=notif.related_user,
+        #     related_user=notif.target,
+        #     related_club=notif.related_club,
+        #     message_type="club_apply_denied",
+        #     message_body=""
+        # )
         send_notification.send(
-            sender=Club,
+            sender=ClubJoining,
             target=notif.related_user,
+            display_mode="with_cover",
+            extra_info="deny",
             related_user=notif.target,
-            related_club=notif.related_club,
-            message_type="club_apply_denied",
-            message_body=""
+            related_club=notif.related_club
         )
         return JsonResponse(dict(success=True))
     else:
