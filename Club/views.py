@@ -373,7 +373,8 @@ def club_apply(request, club_id):
         target=club.host,
         related_user=request.user,
         related_club=club,
-        message_type="club_apply",
+        sender_class_name=ClubJoining.__name__,
+        extra_info="apply",
         checked=False,
     ).exists():
         return JsonResponse(dict(success=False, message="already applied"))
@@ -407,7 +408,8 @@ def club_operation(request, data, club_id):
             notif = Notification.objects\
                 .select_related("related_club", "related_user", "target")\
                 .get(
-                    message_type="club_apply",
+                    extra_info="apply",
+                    sender_class_name=ClubJoining.__name__,
                     related_user_id=applier,
                     target=request.user,
                     related_club_id=club_id,
@@ -453,7 +455,8 @@ def club_operation(request, data, club_id):
             notif = Notification.objects \
                 .select_related("related_club", "related_user", "target") \
                 .get(
-                    message_type="club_apply",
+                    extra_info="apply",
+                    sender_class_name=ClubJoining.__name__,
                     related_user_id=applier,
                     target=request.user,
                     related_club_id=club_id,

@@ -201,7 +201,7 @@ def activity_create(request, data):
             send_notification.send(
                 sender=ActivityJoin,
                 target=user,
-                display_mode="with_cover",
+                display_mode="interact",
                 extra_info="invited",
                 related_act=act,
                 related_user=request.user
@@ -262,7 +262,7 @@ def activity_close(request, act_id):
 
 class ActivityOperation(LoginFirstOperationView):
 
-    operations = ["apply_deny", "invite", "invite_accepted", "invite_denied", "like", "act_remove_member"]
+    operations = ["apply_deny", "invite", "invite_agree", "invite_deny", "like", "act_remove_member"]
 
     # def apply_deny(self, request, data, act_id):
     #     # TODO: 去掉活动申请加入的审核,直接加进来就可以了
@@ -316,12 +316,15 @@ class ActivityOperation(LoginFirstOperationView):
             )
         return JsonResponse(dict(success=True))
 
-    def invite_accepted(self, request, data, act_id):
+    def invite_agree(self, request, data, act_id):
+        inviter_id = data.get('target_user')
         try:
             notif = Notification.objects.select_related("related_act").get(
-                message_type="act_invited",
+                extra_info="invited",
+                sender_class_name=ActivityJoin.__name__,
                 target=request.user,
                 related_act_id=act_id,
+                related_user_id=inviter_id,
                 checked=False
             )
         except ObjectDoesNotExist:
@@ -359,11 +362,12 @@ class ActivityOperation(LoginFirstOperationView):
 
         return JsonResponse(dict(success=True))
 
-    def invite_denied(self, request, data, act_id):
+    def invite_deny(self, request, data, act_id):
         applier = data.get('target_user')
         try:
             notif = Notification.objects.select_related("related_act", "related_user").get(
-                message_type="act_invited",
+                extra_info="invited",
+                sender_class_name=ActivityJoin.__name__,
                 target=request.user,
                 related_user_id=applier,
                 related_act_id=act_id,

@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from Club.models import Club
 from custom.utils import time_to_string, get_logger
 from .signal import send_notification
-from .tasks import send_notification_handler as task
+from .tasks import send_notification_handler
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
@@ -91,7 +91,7 @@ class Notification(models.Model):
 
     @property
     def message_type(self):
-        result = "{sender}:{display_mode}".format(sender=self.sender_class_name, display_mode=self.display_mode)
+        result = "{display_mode}:{sender}".format(sender=self.sender_class_name, display_mode=self.display_mode)
         if self.extra_info != "":
             result += ":%s" % self.extra_info
         return result
@@ -107,8 +107,9 @@ class Notification(models.Model):
 
 
 @receiver(send_notification)
-def send_notification_handler(sender, **kwargs):
-    task.delay(sender, **kwargs)
+def send_notification_message_handler(sender, **kwargs):
+    kwargs["signal"] = None
+    send_notification_handler.delay(sender, **kwargs)
     # message_type = kwargs["message_type"]
     # target = kwargs["target"]
     # message_body = kwargs.get("message_body", None)
