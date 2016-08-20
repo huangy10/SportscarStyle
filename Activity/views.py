@@ -262,30 +262,32 @@ def activity_close(request, act_id):
 
 class ActivityOperation(LoginFirstOperationView):
 
-    operations = ["apply_deny", "invite", "invite_agree", "invite_deny", "like", "act_remove_member"]
+    operations = ["kick_out", "invite", "invite_agree", "invite_deny", "like", "act_remove_member"]
 
-    # def apply_deny(self, request, data, act_id):
-    #     # TODO: 去掉活动申请加入的审核,直接加进来就可以了
-    #     raise NotImplemented
-    #     applier = data.get("target_user")
-    #     try:
-    #         join = ActivityJoin.objects.select_related("user", "activity").get(user_id=applier, activity_id=act_id)
-    #     except ObjectDoesNotExist:
-    #         return JsonResponse(dict(success=False, message="Application not found"))
-    #     join.approved = False
-    #     join.save()
-    #     send_notification.send(
-    #         sender=ActivityJoin,
-    #         target=join.user,
-    #         related_act=join.activity,
-    #         message_type="act_denied",
-    #         message_body=""
-    #     )
-    #     # send_notification.send(
-    #     #     sender=ActivityJoin,
-    #     #
-    #     # )
-    #     return JsonResponse(dict(success=True))
+    def kick_out(self, request, data, act_id):
+        # TODO: 去掉活动申请加入的审核,直接加进来就可以了
+        applier = data.get("target_user")
+        try:
+            join = ActivityJoin.objects.select_related("user", "activity").get(user_id=applier, activity_id=act_id)
+        except ObjectDoesNotExist:
+            return JsonResponse(dict(success=False, message="Application not found"))
+        # send_notification.send(
+        #     sender=ActivityJoin,
+        #     target=join.user,
+        #     related_act=join.activity,
+        #     message_type="kickout",
+        #     message_body=""
+        # )
+        join.delete()
+        send_notification.send(
+            sender=ActivityJoin,
+            target=join.user,
+            display_mode="with_cover",
+            extra_info="kick_out",
+            related_act=join.activity,
+            related_user=request.user
+        )
+        return JsonResponse(dict(success=True))
 
     def invite(self, request, data, act_id):
         appliers = data.get('target_user')

@@ -139,6 +139,9 @@ class MyLogger(object):
     def warning(self, info):
         self.warning(self.build_content(info))
 
+    def warn(self, info):
+        self.warning(info)
+
     def error(self, info):
         self.error(self.build_content(info))
 
