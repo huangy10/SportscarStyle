@@ -109,7 +109,8 @@ class Club(models.Model):
     name = models.CharField(max_length=100, verbose_name=u"俱乐部名称")
     host = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u"发起者", related_name='club_started')
     logo = models.ImageField(upload_to=club_logo, verbose_name=u"俱乐部标识")
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"成员", through='ClubJoining')
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"成员", through='ClubJoining',
+                                     related_name="club_joined")
     description = models.TextField(verbose_name=u"俱乐部简介")
     identified = models.BooleanField(default=False, verbose_name="是否认证", db_index=True)
     identified_at = models.DateTimeField(default=timezone.now)

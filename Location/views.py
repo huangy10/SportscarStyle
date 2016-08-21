@@ -64,25 +64,38 @@ def radar_cars(request, data):
     except KeyError:
         # 向下兼容
         distance = float(data["filter_param"])
+
+    results = User.objects.select_related("location") \
+        .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
+                                       default=0, output_field=models.IntegerField())) \
+        .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user),
+                authed_cars_num__gte=0,
+                location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
+                location__location_available=True,
+                location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300))) \
+        .distinct()
+
+    def result_generator(user):
+        result = user.dict_description(detail=True)
+        result["loc"] = user.location.location.dict_description()
+        return result
+    print data
     if filter_type == "distance":
 
         # TODO: 添加其他的筛选条件
-
-        results = User.objects.select_related("location")\
-            .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
-                                           default=0, output_field=models.IntegerField()))\
-            .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user),
-                    authed_cars_num__gte=0,
-                    location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
-                    location__location_available=True,
-                    location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300)))\
-            .distinct()
-
-        def result_generator(user):
-            result = user.dict_description(detail=True)
-            result["loc"] = user.location.location.dict_description()
-            return result
-
+        return JsonResponse(dict(success=True, result=map(result_generator, results)))
+    elif filter_type == "follows":
+        results = results.filter(fans=request.user)
+        return JsonResponse(dict(success=True, result=map(result_generator, results)))
+    elif filter_type == "fans":
+        results = results.filter(follows=request.user)
+        return JsonResponse(dict(success=True, result=map(result_generator, results)))
+    elif filter_type == "friends":
+        results = results.filter(follows=request.user, fans=request.user)
+        return JsonResponse(dict(success=True, result=map(result_generator, results)))
+    elif filter_type == "club":
+        club_id = data["filter_param"]["club_id"]
+        results = results.filter(club_joined=club_id)
         return JsonResponse(dict(success=True, result=map(result_generator, results)))
     else:
         return JsonResponse(dict(success=False))
