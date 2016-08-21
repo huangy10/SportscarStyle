@@ -5,6 +5,7 @@ from django.views.decorators import http as http_decorators
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.db.models import Q
 
 from .models import Manufacturer, Sportscar, SportCarOwnership, SportCarIdentificationRequestRecord
 from Status.models import Status
@@ -12,24 +13,36 @@ from custom.utils import post_data_loader, login_first
 # Create your views here.
 
 
-@cache_page(60 * 60 * 24)           # Since the result of this view seldom changes, cache it for a entire day
 @http_decorators.require_GET
 def cars_type_list(request):
     """ Request for the information for the available sport cars.
     """
-    all_manufacturers = Manufacturer.objects.all()
-
-    def type_parser(manufacturer):
-        result = {'brand_name': manufacturer.name}
-        details = Sportscar.objects.filter(manufacturer=manufacturer).values('name', 'id')
-        result['detail_list'] = list(details)
-        return result
-
-    data = map(type_parser, all_manufacturers)
-    return JsonResponse(dict(
-        success=True,
-        cars=data,
-    ))
+    scope = request.GET["scope"]
+    if scope == "manufacturer":
+        filter_string = request.GET.get("filter", "")
+        if filter_string == "":
+            filter_q = Q()
+        else:
+            filter_q = Q(name__icontains=filter_string)
+        indexes = u"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        result = dict()
+        for index in indexes:
+            temp = Manufacturer.objects.filter(filter_q, index__iexact=index).values_list("name", flat=True)
+            if temp.count() > 0:
+                result[index] = list(temp)
+        return JsonResponse(dict(success=True, data=result))
+    if scope == "car_name":
+        manufacturer_name = request.GET["manufacturer"]
+        result = Sportscar.objects.filter(manufacturer__name=manufacturer_name).values_list("name", flat=True)
+        return JsonResponse(dict(success=True, data=list(result)))
+    if scope == "sub_name":
+        manufacturer_name = request.GET["manufacturer"]
+        name = request.GET["car_name"]
+        result = Sportscar.objects.filter(manufacturer__name=manufacturer_name, name=name).values_list(
+            "subname", flat=True
+        )
+        print result
+        return JsonResponse(dict(success=True, data=list(result)))
 
 
 @http_decorators.require_GET
@@ -198,9 +211,10 @@ def car_auth(request, data):
 def car_query_by_name(request):
     manufacturer = request.GET['manufacturer']
     car_name = request.GET['car_name']
+    sub_name = request.GET.get('sub_name', "")
 
     try:
-        car = Sportscar.objects.get(name=car_name, manufacturer__name=manufacturer)
+        car = Sportscar.objects.get(name=car_name, manufacturer__name=manufacturer, subname=sub_name)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False))
 
