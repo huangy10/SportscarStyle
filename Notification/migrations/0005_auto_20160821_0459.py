@@ -15,14 +15,10 @@ class Migration(migrations.Migration):
             model_name='notification',
             name='message_body',
         ),
-        migrations.RemoveField(
-            model_name='notification',
-            name='message_type',
-        ),
         migrations.AddField(
             model_name='notification',
             name='display_mode',
-            field=models.CharField(default='minimal', max_length=20, choices=[(b'minimal', b'minimal'), (b'with_cover', b'with_cover'), (b'interact', b'interact')]),
+            field=models.CharField(default='', max_length=20, choices=[(b'minimal', b'minimal'), (b'with_cover', b'with_cover'), (b'interact', b'interact')]),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -30,6 +26,11 @@ class Migration(migrations.Migration):
             name='extra_info',
             field=models.CharField(default='', max_length=20),
             preserve_default=False,
+        ),
+        migrations.RenameField(
+            model_name="notification",
+            old_name="message_type",
+            new_name="message_type_backup"
         ),
         migrations.AddField(
             model_name='notification',

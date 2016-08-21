@@ -25,6 +25,7 @@ class Notification(models.Model):
     ))
     extra_info = models.CharField(max_length=20)
     sender_class_name = models.CharField(max_length=50)
+    message_type_backup = models.CharField(max_length=100, default="")
     related_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="+", null=True)
     related_act = models.ForeignKey("Activity.Activity", related_name="+", null=True)
     related_act_invite = models.ForeignKey("Activity.ActivityInvitation", related_name="+", null=True)
