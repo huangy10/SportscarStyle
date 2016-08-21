@@ -51,7 +51,7 @@ class News(models.Model):
             created_at=time_to_string(self.created_at),
             content=self.content,
             title=self.title,
-            is_video=self.is_video,
+            # is_video=self.is_video,
         )
         return result
 
