@@ -1,6 +1,7 @@
 # coding=utf-8
 import json
 
+from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_POST, require_GET
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -24,6 +25,14 @@ from custom.views import LoginFirstOperationView
 
 logger = get_logger(__name__)
 CLUB_MEMBERS_DISPLAY_NUM = 12   # 3行,每行4个
+
+
+@cache_page(60 * 60 * 24)
+def club_popular_cities(request):
+    result = Club.objects.values("city").annotate(city_num=Count("city"))\
+        .order_by("-city_num")\
+        .values_list("city", flat=True)[0:9]
+    return JsonResponse(dict(success=True, data=list(result)))
 
 
 @require_POST
@@ -155,9 +164,7 @@ def club_discover(request):
             ))
     city_limit = request.GET.get("city_limit", u"全国")
     if city_limit != u'全国':
-        print city_limit
         result = result.filter(city__startswith=city_limit)
-        print result
 
     if query_type == "nearby":
         city = user.district.split(u'市')[0]

@@ -104,5 +104,3 @@ def update_billboard():
 @app.task()
 def club_value_change(club):
     club.recalculate_value(commit=True)
-
-

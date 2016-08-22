@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 
 
 urlpatterns = patterns('Club.views',
+                       url(r'^cities$', 'club_popular_cities', name="cities"),
                        url(r'^create$', 'club_create', name="create"),
                        url(r'^list$', 'club_list', name='list'),
                        url(r'^discover$', 'club_discover', name='discover'),

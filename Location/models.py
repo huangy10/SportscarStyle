@@ -11,6 +11,7 @@ from django.contrib.gis.geos import Point
 class Location(models.Model):
     location = models.PointField(verbose_name=u'当前位置')
     description = models.CharField(max_length=255, verbose_name=u'地理信息描述')
+    city = models.CharField(max_length=255, verbose_name=u'城市', default=u"")
 
     objects = models.GeoManager()
 
@@ -28,7 +29,7 @@ class Location(models.Model):
 
     def dict_description(self):
         return dict(
-            lon=self.longitude, lat=self.latitude, description=self.description
+            lon=self.longitude, lat=self.latitude, description=self.description, city=self.city
         )
 
 

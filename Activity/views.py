@@ -34,6 +34,13 @@ def activity_discover(request):
     # 获取用户的坐标
     lat = float(request.GET.get("lat"))
     lon = float(request.GET.get("lon"))
+    city_limit = request.GET.get("city_limit", u"全国")
+    print city_limit
+    if city_limit != u"全国":
+        city_filter_q = Q(location__city__startswith=city_limit)
+    else:
+        city_filter_q = None
+
     user_position = Point(lon, lat)
     # 检索的距离,单位为km
     query_distance = float(request.GET.get("query_distance", 10.0))
@@ -41,10 +48,18 @@ def activity_discover(request):
     limit = int(request.GET.get("limit"))
     skip = int(request.GET.get("skip"))
     #
-    acts = Activity.objects\
-        .filter(location__location__distance_lte=(user_position, D(km=query_distance)),
-                closed=False, end_at__gt=timezone.now(), allowed_club=None)\
-        .distinct()[skip: skip + limit]
+
+    if city_filter_q is None:
+        acts = Activity.objects\
+            .filter(location__location__distance_lte=(user_position, D(km=query_distance)),
+                    closed=False, end_at__gt=timezone.now(), allowed_club=None)\
+            .distinct()[skip: (skip + limit)]
+        print acts
+    else:
+        acts = Activity.objects.filter(city_filter_q, closed=False, end_at__gt=timezone.now(), allowed_club=None)\
+            .distinct()[skip: (skip + limit)]
+        print city_limit
+        print acts
 
     return JsonResponse(dict(success=True,
                              acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), acts)))
@@ -154,6 +169,7 @@ def activity_create(request, data):
        |- lat
        |- lon
        |- description
+       |- city
     """
     if not SportCarOwnership.objects.filter(user=request.user, identified=True).exists():
         return JsonResponse(dict(success=False, message="no permission"))
@@ -173,7 +189,9 @@ def activity_create(request, data):
     loc = Location.objects.create(
         location=Point(location['lon'], location['lat']),
         description=location['description'],
+        city=location.get("city") or ""
     )
+    print location
     act = Activity.objects.create(
         name=data['name'],
         description=data['description'],
