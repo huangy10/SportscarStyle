@@ -79,10 +79,8 @@ def radar_cars(request, data):
         result = user.dict_description(detail=True)
         result["loc"] = user.location.location.dict_description()
         return result
-    print data
-    if filter_type == "distance":
 
-        # TODO: 添加其他的筛选条件
+    if filter_type == "distance":
         return JsonResponse(dict(success=True, result=map(result_generator, results)))
     elif filter_type == "follows":
         results = results.filter(fans=request.user)

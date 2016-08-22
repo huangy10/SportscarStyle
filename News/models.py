@@ -37,7 +37,7 @@ class News(models.Model):
     cover = models.ImageField(upload_to=cover_path, verbose_name=u'封面', null=True)
     title = models.CharField(max_length=255, verbose_name=u'标题')
     content = models.TextField(verbose_name=u'正文')
-    # is_video = models.BooleanField(verbose_name=u'内容是否是视频', default=False)
+    is_video = models.BooleanField(verbose_name=u'内容是否是视频', default=False)
 
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_news', verbose_name=u'点赞',
                                       through='NewsLikeThrough')
@@ -51,7 +51,7 @@ class News(models.Model):
             created_at=time_to_string(self.created_at),
             content=self.content,
             title=self.title,
-            # is_video=self.is_video,
+            is_video=self.is_video,
         )
         return result
 

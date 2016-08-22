@@ -244,7 +244,7 @@ def activity_edit(request, act_id):
         act.inform_of.add(*users)
 
     act.save()
-    return JsonResponse(dict(success=True))
+    return JsonResponse(dict(success=True, data=act.dict_description_with_aggregation(with_user_info=True)))
 
 
 def activity_close(request, act_id):

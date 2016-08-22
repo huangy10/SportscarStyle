@@ -153,6 +153,11 @@ def club_discover(request):
             attended_count=Sum(
                 Case(When(members=request.user, then=Value(1)), default=Value(0), output_field=IntegerField())
             ))
+    city_limit = request.GET.get("city_limit", u"全国")
+    if city_limit != u'全国':
+        print city_limit
+        result = result.filter(city__startswith=city_limit)
+        print result
 
     if query_type == "nearby":
         city = user.district.split(u'市')[0]
