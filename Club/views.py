@@ -137,6 +137,7 @@ def update_club_settings(request, data, club_id):
     new_logo = request.FILES.get("logo", None)
     if new_logo is not None and club.host == request.user:
         club.logo = new_logo
+    print data
     club_join.update_settings(settings=data, update_club=(club_join.club.host == request.user))
     if new_logo is not None:
         new_logo_url = club.logo.url
@@ -299,14 +300,21 @@ def club_member_change(request, data, club_id):
             filter_elements = filter_str.split(" ")
             filter_q = Q()
             for filter_element in filter_elements:
-                filter_q = filter_q | Q(nick_name__icontains=filter_element)
+                filter_q = filter_q | Q(user__nick_name__icontains=filter_element)
         else:
             filter_q = Q()
 
         # joins = ClubJoining.objects.filter(filter_q, club=club)[skip: (skip + limit)]
         # payload = map(lambda x: x.dict_description(), joins)
-        members = club.members.filter(filter_q)[skip: (skip + limit)]
-        payload = map(lambda x: x.dict_description(), members)
+        # members = club.members.filter(filter_q)[skip: (skip + limit)]
+        # payload = map(lambda x: x.dict_description(), members)
+        members = ClubJoining.objects.select_related("user").filter(filter_q, club=club)[skip: (skip + limit)]
+
+        def member_data_builder(u):
+            temp = u.user.dict_discription()
+            temp.update(club_name=temp.nick_name)
+
+        payload = map(member_data_builder, members)
         return JsonResponse(dict(success=True, members=payload))
 
     if request.method == "GET":
