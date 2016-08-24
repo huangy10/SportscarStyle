@@ -167,7 +167,7 @@ class ChatEntity(models.Model):
         )
         if self.user is not None:
             user_json = self.user.dict_description()
-            user_json.update(nick_name=ChatRemarkNameStorage.get_nick_name(self.host, self.user))
+            user_json.update(note_name=ChatRemarkNameStorage.get_nick_name(self.host, self.user))
             result.update(
                 user=user_json,
                 entity_type="user"
@@ -250,7 +250,7 @@ class Chat(models.Model):
         if isinstance(host, ChatEntity):
             host = host.user
         data = self.sender.dict_description()
-        data.update(nick_name=ChatRemarkNameStorage.get_nick_name(host, self.sender))
+        data.update(note_name=ChatRemarkNameStorage.get_nick_name(host, self.sender))
         result = dict(
             chatID=self.id,
             sender=data,
@@ -274,7 +274,7 @@ class Chat(models.Model):
             )
         if self.target_user is not None:
             data = self.target_user.dict_description()
-            data.update(nick_name=ChatRemarkNameStorage.get_nick_name(host, self.target_user))
+            data.update(note_name=ChatRemarkNameStorage.get_nick_name(host, self.target_user))
             result.update(
                 target_user=data
             )

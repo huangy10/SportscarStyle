@@ -153,8 +153,16 @@ class Club(models.Model):
         )
         if show_members:
             from Club.views import CLUB_MEMBERS_DISPLAY_NUM
+            joins = ClubJoining.objects.filter(club=self)[0: CLUB_MEMBERS_DISPLAY_NUM]
+
+            members = []
+            for join in joins:
+                temp = join.user.dict_description()
+                temp.update(club_name=join.nick_name)
+                members.append(temp)
+
             result.update(
-                members=map(lambda x: x.dict_description(), self.members.all()[0: CLUB_MEMBERS_DISPLAY_NUM])
+                members=members
             )
         if show_setting:
             result.update(dict(
