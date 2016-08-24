@@ -54,12 +54,9 @@ def activity_discover(request):
             .filter(location__location__distance_lte=(user_position, D(km=query_distance)),
                     closed=False, end_at__gt=timezone.now(), allowed_club=None)\
             .distinct()[skip: (skip + limit)]
-        print acts
     else:
         acts = Activity.objects.filter(city_filter_q, closed=False, end_at__gt=timezone.now(), allowed_club=None)\
             .distinct()[skip: (skip + limit)]
-        print city_limit
-        print acts
 
     return JsonResponse(dict(success=True,
                              acts=map(lambda x: x.dict_description_with_aggregation(with_user_info=True), acts)))

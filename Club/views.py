@@ -27,9 +27,9 @@ logger = get_logger(__name__)
 CLUB_MEMBERS_DISPLAY_NUM = 12   # 3行,每行4个
 
 
-@cache_page(60 * 60 * 24)
+# @cache_page(60 * 60 * 24)
 def club_popular_cities(request):
-    result = Club.objects.values("city").annotate(city_num=Count("city"))\
+    result = Club.objects.filter(~Q(city="")).values("city").annotate(city_num=Count("city"))\
         .order_by("-city_num")\
         .values_list("city", flat=True)[0:9]
     return JsonResponse(dict(success=True, data=list(result)))
