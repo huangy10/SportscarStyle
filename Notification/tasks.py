@@ -46,7 +46,6 @@ def push_notification(user, tokens, badge_incr, message_body, type="", data=None
     except Exception, e:
         logger.warn(u"Fail to push notification to {0}, error info: {1}".format(user, e))
     else:
-        print "c"
         for token, reason in res.failed.items():
             code, errmsg = reason
             logger.warn(u"Device failed: {0}, reason: {1}".format(token, errmsg))

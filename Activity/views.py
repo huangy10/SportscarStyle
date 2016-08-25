@@ -35,7 +35,6 @@ def activity_discover(request):
     lat = float(request.GET.get("lat"))
     lon = float(request.GET.get("lon"))
     city_limit = request.GET.get("city_limit", u"全国")
-    print city_limit
     if city_limit != u"全国":
         city_filter_q = Q(location__city__startswith=city_limit)
     else:

@@ -190,7 +190,7 @@ LOGGING = {
 CELERYBEAT_SCHEDULE = {
     'test': {
         'task': 'Club.tasks.update_billboard',
-        'schedule': timedelta(seconds=10),
+        'schedule': timedelta(days=1),
     }
 }
 
