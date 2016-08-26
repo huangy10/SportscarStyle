@@ -57,7 +57,7 @@ class CarMediaItemAdmin(admin.TabularInline):
 
 @register(Sportscar)
 class SportscarAdmin(admin.ModelAdmin):
-    exclude = ("remote_id", 'price_number', 'remote_image', 'remote_thumbnail', 'data_fetched')
+    exclude = ("remote_id", 'price_number', 'remote_image', 'remote_thumbnail', 'data_fetched', "image", "thumbnail")
     list_display = ('name', 'price', 'fuel_consumption', 'engine', 'transmission', 'max_speed', 'torque')
     search_fields = ("name", )
 
