@@ -287,12 +287,21 @@ class CarMediaItem(models.Model):
 
     car = models.ForeignKey(Sportscar, verbose_name=u'相关跑车', related_name="medias")
     item = models.FileField(upload_to=car_image, verbose_name=u'关联文件', null=True, blank=True)
+    link = models.CharField(max_length=255, verbose_name=u"链接", default="", blank=True,
+                            help_text=u"此项不为空时,将覆盖关联文件的内容")
     item_type = models.CharField(max_length=10, choices=(
         ('image', u'图片'), ("video", u'视频'), ('audio', u'音频')
     ))
-    link = models.CharField(max_length=255, verbose_name=u"链接", default="")
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'添加时间')
+
+    @property
+    def item_link(self):
+        link = self.link
+        if link is not None and link != "":
+            return link
+        else:
+            return self.item.url
 
     def __str__(self):
         return smart_str(u'{car}的{item}'.format(
