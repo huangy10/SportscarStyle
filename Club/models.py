@@ -112,8 +112,8 @@ class Club(models.Model):
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"成员", through='ClubJoining',
                                      related_name="club_joined")
     description = models.TextField(verbose_name=u"俱乐部简介")
-    identified = models.BooleanField(default=False, verbose_name="是否认证", db_index=True)
-    identified_at = models.DateTimeField(default=timezone.now)
+    identified = models.BooleanField(default=False, verbose_name=u"是否认证", db_index=True)
+    identified_at = models.DateTimeField(default=timezone.now, verbose_name=u'认证日期')
     city = models.CharField(max_length=30, verbose_name=u"俱乐部所在的城市", db_index=True)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u"创建日期")
