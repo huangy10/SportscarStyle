@@ -138,7 +138,7 @@ class Sportscar(models.Model):
         medias = self.medias.all()
         media_data = dict(audio=[], image=[], video=[])
         for item in medias:
-            media_data[item.item_type].append(item.item.url)
+            media_data[item.item_type].append(item.item_link)
         result.update(medias=media_data)
         return result
 
@@ -312,3 +312,4 @@ class CarMediaItem(models.Model):
     def migrate_from_old_version(cls):
         for car in Sportscar.objects.all():
             CarMediaItem.objects.create(car=car, item_type="image", item=car.image.name)
+

@@ -1,4 +1,6 @@
 # coding=utf-8
+from bs4 import BeautifulSoup
+
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
@@ -21,6 +23,7 @@ class SportscarInlineAdmin(admin.StackedInline):
 
 
 class CarMediaItemFormset(BaseInlineFormSet):
+
     def clean(self):
         super(CarMediaItemFormset, self).clean()
         image_num = 0
@@ -45,6 +48,20 @@ class CarMediaItemFormset(BaseInlineFormSet):
             raise ValidationError(message=u"最多只允许%s个视频" % MAX_VIDEO_PER_CAR)
         if audio_num > MAX_AUDIO_PER_CAR:
             raise ValidationError(message=u'最多只允许%s个音频' % MAX_AUDIO_PER_CAR)
+
+    def save(self, commit=True):
+        items = super(CarMediaItemFormset, self).save(commit=False)
+        for item in items:
+            if item.item_type == "video":
+                link = item.link
+                try:
+                    src = BeautifulSoup(link).find("iframe")["src"]
+                    item.link = src
+                except TypeError:
+                    pass
+            if commit:
+                item.save()
+        return items
 
 
 class CarMediaItemAdmin(admin.TabularInline):
