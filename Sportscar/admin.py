@@ -50,7 +50,7 @@ class CarMediaItemFormset(BaseInlineFormSet):
             raise ValidationError(message=u'最多只允许%s个音频' % MAX_AUDIO_PER_CAR)
 
     def save(self, commit=True):
-        items = super(CarMediaItemFormset, self).save(commit=False)
+        items = super(CarMediaItemFormset, self).save(commit=commit)
         for item in items:
             if item.item_type == "video":
                 link = item.link
