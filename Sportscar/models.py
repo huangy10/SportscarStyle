@@ -293,6 +293,7 @@ class CarMediaItem(models.Model):
         ('image', u'图片'), ("video", u'视频'), ('audio', u'音频')
     ))
 
+    order = models.IntegerField(default=0, verbose_name=u'排序权重', help_text=u'从小到大排列')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'添加时间')
 
     @property
@@ -312,4 +313,7 @@ class CarMediaItem(models.Model):
     def migrate_from_old_version(cls):
         for car in Sportscar.objects.all():
             CarMediaItem.objects.create(car=car, item_type="image", item=car.image.name)
+
+    class Meta:
+        ordering = ('order', 'created_at')
 
