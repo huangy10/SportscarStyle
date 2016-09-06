@@ -131,19 +131,19 @@ class MyLogger(object):
         return u"{prefix}:{info}".format(prefix=self.prefix, info=info)
 
     def debug(self, info):
-        self.debug(self.build_content(info))
+        self.logger.debug(self.build_content(info))
 
     def info(self, info):
-        self.info(self.build_content(info))
+        self.logger.info(self.build_content(info))
 
     def warning(self, info):
-        self.warning(self.build_content(info))
+        self.logger.warning(self.build_content(info))
 
     def warn(self, info):
-        self.warning(info)
+        self.logger.warning(info)
 
     def error(self, info):
-        self.error(self.build_content(info))
+        self.logger.error(self.build_content(info))
 
 
 def get_logger(name):
