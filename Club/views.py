@@ -311,7 +311,7 @@ def club_member_change(request, data, club_id):
         members = ClubJoining.objects.select_related("user").filter(filter_q, club=club)[skip: (skip + limit)]
 
         def member_data_builder(u):
-            temp = u.user.dict_discription()
+            temp = u.user.dict_description()
             temp.update(club_name=temp.nick_name)
 
         payload = map(member_data_builder, members)
