@@ -49,7 +49,7 @@ def push_notification(user, tokens, badge_incr, message_body, type="", data=None
         for token, reason in res.failed.items():
             code, errmsg = reason
             logger.warn(u"Device failed: {0}, reason: {1}".format(token, errmsg))
-w
+
         for code, errmsg in res.errors:
             logger.warn("Error: {}".format(errmsg))
 
