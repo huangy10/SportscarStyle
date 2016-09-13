@@ -21,16 +21,11 @@ logger = get_logger(__name__)
 def push_notification(user, tokens, badge_incr, message_body, type="", data=None, callback=None):
     """ push notification to the user
     """
-    setting = user.setting_center
-    if not setting.notification_accept:
-        return
     if type not in ["chat", "notif"]:
         logger.warn("Invalid notification type")
         return
     if tokens is None or len(tokens) == 0:
         return
-    else:
-        tokens = map(lambda x: x.decode('hex'), tokens)
     if type == "chat":
         if badge_incr > 0:
             badge = UnreadUtil.incr(user.id)
@@ -41,6 +36,7 @@ def push_notification(user, tokens, badge_incr, message_body, type="", data=None
             badge = UnreadUtil.incr(user.id)
         else:
             badge = UnreadUtil.get(user.id)
+
     message = Message(tokens, alert=message_body, badge=badge, sound="default")
     con = session.get_connection(
         "push_sandbox", cert_file=os.path.abspath(os.path.join(__file__, os.pardir, "data", "sportcar.pem")))
@@ -98,7 +94,6 @@ def send_notification_handler(sender, target, display_mode, extra_info="", **kwa
 
     try:
         notif, _ = Notification.objects.get_or_create(**create_params)
-        logger.debug(u"notification created with id: %s" % notif.id)
     except Exception, e:
         logger.error(u'-------->Fail to create Notification')
         logger.error(u'the error info is %s' % e)

@@ -46,8 +46,3 @@ def inform_of_related_waiters(message, global_message_dispatch):
                 join.unread_chats += 1
                 join.save()
                 # TODO: 当目标用户不是waiter时,需要发送notification
-                tokens = RegisteredDevices.objects.filter(user=message.target_user, is_active=True)\
-                    .values_list("token", flat=True)
-                push_notification.delay(
-                    user, tokens, 1, message_body=message.message_body_des(), type="chat"
-                )
