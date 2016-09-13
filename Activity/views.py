@@ -434,14 +434,15 @@ class ActivityOperation(LoginFirstOperationView):
             act.like_num += 1
             act.liked_by.add(request.user)
             act.save()
-            send_notification.send(
-                sender=Activity,
-                target=act.user,
-                display_mode="minimal",
-                extra_info="like",
-                related_act=act,
-                related_user=request.user
-            )
+            if act.user != request.user:
+                send_notification.send(
+                    sender=Activity,
+                    target=act.user,
+                    display_mode="minimal",
+                    extra_info="like",
+                    related_act=act,
+                    related_user=request.user
+                )
             return JsonResponse(dict(success=True, data=dict(liked=True, like_num=act.liked_by.count())))
 
     def act_remove_member(self, request, data, act_id):
