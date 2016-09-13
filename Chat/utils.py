@@ -34,7 +34,7 @@ class ChatRemarkNameStorage(object):
         if name is None:
             return user.nick_name
         else:
-            return name
+            return name.decode("utf8")
 
 
 class UnreadMessageNumStorage(object):
