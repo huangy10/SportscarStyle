@@ -266,7 +266,7 @@ class MessageDispatch(object):
                         else:
                             entity_response["unread_num"] += badge
                         response = chat.dict_description(host=user)
-                        response.update(roster=entity.dict_description())
+                        response.update(roster=entity_response)
                         waiter.take_response(response)
                     elif waiter is not None:
                         response = chat.dict_description(host=user)
