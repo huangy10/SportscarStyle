@@ -240,9 +240,10 @@ class MessageDispatch(object):
             elif entity.unread_num > 0:
                 entity.unread_num = 0
                 entity.save()
-            push_notification.delay(
-                target_user, tokens, badge, message_body=chat.message_body_des, type='chat'
-            )
+            if not entity.no_disturbing:
+                push_notification.delay(
+                    target_user, tokens, badge, message_body=chat.message_body_des, type='chat'
+                )
         else:
             target_club = chat.target_club
             target_joins = ClubJoining.objects.filter(club=target_club)
@@ -301,9 +302,10 @@ class MessageDispatch(object):
             elif waiter is not None:
                 Waiter.cache_chat(notification.dict_description(), user)
             tokens.append(device.token)
-        push_notification.delay(
-            user, tokens, badge, notification.apns_des(), 'notif'
-        )
+        if user.setting_center.notification_accept:
+            push_notification.delay(
+                user, tokens, badge, notification.apns_des(), 'notif'
+            )
         if callback is not None:
             callback()
 

@@ -72,7 +72,7 @@ def radar_cars(request, data):
                 authed_cars_num__gte=0,
                 location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
                 location__location_available=True,
-                location__updated_at__gt=(timezone.now() - datetime.timedelta(seconds=300))) \
+                location__updated_at__gt=(timezone.now() - datetime.timedelta(days=3))) \
         .distinct()
 
     def result_generator(user):
