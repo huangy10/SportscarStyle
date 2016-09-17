@@ -52,7 +52,7 @@ def news_list(request, date_threshold, op_type, limit):
             .filter(user__fans=request.user, user__follows=request.user, news=news)\
             .order_by("-like_at").first()
         if most_recent_like_record is not None:
-            result["recent_like_user_id"] = most_recent_like_record.user_id
+            result["recent_like_user_id"] = most_recent_like_record.user.nick_name
         return result
 
     data = map(format_fix, list(data))
@@ -117,7 +117,7 @@ def news_comments_list(request, date_threshold, op_type, limit, news_id):
         if comment.image:
             result["image"] = comment.image.url
         if comment.response_to is not None:
-            result["response_to"] = comment.response_to.dict_decription()
+            result["response_to"] = comment.response_to.dict_description()
         return result
 
     comments = map(format_fix, comments)
