@@ -139,7 +139,7 @@ def activity_apply(request, act_id):
         send_notification.send(
             sender=ActivityJoin,
             target=act.user,
-            display_mode="interact",
+            display_mode="with_cover",
             extra_info="apply",
             related_user=request.user,
             related_act=act
@@ -242,16 +242,23 @@ def activity_edit(request, act_id):
     act.max_attend = data["max_attend"]
     act.start_at = datetime.datetime.strptime(data['start_at'], '%Y-%m-%d %H:%M:%S.%f %Z')
     act.end_at = datetime.datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M:%S.%f %Z')
+    if act.end_at < act.start_at :
+        return JsonResponse(dict(success=False, message="date error"))
     act.poster = request.FILES['poster']
     act.authed_user_only = data["authed_user_only"]
     location = json.loads(data['location'])
-    loc, _ = Location.objects.get_or_create(
+    loc = Location.objects.filter(
         location=Point(location['lon'], location['lat']),
         description=location['description'],
-    )
+    ).first()
+    if loc is None:
+        loc = Location.objects.create(
+            location=Point(location['lon'], location['lat']),
+            description=location['description'],
+        )
     act.location = loc
     if 'inform_of' in data:
-        inform_of = json.loads(data["inform"])
+        inform_of = json.loads(data["inform_of"])
         users = User.objects.filter(id__in=inform_of)
         if not users.count() == len(inform_of):
             return JsonResponse(dict(success=False, message="Invalid data"))

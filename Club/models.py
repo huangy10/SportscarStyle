@@ -202,6 +202,8 @@ class Club(models.Model):
         self.save()
 
     def recalculate_value(self, commit=True):
+        if ClubJoining.objects.filter(club=self).count() == 0:
+            return
         self.value_total = ClubJoining.objects.filter(club=self)\
             .aggregate(total=models.Sum("user__value"))["total"] or 0
         self.value_average = self.value_total / ClubJoining.objects.filter(club=self).count()

@@ -121,7 +121,6 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
             own.identified = obj.approved
             own.identified_at = timezone.now()
             own.save()
-            print "AUTH"
         super(SportCarIdentificationRequestRecordAdmin, self)\
             .save_model(request, obj, form, change)
 
