@@ -65,10 +65,20 @@ def radar_cars(request, data):
         # 向下兼容
         distance = float(data["filter_param"])
 
+    # check target settings about location visibility
+    visibility_filter = Q(setting_center__location_visible_to="all")
+    if request.user.gender == "m":
+        visibility_filter |= Q(setting_center__location_visible_to="male_only")
+    else:
+        visibility_filter |= Q(setting_center__location_visible_to="female_only")
+    visibility_filter |= Q(setting_center__location_visible_to="only_idol", fans=request.user)
+    visibility_filter |= Q(setting_center__location_visible_to="only_fried", fans=request.user, follows=request.user)
+
     results = User.objects.select_related("location") \
         .annotate(authed_cars_num=Case(When(ownership__identified=True, then=1),
                                        default=0, output_field=models.IntegerField())) \
-        .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user),
+        .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user)\
+                & ~Q(setting_center__location_visible_to="none") & visibility_filter,
                 authed_cars_num__gte=0,
                 location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
                 location__location_available=True,

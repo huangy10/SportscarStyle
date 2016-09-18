@@ -83,12 +83,12 @@ def send_notification_handler(sender, target, display_mode, extra_info="", **kwa
         related_act=kwargs.get("related_act", None),
         related_act_invite=kwargs.get("related_act_invite", None),
         related_act_join=kwargs.get("related_act_join", None),
-        related_act_comment=kwargs.get("related_act_join", None),
+        related_act_comment=kwargs.get("related_act_comment", None),
         related_club=kwargs.get("related_club", None),
         related_status=kwargs.get("related_status", None),
         related_status_comment=kwargs.get("related_status_comment", None),
         related_news=kwargs.get("related_news", None),
-        related_news_comment=kwargs.get("related_news_commnet", None),
+        related_news_comment=kwargs.get("related_news_comment", None),
         related_own=kwargs.get("related_own", None)
     )
 

@@ -652,6 +652,37 @@ def post_activity_comment(request, data, act_id):
     if 'inform_of' in data:
         inform_users = get_user_model().objects.filter(id__in=data['json_data'])
         comment.inform_of.add(*inform_users)
+        for at in inform_users:
+            send_notification.send(
+                sender=ActivityComment,
+                target=at,
+                display_mode="with_cover",
+                extra_info="at",
+                related_user=request.user,
+                related_act=activity,
+                related_act_comment=comment
+            )
+
+    if response_to is not None:
+        send_notification.send(
+            sender=ActivityComment,
+            target=response_to.user,
+            display_mode="with_cover",
+            extra_info="response",
+            related_user=request.user,
+            related_act=activity,
+            related_act_comment=comment
+        )
+    if request.user != activity.user:
+        send_notification.send(
+            sender=ActivityComment,
+            target=activity.user,
+            display_mode="with_cover",
+            extra_info="response",
+            related_user=request.user,
+            related_act=activity,
+            related_act_comment=comment
+        )
 
     return JsonResponse(
         dict(success=True,
