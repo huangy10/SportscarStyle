@@ -18,7 +18,7 @@ class SettingCenter(models.Model):
 
     blacklist = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
-    location_visible_to = models.CharField(max_length=10, choices=(
+    location_visible_to = models.CharField(max_length=20, choices=(
         ('all', '所有人'),
         ('female_only', '仅女性'),
         ('male_only', '仅男性'),
