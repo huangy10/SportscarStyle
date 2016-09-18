@@ -88,6 +88,7 @@ def radar_cars(request, data):
     def result_generator(user):
         result = user.dict_description(detail=True)
         result["loc"] = user.location.location.dict_description()
+        result["only_on_list"] = not user.setting_center.show_on_map
         return result
 
     if filter_type == "distance":
