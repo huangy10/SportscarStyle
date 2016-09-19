@@ -55,6 +55,7 @@ def account_login(request, data):
         # auth.login(request, user)
         if token is not None:
             RegisteredDevices.objects.filter(user=user).update(is_active=False)
+            RegisteredDevices.objects.filter(token=token).update(is_active=False)
             device, _ = RegisteredDevices.objects.get_or_create(
                 user=user,
                 token=token,

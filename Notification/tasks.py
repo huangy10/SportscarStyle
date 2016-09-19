@@ -21,6 +21,10 @@ logger = get_logger(__name__)
 def push_notification(user, tokens, badge_incr, message_body, type="", data=None, callback=None):
     """ push notification to the user
     """
+    print user
+    if not user.setting_center.notification_accept:
+        print "user not accept notifications"
+        return
     if type not in ["chat", "notif"]:
         logger.warn("Invalid notification type")
         return
@@ -37,7 +41,11 @@ def push_notification(user, tokens, badge_incr, message_body, type="", data=None
         else:
             badge = UnreadUtil.get(user.id)
 
-    message = Message(tokens, alert=message_body, badge=badge, sound="default")
+    if user.setting_center.notification_sound:
+        message = Message(tokens, alert=message_body, badge=badge, sound="default")
+    else:
+        message = Message(tokens, alert=message_body, badge=badge)
+
     con = session.get_connection(
         "push_sandbox", cert_file=os.path.abspath(os.path.join(__file__, os.pardir, "data", "sportcar.pem")))
     srv = APNs(con)

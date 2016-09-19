@@ -133,12 +133,17 @@ def update_club_settings(request, data, club_id):
         club_join = ClubJoining.objects.select_related("club").get(club_id=club_id, user=request.user)
         club = club_join.club
     except ObjectDoesNotExist:
+        print data
+        print "aa"
+        print club_id
         return JsonResponse(dict(success=False, code="2002", message="club not found"))
     new_logo = request.FILES.get("logo", None)
     if new_logo is not None and club.host == request.user:
         club.logo = new_logo
     print data
+    print "b"
     club_join.update_settings(settings=data, update_club=(club_join.club.host == request.user))
+    print club_join.no_disturbing
     if new_logo is not None:
         new_logo_url = club.logo.url
         return JsonResponse(dict(success=True, logo=new_logo_url))
@@ -311,8 +316,9 @@ def club_member_change(request, data, club_id):
         members = ClubJoining.objects.select_related("user").filter(filter_q, club=club)[skip: (skip + limit)]
 
         def member_data_builder(u):
-            temp = u.user.dict_discription()
-            temp.update(club_name=temp.nick_name)
+            temp = u.user.dict_description()
+            temp.update(club_name=u.nick_name)
+            return temp
 
         payload = map(member_data_builder, members)
         return JsonResponse(dict(success=True, members=payload))

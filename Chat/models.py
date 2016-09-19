@@ -322,3 +322,15 @@ def auto_delete_chat_after_club_quit(sender, instance, **kwargs):
         pass
 
 
+@receiver(post_save, sender=ClubJoining)
+def auto_sync_chat_settings(sender, instance, created, **kwargs):
+    if created:
+        return
+    try:
+        entity = ChatEntity.objects.get(host=instance.user, club=instance.club)
+        entity.no_disturbing = instance.no_disturbing
+        entity.always_on_top = instance.always_on_top
+        entity.save()
+    except ObjectDoesNotExist:
+        pass
+

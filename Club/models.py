@@ -61,9 +61,9 @@ class ClubJoining(models.Model):
         """
         if update_club:
             self.club.update_settings(settings)
-        self.show_nick_name = settings.get("show_nick_name", self.show_nick_name)
-        self.no_disturbing = settings.get("no_disturbing", self.no_disturbing)
-        self.always_on_top = settings.get("always_on_top", self.always_on_top)
+        self.show_nick_name = settings.get("show_nick_name", self.show_nick_name) != u"0"
+        self.no_disturbing = settings.get("no_disturbing", self.no_disturbing) != u"0"
+        self.always_on_top = settings.get("always_on_top", self.always_on_top) != u"0"
         self.nick_name = settings.get("nick_name", self.nick_name)
         self.save()
 

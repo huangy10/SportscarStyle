@@ -31,7 +31,9 @@ class CarMediaItemFormset(BaseInlineFormSet):
         audio_num = 0
         for form in self.forms:
             if not form.is_valid():
-                return
+                continue
+            if form.cleaned_data["DELETE"]:
+                continue
             item_type = form.cleaned_data.get("item_type", None)
             if item_type == "image":
                 image_num += 1
@@ -50,7 +52,7 @@ class CarMediaItemFormset(BaseInlineFormSet):
             raise ValidationError(message=u'最多只允许%s个音频' % MAX_AUDIO_PER_CAR)
 
     def save(self, commit=True):
-        items = super(CarMediaItemFormset, self).save(commit=commit)
+        items = super(CarMediaItemFormset, self).save(commit=False)
         for item in items:
             if item.item_type == "video":
                 link = item.link

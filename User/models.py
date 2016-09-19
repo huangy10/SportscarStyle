@@ -191,7 +191,8 @@ class User(AbstractUser):
             identified=self.identified
         )
         if self.most_recent_status is not None:
-            result.update(recent_status_des=self.most_recent_status.content)
+            result.update(recent_status_des=self.most_recent_status.as_recent_des())
+            result.update(recent_status=self.most_recent_status.as_recent_des())
         if not detail:
             return result
         if self.avatar_car is not None:

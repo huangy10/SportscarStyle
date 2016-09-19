@@ -52,6 +52,12 @@ class Status(models.Model):
         verbose_name = u'状态'
         verbose_name_plural = u'状态'
 
+    def as_recent_des(self):
+        if self.content == "":
+            return u"[图片]"
+        else:
+            return self.content
+
     @property
     def images(self):
         """ 将所有非空的image的url整理成一个字符串,以分号分隔
