@@ -53,6 +53,7 @@ class CarMediaItemFormset(BaseInlineFormSet):
 
     def save(self, commit=True):
         items = super(CarMediaItemFormset, self).save(commit=False)
+        print self.deleted_objects
         for item in items:
             if item.item_type == "video":
                 link = item.link
@@ -62,7 +63,10 @@ class CarMediaItemFormset(BaseInlineFormSet):
                 except TypeError:
                     pass
             if commit:
-                item.save()
+                item.save
+        if commit:
+            for delete_obj in self.deleted_objects:
+                delete_obj.delete()
         return items
 
 
