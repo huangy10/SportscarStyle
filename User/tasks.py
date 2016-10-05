@@ -5,6 +5,10 @@ import os
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from SportscarStyle.celery import app
+from custom.utils import get_logger
+
+
+logger = get_logger(__name__)
 
 
 @app.task()
@@ -49,3 +53,4 @@ def user_value_change(user):
     if user.value != old_value:
         for club in Club.objects.filter(members=user, identified=True):
             club.recalculate_value(commit=True)
+    logger.info("user value change %s" % user.username)

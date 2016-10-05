@@ -261,7 +261,6 @@ class SportCarIdentificationRequestRecord(models.Model):
 
 @receiver(pre_save, sender=SportCarOwnership)
 def auto_update_user_value(sender, instance, raw, **kwargs):
-    print raw
     try:
         old_obj = SportCarOwnership.objects.get(pk=instance.pk)
     except ObjectDoesNotExist:
@@ -276,6 +275,20 @@ def auto_update_user_value_after_delete(sender, instance, **kwargs):
     if instance.identified:
         user = instance.user
         user_value_change.delay(user)
+
+
+@receiver(pre_save, sender=Sportscar)
+def auto_update_user_value_after_car_change(sender, instance, raw, **kwargs):
+    from User.models import User
+    try:
+        old_car = Sportscar.objects.get(pk=instance.pk)
+    except ObjectDoesNotExist:
+        return
+    if old_car.price_number != instance.price_number:
+        # get related users and recalculate their value
+        users = User.objects.filter(ownership__car=instance)
+        for user in users:
+            user_value_change.delay(user)
 
 
 MAX_IMAGE_PER_CAR = 5
