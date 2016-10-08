@@ -62,6 +62,7 @@ def activity_discover(request):
 
 
 @require_GET
+@login_first
 @page_separator_loader
 def activity_mine(request, date_threshold, op_type, limit):
     """ 自己发布的活动

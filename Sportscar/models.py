@@ -291,7 +291,7 @@ def auto_update_user_value_after_car_change(sender, instance, raw, **kwargs):
             user_value_change.delay(user)
 
 
-MAX_IMAGE_PER_CAR = 5
+MAX_IMAGE_PER_CAR = 50
 MAX_VIDEO_PER_CAR = 1
 MAX_AUDIO_PER_CAR = 1
 
