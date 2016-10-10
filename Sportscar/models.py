@@ -11,6 +11,7 @@ from django.utils.encoding import smart_str
 
 from custom.utils import time_to_string
 from User.tasks import user_value_change
+from custom.fields import BooleanField
 
 # Create your models here.
 
@@ -94,7 +95,7 @@ class Sportscar(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, verbose_name=u'制造商')
     owners = models.ManyToManyField(settings.AUTH_USER_MODEL, through='SportCarOwnership')
     # For the spider to check if the data of this car is fetched
-    data_fetched = models.BooleanField(default=False, verbose_name=u"")
+    data_fetched = BooleanField(default=False, verbose_name=u"")
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.price_number = self.get_price_value(self.price)
@@ -155,7 +156,7 @@ class SportCarOwnership(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='ownership')
     car = models.ForeignKey(Sportscar, related_name='ownership')
     signature = models.CharField(max_length=255, verbose_name=u'跑车签名')
-    identified = models.BooleanField(default=False, verbose_name=u'是否认证')
+    identified = BooleanField(default=False, verbose_name=u'是否认证')
     identified_at = models.DateTimeField(blank=True, verbose_name=u'认证日期', null=True)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'拥有日期')
@@ -187,8 +188,8 @@ class SportCarIdentificationRequestRecord(models.Model):
     """
     ownership = models.ForeignKey(SportCarOwnership, verbose_name=u'待认证跑车')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'申请时间')
-    approved = models.BooleanField(default=False, verbose_name=u'是否批准')
-    checked = models.BooleanField(default=False, verbose_name=u'是否已经处理')
+    approved = BooleanField(default=False, verbose_name=u'是否批准')
+    checked = BooleanField(default=False, verbose_name=u'是否已经处理')
     drive_license = models.ImageField(upload_to=car_auth_image, verbose_name=u"驾照")
     id_card = models.ImageField(upload_to=car_auth_image, verbose_name=u'身份证')
     photo = models.ImageField(upload_to=car_auth_image, verbose_name=u"合影")

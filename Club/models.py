@@ -8,7 +8,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.encoding import smart_str
 from django.utils import timezone
-
+from custom.fields import BooleanField
 # Create your models here.
 
 from Sportscar.models import SportCarOwnership, Sportscar
@@ -24,9 +24,9 @@ class ClubJoining(models.Model):
     join_date = models.DateTimeField(auto_now_add=True, verbose_name=u"加入日期")
 
     # Settings
-    show_nick_name = models.BooleanField(default=True, verbose_name=u"显示本群成员昵称")
-    no_disturbing = models.BooleanField(default=False, verbose_name=u"消息免打扰")
-    always_on_top = models.BooleanField(default=False, verbose_name=u"置顶聊天")
+    show_nick_name = BooleanField(default=True, verbose_name=u"显示本群成员昵称")
+    no_disturbing = BooleanField(default=False, verbose_name=u"消息免打扰")
+    always_on_top = BooleanField(default=False, verbose_name=u"置顶聊天")
     always_on_to_date = models.DateTimeField(null=True, blank=True, verbose_name=u"置顶的日期")  # 影响排序
 
     unread_chats = models.IntegerField(default=0, verbose_name=u"未读消息数量")
@@ -112,7 +112,7 @@ class Club(models.Model):
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"成员", through='ClubJoining',
                                      related_name="club_joined")
     description = models.TextField(verbose_name=u"俱乐部简介")
-    identified = models.BooleanField(default=False, verbose_name=u"是否认证", db_index=True)
+    identified = BooleanField(default=False, verbose_name=u"是否认证", db_index=True)
     identified_at = models.DateTimeField(default=timezone.now, verbose_name=u'认证日期')
     city = models.CharField(max_length=30, verbose_name=u"俱乐部所在的城市", db_index=True)
 
@@ -124,11 +124,11 @@ class Club(models.Model):
     objects = ClubManager()
 
     # some settings about club
-    only_host_can_invite = models.BooleanField(default=False, verbose_name=u"只有群主能够邀请")
-    show_members_to_public = models.BooleanField(default=False, verbose_name=u"对外公布成员信息")
+    only_host_can_invite = BooleanField(default=False, verbose_name=u"只有群主能够邀请")
+    show_members_to_public = BooleanField(default=False, verbose_name=u"对外公布成员信息")
 
     # status
-    deleted = models.BooleanField(default=False, verbose_name=u"俱乐部是否被删除")
+    deleted = BooleanField(default=False, verbose_name=u"俱乐部是否被删除")
 
     def __str__(self):
         return smart_str(self.name)
@@ -214,8 +214,8 @@ class Club(models.Model):
 class ClubAuthRequest(models.Model):
     """ 俱乐部认证
     """
-    approve = models.BooleanField(default=False, verbose_name=u'是否批准')
-    checked = models.BooleanField(default=False, verbose_name=u'是否已经处理')
+    approve = BooleanField(default=False, verbose_name=u'是否批准')
+    checked = BooleanField(default=False, verbose_name=u'是否已经处理')
     club = models.ForeignKey("Club.Club", verbose_name="待认证的俱乐部")
     city = models.CharField(max_length=100, verbose_name="俱乐部所处的城市", default="")
     description = models.CharField(max_length=100, verbose_name="俱乐部简介", default="")
@@ -232,7 +232,7 @@ class ClubBillboard(models.Model):
     version = models.IntegerField(verbose_name=u'第*期', db_index=True)
     order = models.IntegerField(verbose_name=u'排名', db_index=True)
     d_order = models.IntegerField(verbose_name=u'名次变化')
-    new_to_list = models.BooleanField(verbose_name=u'是否是新上榜')
+    new_to_list = BooleanField(verbose_name=u'是否是新上榜')
     scope = models.CharField(
         max_length=50, verbose_name=u'排序范围', help_text=u'通常是城市的名称', db_index=True
     )

@@ -188,7 +188,6 @@ def activity_create(request, data):
         description=location['description'],
         city=location.get("city") or ""
     )
-    print location
     act = Activity.objects.create(
         name=data['name'],
         description=data['description'],
@@ -199,7 +198,7 @@ def activity_create(request, data):
         allowed_club=None,
         poster=request.FILES['poster'],
         user=request.user,
-        authed_user_only=data["authed_user_only"]
+        authed_user_only=(data["authed_user_only"])
     )
     # ActivityJoin.objects.create(user=request.user, activity=act)
     if users is not None:

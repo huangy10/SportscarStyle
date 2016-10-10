@@ -9,6 +9,7 @@ from Club.models import Club
 from custom.utils import time_to_string, get_logger
 from .signal import send_notification
 from .tasks import send_notification_handler
+from custom.fields import BooleanField
 # from Chat.ChatServer.runner import _dispatcher as dispatcher
 # Create your models here.
 
@@ -40,9 +41,9 @@ class Notification(models.Model):
 
     # message_body = models.CharField(max_length=255, verbose_name="消息内容(Optional)")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
-    read = models.BooleanField(default=False, verbose_name="是否已读")
-    flag = models.BooleanField(default=False, verbose_name="保留字段")      # 额外供特殊消息类型使用的字段
-    checked = models.BooleanField(default=False, verbose_name="是否已经操作")
+    read = BooleanField(default=False, verbose_name="是否已读")
+    flag = BooleanField(default=False, verbose_name="保留字段")      # 额外供特殊消息类型使用的字段
+    checked = BooleanField(default=False, verbose_name="是否已经操作")
 
     class Meta:
         ordering = ("-created_at", )
@@ -159,7 +160,7 @@ class RegisteredDevices(models.Model):
     device_type = models.CharField(max_length=50, default='ios')
     update_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="devices")
-    is_active = models.BooleanField(default=True)
+    is_active = BooleanField(default=True)
     # save badge_number in the redis database, the key is the device_t
     # badge_number = models.IntegerField(default=0)
 

@@ -125,6 +125,10 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
             own = obj.ownership
             own.identified = obj.approved
             own.identified_at = timezone.now()
+            user = own.user
+            if own.identified and user.avatar_car is None:
+                user.avatar_car = user
+                user.save()
             own.save()
         super(SportCarIdentificationRequestRecordAdmin, self)\
             .save_model(request, obj, form, change)

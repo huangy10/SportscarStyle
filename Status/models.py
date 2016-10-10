@@ -11,6 +11,7 @@ from django.utils import timezone
 from Sportscar.models import SportCarOwnership
 from custom.models_template import BaseCommentManager, comment_image_path
 from custom.utils import time_to_string
+from custom.fields import BooleanField
 # Create your models here.
 
 
@@ -46,7 +47,7 @@ class Status(models.Model):
                                        related_name='status_need_to_see')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布日期')
     #
-    deleted = models.BooleanField(default=False, verbose_name=u"是否已经被删除")
+    deleted = BooleanField(default=False, verbose_name=u"是否已经被删除")
 
     class Meta:
         verbose_name = u'状态'
@@ -162,8 +163,8 @@ class StatusReport(models.Model):
     status = models.ForeignKey(Status)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     reason = models.CharField(max_length=255)
-    checked = models.BooleanField(default=False)
-    flag = models.BooleanField(default=False)
+    checked = BooleanField(default=False)
+    flag = BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -29,6 +29,7 @@ def settings(request, data):
     """
     user = request.user
     settings = user.setting_center
+    print data
     if request.method == 'POST':
 
         settings.notification_accept = data['notification_accept'] in ['YES', 'yes', 'y', 'Y']

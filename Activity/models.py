@@ -11,6 +11,7 @@ from django.utils.encoding import smart_str
 from custom.models_template import comment_image_path, BaseCommentManager
 from custom.utils import time_to_string
 from Sportscar.models import SportCarOwnership
+from custom.fields import BooleanField
 # Create your models here.
 
 
@@ -42,11 +43,11 @@ class Activity(models.Model):
     start_at = models.DateTimeField(verbose_name=u'开始时间')
     end_at = models.DateTimeField(verbose_name=u'结束时间')
     allowed_club = models.ForeignKey('Club.Club', verbose_name=u'允许加入的俱乐部', blank=True, null=True)
-    authed_user_only = models.BooleanField(default=False, verbose_name=u'只限认证用户参加')
+    authed_user_only = BooleanField(default=False, verbose_name=u'只限认证用户参加')
     poster = models.ImageField(upload_to=activity_poster, verbose_name=u'活动海报')
     location = models.ForeignKey('Location.Location', verbose_name=u'活动地点')
 
-    closed = models.BooleanField(default=False, verbose_name="活动报名是否关闭")
+    closed = BooleanField(default=False, verbose_name="活动报名是否关闭")
     closed_at = models.DateTimeField(default=timezone.now, verbose_name="关闭报名的时间")
 
     appliers = models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -140,7 +141,7 @@ class Activity(models.Model):
 class ActivityJoin(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications")
     activity = models.ForeignKey(Activity, related_name="applications")
-    approved = models.BooleanField(default=True)  # 不需要审核,这里总为true
+    approved = BooleanField(default=True)  # 不需要审核,这里总为true
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -214,8 +215,8 @@ class ActivityInvitation(models.Model):
     target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="invites")
     activity = models.ForeignKey(Activity)
     created_at = models.DateTimeField(auto_now_add=True)
-    responsed = models.BooleanField(default=False)  # 被邀请者是否已经回应了这个邀请
-    agree = models.BooleanField(default=False)
+    responsed = BooleanField(default=False)  # 被邀请者是否已经回应了这个邀请
+    agree = BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "活动邀请"

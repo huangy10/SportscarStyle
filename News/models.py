@@ -8,6 +8,7 @@ from django.utils.encoding import smart_str
 
 from custom.utils import path_creator, time_to_string
 from custom.models_template import BaseCommentManager, comment_image_path
+from custom.fields import BooleanField
 # Create your models here.
 
 
@@ -37,7 +38,7 @@ class News(models.Model):
     cover = models.ImageField(upload_to=cover_path, verbose_name=u'封面', null=True)
     title = models.CharField(max_length=255, verbose_name=u'标题')
     content = models.TextField(verbose_name=u'正文')
-    is_video = models.BooleanField(verbose_name=u'内容是否是视频', default=False)
+    is_video = BooleanField(verbose_name=u'内容是否是视频', default=False)
 
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_news', verbose_name=u'点赞',
                                       through='NewsLikeThrough')

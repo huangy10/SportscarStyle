@@ -3,6 +3,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from custom.fields import BooleanField
 
 # Create your models here.
 
@@ -12,9 +13,9 @@ class SettingCenter(models.Model):
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='setting_center')
 
-    notification_accept = models.BooleanField(default=True, verbose_name=u'接受通知')
-    notification_sound = models.BooleanField(default=True, verbose_name=u'声音')
-    notification_shake = models.BooleanField(default=True, verbose_name=u'震动')
+    notification_accept = BooleanField(default=True, verbose_name=u'接受通知')
+    notification_sound = BooleanField(default=True, verbose_name=u'声音')
+    notification_shake = BooleanField(default=True, verbose_name=u'震动')
 
     blacklist = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
@@ -35,7 +36,7 @@ class SettingCenter(models.Model):
         ('auth_first', '需通过验证'),
         ('never', '不允许'),
     ), default='all')
-    show_on_map = models.BooleanField(default=True, verbose_name="是否展现在地图上")
+    show_on_map = BooleanField(default=True, verbose_name="是否展现在地图上")
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -49,4 +50,4 @@ class Suggestion(models.Model):
     content = models.CharField(max_length=255, verbose_name='内容')
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at = models.DateTimeField(auto_now_add=True)
-    read = models.BooleanField(default=False)
+    read = BooleanField(default=False)

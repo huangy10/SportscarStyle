@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.gis.geos import Point
-
+from custom.fields import BooleanField
 # Create your models here.
 
 
@@ -42,7 +42,7 @@ class UserTracking(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
-    location_available = models.BooleanField(default=False, verbose_name="地址数据是否可用")
+    location_available = BooleanField(default=False, verbose_name="地址数据是否可用")
 
     def update(self):
         """ 测试用的函数,

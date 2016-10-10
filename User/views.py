@@ -314,7 +314,6 @@ def profile_modify(request, data):
     if 'avatar' in request.FILES:
         user.avatar = request.FILES['avatar']
 
-
     user.nick_name = data.get('nick_name', user.nick_name)
     user.signature = data.get('signature', user.signature)
     user.job = data.get('job', user.job)

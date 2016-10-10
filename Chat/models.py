@@ -16,6 +16,7 @@ from django.utils.functional import cached_property
 from Club.models import ClubJoining
 from custom.utils import time_to_string
 from .utils import ChatRemarkNameStorage
+from custom.fields import BooleanField
 
 # Create your models here.
 
@@ -143,8 +144,8 @@ class ChatEntity(models.Model):
     recent_chat = models.CharField(max_length=255, verbose_name=u"最近一条聊天的内容")
 
     # settings
-    always_on_top = models.BooleanField(default=False, verbose_name=u'聊天置顶')
-    no_disturbing = models.BooleanField(default=False, verbose_name=u'消息免打扰')
+    always_on_top = BooleanField(default=False, verbose_name=u'聊天置顶')
+    no_disturbing = BooleanField(default=False, verbose_name=u'消息免打扰')
 
     # timestamps
     created_at = models.DateTimeField(auto_now_add=True)
@@ -211,7 +212,7 @@ class Chat(models.Model):
     audio_wave_data = models.CharField(max_length=2000, default="")
     audio_length = models.FloatField(default=0, verbose_name=u'音频文件的长度')
 
-    deleted = models.BooleanField(default=False)
+    deleted = BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

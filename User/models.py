@@ -10,7 +10,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import UserManager, AbstractUser
 from django.utils import timezone
-# Create your models here.
+
 from django.utils.encoding import smart_str
 from django.utils.functional import cached_property
 from django.contrib.auth.models import AbstractBaseUser
@@ -20,6 +20,7 @@ from custom.utils import time_to_string
 
 from Sportscar.models import SportCarOwnership, Sportscar
 from User.tasks import resize_image
+from custom.fields import BooleanField
 
 
 def profile_avatar(instance, filename, *args, **kwargs):
@@ -88,7 +89,7 @@ class User(AbstractUser):
     objects = MyUserManager()
     # Authentication property
     # username = models.CharField(max_length=20, unique=True)
-    register_finished = models.BooleanField(default=False)
+    register_finished = BooleanField(default=False)
     # password = models.CharField(max_length=50)
 
     # Profile information
@@ -132,7 +133,7 @@ class User(AbstractUser):
     job = models.CharField(max_length=64, verbose_name='行业', default='', blank=True)
 
     # Identification information
-    corporation_identified = models.BooleanField(default=False, verbose_name=u"是否是经过认证的企业用户")
+    corporation_identified = BooleanField(default=False, verbose_name=u"是否是经过认证的企业用户")
 
     @property
     def identified(self):
@@ -235,7 +236,7 @@ class User(AbstractUser):
 class UserRelation(models.Model):
     source_user = models.ForeignKey(User, related_name="follows_relation")
     target_user = models.ForeignKey(User, related_name="fans_relation")
-    is_friend = models.BooleanField(default=False)
+    is_friend = BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -346,7 +347,7 @@ class AuthenticationCode(models.Model):
     phone_num = models.CharField(max_length=20, verbose_name=u'手机号码')
     code = models.CharField(max_length=6, verbose_name=u'验证码')
     created_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
+    is_active = BooleanField(default=True)
 
     objects = AuthenticationManager()
 
@@ -366,8 +367,8 @@ class CorporationAuthenticationRequest(models.Model):
     id_card_image = models.ImageField(upload_to=auth_image, verbose_name=u'身份证图片')
     other_info_image = models.ImageField(upload_to=auth_image, verbose_name=u'补充材料')
 
-    approved = models.BooleanField(default=False, verbose_name=u'是否已经批准')
-    revoked = models.BooleanField(default=False, verbose_name=u'申请是否已经驳回')
+    approved = BooleanField(default=False, verbose_name=u'是否已经批准')
+    revoked = BooleanField(default=False, verbose_name=u'申请是否已经驳回')
 
     class Meta:
         verbose_name = u'企业申请'
