@@ -35,7 +35,7 @@ def update_billboard():
                 )
                 old_order = old_billboard.order
                 ClubBillboard.objects.create(
-                    club=club, order=order, d_order=order - old_order, scope=scope, filter_type=filter_type,
+                    club=club, order=order, d_order=old_order - order, scope=scope, filter_type=filter_type,
                     new_to_list=False, version=next_billboard_version
                 )
             except ObjectDoesNotExist:
