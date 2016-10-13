@@ -103,7 +103,8 @@ DATABASES = {
         'NAME': 'sport_car_db',
         'USER': 'Lena',
         'PASSWORD': 'huang9040601',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
+        'ATOMIC_REQUESTS': True
     }
 }
 
