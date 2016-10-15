@@ -151,6 +151,7 @@ class MessageDispatch(object):
         if waiter.future is not None and not waiter.future.done():
             waiter.future.set_result([])
         waiter.future = None
+        self.waiters[device.id] = None
 
     def logout(self, device):
         self.cancel_wait(device)
@@ -229,9 +230,11 @@ class MessageDispatch(object):
                     response.update(roster=entity_response)
                     waiter.take_response(response)
 
-                elif waiter is not None:
+                else:
                     response = chat.dict_description(host=target_user)
-                    response.update(roster=entity.dict_description())
+                    entity_response = entity.dict_description()
+                    entity_response["unread_num"] += 1
+                    response.update(roster=entity_response)
                     Waiter.cache_chat(response, target_user)
                 tokens.append(device.token)
             if badge > 0:
@@ -246,7 +249,7 @@ class MessageDispatch(object):
                 )
         else:
             target_club = chat.target_club
-            target_joins = ClubJoining.objects.filter(club=target_club)
+            target_joins = ClubJoining.objects.select_related("user").filter(club=target_club)
             for join in target_joins:
                 user = join.user
                 if user.id == chat.sender_id:
@@ -268,9 +271,11 @@ class MessageDispatch(object):
                         response = chat.dict_description(host=user)
                         response.update(roster=entity_response)
                         waiter.take_response(response)
-                    elif waiter is not None:
+                    else:
                         response = chat.dict_description(host=user)
-                        response.update(roster=entity.dict_description())
+                        entity_response = entity.dict_description()
+                        entity_response["unread_num"] += 1
+                        response.update(roster=entity_response)
                         Waiter.cache_chat(response, user)
                     tokens.append(device.token)
 
