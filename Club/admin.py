@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.db.models import Count
 from django.utils import timezone
 from Club.models import Club, ClubAuthRequest
+from tasks import club_value_change
 # Register your models here.
 
 
@@ -46,6 +47,7 @@ class ClubAuthRequestAdmin(admin.ModelAdmin):
             club.identified = True
             club.identified_at = timezone.now()
             club.save()
+            club_value_change.delay(club)
         super(ClubAuthRequestAdmin, self).save_model(request, obj, form, change)
 
     def club_link(self, obj):
