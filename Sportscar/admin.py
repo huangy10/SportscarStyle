@@ -126,7 +126,7 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
             own.identified_at = timezone.now()
             user = own.user
             if own.identified and user.avatar_car is None:
-                user.avatar_car = user
+                user.avatar_car = own
                 user.save()
             own.save()
         super(SportCarIdentificationRequestRecordAdmin, self)\
