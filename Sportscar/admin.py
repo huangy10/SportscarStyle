@@ -111,8 +111,7 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-    fields = ("link_to_user", "link_to_car", "license_num","approved", "checked", "drive_license_admin", "id_card_admin",
-              "photo_admin", "created_at", )
+    fields = ("link_to_user", "link_to_car", "license_num","approved", "checked", "drive_license_admin", "created_at", )
     exclude = None
     readonly_fields = ("link_to_user", "drive_license_admin", "id_card_admin", "photo_admin", "created_at",
                     "link_to_car", "license_num")

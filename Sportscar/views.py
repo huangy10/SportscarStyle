@@ -184,8 +184,10 @@ def car_auth(request, data):
             return JsonResponse(dict(success=False, message=u'该车主的该车辆已经被认证了', code='2400'))
         elif SportCarOwnership.objects.filter(car_id=data['car_id'], user=request.user).exists():
             record.drive_license = request.FILES["drive_license"]
-            record.photo = request.FILES["photo"]
-            record.id_card = request.FILES['id_card']
+            if "photo" in request.FILES:
+                record.photo = request.FILES["photo"]
+            if "id_card" in request.FILES:
+                record.id_card = request.FILES['id_card']
             record.license_num = data['license']
             record.save()
             return JsonResponse(dict(success=True))
@@ -194,13 +196,20 @@ def car_auth(request, data):
     except ObjectDoesNotExist:
         try:
             owner_ship = SportCarOwnership.objects.get(car_id=data['car_id'], user=request.user)
+            reserved_data = dict()
+            if "photo" in request.FILES:
+                reserved_data['photo'] = request.FILES['photo']
+            if "id_card" in request.FILES:
+                reserved_data['id_card'] = request.FILES['id_card']
             SportCarIdentificationRequestRecord.objects.create(
                 ownership=owner_ship,
                 drive_license=request.FILES["drive_license"],
-                photo=request.FILES["photo"],
-                id_card=request.FILES['id_card'],
-                license_num=data['license']
+                # photo=request.FILES["photo"],
+                # id_card=request.FILES['id_card'],
+                license_num=data['license'],
+                **reserved_data
             )
+
             return JsonResponse(dict(success=True))
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message=u'没有权限', code='2401'))
