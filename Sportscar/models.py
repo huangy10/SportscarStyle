@@ -230,7 +230,7 @@ class SportCarIdentificationRequestRecord(models.Model):
 
     def photo_admin(self):
         return '<img src=%s style="max-width:600px"/>' % self.photo.url
-    photo_admin.short_description = u"照片"
+    photo_admin.short_description = u"行驶证"
     photo_admin.allow_tags = True
 
     def link_to_user(self):
