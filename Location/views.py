@@ -80,7 +80,7 @@ def radar_cars(request, data):
         .filter(~Q(id=request.user.id) & ~Q(blacklist_by=request.user)\
                 & ~Q(setting_center__location_visible_to="none") & visibility_filter,
                 authed_cars_num__gte=0,
-                location__location__location__distance_lte=(Point(x=lon, y=lat), D(km=distance)),
+                location__location__location__distance_lte=(Point(x=lon, y=lat), D(m=distance)),
                 location__location_available=True,
                 location__updated_at__gt=(timezone.now() - datetime.timedelta(days=3))) \
         .distinct()
