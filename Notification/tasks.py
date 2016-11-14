@@ -21,9 +21,7 @@ logger = get_logger(__name__)
 def push_notification(user, tokens, badge_incr, message_body, type="", data=None, callback=None):
     """ push notification to the user
     """
-    print user
     if not user.setting_center.notification_accept:
-        print "user not accept notifications"
         return
     if type not in ["chat", "notif"]:
         logger.warn("Invalid notification type")
@@ -51,7 +49,7 @@ def push_notification(user, tokens, badge_incr, message_body, type="", data=None
     srv = APNs(con)
     try:
         res = srv.send(message)
-    except Exception, e:
+    except Exception as e:
         logger.warn(u"Fail to push notification to {0}, error info: {1}".format(user, e))
     else:
         for token, reason in res.failed.items():
@@ -102,7 +100,7 @@ def send_notification_handler(sender, target, display_mode, extra_info="", **kwa
 
     try:
         notif, _ = Notification.objects.get_or_create(**create_params)
-    except Exception, e:
+    except Exception as e:
         logger.error(u'-------->Fail to create Notification')
         logger.error(u'the error info is %s' % e)
         # re-throw the exception, let it crash
