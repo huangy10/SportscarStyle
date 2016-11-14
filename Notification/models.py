@@ -99,12 +99,36 @@ class Notification(models.Model):
         return result
 
     def apns_des(self):
-        if self.message_type == "status_like":
+        element = self.message_type.split(":")
+        if len(element) < 1:
+            return u"未定义的消息"
+        message_type = ":".join(element[1:])
+        if message_type == "Status:like":
             return "{0} 赞了你的动态".format(self.related_user.nick_name)
-        elif self.message_type == "status_comment":
-            return "{0} 评论了你的动态".format(self.related_user.nick_name)
-        elif self.message_type == "relation_follow":
-            return "{} 关注了你".format(self.related_user.nick_name)
+        elif message_type == "StatusComment:response":
+            return "{0} 在动态中回复了你".format(self.related_user.nick_name)
+        elif message_type == "User:like":
+            return "{0} 关注了你".format(self.related_user.nick_name)
+        elif message_type == "ActivityJoin:invited":
+            return "{0} 邀请你参加活动".format(self.related_user.nick_name)
+        elif message_type == "ActivityJoin:invite_agreed":
+            return "{0} 接受了你的活动邀请".format(self.related_user.nick_name)
+        elif message_type == "ActivityJoin:invite_denied":
+            return "{0} 拒绝了你的活动邀请".format(self.related_user.nick_name)
+        elif message_type == "ActivityJoin:kick_out":
+            return "{0} 将你请出了活动".format(self.related_user.nick_name)
+        elif message_type == "Activity:like":
+            return "{0} 赞了你的活动".format(self.related_user.nick_name)
+        elif message_type == "ActivityJoin:apply":
+            return "{0} 报名了你的活动".format(self.related_user.nick_name)
+        elif message_type == "ClubJoining:apply":
+            return "{0} 申请加入你的俱乐部".format(self.related_user.nick_name)
+        elif message_type == "ClubJoining:agree":
+            return "{0} 俱乐部的所有者同意了你的申请".format(self.related_club.name)
+        elif message_type == "ClubJoining:deny":
+            return "{0} 俱乐部的所有者拒绝了你的申请".format(self.related_club.name)
+        elif message_type == "ActivityComment:response":
+            return "{0} 在活动中回复了你".format(self.related_user.nick_name)
         return u"未定义的消息"
 
 
