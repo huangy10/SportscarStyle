@@ -190,6 +190,8 @@ def car_auth(request, data):
                 record.id_card = request.FILES['id_card']
             if "car_license" in request.FILES:
                 record.photo = request.FILES["car_license"]
+            if "drive_license" in request.FILES:
+                record.drive_license = request.FILES["drive_license"]
             record.license_num = data['license']
             record.save()
             return JsonResponse(dict(success=True))
@@ -203,6 +205,8 @@ def car_auth(request, data):
                 reserved_data['photo'] = request.FILES['photo']
             if "id_card" in request.FILES:
                 reserved_data['id_card'] = request.FILES['id_card']
+            if "car_license" in request.FILES:
+                reserved_data['photo'] = request.FILES['car_license']
             record = SportCarIdentificationRequestRecord.objects.create(
                 ownership=owner_ship,
                 drive_license=request.FILES["drive_license"],
