@@ -111,7 +111,7 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-    fields = ("link_to_user", "link_to_car", "license_num","approved", "checked", "drive_license_admin", "id_card_admin",
+    fields = ("link_to_user", "link_to_car", "license_num", "approved", "checked", "drive_license_admin",
               "photo_admin", "created_at", )
     exclude = None
     readonly_fields = ("link_to_user", "drive_license_admin", "id_card_admin", "photo_admin", "created_at",
@@ -127,7 +127,7 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
             own.identified_at = timezone.now()
             user = own.user
             if own.identified and user.avatar_car is None:
-                user.avatar_car = user
+                user.avatar_car = own
                 user.save()
             own.save()
             send_notification.send(
