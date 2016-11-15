@@ -63,8 +63,8 @@ target/
 /media
 
 # local logs
-/logs
-/.idea
+logs
+.idea
 
 model.png
 temp.sql
