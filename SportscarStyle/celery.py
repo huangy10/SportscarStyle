@@ -14,8 +14,8 @@ from django.conf import settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SportscarStyle.settings')
 # always follows with app instance
 # although we could have many instances, but we usually don't do like that
-app = Celery('testCelery', broker='amqp://',
-             backend='amqp://')
+app = Celery('testCelery', broker='redis://localhost:6379/0',
+             backend='redis://localhost:6379/0')
 app.conf.update(
     CELERY_TASK_EXPIRES=3600,
 )

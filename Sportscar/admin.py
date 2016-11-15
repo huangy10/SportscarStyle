@@ -12,7 +12,7 @@ from django.forms.models import BaseInlineFormSet
 
 from .models import Sportscar, SportCarIdentificationRequestRecord, SportCarOwnership, Manufacturer, CarMediaItem
 from .models import MAX_AUDIO_PER_CAR, MAX_IMAGE_PER_CAR, MAX_VIDEO_PER_CAR
-
+from Notification.signal import send_notification
 
 class SportscarInlineAdmin(admin.StackedInline):
 
@@ -130,6 +130,15 @@ class SportCarIdentificationRequestRecordAdmin(admin.ModelAdmin):
                 user.avatar_car = user
                 user.save()
             own.save()
+            send_notification.send(
+                sender=SportCarIdentificationRequestRecord,
+                target=user,
+                display_mode="minimal",
+                extra_info="agree" if obj.approved else "deny",
+                related_user=user,
+                related_own=own
+            )
+
         super(SportCarIdentificationRequestRecordAdmin, self)\
             .save_model(request, obj, form, change)
 
