@@ -52,7 +52,6 @@ class AuthUserFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        print self.value()
         if self.value() == "y":
             return queryset.filter(ownership__identified=True).distinct()
         elif self.value() == 'n':
@@ -74,6 +73,7 @@ class MyUserAdmin(UserAdmin):
     readonly_fields = ('fans_num', 'follows_num', 'status_num', 'act_num', 'value')
     list_display = ('nick_name', 'username', "gender", "birth_date", "district", "value", )
     fieldsets = None
+    search_fields = ("username", "nick_name")
 
     list_filter = (AuthUserFilter, )
 
