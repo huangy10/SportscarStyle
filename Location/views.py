@@ -56,14 +56,18 @@ def radar_cars(request, data):
         tracking.location_available = True
         tracking.save()
     # load the scan center
-    lat = float(data["scan_center"]["lat"])
-    lon = float(data["scan_center"]["lon"])
+    # Woody Huang, 2016.11.15
+    #
+    # 根据要求,只显示用户当前位置周围的周围最大30km以内的车主
+    # lat = float(data["scan_center"]["lat"])
+    # lon = float(data["scan_center"]["lon"])
     filter_type = data["filter"]
     try:
         distance = float(data["scan_distance"])
     except KeyError:
         # 向下兼容
         distance = float(data["filter_param"])
+    distance = min(distance, 30000)
 
     # check target settings about location visibility
     visibility_filter = Q(setting_center__location_visible_to="all")
