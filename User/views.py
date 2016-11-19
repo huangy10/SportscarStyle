@@ -73,6 +73,19 @@ def account_login(request, data):
 
 
 @http_decorators.require_POST
+@post_data_loader()
+@login_first
+def update_token(request, data):
+    user = request.user
+    token = data["device_token"]
+    device, created = RegisteredDevices.objects.get_or_create(user=user, token=token, device_type="ios")
+    if not created and not device.is_active:
+        device.is_active = True
+        device.save()
+    return JsonResponse(dict(success=True))
+
+
+@http_decorators.require_POST
 @login_first
 @post_data_loader()
 def account_logout(request, data):
