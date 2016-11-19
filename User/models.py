@@ -137,6 +137,8 @@ class User(AbstractUser):
 
     @property
     def identified(self):
+        if self.avatar_car and self.avatar_car.identified:
+            return True
         return SportCarOwnership.objects.filter(user=self, identified=True).exists()
 
     # Statistic data

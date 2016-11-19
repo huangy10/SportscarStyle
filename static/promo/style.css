@@ -63,6 +63,18 @@ html,body
     margin: 20pt auto;
 }
 
+.hintdiv{
+    width:489pt;
+    margin:10pt auto 0pt auto;
+}
+
+.hint{
+    font-size: 18pt;
+    text-align: center;
+    color:rgba(0, 0, 0, 0.45);
+    font-family: PingFang SC, Serif;
+}
+
 .describe{
     width: 489pt;
     font-size: 30pt;
@@ -78,7 +90,7 @@ html,body
     border-width: 1px;
     border:1px solid #FF1515;
     border-radius: 6pt;
-    margin:50pt auto;
+    margin:50pt auto 10pt auto;
 
 }
 
@@ -106,4 +118,7 @@ a:visited {
 
 .space2{
     height:1pt;
+}
+.space3{
+    height:15pt;
 }
