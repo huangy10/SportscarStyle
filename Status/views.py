@@ -287,6 +287,8 @@ def status_operation(request, data, status_id):
             #                        related_status=status,
             #                        target=status.user,
             #                        message_body="")
+            status.recent_like_user = request.user
+            status.save()
             send_notification.send(
                 sender=Status,
                 target=status.user,
@@ -322,3 +324,26 @@ def status_operation(request, data, status_id):
     else:
         logger.warning(u"非法操作, 涉及用户为%s" % request.user.id)
         return JsonResponse(dict(success=False, code='4004', message='Operation not defined'))
+
+
+@http_decorator.require_GET
+@login_first
+@page_separator_loader
+def status_like_users(request, date_threshold, op_type, limit, status_id):
+    try:
+        status = Status.objects.get(id=status_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code='4002', message='Status not found.'))
+
+    if op_type == 'latest':
+        date_filter = Q(created_at__gt=date_threshold)
+    else:
+        date_filter = Q(created_at__lt=date_threshold)
+
+    likes = StatusLikeThrough.objects.select_related("user")\
+        .filter(status=status).filter(date_filter, stauts=status)\
+        .order_by("-like_at")[0:limit]
+    return JsonResponse(dict(
+        success=True,
+        data=map(lambda x: x.user.dict_description(), likes)
+    ))

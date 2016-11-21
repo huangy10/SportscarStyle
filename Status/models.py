@@ -48,6 +48,7 @@ class Status(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布日期')
     #
     deleted = BooleanField(default=False, verbose_name=u"是否已经被删除")
+    recent_like_user = models.ForeignKey("User.User", related_name="+", null=True, blank=True)
 
     class Meta:
         verbose_name = u'状态'
@@ -87,6 +88,8 @@ class Status(models.Model):
                 result["car"] = own.dict_description()
             except ObjectDoesNotExist:
                 result["car"] = self.car.dict_description()
+        if self.recent_like_user:
+            result["recent_like_user"] = self.recent_like_user.nick_name
         if self.location is not None:
             result["location"] = self.location.dict_description()
         if hasattr(self, "comment_num"):
@@ -145,6 +148,7 @@ class StatusLikeThrough(models.Model):
 
     class Meta:
         unique_together = ('user', 'status')
+        ordering = ("like_at", )
 
 
 @receiver(post_save, sender=Status)

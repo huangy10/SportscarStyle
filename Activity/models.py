@@ -55,6 +55,8 @@ class Activity(models.Model):
     like_num = models.IntegerField(default=0)
     comment_num = models.IntegerField(default=0)
 
+    recent_like_user =  models.ForeignKey("User.User", related_name="+", null=True, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -79,6 +81,8 @@ class Activity(models.Model):
             created_at=time_to_string(self.created_at),
             authed_user_only=self.authed_user_only
         )
+        if self.recent_like_user:
+            result["recent_like_user"] = self.recent_like_user.nick_name
         if self.allowed_club is not None:
             result.update(allowed_club=self.allowed_club.dict_description())
         return result
