@@ -9,7 +9,7 @@ from django.contrib.gis.geos import Point
 
 from .models import Status, StatusLikeThrough, StatusComment, StatusReport
 from .forms import StatusCreationForm
-from custom.utils import post_data_loader, page_separator_loader, login_first, get_logger
+from custom.utils import post_data_loader, page_separator_loader, login_first, get_logger, time_to_string
 from Notification.signal import send_notification
 # Create your views here.
 
@@ -279,6 +279,15 @@ def status_operation(request, data, status_id):
         obj, created = StatusLikeThrough.objects.get_or_create(user=request.user,
                                                                status=status)
         if not created:
+
+            likes = StatusLikeThrough.objects.select_related("user").filter(status=status).order_by("-like_at")[0: 2]
+            length = likes.count()
+            if length > 0 and obj.id == likes[0].id:
+                if length > 1:
+                    status.recent_like_user = likes[1]
+                else:
+                    status.recent_like_user = None
+                status.save()
             obj.delete()
         elif status.user != request.user:
             # send_notification.send(sender=Status,
@@ -336,14 +345,20 @@ def status_like_users(request, date_threshold, op_type, limit, status_id):
         return JsonResponse(dict(success=False, code='4002', message='Status not found.'))
 
     if op_type == 'latest':
-        date_filter = Q(created_at__gt=date_threshold)
+        date_filter = Q(like_at__gt=date_threshold)
     else:
-        date_filter = Q(created_at__lt=date_threshold)
+        date_filter = Q(like_at__lt=date_threshold)
 
     likes = StatusLikeThrough.objects.select_related("user")\
-        .filter(status=status).filter(date_filter, stauts=status)\
+        .filter(date_filter, status=status)\
         .order_by("-like_at")[0:limit]
+
+    def result_format(like):
+        result = like.user.dict_description()
+        result["like_at"] = time_to_string(like.like_at)
+        return result
+
     return JsonResponse(dict(
         success=True,
-        data=map(lambda x: x.user.dict_description(), likes)
+        data=map(result_format, likes)
     ))

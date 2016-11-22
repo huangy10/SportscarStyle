@@ -38,7 +38,7 @@ class Activity(models.Model):
     inform_of = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u'通知谁看',
                                        related_name='activities_need_to_see')
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"喜欢这个活动的人",
-                                      related_name="liked_acts")
+                                      related_name="liked_acts", through="ActivityLikeThrough")
     max_attend = models.PositiveIntegerField(default=0, verbose_name=u'人数上限')
     start_at = models.DateTimeField(verbose_name=u'开始时间')
     end_at = models.DateTimeField(verbose_name=u'结束时间')

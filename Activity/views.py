@@ -13,7 +13,7 @@ from django.db.models import Q, Count
 
 from User.models import User
 from custom.views import LoginFirstOperationView
-from .models import Activity, ActivityJoin, ActivityComment
+from .models import Activity, ActivityJoin, ActivityComment, ActivityLikeThrough
 from custom.utils import post_data_loader, login_first, page_separator_loader, time_to_string, get_logger
 from Location.models import Location
 from Club.models import Club, ClubJoining
@@ -618,6 +618,24 @@ def activity_detail_comment(request, date_threshold, op_type, limit, act_id):
     return JsonResponse(dict(
         success=True,
         comments=comments
+    ))
+
+
+@require_GET
+@login_first
+@page_separator_loader
+def activity_like_users(request, date_threshold, op_type, limit, act_id):
+    try:
+        act = Activity.objects.get(id=act_id)
+    except ObjectDoesNotExist:
+        return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
+
+    likes = ActivityLikeThrough.objects\
+        .select_related("user")\
+        .filter(activity=act).order_by("-created_at")
+    return JsonResponse(dict(
+        success=True,
+        data=map(lambda x: x.user.dict_description(), likes)
     ))
 
 
