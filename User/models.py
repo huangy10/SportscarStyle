@@ -191,7 +191,18 @@ class User(AbstractUser):
             ssid=self.id,
             nick_name=self.nick_name,
             avatar=self.avatar.url,
-            identified=self.identified
+            identified=self.identified,
+            phone_num=self.username,
+            gender=self.get_gender_display(),
+            age=self.age,
+            star_sign=self.get_star_sign_display(),
+            district=self.district,
+            signature=self.signature,
+            job=self.job,
+            corporation_identified=self.corporation_identified,
+            follow_num=self.follows_num,
+            fans_num=self.fans_num,
+            status_num=self.status_num,
         )
         if self.most_recent_status is not None:
             result.update(recent_status_des=self.most_recent_status.as_recent_des())

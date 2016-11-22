@@ -284,18 +284,12 @@ def status_operation(request, data, status_id):
             length = likes.count()
             if length > 0 and obj.id == likes[0].id:
                 if length > 1:
-                    status.recent_like_user = likes[1]
+                    status.recent_like_user = likes[1].user
                 else:
                     status.recent_like_user = None
                 status.save()
             obj.delete()
         elif status.user != request.user:
-            # send_notification.send(sender=Status,
-            #                        message_type="status_like",
-            #                        related_user=request.user,
-            #                        related_status=status,
-            #                        target=status.user,
-            #                        message_body="")
             status.recent_like_user = request.user
             status.save()
             send_notification.send(

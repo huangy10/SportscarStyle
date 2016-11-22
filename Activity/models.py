@@ -38,7 +38,7 @@ class Activity(models.Model):
     inform_of = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u'通知谁看',
                                        related_name='activities_need_to_see')
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=u"喜欢这个活动的人",
-                                      related_name="liked_acts", through="ActivityLikeThrough")
+                                      related_name="liked_acts")
     max_attend = models.PositiveIntegerField(default=0, verbose_name=u'人数上限')
     start_at = models.DateTimeField(verbose_name=u'开始时间')
     end_at = models.DateTimeField(verbose_name=u'结束时间')
@@ -55,7 +55,7 @@ class Activity(models.Model):
     like_num = models.IntegerField(default=0)
     comment_num = models.IntegerField(default=0)
 
-    recent_like_user =  models.ForeignKey("User.User", related_name="+", null=True, blank=True)
+    recent_like_user = models.ForeignKey("User.User", related_name="+", null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -118,6 +118,8 @@ class Activity(models.Model):
             comment_num=self.comment_num,
             authed_user_only=self.authed_user_only
         )
+        if self.recent_like_user:
+            result["recent_like_user"] = self.recent_like_user.nick_name
         # if self.allowed_club is not None:
         #     result.update(allowed_club=self.allowed_club.dict_description())
         return result

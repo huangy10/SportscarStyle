@@ -433,6 +433,14 @@ class ActivityOperation(LoginFirstOperationView):
         except ObjectDoesNotExist:
             return JsonResponse(dict(success=False, message="activity not found"))
         if act.liked_by.filter(id=request.user.id).exists():
+            likes = act.liked_by.all()[0:2]
+            length = likes.count()
+            if length > 0 and act.recent_like_user_id == request.user.id:
+                if length > 1:
+                    act.recent_like_user = likes[1]
+                else:
+                    act.recent_like_user = None
+
             act.liked_by.remove(request.user)
             act.like_num -= 1
             act.save()
@@ -440,6 +448,7 @@ class ActivityOperation(LoginFirstOperationView):
         else:
             act.like_num += 1
             act.liked_by.add(request.user)
+            act.recent_like_user = request.user
             act.save()
             if act.user != request.user:
                 send_notification.send(
@@ -462,118 +471,6 @@ class ActivityOperation(LoginFirstOperationView):
         join.approved = False
         join.save()
         return JsonResponse(dict(success=True))
-
-
-#
-# @require_POST
-# @login_first
-# @post_data_loader()
-# def activity_operation(request, data, act_id):
-#     """ 对活动的操作,目前支持:
-#      - 批准活动申请
-#      - 邀请他人
-#     """
-#     op_type = data.get("op_type")
-#     if op_type == "apply_deny":
-#         applier = data.get("target_user")
-#         try:
-#             join = ActivityJoin.objects.get(user_id=applier, activity_id=act_id)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=False, message="Application not found"))
-#         join.approved = False
-#         join.save()
-#         # send a notification to the guy who applied the activity
-#         send_notification.send(sender=ActivityJoin,
-#                                target=join.user,
-#                                related_act=join.activity,
-#                                message_type="act_denied",
-#                                message_body="")
-#         return JsonResponse(dict(success=True))
-#     elif op_type == "invite":
-#         # invite users to
-#         appliers = data.get("target_user")
-#         appliers = json.loads(appliers)
-#         try:
-#             act = Activity.objects.get(id=act_id)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=True, message="Activity Not found"))
-#         users = get_user_model().objects.filter(~Q(id=request.user.id), id__in=appliers)
-#         if len(users) != len(appliers):
-#             return JsonResponse(dict(success=False, message="user id list is not valid"))
-#         for user in users:
-#             send_notification.send(sender=ActivityJoin,
-#                                    target=user,
-#                                    related_user=request.user,
-#                                    related_act=act,
-#                                    message_type="act_invited",
-#                                    message_body="")
-#         return JsonResponse(dict(success=True))
-#     elif op_type == "invite_accepted":
-#         # applier = data.get("target_user")
-#         try:
-#             notif = Notification.objects.get(message_type="act_invited",
-#                                              target=request.user,
-#                                              related_act__id=act_id, checked=False)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=False, message="Not invited"))
-#         # 检查活动是否已经报满了
-#         act = notif.related_act
-#         cur_join_num = ActivityJoin.objects.filter(activity=act, approved=True).count()
-#         if cur_join_num >= act.max_attend:
-#             return JsonResponse(dict(success=False, message="full"))
-#         notif.flag = True
-#         notif.checked = True
-#         notif.save()
-#         send_notification.send(
-#             sender=Activity,
-#             target=notif.related_user,
-#             related_user=request.user,
-#             related_act=notif.related_act,
-#             message_type="act_invitation_agreed",
-#             message_body=""
-#         )
-#         ActivityJoin.objects.create(user=request.user, activity=notif.related_act,
-#                                     approved=True)
-#         return JsonResponse(dict(success=True))
-#     elif op_type == "invite_denied":
-#         applier = data.get("target_user")
-#         try:
-#             notif = Notification.objects.get(message_type="act_invited",
-#                                              target=request.user,
-#                                              related_user_id=applier,
-#                                              related_act__id=act_id, flag=False)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=False, message="Not invited"))
-#         notif.flag = False
-#         notif.checked = True
-#         notif.save()
-#         send_notification.send(
-#             sender=Activity,
-#             target=notif.related_user,
-#             related_user=request.user,
-#             related_act=notif.related_act,
-#             message_type="act_invitation_denied",
-#             message_body=""
-#         )
-#         ActivityJoin.objects.create(user=request.user, activity=notif.related_act,
-#                                     approve=False)
-#         return JsonResponse(dict(success=True))
-#     elif op_type == "like":
-#         try:
-#             act = Activity.objects.get(id=act_id)
-#         except ObjectDoesNotExist:
-#             return JsonResponse(dict(success=False, message="activity not found"))
-#         if act.liked_by.filter(id=request.user.id).exists():
-#             act.liked_by.remove(request.user)
-#             act.like_num -= 1
-#             act.save()
-#             return JsonResponse(dict(success=True, data=dict(liked=False, like_num=act.liked_by.count())))
-#         else:
-#             act.like_num += 1
-#             act.liked_by.add(request.user)
-#             act.save()
-#             return JsonResponse(dict(success=True, data=dict(liked=True, like_num=act.liked_by.count())))
-#     return JsonResponse(dict(success=False, message="Undefined operation type"))
 
 
 @require_GET
@@ -623,19 +520,20 @@ def activity_detail_comment(request, date_threshold, op_type, limit, act_id):
 
 @require_GET
 @login_first
-@page_separator_loader
-def activity_like_users(request, date_threshold, op_type, limit, act_id):
+def activity_like_users(request, act_id):
     try:
         act = Activity.objects.get(id=act_id)
     except ObjectDoesNotExist:
         return JsonResponse(dict(success=False, code='7000', message='Activity not found.'))
 
-    likes = ActivityLikeThrough.objects\
-        .select_related("user")\
-        .filter(activity=act).order_by("-created_at")
+    limit = int(request.GET["limit"])
+    skip = int(request.GET["skip"])
+
+    likes = act.liked_by.all()[skip: (skip + limit)]
+
     return JsonResponse(dict(
         success=True,
-        data=map(lambda x: x.user.dict_description(), likes)
+        data=map(lambda x: x.dict_description(), likes)
     ))
 
 
