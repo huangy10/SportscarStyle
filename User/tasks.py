@@ -1,3 +1,4 @@
+# coding=utf-8
 from PIL import Image
 import StringIO
 import os
@@ -6,6 +7,9 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from SportscarStyle.celery import app
 from custom.utils import get_logger
+from models import User, UserRelation
+from Status.models import Status
+from Activity.models import Activity
 
 
 logger = get_logger(__name__)
@@ -54,3 +58,27 @@ def user_value_change(user):
         for club in Club.objects.filter(members=user, identified=True):
             club.recalculate_value(commit=True)
     logger.info("user value change %s" % user.username)
+
+
+@app.task()
+def sync_user_cache_data(user):
+    """
+    同步校验用户中缓存数据的正确性,主要是包括粉丝数,关注数,动态数量等
+    :param user:
+    :return:
+    """
+    status_num = Status.objects.filter(user=user, deleted=False).count()
+    fans_num = UserRelation.objects.filter(target_user=user).count()
+    follow_num = UserRelation.objects.filter(source_user=user).count()
+    act_num = Activity.objects.filter(user=user).count()
+
+    if status_num != user.status_num or\
+            fans_num != user.fans_num or\
+            follow_num != user.fans_num or\
+            act_num != user.act_num:
+
+        user.status_num = status_num
+        user.fans = fans_num
+        user.follows_num = follow_num
+        user.act_num = act_num
+        user.save()
